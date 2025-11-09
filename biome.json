@@ -1,0 +1,95 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "**/*.ts",
+      "!**/dist",
+      "!**/nodeModules",
+      "!**/coverage",
+      "!**/reports",
+      "!**/stryker-tmp",
+      "!.turbo"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "lineEnding": "lf",
+    "useEditorconfig": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": "error",
+      "complexity": "error",
+      "correctness": "error",
+      "performance": "error",
+      "security": "error",
+      "style": "error",
+      "suspicious": "error",
+      "nursery": {
+        "useQwikValidLexicalScope": "off"
+      }
+    },
+    "domains": {
+      "react": "all",
+      "test": "all",
+      "project": "all",
+      "next": "all",
+      "vue": "all",
+      "solid": "all",
+      "tailwind": "all"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false
+    },
+    "globals": [
+      "Bun",
+      "process",
+      "console",
+      "Buffer",
+      "globalThis"
+    ]
+  },
+  "plugins": [],
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "tests/**/*.ts",
+        "**/*.test.ts",
+        "**/*.spec.ts"
+      ],
+      "linter": {
+        "rules": {
+          "security": {
+            "noSecrets": "off"
+          }
+        }
+      }
+    }
+  ]
+}
