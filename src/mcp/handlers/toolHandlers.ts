@@ -10,69 +10,96 @@ import {
     Violation
 } from '../../types/mcp.js';
 import {McpErrorHandler} from './errorHandler.js';
-
-// Mock data for now - will be replaced with actual file system implementation
-const mockStandards: Standard[] = [
-    {
-        id: 'ts-naming-001',
-        title: 'Use PascalCase for class names',
-        category: 'Naming',
-        technology: 'typescript',
-        description: 'Class names should follow PascalCase convention',
-        rules: [
-            {
-                id: 'ts-naming-001-rule',
-                description: 'Class names must be PascalCase',
-                severity: 'error',
-                category: 'naming'
-            }
-        ],
-        lastUpdated: '2025-11-09'
-    },
-    {
-        id: 'ts-format-001',
-        title: 'Use semicolons at end of statements',
-        category: 'Formatting',
-        technology: 'typescript',
-        description: 'All statements should end with semicolons',
-        rules: [
-            {
-                id: 'ts-format-001-rule',
-                description: 'Statements must end with semicolon',
-                severity: 'error',
-                category: 'formatting'
-            }
-        ],
-        lastUpdated: '2025-11-09'
-    }
-];
+import { StandardsLoader } from '../../standards/standards-loader.js';
+import { mcpCache, CacheKeys, createCodeHash } from '../../cache/cache-manager.js';
+import { performanceMonitor, measureAsyncFunction } from '../../utils/performance-monitor.js';
 
 export class GetStandardsHandler {
+    private standardsLoader: StandardsLoader;
+
+    constructor() {
+        this.standardsLoader = new StandardsLoader();
+    }
+
     async getStandards(request: GetStandardsRequest): Promise<GetStandardsResponse> {
         this.validateGetStandardsRequest(request);
 
+        const cacheKey = CacheKeys.standards(request.technology, request.category);
+
+        // Check cache first if enabled
+        if (request.useCache !== false) {
+            const cached = mcpCache.getStandards(cacheKey);
+            if (cached) {
+                performanceMonitor.recordMetric({
+                    responseTime: 0,
+                    memoryUsage: this.getMemoryUsage(),
+                    timestamp: Date.now(),
+                    operation: 'getStandards',
+                    success: true,
+                    cacheHit: true,
+                    data: { cached: true }
+                });
+                return cached;
+            }
+        }
+
         try {
-            let filteredStandards = mockStandards;
+            const { result: standards, responseTime } = await measureAsyncFunction(
+                'getStandards',
+                async () => {
+                    let filteredStandards = await this.standardsLoader.loadStandards();
 
-            if (request.technology) {
-                filteredStandards = filteredStandards.filter(s =>
-                    s.technology.toLowerCase() === request.technology!.toLowerCase()
-                );
-            }
+                    if (request.technology) {
+                        filteredStandards = filteredStandards.filter(s =>
+                            s.technology.toLowerCase().includes(request.technology!.toLowerCase())
+                        );
+                    }
 
-            if (request.category) {
-                filteredStandards = filteredStandards.filter(s =>
-                    s.category.toLowerCase() === request.category!.toLowerCase()
-                );
-            }
+                    if (request.category) {
+                        filteredStandards = filteredStandards.filter(s =>
+                            s.category.toLowerCase() === request.category!.toLowerCase()
+                        );
+                    }
 
-            return {
-                standards: filteredStandards,
-                totalCount: filteredStandards.length,
-                responseTime: 0, // Will be set by server
+                    return filteredStandards;
+                }
+            );
+
+            const response: GetStandardsResponse = {
+                standards,
+                totalCount: standards.length,
+                responseTime,
                 cached: false
             };
+
+            // Cache the result if enabled
+            if (request.useCache !== false) {
+                mcpCache.setStandards(cacheKey, response);
+            }
+
+            performanceMonitor.recordMetric({
+                responseTime,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'getStandards',
+                success: true,
+                cacheHit: false,
+                data: {
+                    filteredBy: { technology: request.technology, category: request.category },
+                    resultCount: standards.length
+                }
+            });
+
+            return response;
         } catch (error) {
+            performanceMonitor.recordMetric({
+                responseTime: 0,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'getStandards',
+                success: false,
+                data: { error: error instanceof Error ? error.message : 'Unknown error' }
+            });
             throw McpErrorHandler.handleError(error);
         }
     }
@@ -80,41 +107,95 @@ export class GetStandardsHandler {
     async searchStandards(request: SearchStandardsRequest): Promise<SearchStandardsResponse> {
         this.validateSearchStandardsRequest(request);
 
+        const cacheKey = CacheKeys.search(request.query, request.technology, request.fuzzy, request.limit);
+
+        // Check cache first
+        const cached = mcpCache.getSearch(cacheKey);
+        if (cached) {
+            performanceMonitor.recordMetric({
+                responseTime: 0,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'searchStandards',
+                success: true,
+                cacheHit: true,
+                data: { cached: true }
+            });
+            return cached;
+        }
+
         try {
-            const query = request.query.toLowerCase();
-            let results = mockStandards;
+            const { result: searchResults, responseTime } = await measureAsyncFunction(
+                'searchStandards',
+                async () => {
+                    const standards = await this.standardsLoader.loadStandards();
+                    const query = request.query.toLowerCase();
+                    let results = standards;
 
-            if (request.technology) {
-                results = results.filter(s =>
-                    s.technology.toLowerCase() === request.technology!.toLowerCase()
-                );
-            }
+                    // Filter by technology if specified
+                    if (request.technology) {
+                        results = results.filter(s =>
+                            s.technology.toLowerCase().includes(request.technology!.toLowerCase())
+                        );
+                    }
 
-            if (request.fuzzy !== false) {
-                // Simple fuzzy search
-                results = results.filter(s =>
-                    s.title.toLowerCase().includes(query) ||
-                    s.description.toLowerCase().includes(query) ||
-                    s.category.toLowerCase().includes(query)
-                );
-            } else {
-                // Exact match
-                results = results.filter(s =>
-                    s.title.toLowerCase() === query ||
-                    s.description.toLowerCase() === query ||
-                    s.category.toLowerCase() === query
-                );
-            }
+                    // Search logic
+                    if (request.fuzzy !== false) {
+                        // Fuzzy search - look for query in title, description, or category
+                        results = results.filter(s =>
+                            s.title.toLowerCase().includes(query) ||
+                            s.description.toLowerCase().includes(query) ||
+                            s.category.toLowerCase().includes(query) ||
+                            s.rules.some(rule => rule.description.toLowerCase().includes(query))
+                        );
+                    } else {
+                        // Exact match search
+                        results = results.filter(s =>
+                            s.title.toLowerCase() === query ||
+                            s.description.toLowerCase() === query ||
+                            s.category.toLowerCase() === query
+                        );
+                    }
 
-            const limit = request.limit || 10;
-            const limitedResults = results.slice(0, limit);
+                    // Limit results
+                    const limit = request.limit || 10;
+                    return results.slice(0, limit);
+                }
+            );
 
-            return {
-                results: limitedResults,
-                totalCount: limitedResults.length,
-                responseTime: 0 // Will be set by server
+            const response: SearchStandardsResponse = {
+                results: searchResults,
+                totalCount: searchResults.length,
+                responseTime
             };
+
+            // Cache the result
+            mcpCache.setSearch(cacheKey, response);
+
+            performanceMonitor.recordMetric({
+                responseTime,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'searchStandards',
+                success: true,
+                cacheHit: false,
+                data: {
+                    query: request.query,
+                    resultCount: searchResults.length,
+                    fuzzy: request.fuzzy
+                }
+            });
+
+            return response;
         } catch (error) {
+            performanceMonitor.recordMetric({
+                responseTime: 0,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'searchStandards',
+                success: false,
+                data: { error: error instanceof Error ? error.message : 'Unknown error' }
+            });
             throw McpErrorHandler.handleError(error);
         }
     }
@@ -122,61 +203,216 @@ export class GetStandardsHandler {
     async validateCode(request: ValidateCodeRequest): Promise<ValidateCodeResponse> {
         this.validateValidateCodeRequest(request);
 
+        const codeHash = createCodeHash(request.code);
+        const cacheKey = CacheKeys.validation(codeHash, request.language, request.rules);
+
+        // Check cache first
+        const cached = mcpCache.getValidation(cacheKey);
+        if (cached) {
+            performanceMonitor.recordMetric({
+                responseTime: 0,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'validateCode',
+                success: true,
+                cacheHit: true,
+                data: { cached: true }
+            });
+            return cached;
+        }
+
         try {
-            const violations: Violation[] = [];
-            let score = 100;
+            const { result: validationResult, responseTime } = await measureAsyncFunction(
+                'validateCode',
+                async () => {
+                    const violations: Violation[] = [];
+                    let score = 100;
 
-            // Simple validation logic for demonstration
-            if (request.language.toLowerCase() === 'typescript' || request.language.toLowerCase() === 'javascript') {
-                const lines = request.code.split('\n');
+                    // Get relevant standards for validation
+                    const standards = await this.standardsLoader.loadStandards();
+                    const relevantStandards = standards.filter(s =>
+                        s.technology.toLowerCase().includes(request.language.toLowerCase())
+                    );
 
-                lines.forEach((line, index) => {
-                    // Check for missing semicolons
-                    if (line.trim() && !line.trim().endsWith(';') && !line.trim().endsWith('{') && !line.trim().endsWith('}')) {
-                        violations.push({
-                            rule: {
-                                id: 'missing-semicolon',
-                                description: 'Statements should end with semicolons',
-                                severity: 'warning',
-                                category: 'formatting'
-                            },
-                            line: index + 1,
-                            column: line.length,
-                            message: 'Missing semicolon at end of statement',
-                            severity: 'warning'
+                    // Apply validation rules based on loaded standards
+                    if (request.language.toLowerCase() === 'typescript' || request.language.toLowerCase() === 'javascript') {
+                        const lines = request.code.split('\n');
+
+                        lines.forEach((line, index) => {
+                            // Apply standards-based validation
+                            for (const standard of relevantStandards) {
+                                for (const rule of standard.rules) {
+                                    const violation = this.validateLine(line, index + 1, rule, request);
+                                    if (violation) {
+                                        violations.push(violation);
+                                        score -= this.getScorePenalty(rule.severity);
+                                    }
+                                }
+                            }
+
+                            // Additional language-specific validations
+                            if (!request.useStrict) {
+                                // Check for 'use strict' directive recommendation
+                                if (index === 0 && !line.includes('use strict') && request.language === 'javascript') {
+                                    violations.push({
+                                        rule: {
+                                            id: 'missing-use-strict',
+                                            description: 'Consider using "use strict" directive',
+                                            severity: 'warning',
+                                            category: 'best-practices'
+                                        },
+                                        line: 1,
+                                        column: 1,
+                                        message: 'Missing "use strict" directive',
+                                        severity: 'warning'
+                                    });
+                                    score -= 2;
+                                }
+                            }
                         });
-                        score -= 5;
                     }
 
-                    // Check for class naming
-                    const classMatch = line.match(/class\s+(\w+)/);
-                    if (classMatch && !/^[A-Z][a-zA-Z0-9]*$/.test(classMatch[1])) {
-                        violations.push({
-                            rule: {
-                                id: 'class-naming',
-                                description: 'Class names should follow PascalCase',
-                                severity: 'error',
-                                category: 'naming'
-                            },
-                            line: index + 1,
-                            column: line.indexOf(classMatch[0]) + 1,
-                            message: `Class name "${classMatch[1]}" should be PascalCase`,
-                            severity: 'error'
-                        });
-                        score -= 10;
-                    }
-                });
-            }
+                    return {
+                        valid: violations.filter(v => v.severity === 'error').length === 0,
+                        violations,
+                        score: Math.max(0, score)
+                    };
+                }
+            );
 
-            return {
-                valid: violations.filter(v => v.severity === 'error').length === 0,
-                violations,
-                score: Math.max(0, score),
-                responseTime: 0 // Will be set by server
+            const response: ValidateCodeResponse = {
+                ...validationResult,
+                responseTime
             };
+
+            // Cache the result
+            mcpCache.setValidation(cacheKey, response);
+
+            performanceMonitor.recordMetric({
+                responseTime,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'validateCode',
+                success: true,
+                cacheHit: false,
+                data: {
+                    language: request.language,
+                    violationsCount: validationResult.violations.length,
+                    score: validationResult.score
+                }
+            });
+
+            return response;
         } catch (error) {
+            performanceMonitor.recordMetric({
+                responseTime: 0,
+                memoryUsage: this.getMemoryUsage(),
+                timestamp: Date.now(),
+                operation: 'validateCode',
+                success: false,
+                data: { error: error instanceof Error ? error.message : 'Unknown error' }
+            });
             throw McpErrorHandler.handleError(error);
         }
+    }
+
+    /**
+     * Validate a single line of code against a rule
+     */
+    private validateLine(line: string, lineNumber: number, rule: Rule, request: ValidateCodeRequest): Violation | null {
+        const trimmedLine = line.trim();
+
+        // Apply specific rule validations
+        switch (rule.id.toLowerCase()) {
+            case 'semi':
+            case 'missing-semicolon':
+                if (trimmedLine &&
+                    !trimmedLine.endsWith(';') &&
+                    !trimmedLine.endsWith('{') &&
+                    !trimmedLine.endsWith('}') &&
+                    !trimmedLine.startsWith('//') &&
+                    !trimmedLine.startsWith('/*') &&
+                    !trimmedLine.startsWith('*') &&
+                    !trimmedLine.endsWith('*/')) {
+                    return {
+                        rule,
+                        line: lineNumber,
+                        column: line.length,
+                        message: 'Missing semicolon at end of statement',
+                        severity: rule.severity
+                    };
+                }
+                break;
+
+            case 'class-naming':
+            case 'pascalcase':
+                const classMatch = line.match(/(?:class|interface|type)\s+(\w+)/);
+                if (classMatch && !/^[A-Z][a-zA-Z0-9]*$/.test(classMatch[1])) {
+                    return {
+                        rule,
+                        line: lineNumber,
+                        column: line.indexOf(classMatch[0]) + 1,
+                        message: `${classMatch[0]} should use PascalCase`,
+                        severity: rule.severity
+                    };
+                }
+                break;
+
+            case 'camelcase':
+                const varMatch = line.match(/(?:const|let|var)\s+(\w+)/);
+                if (varMatch && !/^[a-z][a-zA-Z0-9]*$/.test(varMatch[1])) {
+                    return {
+                        rule,
+                        line: lineNumber,
+                        column: line.indexOf(varMatch[0]) + 1,
+                        message: `Variable "${varMatch[1]}" should use camelCase`,
+                        severity: rule.severity
+                    };
+                }
+                break;
+
+            case 'quotes':
+                // Check for consistent quote usage
+                const hasSingleQuotes = line.includes("'") && !line.includes("'");
+                const hasDoubleQuotes = line.includes('"') && !line.includes('"');
+                if ((hasSingleQuotes || hasDoubleQuotes) && trimmedLine) {
+                    return {
+                        rule,
+                        line: lineNumber,
+                        column: 1,
+                        message: 'Use consistent quote style',
+                        severity: rule.severity
+                    };
+                }
+                break;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get score penalty based on rule severity
+     */
+    private getScorePenalty(severity: string): number {
+        switch (severity) {
+            case 'error': return 10;
+            case 'warning': return 5;
+            case 'info': return 2;
+            default: return 1;
+        }
+    }
+
+    /**
+     * Get current memory usage
+     */
+    private getMemoryUsage() {
+        const usage = process.memoryUsage();
+        return {
+            heapUsed: usage.heapUsed,
+            heapTotal: usage.heapTotal,
+            external: usage.external,
+            rss: usage.rss
+        };
     }
 
     private validateGetStandardsRequest(request: GetStandardsRequest): void {

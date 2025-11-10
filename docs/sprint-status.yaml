@@ -1,0 +1,72 @@
+# generated: 2025-11-09
+# project: coding-standard
+# project_key: coding-standard
+# tracking_system: file-system
+# story_location: {project-root}/docs/stories
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic exists in epic file but not contexted
+#   - contexted: Epic tech context created (required before drafting stories)
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been done
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epics should be 'contexted' before stories can be 'drafted'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
+
+generated: 2025-11-09
+project: coding-standard
+project_key: coding-standard
+tracking_system: file-system
+story_location: { project-root }/docs/stories
+
+development_status:
+  # Epic 1: Core MCP Server Infrastructure
+  epic-1: contexted
+  1-1-mcp-server-foundation: review
+  1-2-sqlite-database-integration: backlog
+  1-3-caching-and-performance-layer: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: CLI Interface Implementation
+  epic-2: backlog
+  2-1-cli-framework-and-commands: backlog
+  2-2-configuration-management: backlog
+  2-3-shell-integration-and-completion: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Dynamic Standard Management
+  epic-3: backlog
+  3-1-standards-registry-system: backlog
+  3-2-slash-command-interface: backlog
+  3-3-hot-reload-and-file-watching: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Tool Integration and Auto-Detection
+  epic-4: backlog
+  4-1-configuration-detection-engine: backlog
+  4-2-cross-tool-standardization: backlog
+  4-3-configuration-template-generation: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Performance Optimization and Analytics
+  epic-5: backlog
+  5-1-performance-monitoring: backlog
+  5-2-usage-analytics: backlog
+  5-3-optional-web-dashboard: backlog
+  epic-5-retrospective: optional

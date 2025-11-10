@@ -6,12 +6,8 @@
   },
   "coverageAnalysis": "perTest",
   "mutate": [
-    "**/*.ts",
-    "**/*.tsx",
-    "!**/*.test.ts",
-    "!**/*.test.tsx",
-    "!**/*.spec.ts",
-    "!**/*.spec.tsx"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "thresholds": {
     "high": 90,
@@ -23,10 +19,6 @@
     "dist",
     "build",
     "coverage",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
     "stryker-tmp",
     ".stryker-tmp"
   ],

@@ -1,0 +1,123 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context" v="1.0">
+    <metadata>
+        <epicId>1</epicId>
+        <storyId>1</storyId>
+        <title>MCP Server Foundation</title>
+        <status>drafted</status>
+        <generatedAt>2025-11-09</generatedAt>
+        <generator>BMAD Story Context Workflow</generator>
+        <sourceStoryPath>docs/stories/1-1-mcp-server-foundation.md</sourceStoryPath>
+    </metadata>
+
+    <story>
+        <asA>developer using Claude Code</asA>
+        <iWant>a functional MCP server that responds to basic requests</iWant>
+        <soThat>I can access coding standards through natural language queries</soThat>
+        <tasks>- [ ] Set up MCP server foundation (AC: 1, 2, 4)
+            - [ ] Initialize Bun project with @modelcontextprotocol/sdk dependency
+            - [ ] Create basic MCP server with stdio communication
+            - [ ] Implement tool discovery and registration system
+            - [ ] Set up request routing framework with proper error handling
+            - [ ] Implement getStandards tool (AC: 1, 4)
+            - [ ] Create getStandards tool with request/response schemas
+            - [ ] Implement basic standards retrieval from file system
+            - [ ] Add response time monitoring to ensure &lt;50ms targets
+            - [ ] Test tool integration with MCP server
+            - [ ] Add error handling and validation (AC: 3)
+            - [ ] Implement input validation for all MCP protocol messages
+            - [ ] Create structured error response format
+            - [ ] Add graceful degradation for malformed requests
+            - [ ] Test error scenarios without server crashes
+            - [ ] Performance testing and optimization (AC: 2)
+            - [ ] Implement concurrent request handling
+            - [ ] Create performance benchmarking tests
+            - [ ] Optimize request processing for sub-50ms response times
+            - [ ] Validate memory usage stays under 50MB target
+            - [ ] Testing and validation (AC: 1, 2, 3, 4)
+            - [ ] Create unit tests for server components
+            - [ ] Add integration tests for MCP protocol compliance
+            - [ ] Implement load testing for concurrent requests
+            - [ ] Validate all acceptance criteria with automated tests
+        </tasks>
+    </story>
+
+    <acceptanceCriteria>1. Given the MCP server is running, when I send a basic "getStandards" request, then the server
+        responds with appropriate standards data in under 50ms
+        2. Given concurrent load testing, when multiple clients send simultaneous requests, then the server handles all
+        requests without performance degradation exceeding 10%
+        3. Given an invalid MCP protocol request, when the server receives malformed data, then it returns a structured
+        error response without crashing
+        4. Given the server is initialized, when I request available tools, then the server correctly lists
+        getStandards, searchStandards, and validateCode tools with proper schemas
+    </acceptanceCriteria>
+
+    <artifacts>
+        <docs>
+            <doc path="docs/tech-spec-epic-1.md" title="Epic 1 Technical Specification" section="APIs and Interfaces"
+                 snippet="MCP Tool: getStandards, searchStandards, validateCode with request/response schemas and performance targets"/>
+            <doc path="docs/architecture.md" title="Architecture Documentation" section="Project Structure"
+                 snippet="src/mcp/ directory with server.ts as main entry point, handlers/ and tools/ subdirectories"/>
+            <doc path="docs/epics.md" title="Epic Breakdown" section="Story 1.1"
+                 snippet="MCP Server Foundation with @modelcontextprotocol/sdk, stdio communication, basic request routing"/>
+            <doc path="docs/PRD.md" title="Product Requirements Document" section="Core System Requirements"
+                 snippet="FR1: MCP Server Implementation with sub-50ms response times and concurrent request handling"/>
+        </docs>
+        <code>
+            <!-- No existing code artifacts found - this is the first story in the project -->
+        </code>
+        <dependencies>
+            <dependency ecosystem="bun" name="@modelcontextprotocol/sdk" version="0.5.0"/>
+            <dependency ecosystem="bun" name="@types/bun" version="latest"/>
+            <dependency ecosystem="runtime" name="bun" version="&gt;=1.0.0"/>
+        </dependencies>
+    </artifacts>
+
+    <constraints>
+        <constraint type="performance">Server startup time &lt; 100ms (target: 50ms)</constraint>
+        <constraint type="performance">Response time &lt; 50ms for all standard retrieval operations</constraint>
+        <constraint type="performance">Memory usage &lt; 50MB during normal operation</constraint>
+        <constraint type="architecture">Follow MCP server pattern in src/mcp/ with server.ts as main entry point
+        </constraint>
+        <constraint type="architecture">Implement tool handlers in src/mcp/handlers/ for request processing</constraint>
+        <constraint type="architecture">Use standardized error handling through src/utils/error-handler.ts</constraint>
+        <constraint type="architecture">Place type definitions in src/types/ following existing patterns</constraint>
+        <constraint type="naming">Follow kebab-case file naming convention</constraint>
+        <constraint type="security">All MCP protocol inputs must be validated against JSON schemas</constraint>
+        <constraint type="security">No arbitrary code execution from user inputs</constraint>
+        <constraint type="protocol">Must use @modelcontextprotocol/sdk 0.5.0 for Claude Code compatibility</constraint>
+    </constraints>
+
+    <interfaces>
+        <interface name="getStandards" kind="MCP Tool"
+                   signature="interface GetStandardsRequest { technology?: string; category?: string; context?: string; useCache?: boolean; }"
+                   path="docs/tech-spec-epic-1.md"/>
+        <interface name="searchStandards" kind="MCP Tool"
+                   signature="interface SearchStandardsRequest { query: string; technology?: string; fuzzy?: boolean; limit?: number; }"
+                   path="docs/tech-spec-epic-1.md"/>
+        <interface name="validateCode" kind="MCP Tool"
+                   signature="interface ValidateCodeRequest { code: string; language: string; useStrict?: boolean; rules?: string[]; }"
+                   path="docs/tech-spec-epic-1.md"/>
+    </interfaces>
+
+    <tests>
+        <standards>Use Bun test runner for all testing. Unit tests for individual components, integration tests for MCP
+            protocol compliance, performance tests for response time validation, and load tests for concurrent request
+            handling. All tests must validate acceptance criteria with measurable outcomes.
+        </standards>
+        <locations>
+            <location path="tests/unit/" type="unit-tests"/>
+            <location path="tests/integration/" type="integration-tests"/>
+            <location path="tests/performance/" type="performance-tests"/>
+            <location path="tests/fixtures/" type="test-data"/>
+        </locations>
+        <ideas>
+            <test idea="MCP server responds to getStandards request in &lt;50ms" ac="1"/>
+            <test idea="Concurrent request handling with 10 parallel clients" ac="2"/>
+            <test idea="Structured error response for malformed MCP protocol messages" ac="3"/>
+            <test idea="Tool discovery returns correct getStandards, searchStandards, validateCode tools" ac="4"/>
+            <test idea="Load testing with response time monitoring" ac="1,2"/>
+            <test idea="Memory usage validation during normal operation" ac="2"/>
+            <test idea="MCP protocol compliance validation" ac="3,4"/>
+        </ideas>
+    </tests>
+</story-context>

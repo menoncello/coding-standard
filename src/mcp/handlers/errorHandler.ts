@@ -17,7 +17,7 @@ export class McpErrorHandler {
     }
 
     static invalidParams(message: string, data?: unknown): McpError {
-        return this.createError(-32602, `Invalid params: ${message}`, data);
+        return this.createError(-32602, `${message}`, data);
     }
 
     static internalError(message: string, data?: unknown): McpError {
