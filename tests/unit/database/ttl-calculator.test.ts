@@ -1,8 +1,8 @@
-import { test, expect, describe } from 'bun:test';
+import { test, expect, describe, beforeEach } from 'bun:test';
 
 // These imports will fail - modules don't exist yet
-import { TTLCalculator } from '../../src/database/utils/ttl-calculator.js';
-import { SearchQueryParser } from '../../src/database/utils/search-query-parser.js';
+import { TTLCalculator } from '../../../src/database/utils/ttl-calculator.ts';
+import { SearchQueryParser } from '../../../src/database/utils/search-query-parser.ts';
 
 describe('TTL Calculator Unit Tests', () => {
     let ttlCalculator: TTLCalculator;

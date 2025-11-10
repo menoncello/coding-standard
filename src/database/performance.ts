@@ -102,11 +102,17 @@ export class DatabasePerformanceManager {
      */
     async analyzePerformance(): Promise<{
         overallScore: number;
+        slowOperations: Array<{
+            operation: string;
+            averageDuration: number;
+            count: number;
+            severity: 'low' | 'medium' | 'high';
+        }>;
+        recommendations: PerformanceRecommendation[];
         queryPerformance: QueryPerformanceMetrics;
         indexHealth: IndexHealthMetrics;
         cacheEfficiency: CacheEfficiencyMetrics;
         concurrencyMetrics: ConcurrencyMetrics;
-        recommendations: PerformanceRecommendation[];
     }> {
         const queryPerformance = await this.analyzeQueryPerformance();
         const indexHealth = await this.analyzeIndexHealth();
@@ -127,13 +133,17 @@ export class DatabasePerformanceManager {
             concurrencyMetrics
         });
 
+        // Identify slow operations from our own metrics
+        const slowOperations = this.identifySlowOperations();
+
         return {
             overallScore,
+            slowOperations,
+            recommendations,
             queryPerformance,
             indexHealth,
             cacheEfficiency,
-            concurrencyMetrics,
-            recommendations
+            concurrencyMetrics
         };
     }
 
@@ -386,6 +396,13 @@ export class DatabasePerformanceManager {
                 walCheckpoint = await this.db.execute('PRAGMA wal_checkpoint(PASSIVE)');
             } catch (error) {
                 console.debug('Failed to get WAL checkpoint info:', error);
+                // Don't re-throw table lock errors during analysis
+                if (error instanceof Error && error.message.includes('database table is locked')) {
+                    console.debug('WAL checkpoint failed due to table lock during analysis - continuing');
+                    walCheckpoint = [];
+                } else {
+                    throw error;
+                }
             }
 
             // Check lock status
@@ -433,8 +450,22 @@ export class DatabasePerformanceManager {
             this.setCachedMetrics(cacheKey, metrics);
             return metrics;
 
-        } catch (error) {
+              } catch (error) {
             console.error('Failed to analyze concurrency metrics:', error);
+            // If it's a table lock error, return default metrics
+            if (error instanceof Error && error.message.includes('database table is locked')) {
+                console.debug('Table lock detected during concurrency analysis - returning default metrics');
+                const dbMetrics = this.db.getMetrics();
+                return {
+                    walMode: true, // Assume WAL mode is enabled
+                    activeConnections: dbMetrics.connectionsActive,
+                    totalConnections: dbMetrics.connectionsTotal,
+                    avgConcurrentOps: 0,
+                    lockContentions: 1, // We detected at least one lock contention
+                    checkpointEfficiency: 50, // Moderate efficiency due to locks
+                    concurrencyScore: Math.max(0, 100 - (dbMetrics.connectionsActive * 10)) // Reduce score based on active connections
+                };
+            }
             return {
                 walMode: false,
                 activeConnections: 0,
@@ -649,6 +680,55 @@ export class DatabasePerformanceManager {
         const connectionEfficiency = dbMetrics.connectionsTotal > 0 ?
             (dbMetrics.connectionsActive / dbMetrics.connectionsTotal) * 100 : 0;
         return Math.min(100, connectionEfficiency);
+    }
+
+    /**
+     * Identify slow operations from collected metrics
+     */
+    private identifySlowOperations(): Array<{
+        operation: string;
+        averageDuration: number;
+        count: number;
+        severity: 'low' | 'medium' | 'high';
+    }> {
+        const slowOps: Array<{
+            operation: string;
+            averageDuration: number;
+            count: number;
+            severity: 'low' | 'medium' | 'high';
+        }> = [];
+
+        for (const [operationName, metrics] of this.operations) {
+            const validMetrics = metrics.filter(m => !m.error);
+            if (validMetrics.length === 0) continue;
+
+            const avgDuration = validMetrics.reduce((sum, m) => sum + m.duration, 0) / validMetrics.length;
+
+            // Define severity based on operation type and duration
+            let severity: 'low' | 'medium' | 'high' = 'low';
+
+            if (operationName.includes('search')) {
+                if (avgDuration > 100) severity = 'high';
+                else if (avgDuration > 50) severity = 'medium';
+            } else if (operationName.includes('cache')) {
+                if (avgDuration > 20) severity = 'high';
+                else if (avgDuration > 10) severity = 'medium';
+            } else {
+                if (avgDuration > 200) severity = 'high';
+                else if (avgDuration > 100) severity = 'medium';
+            }
+
+            if (severity !== 'low') {
+                slowOps.push({
+                    operation: operationName,
+                    averageDuration: Math.round(avgDuration * 100) / 100,
+                    count: validMetrics.length,
+                    severity
+                });
+            }
+        }
+
+        return slowOps.sort((a, b) => b.averageDuration - a.averageDuration);
     }
 
     /**

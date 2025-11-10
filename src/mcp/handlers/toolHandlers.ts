@@ -275,6 +275,8 @@ export class GetStandardsHandler {
         switch (rule.id.toLowerCase()) {
             case 'semi':
             case 'missing-semicolon':
+            case 'biome-semicolons':
+                // Check for missing semicolons (Biome requires semicolons)
                 if (trimmedLine &&
                     !trimmedLine.endsWith(';') &&
                     !trimmedLine.endsWith('{') &&
@@ -295,6 +297,7 @@ export class GetStandardsHandler {
 
             case 'class-naming':
             case 'pascalcase':
+            case 'biome-nursery-camelcase':
                 const classMatch = line.match(/(?:class|interface|type)\s+(\w+)/);
                 if (classMatch && !/^[A-Z][a-zA-Z0-9]*$/.test(classMatch[1])) {
                     return {
@@ -333,6 +336,11 @@ export class GetStandardsHandler {
                         severity: rule.severity
                     };
                 }
+                break;
+
+            default:
+                // For rules that don't have specific validation logic, don't generate violations
+                // In a real implementation, you'd parse the actual rule logic from Biome/ESLint configs
                 break;
         }
 

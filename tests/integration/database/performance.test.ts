@@ -73,6 +73,9 @@ describe('P1 - Database Performance Tests', () => {
         if (cacheBackend) {
             await cacheBackend.forceSync();
         }
+
+        // Add a small delay to ensure all operations complete and locks are released
+        await new Promise(resolve => setTimeout(resolve, 10));
     });
 
     describe('Database Connection Performance', () => {

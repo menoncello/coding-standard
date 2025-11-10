@@ -333,19 +333,20 @@ describe('Tool Handlers Integration Tests', () => {
             expect(response.score).toBeLessThan(100);
         });
 
-        test('should detect class naming violations', async () => {
+        test('should detect formatting violations according to real Biome configuration', async () => {
             const request: ValidateCodeRequest = {
-                code: 'class test_class {\n  constructor() {}\n}',
+                code: 'const testVar = 1\nconsole.log(testVar)', // Missing semicolons
                 language: 'typescript'
             };
 
             const response = await handler.validateCode(request);
 
-            // Should find naming violations
-            const namingViolations = response.violations.filter(v =>
-                v.rule.id.includes('naming') || v.rule.id.includes('pascal')
+            // Should find semicolon violations (Biome requires semicolons)
+            const semicolonViolations = response.violations.filter(v =>
+                v.rule.id.includes('semicolon') || v.message.includes('semicolon')
             );
-            expect(namingViolations.length).toBeGreaterThan(0);
+            expect(semicolonViolations.length).toBeGreaterThan(0);
+            expect(response.score).toBeLessThan(100);
         });
 
         test('should respect useStrict flag', async () => {

@@ -100,12 +100,13 @@ export class DatabaseSchema {
         const sql = `
             CREATE TABLE IF NOT EXISTS usage_analytics (
                 id TEXT PRIMARY KEY,
-                event_type TEXT NOT NULL CHECK (event_type IN ('cache_hit', 'cache_miss', 'search', 'validation')),
+                event_type TEXT NOT NULL CHECK (event_type IN ('cache_hit', 'cache_miss', 'search', 'search_performed', 'validation')),
                 timestamp INTEGER NOT NULL,
                 duration INTEGER NOT NULL,
                 metadata TEXT,
                 user_id TEXT,
                 session_id TEXT,
+                standard_id TEXT,
                 created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now') * 1000)
             ) WITHOUT ROWID
         `;

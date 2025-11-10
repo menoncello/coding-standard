@@ -41,7 +41,7 @@ export interface FtsSchema {
 
 export interface AnalyticsSchema {
     id: string;
-    eventType: 'cache_hit' | 'cache_miss' | 'search' | 'validation';
+    eventType: 'cache_hit' | 'cache_miss' | 'search' | 'search_performed' | 'validation';
     timestamp: number;
     duration: number;
     metadata: string; // JSON string
