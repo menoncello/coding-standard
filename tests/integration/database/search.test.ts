@@ -46,8 +46,9 @@ describe('P1 - FTS Search Engine Tests', () => {
         await db.transaction(async (connection) => {
             await connection.execute('DELETE FROM standards_cache');
             await connection.execute('DELETE FROM usage_analytics');
-            // Note: FTS5 content table is managed automatically, don't delete directly
+            await connection.execute('DELETE FROM standards_search_data');
         });
+        // FTS5 automatically syncs via internal triggers
     });
 
     describe('Search Indexing', () => {

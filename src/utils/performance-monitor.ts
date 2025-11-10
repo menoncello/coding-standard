@@ -56,6 +56,7 @@ export interface OperationMetrics {
 export class PerformanceMonitor {
     private metrics: PerformanceMetrics[] = [];
     private startTime: number = Date.now();
+    private initialStartTime: number = Date.now();
     private maxMetrics: number = 10000; // Keep last 10,000 metrics
     private operationTimers = new Map<string, number>();
 
@@ -124,7 +125,7 @@ export class PerformanceMonitor {
      */
     getStats(): PerformanceStats {
         const now = Date.now();
-        const uptime = now - this.startTime;
+        const uptime = Math.max(1, now - this.initialStartTime); // Ensure uptime is at least 1ms
         const recentMetrics = this.metrics.filter(m => now - m.timestamp < 60000); // Last minute
 
         if (this.metrics.length === 0) {

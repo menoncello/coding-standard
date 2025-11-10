@@ -63,9 +63,10 @@ describe('P1 - Database Schema and Migration Tests', () => {
             expect(validation.valid).toBe(true);
             expect(validation.errors).toHaveLength(0);
             expect(validation.tables).toContain('standards_cache');
-            expect(validation.tables).toContain('standards_search_content');
-            expect(validation.tables).toContain('standards_search');
+            expect(validation.tables).toContain('standards_search_data');
+            expect(validation.tables).toContain('standards_search_idx');
             expect(validation.tables).toContain('usage_analytics');
+            expect(validation.tables).toContain('backup_metadata');
         });
 
         test('1.2-SCHEMA-002 should provide table statistics (AC: 1)', async () => {
@@ -82,7 +83,7 @@ describe('P1 - Database Schema and Migration Tests', () => {
             // Then: Statistics should reflect current state
             expect(stats.totalSize).toBeGreaterThan(0);
             // Expect at least our core tables (may include FTS shadow tables)
-            const coreTables = ['standards_cache', 'standards_search_content', 'standards_search', 'usage_analytics'];
+            const coreTables = ['standards_cache', 'standards_search_data', 'standards_search_idx', 'usage_analytics'];
             const tableNames = stats.tables.map(t => t.name);
 
             for (const coreTable of coreTables) {

@@ -59,6 +59,8 @@ describe('P0 - Cache Backend Tests', () => {
             await connection.execute('DELETE FROM standards_cache');
             await connection.execute('DELETE FROM usage_analytics');
         });
+        // Also clear in-memory cache
+        cacheBackend.clear();
     });
 
     afterEach(async () => {
@@ -73,24 +75,19 @@ describe('P0 - Cache Backend Tests', () => {
             // Given: A standard to cache
             const testStandard = createStandard();
             const cacheKey = 'standards:test-key';
-            const serializedData = JSON.stringify(testStandard);
 
             // When: I store the standard in cache
-            await cacheBackend.set(cacheKey, serializedData);
+            await cacheBackend.set(cacheKey, testStandard);
 
             // Then: The standard should be retrievable
             const cachedData = await cacheBackend.get(cacheKey);
-            expect(cachedData).toBe(serializedData);
-
-            const parsedData = JSON.parse(cachedData!);
-            expect(parsedData).toEqual(testStandard);
+            expect(cachedData).toEqual(testStandard);
         });
 
         test('1.2-CACHE-002 should respect TTL expiration (AC: 1)', async () => {
             // Given: A cached standard with short TTL
             const testStandard = createStandard();
             const cacheKey = 'standards:ttl-test';
-            const serializedData = JSON.stringify(testStandard);
 
             // Create cache backend with very short TTL for testing
             const shortTtlCache = new SqliteCacheBackend<string>({
@@ -104,11 +101,11 @@ describe('P0 - Cache Backend Tests', () => {
             });
 
             // When: I store the data and wait for expiration
-            await shortTtlCache.set(cacheKey, serializedData);
+            await shortTtlCache.set(cacheKey, testStandard);
 
             // Data should be immediately available
             let cachedData = await shortTtlCache.get(cacheKey);
-            expect(cachedData).toBe(serializedData);
+            expect(cachedData).toEqual(testStandard);
 
             // Wait for TTL to expire
             await new Promise(resolve => setTimeout(resolve, 150));
@@ -125,7 +122,7 @@ describe('P0 - Cache Backend Tests', () => {
             const standards = Array.from({ length: 5 }, () => createStandard());
 
             for (let i = 0; i < standards.length; i++) {
-                await cacheBackend.set(`standards:test-${i}`, JSON.stringify(standards[i]));
+                await cacheBackend.set(`standards:test-${i}`, standards[i]);
             }
 
             // When: I force synchronization to disk
@@ -147,10 +144,9 @@ describe('P0 - Cache Backend Tests', () => {
             // Given: A cached standard
             const testStandard = createStandard();
             const cacheKey = 'standards:metadata-test';
-            const serializedData = JSON.stringify(testStandard);
 
             // When: I store and access the data multiple times
-            await cacheBackend.set(cacheKey, serializedData);
+            await cacheBackend.set(cacheKey, testStandard);
 
             // Access the data several times
             for (let i = 0; i < 3; i++) {
@@ -178,7 +174,7 @@ describe('P0 - Cache Backend Tests', () => {
             const standards = Array.from({ length: 3 }, () => createStandard());
 
             for (let i = 0; i < standards.length; i++) {
-                await cacheBackend.set(`standards:stats-${i}`, JSON.stringify(standards[i]));
+                await cacheBackend.set(`standards:stats-${i}`, standards[i]);
 
                 // Access some items more than others
                 if (i < 2) {
@@ -203,11 +199,11 @@ describe('P0 - Cache Backend Tests', () => {
             // Given: Multiple cached standards with different key patterns
             const standards = Array.from({ length: 5 }, () => createStandard());
 
-            await cacheBackend.set('standards:typescript:naming', JSON.stringify(standards[0]));
-            await cacheBackend.set('standards:javascript:formatting', JSON.stringify(standards[1]));
-            await cacheBackend.set('standards:typescript:types', JSON.stringify(standards[2]));
-            await cacheBackend.set('other:cache:item', JSON.stringify(standards[3]));
-            await cacheBackend.set('standards:python:style', JSON.stringify(standards[4]));
+            await cacheBackend.set('standards:typescript:naming', standards[0]);
+            await cacheBackend.set('standards:javascript:formatting', standards[1]);
+            await cacheBackend.set('standards:typescript:types', standards[2]);
+            await cacheBackend.set('other:cache:item', standards[3]);
+            await cacheBackend.set('standards:python:style', standards[4]);
 
             await cacheBackend.forceSync();
 
@@ -219,7 +215,7 @@ describe('P0 - Cache Backend Tests', () => {
 
             // Non-matching entries should still exist
             const remainingData = await cacheBackend.get('other:cache:item');
-            expect(remainingData).toBe(JSON.stringify(standards[3]));
+            expect(remainingData).toEqual(standards[3]);
 
             // Standards entries should be gone
             const standardsData = await cacheBackend.get('standards:typescript:naming');
@@ -235,7 +231,7 @@ describe('P0 - Cache Backend Tests', () => {
 
             // When: I cache all standards
             for (const cachedStandard of largeStandardSet) {
-                await cacheBackend.set(cachedStandard.cacheKey, JSON.stringify(cachedStandard));
+                await cacheBackend.set(cachedStandard.cacheKey, cachedStandard);
             }
 
             const storeTime = Date.now() - startTime;

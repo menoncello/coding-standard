@@ -39,7 +39,7 @@ export class GetStandardsHandler {
                     cacheHit: true,
                     data: { cached: true }
                 });
-                return cached;
+                return { ...cached, cached: true };
             }
         }
 
@@ -62,6 +62,10 @@ export class GetStandardsHandler {
                     }
 
                     return filteredStandards;
+                },
+                {
+                    filteredBy: { technology: request.technology, category: request.category },
+                    resultCount: 0 // Will be updated after filtering
                 }
             );
 
@@ -77,29 +81,8 @@ export class GetStandardsHandler {
                 mcpCache.setStandards(cacheKey, response);
             }
 
-            performanceMonitor.recordMetric({
-                responseTime,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'getStandards',
-                success: true,
-                cacheHit: false,
-                data: {
-                    filteredBy: { technology: request.technology, category: request.category },
-                    resultCount: standards.length
-                }
-            });
-
             return response;
         } catch (error) {
-            performanceMonitor.recordMetric({
-                responseTime: 0,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'getStandards',
-                success: false,
-                data: { error: error instanceof Error ? error.message : 'Unknown error' }
-            });
             throw McpErrorHandler.handleError(error);
         }
     }
@@ -121,7 +104,7 @@ export class GetStandardsHandler {
                 cacheHit: true,
                 data: { cached: true }
             });
-            return cached;
+            return { ...cached, responseTime: 0 };
         }
 
         try {
@@ -160,6 +143,11 @@ export class GetStandardsHandler {
                     // Limit results
                     const limit = request.limit || 10;
                     return results.slice(0, limit);
+                },
+                {
+                    query: request.query,
+                    resultCount: 0, // Will be updated after filtering
+                    fuzzy: request.fuzzy
                 }
             );
 
@@ -172,30 +160,8 @@ export class GetStandardsHandler {
             // Cache the result
             mcpCache.setSearch(cacheKey, response);
 
-            performanceMonitor.recordMetric({
-                responseTime,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'searchStandards',
-                success: true,
-                cacheHit: false,
-                data: {
-                    query: request.query,
-                    resultCount: searchResults.length,
-                    fuzzy: request.fuzzy
-                }
-            });
-
             return response;
         } catch (error) {
-            performanceMonitor.recordMetric({
-                responseTime: 0,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'searchStandards',
-                success: false,
-                data: { error: error instanceof Error ? error.message : 'Unknown error' }
-            });
             throw McpErrorHandler.handleError(error);
         }
     }
@@ -218,7 +184,7 @@ export class GetStandardsHandler {
                 cacheHit: true,
                 data: { cached: true }
             });
-            return cached;
+            return { ...cached, responseTime: 0 };
         }
 
         try {
@@ -277,6 +243,11 @@ export class GetStandardsHandler {
                         violations,
                         score: Math.max(0, score)
                     };
+                },
+                {
+                    language: request.language,
+                    violationsCount: 0, // Will be updated after validation
+                    score: 0 // Will be updated after validation
                 }
             );
 
@@ -288,30 +259,8 @@ export class GetStandardsHandler {
             // Cache the result
             mcpCache.setValidation(cacheKey, response);
 
-            performanceMonitor.recordMetric({
-                responseTime,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'validateCode',
-                success: true,
-                cacheHit: false,
-                data: {
-                    language: request.language,
-                    violationsCount: validationResult.violations.length,
-                    score: validationResult.score
-                }
-            });
-
             return response;
         } catch (error) {
-            performanceMonitor.recordMetric({
-                responseTime: 0,
-                memoryUsage: this.getMemoryUsage(),
-                timestamp: Date.now(),
-                operation: 'validateCode',
-                success: false,
-                data: { error: error instanceof Error ? error.message : 'Unknown error' }
-            });
             throw McpErrorHandler.handleError(error);
         }
     }
@@ -446,11 +395,11 @@ export class GetStandardsHandler {
     }
 
     private validateValidateCodeRequest(request: ValidateCodeRequest): void {
-        if (!request.code || typeof request.code !== 'string') {
+        if (request.code === null || request.code === undefined || typeof request.code !== 'string') {
             throw McpErrorHandler.invalidParams('code is required and must be a string');
         }
-        if (!request.language || typeof request.language !== 'string') {
-            throw McpErrorHandler.invalidParams('language is required and must be a string');
+        if (request.language === null || request.language === undefined || typeof request.language !== 'string' || request.language === '') {
+            throw McpErrorHandler.invalidParams('language is required and must be a non-empty string');
         }
         if (request.useStrict !== undefined && typeof request.useStrict !== 'boolean') {
             throw McpErrorHandler.invalidParams('useStrict must be a boolean');

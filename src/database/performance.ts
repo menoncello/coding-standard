@@ -8,9 +8,93 @@ export class DatabasePerformanceManager {
     private db: DatabaseConnection;
     private metricsCache = new Map<string, any>();
     private cacheTimeout = 60000; // 1 minute cache timeout
+    private operations = new Map<string, Array<{ duration: number; timestamp: number; error?: boolean }>>();
 
     constructor(db: DatabaseConnection) {
         this.db = db;
+    }
+
+    /**
+     * Measure operation performance
+     */
+    async measure(operationName: string, operation: () => Promise<void>): Promise<void> {
+        const startTime = performance.now();
+        try {
+            await operation();
+            const duration = performance.now() - startTime;
+
+            if (!this.operations.has(operationName)) {
+                this.operations.set(operationName, []);
+            }
+
+            const operationMetrics = this.operations.get(operationName)!;
+            operationMetrics.push({
+                duration,
+                timestamp: Date.now()
+            });
+
+            // Keep only last 100 measurements per operation
+            if (operationMetrics.length > 100) {
+                operationMetrics.splice(0, operationMetrics.length - 100);
+            }
+        } catch (error) {
+            const duration = performance.now() - startTime;
+
+            if (!this.operations.has(operationName)) {
+                this.operations.set(operationName, []);
+            }
+
+            const operationMetrics = this.operations.get(operationName)!;
+            operationMetrics.push({
+                duration,
+                timestamp: Date.now(),
+                error: true
+            });
+
+            throw error;
+        }
+    }
+
+    /**
+     * Get collected performance metrics
+     */
+    getMetrics(): {
+        operations: Record<string, {
+            count: number;
+            averageDuration: number;
+            minDuration: number;
+            maxDuration: number;
+            errorCount: number;
+        }>;
+    } {
+        const result: Record<string, any> = {};
+
+        for (const [operationName, metrics] of this.operations) {
+            const durations = metrics.filter(m => !m.error).map(m => m.duration);
+            const errorCount = metrics.filter(m => m.error).length;
+
+            if (durations.length > 0) {
+                result[operationName] = {
+                    count: durations.length,
+                    averageDuration: Math.round(durations.reduce((sum, d) => sum + d, 0) / durations.length * 100) / 100,
+                    minDuration: Math.round(Math.min(...durations) * 100) / 100,
+                    maxDuration: Math.round(Math.max(...durations) * 100) / 100,
+                    errorCount
+                };
+            } else {
+                result[operationName] = {
+                    count: 0,
+                    averageDuration: 0,
+                    minDuration: 0,
+                    maxDuration: 0,
+                    errorCount
+                };
+            }
+        }
+
+        return {
+            operations: result
+        };
     }
 
     /**
@@ -138,23 +222,48 @@ export class DatabasePerformanceManager {
             `);
 
             // Get index usage statistics
-            const indexUsage = await this.db.execute(`
-                SELECT name, stat
-                FROM sqlite_stat1
-                WHERE tbl_name IN ('standards_cache', 'standards_search_content', 'usage_analytics')
-            `);
+            let indexUsage: any[] = [];
+            try {
+                // sqlite_stat1 table may not exist until ANALYZE has been run
+                indexUsage = await this.db.execute(`
+                    SELECT name, stat
+                    FROM sqlite_stat1
+                    WHERE tbl_name IN ('standards_cache', 'standards_search_content', 'usage_analytics')
+                `);
+            } catch (statError) {
+                // sqlite_stat1 table doesn't exist yet, which is normal for fresh databases
+                console.debug('sqlite_stat1 table not available, index usage metrics will be limited');
+            }
 
-            // Check for fragmented indexes
-            const fragmentation = await this.checkIndexFragmentation();
+            // Check for fragmented indexes (with error handling)
+            let fragmentation = 0;
+            try {
+                fragmentation = await this.checkIndexFragmentation();
+            } catch (fragError) {
+                console.debug('Could not analyze index fragmentation:', fragError);
+            }
 
-            // Get missing indexes suggestions
-            const missingIndexes = await this.identifyMissingIndexes();
+            // Get missing indexes suggestions (with error handling)
+            let missingIndexes: string[] = [];
+            try {
+                missingIndexes = await this.identifyMissingIndexes();
+            } catch (missingError) {
+                console.debug('Could not identify missing indexes:', missingError);
+            }
+
+            // Calculate average index size (with error handling)
+            let avgIndexSize = 0;
+            try {
+                avgIndexSize = await this.calculateAverageIndexSize(indexStats);
+            } catch (sizeError) {
+                console.debug('Could not calculate average index size:', sizeError);
+            }
 
             const metrics: IndexHealthMetrics = {
                 totalIndexes: indexStats.length,
                 usedIndexes: indexUsage.length,
                 fragmentationRate: fragmentation,
-                avgIndexSize: await this.calculateAverageIndexSize(indexStats),
+                avgIndexSize,
                 missingIndexes,
                 indexUsageRate: indexStats.length > 0 ? (indexUsage.length / indexStats.length) * 100 : 0
             };
@@ -265,33 +374,58 @@ export class DatabasePerformanceManager {
             const dbMetrics = this.db.getMetrics();
 
             // Get WAL mode information
-            const walInfo = await this.db.execute('PRAGMA journal_mode');
-            const walCheckpoint = await this.db.execute('PRAGMA wal_checkpoint(PASSIVE)');
+            let walInfo: any[] = [];
+            let walCheckpoint: any[] = [];
+            try {
+                walInfo = await this.db.execute('PRAGMA journal_mode');
+            } catch (error) {
+                console.debug('Failed to get WAL mode info:', error);
+            }
+
+            try {
+                walCheckpoint = await this.db.execute('PRAGMA wal_checkpoint(PASSIVE)');
+            } catch (error) {
+                console.debug('Failed to get WAL checkpoint info:', error);
+            }
 
             // Check lock status
-            const lockStatus = await this.db.execute(`
-                SELECT COUNT(*) as active_connections
-                FROM pragma_database_list()
-                WHERE name = 'main'
-            `);
+            let lockStatus: any[] = [];
+            try {
+                lockStatus = await this.db.execute('PRAGMA database_list');
+            } catch (error) {
+                console.debug('Failed to get database list for lock status check');
+            }
 
-            // Get concurrent operation metrics
-            const concurrentOps = await this.db.execute(`
-                SELECT
-                    event_type,
-                    COUNT(*) as count,
-                    AVG(duration) as avg_duration
-                FROM usage_analytics
-                WHERE timestamp > ?
-                GROUP BY event_type
-            `, [Date.now() - 60000]); // Last minute
+            // Get concurrent operation metrics (with error handling)
+            let concurrentOps: any[] = [];
+            try {
+                concurrentOps = await this.db.execute(`
+                    SELECT
+                        event_type,
+                        COUNT(*) as count,
+                        AVG(duration) as avg_duration
+                    FROM usage_analytics
+                    WHERE timestamp > ?
+                    GROUP BY event_type
+                `, [Date.now() - 60000]); // Last minute
+            } catch (opsError) {
+                console.debug('Could not get concurrent operation metrics:', opsError);
+            }
+
+            // Get lock contentions (with error handling)
+            let lockContentions = 0;
+            try {
+                lockContentions = await this.detectLockContentions();
+            } catch (lockError) {
+                console.debug('Could not detect lock contentions:', lockError);
+            }
 
             const metrics: ConcurrencyMetrics = {
-                walMode: walInfo[0].journal_mode === 'wal',
+                walMode: walInfo.length > 0 ? walInfo[0].journal_mode === 'wal' : false,
                 activeConnections: dbMetrics.connectionsActive,
                 totalConnections: dbMetrics.connectionsTotal,
                 avgConcurrentOps: concurrentOps.reduce((sum, op) => sum + op.count, 0),
-                lockContentions: await this.detectLockContentions(),
+                lockContentions,
                 checkpointEfficiency: this.calculateCheckpointEfficiency(walCheckpoint),
                 concurrencyScore: this.calculateConcurrencyScore(dbMetrics)
             };

@@ -73,7 +73,8 @@ export class DatabaseSchema {
         `;
         await db.execute(contentSql);
 
-        // Create standalone FTS5 virtual table (no content parameter)
+        // Create FTS5 virtual table WITH content parameter
+        // This automatically syncs the FTS index with the content table
         const ftsSql = `
             CREATE VIRTUAL TABLE standards_search_idx USING fts5(
                 standard_id,
@@ -82,10 +83,14 @@ export class DatabaseSchema {
                 technology,
                 category,
                 rules,
-                tokenize = 'porter unicode61 remove_diacritics 1'
+                content='standards_search_data',
+                content_rowid='id'
             )
         `;
         await db.execute(ftsSql);
+
+        // Note: FTS5 with content='standards_search_data' automatically handles synchronization
+        // No manual triggers needed for FTS5 index maintenance
     }
 
     /**
@@ -257,10 +262,10 @@ export class DatabaseSchema {
                 }
             }
 
-            // Check FTS virtual table
+            // Check FTS virtual table (with content parameter)
             const ftsCheck = await this.db.execute(`
                 SELECT sql FROM sqlite_master
-                WHERE type='table' AND name='standards_search' AND sql LIKE '%VIRTUAL TABLE%'
+                WHERE type='table' AND name='standards_search_idx' AND sql LIKE '%VIRTUAL TABLE%'
             `);
 
             if (ftsCheck.length === 0) {

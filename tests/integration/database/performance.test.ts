@@ -118,12 +118,10 @@ describe('P1 - Database Performance Tests', () => {
                 const standard = createStandard();
                 const startTime = Date.now();
 
-                await db.transaction(async (connection) => {
-                    await connection.execute(
-                        'INSERT INTO standards_cache (id, key, data, ttl, created_at, last_accessed, access_count, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                        [`concurrent-${index}`, `key-${index}`, JSON.stringify(standard), 5000, Date.now(), Date.now(), 0, Date.now() + 5000]
-                    );
-                });
+                await db.execute(
+                    'INSERT INTO standards_cache (id, key, data, ttl, created_at, last_accessed, access_count, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                    [`concurrent-${index}`, `key-${index}`, JSON.stringify(standard), 5000, Date.now(), Date.now(), 0, Date.now() + 5000]
+                );
 
                 return Date.now() - startTime;
             });
@@ -146,11 +144,10 @@ describe('P1 - Database Performance Tests', () => {
             // Given: A standard to cache
             const testStandard = createStandard();
             const cacheKey = 'performance-test-standard';
-            const serializedData = JSON.stringify(testStandard);
-
+            
             // When: I store and retrieve cached data
             const storeStartTime = Date.now();
-            await cacheBackend.set(cacheKey, serializedData);
+            await cacheBackend.set(cacheKey, testStandard);
             const storeTime = Date.now() - storeStartTime;
 
             const retrieveStartTime = Date.now();
@@ -160,7 +157,7 @@ describe('P1 - Database Performance Tests', () => {
             // Then: Both operations should complete under 10ms
             expect(storeTime).toBeLessThan(10);
             expect(retrieveTime).toBeLessThan(10);
-            expect(cachedData).toBe(serializedData);
+            expect(cachedData).toEqual(testStandard);
         });
 
         test('1.2-PERF-004 should handle large cache datasets efficiently (AC: 1)', async () => {
@@ -171,7 +168,7 @@ describe('P1 - Database Performance Tests', () => {
             // When: I store all standards in cache
             for (let i = 0; i < largeStandardSet.length; i++) {
                 const startTime = Date.now();
-                await cacheBackend.set(`perf-test-${i}`, JSON.stringify(largeStandardSet[i]));
+                await cacheBackend.set(`perf-test-${i}`, largeStandardSet[i]);
                 storeTimes.push(Date.now() - startTime);
             }
 
@@ -283,7 +280,7 @@ describe('P1 - Database Performance Tests', () => {
             const standard = createStandard();
 
             await performance.measure('cache_set', async () => {
-                await cacheBackend.set('metrics-test', JSON.stringify(standard));
+                await cacheBackend.set('metrics-test', standard);
             });
 
             await performance.measure('cache_get', async () => {
@@ -303,11 +300,11 @@ describe('P1 - Database Performance Tests', () => {
             // Each operation should have timing data
             for (const [operation, data] of Object.entries(metrics.operations)) {
                 expect(data).toHaveProperty('count');
-                expect(data).toHaveProperty('averageTime');
-                expect(data).toHaveProperty('minTime');
-                expect(data).toHaveProperty('maxTime');
+                expect(data).toHaveProperty('averageDuration');
+                expect(data).toHaveProperty('minDuration');
+                expect(data).toHaveProperty('maxDuration');
                 expect(data.count).toBeGreaterThan(0);
-                expect(data.averageTime).toBeGreaterThanOrEqual(0);
+                expect(data.averageDuration).toBeGreaterThanOrEqual(0);
             }
         });
 
@@ -320,7 +317,7 @@ describe('P1 - Database Performance Tests', () => {
 
             for (const standard of standards) {
                 await performance.measure('bulk_cache', async () => {
-                    await cacheBackend.set(`bulk-${standard.id}`, JSON.stringify(standard));
+                    await cacheBackend.set(`bulk-${standard.id}`, standard);
                 });
             }
 

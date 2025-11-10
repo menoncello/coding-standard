@@ -21,9 +21,7 @@ export class FtsSearchEngine {
         const startTime = performance.now();
 
         try {
-            const rulesText = standard.rules.map(rule =>
-                `${rule.description} ${rule.example || ''} ${rule.category}`
-            ).join(' ');
+            const rulesText = JSON.stringify(standard.rules);
 
             const now = Date.now();
 
@@ -33,11 +31,8 @@ export class FtsSearchEngine {
                     SELECT id FROM ${this.contentTable} WHERE standard_id = ?
                 `, [standard.id]);
 
-                let contentId: number;
-
                 if (existing.length > 0) {
                     // Update existing record
-                    contentId = existing[0].id;
                     await connection.execute(`
                         UPDATE ${this.contentTable}
                         SET title = ?, description = ?, technology = ?, category = ?,
@@ -52,23 +47,6 @@ export class FtsSearchEngine {
                         standard.lastUpdated,
                         now,
                         standard.id
-                    ]);
-
-                    // Update FTS5 index
-                    await connection.execute(`
-                        DELETE FROM ${this.tableName} WHERE standard_id = ?
-                    `, [standard.id]);
-
-                    await connection.execute(`
-                        INSERT INTO ${this.tableName} (standard_id, title, description, technology, category, rules)
-                        VALUES (?, ?, ?, ?, ?, ?)
-                    `, [
-                        standard.id,
-                        standard.title,
-                        standard.description,
-                        standard.technology,
-                        standard.category,
-                        rulesText
                     ]);
                 } else {
                     // Insert new record
@@ -88,23 +66,15 @@ export class FtsSearchEngine {
                         now,
                         now
                     ]);
-
-                    contentId = result.lastInsertRowid as number;
-
-                    // Insert into FTS5 index
-                    await connection.execute(`
-                        INSERT INTO ${this.tableName} (standard_id, title, description, technology, category, rules)
-                        VALUES (?, ?, ?, ?, ?, ?)
-                    `, [
-                        standard.id,
-                        standard.title,
-                        standard.description,
-                        standard.technology,
-                        standard.category,
-                        rulesText
-                    ]);
                 }
             });
+
+            // Manually rebuild FTS5 index to ensure synchronization
+            try {
+                await this.db.execute(`INSERT INTO ${this.tableName}(${this.tableName}) VALUES('rebuild')`);
+            } catch (error) {
+                console.warn(`Failed to rebuild FTS5 index for ${standard.id}:`, error);
+            }
 
             const indexTime = performance.now() - startTime;
 
@@ -122,25 +92,35 @@ export class FtsSearchEngine {
     async removeStandard(standardId: string): Promise<void> {
         try {
             await this.db.transaction(async (connection) => {
-                // Remove from FTS5 index
-                await connection.execute(`
-                    DELETE FROM ${this.tableName} WHERE standard_id = ?
-                `, [standardId]);
-
                 // Remove from content table
                 await connection.execute(`
                     DELETE FROM ${this.contentTable} WHERE standard_id = ?
                 `, [standardId]);
-
-                console.log(`Removed standard ${standardId} from search index`);
             });
 
+            // Rebuild FTS5 index to remove the deleted entry
+            try {
+                await this.db.execute(`INSERT INTO ${this.tableName}(${this.tableName}) VALUES('rebuild')`);
+            } catch (error) {
+                console.warn(`Failed to rebuild FTS5 index after removing ${standardId}:`, error);
+            }
+
+            console.log(`Removed standard ${standardId} from search index`);
+
         } catch (error) {
-            console.error(`Failed to remove standard ${standardId} from search index:`, error);
+            console.error(`Failed to remove standard ${standardId}:`, error);
             throw error;
         }
     }
 
+    /**
+     * Alias for removeStandard for backward compatibility
+     */
+    async removeFromIndex(standardId: string): Promise<void> {
+        return this.removeStandard(standardId);
+    }
+
+    
     /**
      * Perform full-text search with BM25 ranking
      */
@@ -163,23 +143,44 @@ export class FtsSearchEngine {
             } = options;
 
             // Build search query
-            let ftsQuery = this.buildFtsQuery(query, fuzzy);
-            let sql = `
-                SELECT
-                    sc.standard_id,
-                    sc.title,
-                    sc.description,
-                    sc.technology,
-                    sc.category,
-                    sc.rules,
-                    sc.last_updated,
-                    rank
-                FROM ${this.tableName} ft
-                JOIN ${this.contentTable} sc ON ft.standard_id = sc.standard_id
-                WHERE ${this.tableName} MATCH ?
-            `;
+            let sql: string;
+            let params: any[] = [];
 
-            const params: any[] = [ftsQuery];
+            if (query.trim()) {
+                // Normal FTS search with query
+                let ftsQuery = this.buildFtsQuery(query, fuzzy);
+                sql = `
+                    SELECT
+                        sc.standard_id,
+                        sc.title,
+                        sc.description,
+                        sc.technology,
+                        sc.category,
+                        sc.rules,
+                        sc.last_updated,
+                        rank
+                    FROM ${this.tableName}
+                    JOIN ${this.contentTable} sc ON sc.id = ${this.tableName}.rowid
+                    WHERE ${this.tableName} MATCH ?
+                `;
+                params = [ftsQuery];
+            } else {
+                // Empty query - just filter without FTS
+                sql = `
+                    SELECT
+                        sc.standard_id,
+                        sc.title,
+                        sc.description,
+                        sc.technology,
+                        sc.category,
+                        sc.rules,
+                        sc.last_updated,
+                        1.0 as rank
+                    FROM ${this.contentTable} sc
+                    WHERE 1=1
+                `;
+                params = [];
+            }
 
             // Add filters
             if (technology) {
@@ -207,34 +208,59 @@ export class FtsSearchEngine {
             const results = await this.db.execute(sql, params);
 
             // Get total count
-            const countSql = `
-                SELECT COUNT(*) as total
-                FROM ${this.tableName} ft
-                JOIN ${this.contentTable} sc ON ft.standard_id = sc.standard_id
-                WHERE ${this.tableName} MATCH ?
-                ${technology ? 'AND sc.technology = ?' : ''}
-                ${category ? 'AND sc.category = ?' : ''}
-            `;
+            let countSql: string;
+            let countParams: any[] = [];
 
-            const countParams = [ftsQuery];
-            if (technology) countParams.push(technology);
-            if (category) countParams.push(category);
+            if (query.trim()) {
+                // Normal FTS search count
+                let ftsQuery = this.buildFtsQuery(query, fuzzy);
+                countSql = `
+                    SELECT COUNT(*) as total
+                    FROM ${this.tableName}
+                    JOIN ${this.contentTable} sc ON sc.id = ${this.tableName}.rowid
+                    WHERE ${this.tableName} MATCH ?
+                    ${technology ? 'AND sc.technology = ?' : ''}
+                    ${category ? 'AND sc.category = ?' : ''}
+                `;
+                countParams = [ftsQuery];
+                if (technology) countParams.push(technology);
+                if (category) countParams.push(category);
+            } else {
+                // Empty query count - just filter without FTS
+                countSql = `
+                    SELECT COUNT(*) as total
+                    FROM ${this.contentTable} sc
+                    WHERE 1=1
+                    ${technology ? 'AND sc.technology = ?' : ''}
+                    ${category ? 'AND sc.category = ?' : ''}
+                `;
+                if (technology) countParams.push(technology);
+                if (category) countParams.push(category);
+            }
 
             const countResult = await this.db.execute(countSql, countParams);
             const totalCount = countResult[0].total;
 
             // Format results
-            const searchResults: SearchResult[] = results.map((row: any) => ({
-                standardId: row.standard_id,
-                title: row.title,
-                description: row.description,
-                technology: row.technology,
-                category: row.category,
-                rules: this.parseRules(row.rules),
-                lastUpdated: row.last_updated,
-                rank: row.rank || 0,
-                bm25Score: this.calculateBM25Score(row.rank || 0)
-            }));
+            const searchResults: SearchResult[] = results.map((row: any) => {
+                const rank = row.rank || 0;
+                const bm25Score = this.calculateBM25Score(rank);
+                return {
+                    standardId: row.standard_id,
+                    standard: {
+                        id: row.standard_id,
+                        title: row.title,
+                        description: row.description,
+                        technology: row.technology,
+                        category: row.category,
+                        rules: this.parseRules(row.rules),
+                        lastUpdated: row.last_updated
+                    },
+                    rank,
+                    bm25Score,
+                    score: bm25Score // Legacy property for backward compatibility
+                };
+            });
 
             const queryTime = performance.now() - startTime;
 
@@ -274,11 +300,18 @@ export class FtsSearchEngine {
         const terms = cleanQuery.split(' ').filter(term => term.length > 0);
 
         if (fuzzy) {
-            // Use NEAR operator for fuzzy matching (FTS5 syntax)
-            return terms.map(term => `"${term}"`).join(' NEAR ');
+            // For fuzzy search, use OR with wildcards for broader matching
+            const fuzzyTerms = terms.map(term => {
+                // Add prefix wildcard for terms longer than 2 characters
+                if (term.length > 2) {
+                    return `${term}*`;
+                }
+                return term;
+            });
+            return fuzzyTerms.join(' OR ');
         } else {
-            // Exact phrase matching with AND logic
-            return terms.map(term => `"${term}"`).join(' AND ');
+            // For exact search, use AND for precise matching
+            return terms.join(' AND ');
         }
     }
 
@@ -335,8 +368,10 @@ export class FtsSearchEngine {
                 queryTime
             };
 
+            // Use INSERT OR IGNORE to avoid UNIQUE constraint violations
+            // If a record with the same ID exists, it will be ignored
             await this.db.execute(`
-                INSERT INTO usage_analytics (id, event_type, timestamp, duration, metadata)
+                INSERT OR IGNORE INTO usage_analytics (id, event_type, timestamp, duration, metadata)
                 VALUES (?, ?, ?, ?, ?)
             `, [
                 this.generateAnalyticsId(),
@@ -525,9 +560,6 @@ export class FtsSearchEngine {
      */
     async optimize(): Promise<void> {
         try {
-            // Rebuild FTS index
-            await this.db.execute(`INSERT INTO ${this.tableName}(${this.tableName}) VALUES('rebuild')`);
-
             // Analyze content table for query optimization
             await this.db.execute(`ANALYZE ${this.contentTable}`);
 
@@ -544,8 +576,9 @@ export class FtsSearchEngine {
      */
     async clear(): Promise<void> {
         try {
-            // Clear FTS5 index
-            await this.db.execute(`DELETE FROM ${this.tableName}`);
+            // Clear content table
+            // FTS5 will automatically sync via content parameter triggers
+            await this.db.execute(`DELETE FROM ${this.contentTable}`);
 
             console.log('Search index cleared');
 
@@ -630,6 +663,56 @@ export class FtsSearchEngine {
                 ftsSize: 0,
                 lastIndexed: 0,
                 issues
+            };
+        }
+    }
+
+    /**
+     * Get search index health and statistics
+     */
+    async getIndexHealth(): Promise<{
+        healthy: boolean;
+        totalDocuments: number;
+        indexSize: number;
+        lastIndexed: number | null;
+        issues: string[];
+    }> {
+        try {
+            // Get total number of indexed standards
+            const contentCount = await this.db.execute(`
+                SELECT COUNT(*) as count, MAX(updated_at) as last_updated
+                FROM ${this.contentTable}
+            `);
+
+            // Get FTS index statistics
+            const ftsStats = await this.db.execute(`
+                SELECT COUNT(*) as count FROM ${this.tableName}
+            `);
+
+            const totalDocuments = contentCount[0]?.count || 0;
+            const lastIndexed = contentCount[0]?.last_updated ? parseInt(contentCount[0].last_updated) : null;
+            const indexSize = ftsStats[0]?.count || 0;
+
+            const issues: string[] = [];
+            if (totalDocuments !== indexSize) {
+                issues.push(`FTS index out of sync: ${totalDocuments} content records vs ${indexSize} FTS records`);
+            }
+
+            return {
+                healthy: issues.length === 0,
+                totalDocuments,
+                indexSize,
+                lastIndexed,
+                issues
+            };
+        } catch (error) {
+            console.error('Failed to get search index health:', error);
+            return {
+                healthy: false,
+                totalDocuments: 0,
+                indexSize: 0,
+                lastIndexed: null,
+                issues: [`Failed to get health metrics: ${error.message}`]
             };
         }
     }

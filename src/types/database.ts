@@ -67,14 +67,24 @@ export interface SearchOptions {
 
 export interface SearchResult {
     standardId: string;
-    title: string;
-    description: string;
-    technology: string;
-    category: string;
-    rules: string[];
-    lastUpdated: string;
+    standard: {
+        id: string;
+        title: string;
+        description: string;
+        technology: string;
+        category: string;
+        rules: Array<{
+            id: string;
+            description: string;
+            severity: 'error' | 'warning' | 'info';
+            category: string;
+            example?: string;
+        }>;
+        lastUpdated: string;
+    };
     rank: number;
     bm25Score: number;
+    score?: number; // Legacy property for backward compatibility
 }
 
 export interface CacheStats {

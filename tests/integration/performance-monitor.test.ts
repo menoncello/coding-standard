@@ -13,10 +13,13 @@ describe('PerformanceMonitor Integration Tests', () => {
 
     beforeEach(() => {
         monitor = new PerformanceMonitor();
+        // Clear the global performance monitor to ensure clean state for decorator tests
+        performanceMonitor.clearMetrics();
     });
 
     afterEach(() => {
         monitor.clearMetrics();
+        performanceMonitor.clearMetrics();
     });
 
     describe('timer operations', () => {
@@ -391,6 +394,14 @@ describe('PerformanceMonitor Integration Tests', () => {
 });
 
 describe('measurePerformance decorator', () => {
+    beforeEach(() => {
+        performanceMonitor.clearMetrics();
+    });
+
+    afterEach(() => {
+        performanceMonitor.clearMetrics();
+    });
+
     test('should measure function performance automatically', async () => {
         class TestClass {
             @measurePerformance('test-method')
@@ -436,6 +447,14 @@ describe('measurePerformance decorator', () => {
 });
 
 describe('measureAsyncFunction helper', () => {
+    beforeEach(() => {
+        performanceMonitor.clearMetrics();
+    });
+
+    afterEach(() => {
+        performanceMonitor.clearMetrics();
+    });
+
     test('should measure async function performance', async () => {
         const asyncFunction = async () => {
             await new Promise(resolve => setTimeout(resolve, 50));
@@ -531,7 +550,7 @@ describe('MemoryMonitor Integration Tests', () => {
 
     test('should restart monitoring correctly', async () => {
         memMonitor.startMonitoring(50);
-        await new Promise(resolve => setTimeout(resolve, 150));
+        await new Promise(resolve => setTimeout(resolve, 120)); // Run for ~120ms (should get 2-3 samples)
         memMonitor.stopMonitoring();
 
         const firstTrend = memMonitor.getMemoryTrend();
@@ -539,11 +558,11 @@ describe('MemoryMonitor Integration Tests', () => {
 
         memMonitor.clear();
         memMonitor.startMonitoring(50);
-        await new Promise(resolve => setTimeout(resolve, 150));
+        await new Promise(resolve => setTimeout(resolve, 250)); // Run for ~250ms (should get more samples)
         memMonitor.stopMonitoring();
 
         const secondTrend = memMonitor.getMemoryTrend();
         expect(secondTrend.samples).toBeGreaterThan(0);
-        expect(secondTrend.samples).not.toBe(firstTrend.samples);
+        expect(secondTrend.samples).not.toBe(firstTrend.samples); // Should have different sample counts
     });
 });

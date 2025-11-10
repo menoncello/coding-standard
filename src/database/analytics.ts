@@ -873,6 +873,101 @@ export class DatabaseAnalytics {
     }
 
     /**
+     * Get analytics summary
+     */
+    async getSummary(options: {
+        timeRange: '1h' | '24h' | '7d' | '30d';
+        groupBy: 'eventType' | 'userId' | 'sessionId';
+    }): Promise<{
+        totalEvents: number;
+        eventCounts: Record<string, number>;
+        avgDuration: number;
+        uniqueUsers: number;
+        uniqueSessions: number;
+    }> {
+        const { timeRange, groupBy } = options;
+
+        // Calculate time range
+        const now = Date.now();
+        let startTime: number;
+
+        switch (timeRange) {
+            case '1h':
+                startTime = now - (60 * 60 * 1000);
+                break;
+            case '24h':
+                startTime = now - (24 * 60 * 60 * 1000);
+                break;
+            case '7d':
+                startTime = now - (7 * 24 * 60 * 60 * 1000);
+                break;
+            case '30d':
+                startTime = now - (30 * 24 * 60 * 60 * 1000);
+                break;
+            default:
+                startTime = now - (24 * 60 * 60 * 1000);
+        }
+
+        try {
+            // Get grouped counts
+            const groupField = groupBy === 'eventType' ? 'event_type' : groupBy;
+            const result = await this.db.execute(`
+                SELECT
+                    ${groupField} as group_value,
+                    COUNT(*) as count,
+                    AVG(duration) as avg_duration
+                FROM ${this.tableName}
+                WHERE timestamp >= ?
+                GROUP BY ${groupField}
+                ORDER BY count DESC
+            `, [startTime]);
+
+            // Get total count and unique users/sessions
+            const totals = await this.db.execute(`
+                SELECT
+                    COUNT(*) as total_events,
+                    COUNT(DISTINCT user_id) as unique_users,
+                    COUNT(DISTINCT session_id) as unique_sessions,
+                    AVG(duration) as overall_avg
+                FROM ${this.tableName}
+                WHERE timestamp >= ?
+            `, [startTime]);
+
+            // Build event counts object
+            const eventCounts: Record<string, number> = {};
+            let totalAvgDuration = 0;
+
+            for (const row of result) {
+                const key = row.group_value || 'unknown';
+                eventCounts[key] = row.count;
+                totalAvgDuration += row.avg_duration;
+            }
+
+            const avgDuration = result.length > 0
+                ? totalAvgDuration / result.length
+                : totals[0].overall_avg || 0;
+
+            return {
+                totalEvents: totals[0].total_events || 0,
+                eventCounts,
+                avgDuration: Math.round(avgDuration * 100) / 100,
+                uniqueUsers: totals[0].unique_users || 0,
+                uniqueSessions: totals[0].unique_sessions || 0
+            };
+
+        } catch (error) {
+            console.error('Failed to get analytics summary:', error);
+            return {
+                totalEvents: 0,
+                eventCounts: {},
+                avgDuration: 0,
+                uniqueUsers: 0,
+                uniqueSessions: 0
+            };
+        }
+    }
+
+    /**
      * Extract technology from cache key
      */
     private extractTechnology(key: string): string | undefined {

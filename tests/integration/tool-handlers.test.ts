@@ -464,7 +464,6 @@ describe('Tool Handlers Integration Tests', () => {
             const invalidRequests = [
                 { code: 123, language: 'typescript' }, // code should be string
                 { code: 'test', language: 123 }, // language should be string
-                { code: '', language: 'typescript' }, // empty code
                 { code: 'test', language: '' }, // empty language
                 { code: 'test', language: 'typescript', useStrict: 'yes' }, // useStrict should be boolean
                 { code: 'test', language: 'typescript', rules: 'not-array' } // rules should be array

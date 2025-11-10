@@ -189,6 +189,13 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     }
 
     /**
+     * Async version of set for compatibility with tests
+     */
+    async setAsync(key: string, data: T, customTtl?: number): Promise<void> {
+        this.set(key, data, customTtl);
+    }
+
+    /**
      * Override delete method to mark as dirty
      */
     delete(key: string): boolean {
@@ -236,8 +243,26 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     /**
      * Get basic cache statistics
      */
-    async getStatistics(): Promise<CacheStats> {
-        return super.getStats();
+    async getStatistics(): Promise<{
+        totalItems: number;
+        hitCount: number;
+        missCount: number;
+        totalAccesses: number;
+        hitRate: number;
+        memoryUsage: number;
+        averageAccessTime: number;
+    }> {
+        const memoryStats = super.getStats();
+
+        return {
+            totalItems: this.cache.size,
+            hitCount: memoryStats.hits,
+            missCount: memoryStats.misses,
+            totalAccesses: memoryStats.hits + memoryStats.misses,
+            hitRate: memoryStats.hitRate,
+            memoryUsage: memoryStats.memoryUsage,
+            averageAccessTime: 0 // Not tracked in basic stats
+        };
     }
 
     /**
@@ -356,9 +381,16 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     async invalidateByPattern(pattern: string): Promise<number> {
         let invalidated = 0;
 
+        // Convert pattern to SQL LIKE pattern
+        // * is converted to %, and special characters are escaped
+        const sqlPattern = pattern.replace(/\*/g, '%');
+
         // Remove from memory cache
         for (const key of this.cache.keys()) {
-            if (key.includes(pattern)) {
+            // Convert pattern to regex for memory cache matching
+            const regexPattern = pattern.replace(/\*/g, '.*');
+            const regex = new RegExp(`^${regexPattern}$`);
+            if (regex.test(key)) {
                 this.delete(key);
                 invalidated++;
             }
@@ -368,7 +400,7 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
         try {
             const result = await this.db.execute(`
                 DELETE FROM ${this.tableName} WHERE key LIKE ?
-            `, [`%${pattern}%`]);
+            `, [sqlPattern]);
             invalidated += result.changes;
         } catch (error) {
             console.error(`Failed to invalidate cache pattern ${pattern}:`, error);
@@ -378,12 +410,20 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     }
 
     /**
-     * Invalidate all cache entries (alias for clear)
+     * Invalidate cache entries by pattern
+     * If pattern is provided, only invalidate matching entries
+     * If pattern is not provided, invalidate all entries
      */
-    async invalidate(): Promise<number> {
-        const count = this.cache.size;
-        this.clear();
-        return count;
+    async invalidate(pattern?: string): Promise<number> {
+        if (!pattern) {
+            // Invalidate all entries
+            const count = this.cache.size;
+            this.clear();
+            return count;
+        } else {
+            // Invalidate by pattern
+            return this.invalidateByPattern(pattern);
+        }
     }
 
     /**
@@ -443,11 +483,13 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
                 standardId: this.extractStandardId(key)
             };
 
+            // Use INSERT OR IGNORE to avoid UNIQUE constraint violations
+            // If a record with the same ID exists, it will be ignored
             await this.db.execute(`
-                INSERT INTO usage_analytics (id, event_type, timestamp, duration, metadata)
+                INSERT OR IGNORE INTO usage_analytics (id, event_type, timestamp, duration, metadata)
                 VALUES (?, ?, ?, ?, ?)
             `, [
-                this.generateId(`analytics_${eventType}_${key}`),
+                this.generateId(`analytics_${eventType}_${key}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`),
                 eventType,
                 Date.now(),
                 0,
