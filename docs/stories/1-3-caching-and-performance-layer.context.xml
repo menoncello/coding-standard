@@ -1,0 +1,107 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+    <metadata>
+        <epicId>1</epicId>
+        <storyId>3</storyId>
+        <title>caching-and-performance-layer</title>
+        <status>drafted</status>
+        <generatedAt>2025-11-10</generatedAt>
+        <generator>BMAD Story Context Workflow</generator>
+        <sourceStoryPath>docs/stories/1-3-caching-and-performance-layer.md</sourceStoryPath>
+    </metadata>
+
+    <story>
+        <asA>user</asA>
+        <iWant>sub-50ms response times for cached queries</iWant>
+        <soThat>coding standards access feels instantaneous</soThat>
+        <tasks>- **Multi-Layer Cache Implementation** (AC: 1, 4)
+  - [ ] Implement memory cache with LRU eviction
+  - [ ] Create cache orchestration layer (memory → SQLite → file system)
+  - [ ] Add cache warm-up functionality for critical standards
+  - [ ] Implement cache hit rate tracking and statistics
+  - [ ] Optimize cache operations for sub-30ms response times
+
+- **Performance Monitoring and Metrics** (AC: 3)
+  - [ ] Extend performance-monitor.ts with cache-specific metrics
+  - [ ] Implement real-time cache hit rate monitoring
+  - [ ] Add SLA threshold violation detection and alerting
+  - [ ] Create cache performance analytics and reporting
+  - [ ] Integrate with existing performance monitoring infrastructure
+
+- **Memory Management and Eviction** (AC: 2)
+  - [ ] Implement LRU eviction strategy for memory cache
+  - [ ] Add memory pressure detection and response
+  - [ ] Create cache size management and limits
+  - [ ] Implement intelligent cache warming based on access patterns
+  - [ ] Add cache invalidation and consistency mechanisms</tasks>
+    </story>
+
+    <acceptanceCriteria>1. Given a standard has been cached, when I request the same standard again, then response time is under 30ms with >80% cache hit rate
+
+2. Given memory pressure conditions, when cache eviction occurs, then LRU strategy removes least recently used items while preserving frequently accessed standards
+
+3. Given cache performance monitoring, when I track metrics over time, then cache hit rates exceed targets and response times remain within SLA thresholds
+
+4. Given system startup conditions, when the server initializes with cold cache, then warm-up completes within 200ms with critical standards pre-loaded</acceptanceCriteria>
+
+    <artifacts>
+        <docs>
+            <doc path="docs/architecture.md" title="Architecture: coding-standard" section="Performance-first architecture" snippet="The coding-standard project implements a high-performance, Bun-native architecture combining a CLI tool with MCP server capabilities. The architecture prioritizes ultra-fast performance (sub-50ms response times), minimal memory footprint (< 50MB), and seamless integration with existing development tools." />
+            <doc path="docs/tech-spec-epic-1.md" title="Epic Technical Specification: Core MCP Server Infrastructure" section="Cache performance specifications" snippet="This epic implements the core caching layer, database integration, and real-time validation capabilities that provide sub-50ms response times, leveraging Bun's native SQLite support and ultra-fast performance characteristics." />
+            <doc path="docs/PRD.md" title="coding-standard - Product Requirements Document" section="Performance excellence criteria" snippet="Sub-50ms response times for all standard retrieval operations (3-4x faster than Node.js alternatives), < 50MB memory footprint for the complete system (60% less than traditional solutions), > 80% cache hit rate for frequently accessed standards." />
+            <doc path="docs/nfr-assessment.md" title="NFR Assessment - Story 1.2" section="Cache performance validation" snippet="Cache operations exceed performance targets by significant margin with sub-millisecond cache operations demonstrated in performance tests. Database initialization 30-60x faster than target requirements." />
+            <doc path="docs/traceability-matrix-1.2.md" title="Traceability Matrix & Gate Decision - Story 1.2" section="Performance targets" snippet="Cache operations should complete under 10ms with sub-millisecond performance demonstrated. FTS search should complete under 100ms with BM25 ranking." />
+        </docs>
+        <code>
+            <artifact path="src/cache/cache-manager.ts" kind="service" symbol="CacheManager&lt;T&gt;" lines="36-252" reason="Generic in-memory cache with TTL and LRU eviction - foundation for Story 1.3 performance layer" />
+            <artifact path="src/cache/cache-manager.ts" kind="service" symbol="McpResponseCache" lines="257-389" reason="Specialized cache for MCP responses with statistics tracking - extend with performance monitoring" />
+            <artifact path="src/database/cache-backend.ts" kind="service" symbol="SqliteCacheBackend&lt;T&gt;" lines="20-616" reason="SQLite-based persistent cache - integrate with multi-layer cache orchestration" />
+            <artifact path="src/cache/search-index.ts" kind="service" symbol="FtsSearchEngine" lines="8-726" reason="FTS5 search engine with caching - leverage search performance patterns for cache optimization" />
+            <artifact path="src/utils/performance-monitor.ts" kind="service" symbol="PerformanceMonitor" lines="56-307" reason="Core performance tracking infrastructure - extend with cache-specific metrics and SLA monitoring" />
+            <artifact path="src/utils/performance-monitor.ts" kind="service" symbol="MemoryMonitor" lines="365-496" reason="Memory usage monitoring - critical for LRU eviction and memory pressure handling" />
+            <artifact path="src/database/performance.ts" kind="service" symbol="DatabasePerformanceManager" lines="7-966" reason="Database performance optimization - leverage for cache performance patterns" />
+            <artifact path="src/database/connection.ts" kind="service" symbol="DatabaseConnection" lines="7-468" reason="WAL-enabled SQLite connection - foundation for persistent cache layer" />
+            <artifact path="src/database/schema.ts" kind="service" symbol="DatabaseSchema" lines="7-431" reason="Cache table schema with TTL and access tracking - extend for performance layer" />
+            <artifact path="src/types/database.ts" kind="types" symbol="CacheStats" lines="90-99" reason="Cache statistics interface - extend with performance layer metrics" />
+            <artifact path="tests/integration/cache-manager.test.ts" kind="test" symbol="Cache Test Suite" lines="1-483" reason="Comprehensive cache testing patterns - follow for performance test structure" />
+            <artifact path="tests/integration/performance-monitor.test.ts" kind="test" symbol="Performance Test Suite" lines="1-568" reason="Performance monitoring test patterns - extend with cache-specific tests" />
+        </code>
+        <dependencies>
+            <ecosystem name="bun" packages="runtime: >=1.0.0, sqlite: builtin, test: builtin" />
+            <ecosystem name="typescript" packages="compiler: ^5.0.0, types: builtin" />
+            <ecosystem name="mcp" packages="@modelcontextprotocol/sdk: 0.5.0" />
+            <ecosystem name="testing" packages="@faker-js/faker: ^10.1.0, @stryker-mutator/core: ^9.3.0" />
+            <ecosystem name="tools" packages="biome: linter/formatter, stryker: mutation testing" />
+        </dependencies>
+    </artifacts>
+
+    <constraints>
+        <constraint type="performance" description="Memory cache response time must be under 30ms" />
+        <constraint type="performance" description="Cache hit rate must exceed 80% for frequently accessed standards" />
+        <constraint type="performance" description="Memory usage must remain under 50MB during normal operation" />
+        <constraint type="performance" description="Cache warm-up must complete within 200ms on cold startup" />
+        <constraint type="architecture" description="Must extend existing cache-manager.ts with performance layer enhancements" />
+        <constraint type="architecture" description="Must integrate with performance-monitor.ts for cache-specific metrics" />
+        <constraint type="architecture" description="Must follow established performance patterns for sub-100ms response times" />
+        <constraint type="technology" description="Must use Bun runtime (not Node.js) with built-in SQLite" />
+        <constraint type="testing" description="Must follow BDD test structure with test IDs and priority classification" />
+    </constraints>
+    <interfaces>
+        <interface name="Cache Performance Interface" kind="class interface" signature="interface CachePerformanceLayer { getMetrics(): CacheStats; warmupCriticalStandards(): Promise&lt;void&gt;; monitorSLA(): SLAResult; }" path="src/cache/performance-layer.ts" />
+        <interface name="LRU Eviction Interface" kind="class interface" signature="interface LRUEvictionStrategy { evict(leastRecent: CacheEntry): void; updateAccess(key: string): void; handleMemoryPressure(): void; }" path="src/cache/lru-cache.ts" />
+        <interface name="Performance Monitor Extension" kind="function signature" signature="measureCachePerformance&lt;T&gt;(operation: string, fn: () =&gt; T): T" path="src/utils/performance-monitor.ts" />
+    </interfaces>
+    <tests>
+        <standards>Framework: Bun Test (bun:test), Structure: Integration tests in tests/integration/cache/, Quality: BDD format with test IDs, Priority classification: P0/P1/P2/P3, Isolation: Perfect cleanup with hooks, Data factories: Use existing standard-factory.ts, Performance validation: Real benchmarking with timing requirements, Coverage: Maintain 100/100 A+ test quality score from Story 1.2</standards>
+        <locations>tests/integration/cache/cache-performance.test.ts (AC1.1), tests/integration/cache/lru-eviction.test.ts (AC1.2), tests/integration/cache/performance-monitoring.test.ts (AC1.3), tests/integration/cache/cache-warming.test.ts (AC1.4), tests/integration/performance/load-testing.test.ts, tests/integration/performance/memory-pressure.test.ts, tests/support/fixtures/cache-performance.fixture.ts, tests/support/factories/cache-factory.ts</locations>
+        <ideas>
+            <test idea="1.3-PERF-001 should retrieve cached standards under 30ms (AC: 1.1)" priority="P0" />
+            <test idea="1.3-PERF-002 should maintain >80% cache hit rate for frequent access (AC: 1.1)" priority="P0" />
+            <test idea="1.3-LRU-001 should evict least recently used items under memory pressure (AC: 1.2)" priority="P1" />
+            <test idea="1.3-LRU-002 should preserve frequently accessed standards during eviction (AC: 1.2)" priority="P1" />
+            <test idea="1.3-MONITOR-001 should track cache performance metrics in real-time (AC: 1.3)" priority="P1" />
+            <test idea="1.3-MONITOR-002 should detect SLA threshold violations (AC: 1.3)" priority="P1" />
+            <test idea="1.3-WARM-001 should complete cold cache warm-up under 200ms (AC: 1.4)" priority="P0" />
+            <test idea="1.3-WARM-002 should pre-load critical standards during server initialization (AC: 1.4)" priority="P0" />
+        </ideas>
+    </tests>
+</story-context>

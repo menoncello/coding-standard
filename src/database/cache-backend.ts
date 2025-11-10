@@ -6,7 +6,7 @@ import { CacheSchema, CacheStats } from '../types/database.js';
  * SQLite cache configuration
  */
 export interface SqliteCacheConfig extends CacheConfig {
-    database: DatabaseConnection;
+    database?: DatabaseConnection;
     persistToDisk: boolean;
     syncInterval: number; // Sync memory to disk interval in ms
     cleanupInterval: number; // Cleanup expired entries interval in ms
@@ -18,7 +18,7 @@ export interface SqliteCacheConfig extends CacheConfig {
  * SQLite-based cache backend that extends the in-memory CacheManager
  */
 export class SqliteCacheBackend<T = any> extends CacheManager<T> {
-    private db: DatabaseConnection;
+    private db: DatabaseConnection | null;
     private config: SqliteCacheConfig;
     private syncTimer: Timer | null = null;
     private cleanupTimer: Timer | null = null;
@@ -28,9 +28,9 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     constructor(config: SqliteCacheConfig) {
         super(config);
         this.config = config;
-        this.db = config.database;
+        this.db = config.database || null;
 
-        if (config.persistToDisk) {
+        if (config.persistToDisk && this.db) {
             this.startBackgroundTasks();
         }
     }
@@ -70,6 +70,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Load cache entries from database on startup
      */
     async loadFromDisk(): Promise<void> {
+        if (!this.db) return;
+
         try {
             const result = await this.db.execute(`
                 SELECT key, data, ttl, created_at, last_accessed, access_count, expires_at,
@@ -110,7 +112,7 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Synchronize in-memory cache to disk
      */
     private async syncToDisk(): Promise<void> {
-        if (!this.config.persistToDisk) return;
+        if (!this.config.persistToDisk || !this.db) return;
 
         try {
             await this.db.transaction(async (connection) => {
@@ -150,6 +152,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Cleanup expired entries from database
      */
     private async cleanupExpired(): Promise<void> {
+        if (!this.db) return;
+
         try {
             const result = await this.db.execute(`
                 DELETE FROM ${this.tableName}
@@ -211,6 +215,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Delete entry from database
      */
     private async deleteFromDisk(key: string): Promise<void> {
+        if (!this.db) return;
+
         try {
             await this.db.execute(`
                 DELETE FROM ${this.tableName} WHERE key = ?
@@ -226,7 +232,11 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     clear(): void {
         super.clear();
         this.isDirty = true;
-        this.clearDisk();
+        // Don't wait for clearDisk to complete in synchronous clear()
+        // Fire and forget to maintain API compatibility
+        this.clearDisk().catch(error => {
+            console.error('Failed to clear cache from disk:', error);
+        });
     }
 
     /**
@@ -234,7 +244,9 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      */
     private async clearDisk(): Promise<void> {
         try {
-            await this.db.execute(`DELETE FROM ${this.tableName}`);
+            if (this.db) {
+                await this.db.execute(`DELETE FROM ${this.tableName}`);
+            }
         } catch (error) {
             console.error('Failed to clear cache from disk:', error);
         }
@@ -278,6 +290,10 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
         const memoryStats = super.getStats();
 
         try {
+            if (!this.db) {
+                throw new Error('Database connection not available');
+            }
+
             const diskStats = await this.db.execute(`
                 SELECT
                     COUNT(*) as total_entries,
@@ -342,6 +358,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Get count of expired entries
      */
     private async getExpiredCount(): Promise<number> {
+        if (!this.db) return 0;
+
         const result = await this.db.execute(`
             SELECT COUNT(*) as count FROM ${this.tableName} WHERE expires_at < ?
         `, [Date.now()]);
@@ -352,6 +370,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Get oldest entry timestamp
      */
     private async getOldestEntry(): Promise<number> {
+        if (!this.db) return 0;
+
         const result = await this.db.execute(`
             SELECT MIN(created_at) as oldest FROM ${this.tableName}
         `);
@@ -362,6 +382,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Get newest entry timestamp
      */
     private async getNewestEntry(): Promise<number> {
+        if (!this.db) return 0;
+
         const result = await this.db.execute(`
             SELECT MAX(created_at) as newest FROM ${this.tableName}
         `);
@@ -475,6 +497,8 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
      * Record cache analytics
      */
     private async recordAnalytics(eventType: 'cache_hit' | 'cache_miss', key: string): Promise<void> {
+        if (!this.db) return;
+
         try {
             const metadata = {
                 key,
@@ -619,12 +643,12 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
  * Factory function to create SQLite cache backend
  */
 export function createSqliteCache<T = any>(
-    db: DatabaseConnection,
+    db: DatabaseConnection | null = null,
     config: Partial<SqliteCacheConfig> = {}
 ): SqliteCacheBackend<T> {
     const defaultConfig: SqliteCacheConfig = {
-        database: db,
-        persistToDisk: true,
+        database: db || undefined,
+        persistToDisk: !!db, // Only persist to disk if database is provided
         syncInterval: 30000, // 30 seconds
         cleanupInterval: 300000, // 5 minutes
         compressionEnabled: false,

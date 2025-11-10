@@ -182,7 +182,19 @@ export class DatabaseConnection {
         } catch (error) {
             // Enhanced error handling for common database issues
             if (error instanceof Error) {
-                if (error.message.includes('database table is locked')) {
+                if (error.message.includes('database table is locked') ||
+                    error.message.includes('database is locked')) {
+                    // For performance analysis operations, provide more lenient handling
+                    const isAnalysisOperation = sql.includes('PRAGMA wal_checkpoint') ||
+                                            sql.includes('PRAGMA journal_mode') ||
+                                            sql.includes('sqlite_master') ||
+                                            sql.includes('sqlite_stat');
+
+                    if (isAnalysisOperation) {
+                        console.debug('Database locked during analysis operation, continuing:', error.message);
+                        return []; // Return empty result for analysis operations
+                    }
+
                     throw new Error(`Database table is locked - please retry the operation: ${error.message}`);
                 } else if (error.message.includes('disk I/O error')) {
                     // Check if we're in a test environment

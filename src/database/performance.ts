@@ -397,7 +397,10 @@ export class DatabasePerformanceManager {
             } catch (error) {
                 console.debug('Failed to get WAL checkpoint info:', error);
                 // Don't re-throw table lock errors during analysis
-                if (error instanceof Error && error.message.includes('database table is locked')) {
+                if (error instanceof Error && (
+                    error.message.includes('database table is locked') ||
+                    error.message.includes('database is locked')
+                )) {
                     console.debug('WAL checkpoint failed due to table lock during analysis - continuing');
                     walCheckpoint = [];
                 } else {
