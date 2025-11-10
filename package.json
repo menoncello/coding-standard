@@ -12,6 +12,7 @@
     "test:performance": "bun test tests/performance"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@stryker-mutator/core": "^9.3.0",
     "@types/bun": "latest"
   },

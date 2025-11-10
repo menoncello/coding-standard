@@ -1,0 +1,234 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context" v="1.0">
+    <metadata>
+        <epicId>1</epicId>
+        <storyId>2</storyId>
+        <title>SQLite Database Integration</title>
+        <status>drafted</status>
+        <generatedAt>2025-11-09</generatedAt>
+        <generator>BMAD Story Context Workflow</generator>
+        <sourceStoryPath>docs/stories/1-2-sqlite-database-integration.md</sourceStoryPath>
+    </metadata>
+
+    <story>
+        <asA>system</asA>
+        <iWant>persistent SQLite storage with FTS capabilities</iWant>
+        <soThat>standards can be cached and searched efficiently</soThat>
+        <tasks>
+- Database Schema and Connection (AC: 1, 3, 4)
+- Cache Integration Layer (AC: 1)
+- Full-Text Search Implementation (AC: 2)
+- Database Reliability and Recovery (AC: 3)
+- Performance and Concurrency (AC: 2, 4)
+        </tasks>
+    </story>
+
+    <acceptanceCriteria>
+1. Given standards are retrieved for the first time, when I check the database, then they are cached in SQLite with appropriate TTL and access metadata
+
+2. Given cached standards exist, when I perform a full-text search, then FTS indexes return relevant results in under 100ms with BM25 ranking
+
+3. Given database corruption scenarios, when SQLite detects corruption, then the server automatically recovers or rebuilds the database without data loss
+
+4. Given concurrent database operations, when multiple threads access SQLite simultaneously, then WAL mode provides optimal read/write concurrency without blocking
+    </acceptanceCriteria>
+
+    <artifacts>
+        <docs>
+            <doc>
+                <path>docs/tech-spec-epic-1.md</path>
+                <title>Epic Technical Specification: Core MCP Server Infrastructure</title>
+                <section>Data Models and Contracts</section>
+                <snippet>Defines the Standards Cache Schema with SQLite tables including standards_cache and FTS5 virtual tables for full-text search capabilities.</snippet>
+            </doc>
+            <doc>
+                <path>docs/architecture.md</path>
+                <title>Architecture: coding-standard</title>
+                <section>Project Structure</section>
+                <snippet>Specifies database layer components in src/database/ including schema.ts, migrations.ts, connection.ts, and analytics.ts for SQLite integration.</snippet>
+            </doc>
+            <doc>
+                <path>docs/epics.md</path>
+                <title>coding-standard - Epic Breakdown</title>
+                <section>Story 1.2: SQLite Database Integration</section>
+                <snippet>Specifies use of Bun's built-in SQLite, WAL mode for performance, and FTS5 virtual tables for fast text search with BM25 ranking.</snippet>
+            </doc>
+            <doc>
+                <path>docs/PRD.md</path>
+                <title>coding-standard - Product Requirements Document</title>
+                <section>Functional Requirements</section>
+                <snippet>FR7: Caching and Storage - MUST implement SQLite-based persistent caching with automatic cleanup and handle large rule sets efficiently.</snippet>
+            </doc>
+        </docs>
+        <code>
+            <artifact>
+                <path>src/cache/cache-manager.ts</path>
+                <kind>service</kind>
+                <symbol>CacheManager</symbol>
+                <lines>36-252</lines>
+                <reason>Existing cache implementation with TTL and LRU eviction - needs SQLite backend extension for persistent storage</reason>
+            </artifact>
+            <artifact>
+                <path>src/cache/cache-manager.ts</path>
+                <kind>service</kind>
+                <symbol>McpResponseCache</symbol>
+                <lines>257-389</lines>
+                <reason>Specialized cache for MCP responses - integration point for SQLite persistence layer</reason>
+            </artifact>
+            <artifact>
+                <path>src/types/mcp.ts</path>
+                <kind>interface</kind>
+                <symbol>GetStandardsResponse</symbol>
+                <lines>10-15</lines>
+                <reason>Type definition for cached standards data - needs database schema alignment</reason>
+            </artifact>
+            <artifact>
+                <path>src/types/mcp.ts</path>
+                <kind>interface</kind>
+                <symbol>SearchStandardsResponse</symbol>
+                <lines>24-28</lines>
+                <reason>Type definition for search results - supports FTS5 implementation requirements</reason>
+            </artifact>
+            <artifact>
+                <path>src/utils/performance-monitor.ts</path>
+                <kind>utility</kind>
+                <symbol>PerformanceMetrics</symbol>
+                <lines>6-19</lines>
+                <reason>Existing performance monitoring infrastructure - extend for database operation tracking</reason>
+            </artifact>
+            <artifact>
+                <path>src/standards/standards-loader.ts</path>
+                <kind>service</kind>
+                <symbol>StandardsLoader</symbol>
+                <reason>File system standards loader - integrate with database persistence for cache population</reason>
+            </artifact>
+            <artifact>
+                <path>src/mcp/handlers/toolHandlers.ts</path>
+                <kind>handler</kind>
+                <symbol>ToolHandlers</symbol>
+                <reason>MCP tool request handlers - integrate search functionality with FTS5 database</reason>
+            </artifact>
+        </code>
+        <dependencies>
+            <dependency ecosystem="bun-runtime">
+                <package>bun</package>
+                <version>>=1.0.0</version>
+                <purpose>Primary runtime with built-in SQLite support and zero-copy operations</purpose>
+            </dependency>
+            <dependency ecosystem="typescript">
+                <package>typescript</package>
+                <version>^5.0.0</version>
+                <purpose>Type safety and enhanced developer experience with strict mode</purpose>
+            </dependency>
+            <dependency ecosystem="mcp">
+                <package>@modelcontextprotocol/sdk</package>
+                <version>0.5.0</version>
+                <purpose>Claude Code integration through standardized MCP protocol</purpose>
+            </dependency>
+            <dependency ecosystem="database">
+                <package>sqlite</package>
+                <version>Built-in to Bun 3.44+</version>
+                <purpose>Persistent caching layer with WAL mode and FTS5 support</purpose>
+            </dependency>
+            <dependency ecosystem="testing">
+                <package>stryker-mutator/core</package>
+                <version>^9.3.0</version>
+                <purpose>Mutation testing for coverage validation</purpose>
+            </dependency>
+        </dependencies>
+    </artifacts>
+
+    <constraints>
+        <constraint>MUST use Bun's built-in SQLite (version 3.44+) for zero-dependency implementation</constraint>
+        <constraint>Database startup time must be under 100ms (target: 50ms with warm cache)</constraint>
+        <constraint>FTS search queries must complete in under 100ms with BM25 ranking</constraint>
+        <constraint>Support concurrent operations without performance degradation using WAL mode</constraint>
+        <constraint>Database size must remain under 50MB for typical usage patterns</constraint>
+        <constraint>Integrate with existing cache-manager.ts without breaking current functionality</constraint>
+        <constraint>Follow kebab-case file naming convention and established directory structure</constraint>
+        <constraint>Maintain compatibility with existing MCP server architecture</constraint>
+        <constraint>Implement comprehensive error handling and automatic recovery mechanisms</constraint>
+        <constraint>Use existing performance-monitor.ts infrastructure for database metrics</constraint>
+    </constraints>
+    <interfaces>
+        <interface>
+            <name>SQLite Backend Extension</name>
+            <kind>Database Interface</kind>
+            <signature>class SqliteCacheBackend extends CacheManager&lt;T&gt;</signature>
+            <path>src/database/cache-backend.ts</path>
+        </interface>
+        <interface>
+            <name>Database Connection</name>
+            <kind>Database Interface</kind>
+            <signature>class DatabaseConnection { constructor(config: DbConfig); query(sql: string, params?: any[]): Promise&lt;any[]&gt;; close(): Promise&lt;void&gt;; }</signature>
+            <path>src/database/connection.ts</path>
+        </interface>
+        <interface>
+            <name>Full-Text Search</name>
+            <kind>Search Interface</kind>
+            <signature>class FtsSearchEngine { search(query: string, options?: SearchOptions): Promise&lt;SearchResult[]&gt;; createIndex(): Promise&lt;void&gt;; }</signature>
+            <path>src/cache/search-index.ts</path>
+        </interface>
+        <interface>
+            <name>Database Schema</name>
+            <kind>Data Interface</kind>
+            <signature>interface DatabaseSchema { standards_cache: CacheSchema; standards_search: FtsSchema; usage_analytics: AnalyticsSchema; }</signature>
+            <path>src/database/schema.ts</path>
+        </interface>
+        <interface>
+            <name>Cache Integration</name>
+            <kind>Service Interface</kind>
+            <signature>interface CacheIntegration { persist(key: string, data: T, ttl?: number): Promise&lt;void&gt;; retrieve(key: string): Promise&lt;T | null&gt;; invalidate(pattern?: string): Promise&lt;number&gt;; }</signature>
+            <path>src/database/cache-integration.ts</path>
+        </interface>
+    </interfaces>
+    <tests>
+        <standards>
+            Use Bun test runner for all unit and integration tests with TypeScript support
+            Follow established test structure: tests/unit/ for component tests, tests/integration/ for end-to-end functionality
+            Include comprehensive performance tests for sub-100ms FTS search targets
+            Implement concurrent operation testing for WAL mode validation
+            Use mutation testing with Stryker for coverage validation (95%+ requirement)
+            Test database corruption recovery and automatic backup/restore functionality
+            Include integration tests with existing cache-manager.ts compatibility
+        </standards>
+        <locations>
+            tests/unit/database/ - Unit tests for database components
+            tests/integration/database/ - Database integration tests
+            tests/integration/cache-manager.test.ts - Existing cache tests to extend
+            tests/performance/ - Performance tests for FTS and concurrency
+            tests/security/ - Database security and corruption tests
+        </locations>
+        <ideas>
+            <idea id="ac1">
+                <acceptanceCriteria>1</acceptanceCriteria>
+                <description>Test SQLite caching with TTL and access metadata persistence</description>
+                <type>integration</type>
+            </idea>
+            <idea id="ac2">
+                <acceptanceCriteria>2</acceptanceCriteria>
+                <description>Performance test FTS5 search with BM25 ranking under 100ms</description>
+                <type>performance</type>
+            </idea>
+            <idea id="ac3">
+                <acceptanceCriteria>3</acceptanceCriteria>
+                <description>Database corruption recovery and automatic rebuild simulation</description>
+                <type>integration</type>
+            </idea>
+            <idea id="ac4">
+                <acceptanceCriteria>4</acceptanceCriteria>
+                <description>Concurrent WAL mode operations without blocking</description>
+                <type>concurrency</type>
+            </idea>
+            <idea id="cache-integration">
+                <acceptanceCriteria>1</acceptanceCriteria>
+                <description>Test SQLite backend integration with existing CacheManager</description>
+                <type>integration</type>
+            </idea>
+            <idea id="performance-monitoring">
+                <acceptanceCriteria>All</acceptanceCriteria>
+                <description>Validate database metrics integration with performance-monitor.ts</description>
+                <type>integration</type>
+            </idea>
+        </ideas>
+    </tests>
+</story-context>
