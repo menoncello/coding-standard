@@ -1,0 +1,68 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>2</storyId>
+    <title>slash-command-interface</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-11</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>bmad-ephemeral/stories/3-2-slash-command-interface.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>Claude Code user</asA>
+    <iWant>to add/remove standards using slash commands</iWant>
+    <soThat>I can manage patterns dynamically without touching code</soThat>
+    <tasks>Implement SlashCommandParser for command syntax parsing; Develop SlashCommandExecutor for registry integration; Create CommandHelpSystem for usage documentation; Implement CLI integration layer; Create comprehensive test suite</tasks>
+  </story>
+
+  <acceptanceCriteria>Given the slash command interface is active When I use `/add <rule-name> "<pattern>" "<description>"` with valid parameters Then the new standard is immediately available in the registry and response time is under 50ms; Given the slash command interface is active When I use `/remove <rule-name>` for an existing standard Then the standard is removed from the active registry and response time is under 50ms; Given I use invalid slash command syntax (missing parameters, malformed patterns) When the interface processes the command Then it provides clear error messages with proper usage examples within 20ms; Given multiple slash commands are issued in sequence When processing occurs Then each command maintains registry consistency and atomic operations with no partial states; Given I use `/help` or invalid commands When the interface responds Then comprehensive usage documentation is displayed with all available commands and examples; Given concurrent slash commands are executed When processing occurs simultaneously Then registry remains consistent and no race conditions occur</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="docs/epics.md" title="coding-standard - Epic Breakdown" section="Epic 3: Dynamic Standard Management" snippet="Epic 3 focuses on implementing the ability to dynamically add, remove, and manage coding standards through slash commands and semantic rule naming without server restarts." />
+      <doc path="docs/PRD.md" title="coding-standard - Product Requirements Document" section="Success Criteria" snippet="Sub-50ms response times for all standard retrieval operations, &lt;50MB memory footprint, &gt;80% cache hit rate for frequently accessed standards." />
+      <doc path="docs/architecture.md" title="Architecture: coding-standard" section="Project Structure" snippet="Follow established `src/cli/` module organization pattern, use TypeScript interfaces for clear type definitions, implement proper separation of concerns with dedicated service classes." />
+      <doc path="bmad-ephemeral/stories/3-1-standards-registry-system.md" title="Story 3.1: Standards Registry System" section="Dev Agent Record" snippet="Complete StandardsRegistry available at `src/standards/registry.ts` with add(), remove(), and get() methods; MCP tool handlers extended with addStandard/removeStandard tools." />
+    </docs>
+    <code>
+      <artifact path="src/standards/registry.ts" kind="service" symbol="StandardsRegistry" lines="1-100" reason="Core registry with add(), remove(), get() methods for slash command integration" />
+      <artifact path="src/standards/validator.ts" kind="service" symbol="StandardValidator" lines="1-50" reason="Input validation and conflict detection for slash command parsing" />
+      <artifact path="src/standards/semantic-naming.ts" kind="service" symbol="SemanticNamingService" lines="1-80" reason="Name resolution and search capabilities for command processing" />
+      <artifact path="src/mcp/handlers/toolHandlers.ts" kind="handler" symbol="addStandard/removeStandard" lines="1-200" reason="Existing MCP tool patterns for registry integration" />
+      <artifact path="src/types/mcp.ts" kind="types" symbol="MCP tool schemas" lines="1-100" reason="Type definitions for tool integration patterns" />
+      <artifact path="src/mcp/server.ts" kind="server" symbol="MCP server integration" lines="1-150" reason="Server integration patterns for command processing" />
+    </code>
+    <dependencies>
+      <ecosystem name="nodejs">
+        <package name="@modelcontextprotocol/sdk" version="1.21.1" />
+        <package name="typescript" version="^5.9.3" />
+        <package name="@types/bun" version="^1.3.2" />
+        <package name="@playwright/test" version="^1.56.1" />
+      </ecosystem>
+      <framework name="bun" usage="runtime and test runner" />
+      <framework name="@modelcontextprotocol/sdk" usage="MCP protocol integration for tool handlers" />
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+Follow cache-first architecture (Memory → SQLite → File system) for all registry operations; Sub-50ms response time targets for slash command processing; Atomic operations to maintain registry consistency during concurrent commands; Use existing StandardsRegistry methods instead of direct database operations; Implement proper error handling following MCP patterns with structured error responses; Leverage existing validation and conflict detection from StandardValidator; Maintain cache consistency after command execution; Follow TypeScript naming conventions (PascalCase classes, camelCase methods); Create dedicated service classes with proper separation of concerns in src/cli/slash-commands/ module</constraints>
+  <interfaces>
+      <interface name="StandardsRegistry" kind="class" signature="add(rule: StandardRule): Promise&lt;void&gt;; remove(semanticName: string): Promise&lt;void&gt;; get(semanticName: string): Promise&lt;StandardRule | null&gt;" path="src/standards/registry.ts" />
+      <interface name="StandardValidator" kind="class" signature="validateRule(rule: StandardRule): ValidationResult; checkConflict(semanticName: string, pattern: string): ConflictResult" path="src/standards/validator.ts" />
+      <interface name="SlashCommandParser" kind="class" signature="parse(input: string): ParseResult; validate(command: SlashCommand): ValidationResult" path="src/cli/slash-commands/parser.ts" />
+      <interface name="SlashCommandExecutor" kind="class" signature="execute(command: SlashCommand): Promise&lt;ExecutionResult&gt;" path="src/cli/slash-commands/executor.ts" />
+    </interfaces>
+  <tests>
+    <standards>Bun test runner with TypeScript support; &gt;95% line coverage requirement; Performance tests to validate sub-50ms targets; Unit tests for all parser, executor, and help system operations; Integration tests with StandardsRegistry; Concurrency tests for race condition prevention</standards>
+    <locations>tests/unit/cli/slash-commands/; tests/integration/; tests/performance/; tests/security/</locations>
+    <ideas>
+      <testidea ac="1">Test /add command with valid parameters validates registry integration and sub-50ms performance</testidea>
+      <testidea ac="2">Test /remove command validates proper registry cleanup and sub-50ms performance</testidea>
+      <testidea ac="3">Test invalid command syntax produces clear error messages within 20ms</testidea>
+      <testidea ac="4">Test multiple sequential commands maintain registry consistency</testidea>
+      <testidea ac="5">Test /help command displays comprehensive documentation</testidea>
+      <testidea ac="6">Test concurrent commands prevent race conditions and maintain consistency</testidea>
+    </ideas>
+  </tests>
+</story-context>

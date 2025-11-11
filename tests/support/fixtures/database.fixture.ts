@@ -1,6 +1,10 @@
 import { test as base, expect } from 'bun:test';
 import { Database } from 'bun:sqlite';
 import { createStandard, createStandards, createCachedStandards } from '../factories/standard-factory.js';
+import { LoggerFactory } from '../../../src/utils/logger/logger-factory.js';
+
+// Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
 
 // Types for fixture context
 export interface DatabaseFixture {
@@ -48,7 +52,7 @@ export const test = base.extend<DatabaseFixture & CacheFixture & SearchFixture>(
                 // Clean up temp file if it exists
                 try {
                     // Note: Bun doesn't have fs.unlink yet, so we rely on temp cleanup
-                    console.log(`Database cleanup: ${testDbPath}`);
+                    testLogger.debug(`Database cleanup: ${testDbPath}`);
                 } catch (error) {
                     // Ignore cleanup errors
                 }

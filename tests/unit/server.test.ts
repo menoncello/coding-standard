@@ -5,6 +5,11 @@ import {CallToolRequestSchema, ListToolsRequestSchema, McpError, ErrorCode} from
 import CodingStandardsServer from '../../src/mcp/server.js';
 import {getStandardsHandler} from '../../src/mcp/handlers/toolHandlers.js';
 import {McpErrorHandler} from '../../src/mcp/handlers/errorHandler.js';
+import { McpFactory } from '../../src/factories/mcp-factory.js';
+import { LoggerFactory } from '../../src/utils/logger/logger-factory.js';
+
+// Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
 
 // Note: Removed mocking to test actual implementation
 
@@ -12,7 +17,7 @@ describe('CodingStandardsServer', () => {
     let server: CodingStandardsServer;
 
     beforeEach(() => {
-        server = new CodingStandardsServer();
+        server = McpFactory.createServerWithCustomLogger(testLogger);
     });
 
     afterEach(() => {
@@ -24,12 +29,12 @@ describe('CodingStandardsServer', () => {
     });
 
     test('should have tools capability', () => {
-        expect(() => new CodingStandardsServer()).not.toThrow();
+        expect(() => McpFactory.createServerWithCustomLogger(testLogger)).not.toThrow();
     });
 
     test('should handle server startup metrics', async () => {
         const startTime = performance.now();
-        const testServer = new CodingStandardsServer();
+        const testServer = McpFactory.createServerWithCustomLogger(testLogger);
         const endTime = performance.now();
         const startupTime = endTime - startTime;
 
@@ -126,7 +131,7 @@ describe('Server Performance', () => {
         const initialMemory = process.memoryUsage().heapUsed;
 
         // Create multiple server instances to test memory usage
-        const servers = Array.from({length: 10}, () => new CodingStandardsServer());
+        const servers = Array.from({length: 10}, () => McpFactory.createServerWithCustomLogger(testLogger));
 
         const finalMemory = process.memoryUsage().heapUsed;
         const memoryIncrease = (finalMemory - initialMemory) / 1024 / 1024; // MB
@@ -250,7 +255,7 @@ describe('Server Response Format', () => {
 
 describe('Server Lifecycle', () => {
     test('should handle server startup', () => {
-        expect(() => new CodingStandardsServer()).not.toThrow();
+        expect(() => McpFactory.createServerWithCustomLogger(testLogger)).not.toThrow();
     });
 
     test('should handle transport connection', () => {
@@ -259,7 +264,7 @@ describe('Server Lifecycle', () => {
     });
 
     test('should handle startup errors gracefully', () => {
-        expect(() => new CodingStandardsServer()).not.toThrow();
+        expect(() => McpFactory.createServerWithCustomLogger(testLogger)).not.toThrow();
     });
 });
 

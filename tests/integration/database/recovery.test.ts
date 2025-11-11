@@ -4,8 +4,17 @@ import { DatabaseSchema } from '../../../src/database/schema.js';
 import { DatabaseRecoveryManager } from '../../../src/database/recovery.js';
 import { DatabaseAnalytics } from '../../../src/database/analytics.js';
 import { createStandard, createCorruptedDatabaseState } from '../../support/factories/standard-factory.js';
+// Factory imports
+import { DatabaseFactory } from '../../../src/factories/database-factory.js';
+import { CacheFactory } from '../../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../../src/utils/logger/logger-factory.js';
 
 describe('P2 - Database Recovery and Analytics Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let db: DatabaseConnection;
     let schema: DatabaseSchema;
     let recovery: DatabaseRecoveryManager;
@@ -18,7 +27,7 @@ describe('P2 - Database Recovery and Analytics Tests', () => {
         testDbPath = `./test-data-${Date.now()}.db`;
         backupDir = `./test-backups-${Date.now()}`;
 
-        db = new DatabaseConnection({
+        db = DatabaseFactory.createDatabaseConnection({
             path: testDbPath,
             walMode: false, // Disable WAL mode to avoid test environment issues
             foreignKeys: false, // Disable foreign key constraints for simpler test setup
@@ -27,7 +36,7 @@ describe('P2 - Database Recovery and Analytics Tests', () => {
             synchronous: 'OFF', // Less strict sync for test environment
             journalMode: 'DELETE', // Use DELETE journal mode for simplicity
             tempStore: 'MEMORY' // Store temp tables in memory
-        });
+        }, testLogger);
 
         await db.initialize();
         schema = new DatabaseSchema(db);

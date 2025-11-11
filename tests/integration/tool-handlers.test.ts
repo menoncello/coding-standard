@@ -5,8 +5,17 @@ import { mcpCache, performanceMonitor } from '../../src/cache/cache-manager.js';
 import { secureMcpCache } from '../../src/cache/secure-mcp-response-cache.js';
 import { performanceMonitor as perfMonitor } from '../../src/utils/performance-monitor.js';
 import { rmSync, existsSync } from 'node:fs';
+// Factory imports
+import { DatabaseFactory } from '../../src/factories/database-factory.js';
+import { CacheFactory } from '../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../src/utils/logger/logger-factory.js';
 
 describe('Tool Handlers Integration Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let handler: GetStandardsHandler;
     const testDbPath = './test-tool-handlers-registry.db';
 
@@ -16,7 +25,7 @@ describe('Tool Handlers Integration Tests', () => {
             rmSync(testDbPath);
         }
 
-        handler = new GetStandardsHandler(true, testDbPath);
+        handler = ToolHandlersFactory.createGetStandardsHandler(true, testDbPath, testDbPath);
         mcpCache.clear();
         secureMcpCache.clear();
         perfMonitor.clearMetrics();

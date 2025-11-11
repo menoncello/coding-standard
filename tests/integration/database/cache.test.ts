@@ -3,8 +3,17 @@ import { DatabaseConnection } from '../../../src/database/connection.js';
 import { DatabaseSchema } from '../../../src/database/schema.js';
 import { SqliteCacheBackend } from '../../../src/database/cache-backend.js';
 import { createStandard, createCachedStandard } from '../../support/factories/standard-factory.js';
+// Factory imports
+import { DatabaseFactory } from '../../../src/factories/database-factory.js';
+import { CacheFactory } from '../../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../../src/utils/logger/logger-factory.js';
 
 describe('P0 - Cache Backend Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let db: DatabaseConnection;
     let schema: DatabaseSchema;
     let cacheBackend: SqliteCacheBackend<string>;
@@ -12,27 +21,28 @@ describe('P0 - Cache Backend Tests', () => {
 
     beforeAll(async () => {
         testDbPath = `./test-data-${Date.now()}.db`;
-        db = new DatabaseConnection({
+        db = DatabaseFactory.createDatabaseConnection({
             path: testDbPath,
             walMode: true,
             foreignKeys: true,
             cacheSize: 1000,
             busyTimeout: 5000
-        });
+        }, testLogger);
 
         await db.initialize();
         schema = new DatabaseSchema(db);
         await schema.initialize();
 
-        cacheBackend = new SqliteCacheBackend<string>({
+          cacheBackend = new SqliteCacheBackend<string>({
             database: db,
             persistToDisk: true,
             syncInterval: 1000,
             cleanupInterval: 2000,
             ttl: 5000,
             maxSize: 100,
-            enabled: true
-        });
+            enabled: true,
+            compressionEnabled: false
+        }, testLogger);
     });
 
     afterAll(async () => {
@@ -49,7 +59,7 @@ describe('P0 - Cache Backend Tests', () => {
             if (fs.existsSync(`${testDbPath}-wal`)) fs.unlinkSync(`${testDbPath}-wal`);
             if (fs.existsSync(`${testDbPath}-shm`)) fs.unlinkSync(`${testDbPath}-shm`);
         } catch (error) {
-            console.warn('Failed to cleanup test files:', error);
+            testLogger.warn('Failed to cleanup test files:', error);
         }
     });
 
@@ -97,8 +107,9 @@ describe('P0 - Cache Backend Tests', () => {
                 cleanupInterval: 100,
                 ttl: 100, // 100ms TTL
                 maxSize: 10,
-                enabled: true
-            });
+                enabled: true,
+                compressionEnabled: false
+            }, testLogger);
 
             // When: I store the data and wait for expiration
             await shortTtlCache.set(cacheKey, testStandard);

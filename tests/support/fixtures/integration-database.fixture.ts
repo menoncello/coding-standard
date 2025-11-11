@@ -8,6 +8,13 @@ import { DatabaseRecoveryManager } from '../../../src/database/recovery.js';
 import { DatabaseAnalytics } from '../../../src/database/analytics.js';
 import { createDatabasePerformanceManager } from '../../../src/database/performance.js';
 import { createStandard, createStandards } from '../factories/standard-factory.js';
+// Factory imports
+import { DatabaseFactory } from '../../../src/factories/database-factory.js';
+import { CacheFactory } from '../../../src/factories/cache-factory.js';
+import { LoggerFactory } from '../../../src/utils/logger/logger-factory.js';
+
+// Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
 
 // Types for fixture context
 export interface IntegrationDatabaseFixture {
@@ -29,13 +36,13 @@ export const test = base.extend<IntegrationDatabaseFixture>({
     db: async ({}, use) => {
         const testDbPath = `./test-data-${Date.now()}-${Math.random().toString(36).substr(2, 9)}.db`;
 
-        const db = new DatabaseConnection({
+        const db = DatabaseFactory.createDatabaseConnection(
             path: testDbPath,
             walMode: true,
             foreignKeys: true,
             cacheSize: 1000,
             busyTimeout: 5000
-        });
+            , testLogger);
 
         await db.initialize();
         await use({ db, testDbPath });
@@ -49,7 +56,7 @@ export const test = base.extend<IntegrationDatabaseFixture>({
             if (fs.existsSync(`${testDbPath}-wal`)) fs.unlinkSync(`${testDbPath}-wal`);
             if (fs.existsSync(`${testDbPath}-shm`)) fs.unlinkSync(`${testDbPath}-shm`);
         } catch (error) {
-            console.warn('Failed to cleanup test files:', error);
+            testLogger.warn('Failed to cleanup test files:', error);
         }
     },
 
@@ -68,7 +75,7 @@ export const test = base.extend<IntegrationDatabaseFixture>({
 
     // Cache backend fixture
     cacheBackend: async ({ db }, use) => {
-        const cacheBackend = new SqliteCacheBackend<string>({
+        const cacheBackend = CacheFactory.createCacheBackend<string>(
             database: db,
             persistToDisk: true,
             syncInterval: 1000,
@@ -76,7 +83,7 @@ export const test = base.extend<IntegrationDatabaseFixture>({
             ttl: 5000,
             maxSize: 100,
             enabled: true
-        });
+            , testLogger);
         await use({ cacheBackend });
         await cacheBackend.close();
     },
@@ -100,7 +107,7 @@ export const test = base.extend<IntegrationDatabaseFixture>({
                 fs.rmSync(backupDir, { recursive: true, force: true });
             }
         } catch (error) {
-            console.warn('Failed to cleanup backup directory:', error);
+            testLogger.warn('Failed to cleanup backup directory:', error);
         }
     },
 

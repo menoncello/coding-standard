@@ -1,4 +1,5 @@
 import { Standard, Rule } from '../types/mcp.js';
+import { Logger } from '../utils/logger/logger.js';
 
 /**
  * File System Standards Loader
@@ -17,9 +18,11 @@ export class StandardsLoader {
     private readonly projectRoot: string;
     private readonly cache = new Map<string, Standard[]>();
     private lastModified = new Map<string, number>();
+    private logger: Logger;
 
-    constructor(projectRoot: string = process.cwd()) {
+    constructor(projectRoot: string = process.cwd(), logger?: Logger) {
         this.projectRoot = projectRoot;
+        this.logger = logger || (globalThis as any).console; // Fallback for now
     }
 
     /**
@@ -77,7 +80,7 @@ export class StandardsLoader {
             this.cache.set(cacheKey, standards);
             return standards;
         } catch (error) {
-            console.error('Error loading standards:', error);
+            this.logger.error('Error loading standards:', error);
             return [];
         }
     }
@@ -135,7 +138,7 @@ export class StandardsLoader {
                 });
             }
         } catch (error) {
-            console.warn('Could not load ESLint standards:', error);
+            this.logger.warn('Could not load ESLint standards:', error);
         }
 
         return standards;
@@ -260,7 +263,7 @@ export class StandardsLoader {
                 }
             }
         } catch (error) {
-            console.warn('Could not load Biome standards:', error);
+            this.logger.warn('Could not load Biome standards:', error);
         }
 
         return standards;
@@ -333,7 +336,7 @@ export class StandardsLoader {
                 });
             }
         } catch (error) {
-            console.warn('Could not load TypeScript standards:', error);
+            this.logger.warn('Could not load TypeScript standards:', error);
         }
 
         return standards;

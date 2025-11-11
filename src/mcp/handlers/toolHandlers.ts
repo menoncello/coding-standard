@@ -14,17 +14,23 @@ import { StandardsRegistry } from '../../standards/registry.js';
 import { StandardRule } from '../../standards/types.js';
 import { mcpCache, CacheKeys, createCodeHash } from '../../cache/cache-manager.js';
 import { secureMcpCache, SecureCacheKeys } from '../../cache/secure-mcp-response-cache.js';
-import { performanceMonitor, measureAsyncFunction } from '../../utils/performance-monitor.js';
+import { PerformanceFactory } from '../../factories/performance-factory.js';
+import { LoggerFactory } from '../../utils/logger/logger-factory.js';
+import { measureAsyncFunction, performanceMonitor } from '../../utils/performance-monitor.js';
+
+type Logger = ReturnType<typeof LoggerFactory.createLogger>;
 
 export class GetStandardsHandler {
     private registry: StandardsRegistry;
     private useSecureCache: boolean;
+    private logger: Logger;
 
-    constructor(useSecureCache: boolean = true, dbPath?: string) {
+    constructor(useSecureCache: boolean = true, dbPath?: string, logger?: Logger) {
         this.registry = new StandardsRegistry(dbPath || './standards-registry.db');
         this.useSecureCache = useSecureCache;
+        this.logger = logger || PerformanceFactory.getLogger() as any;
         // Initialize registry in background
-        this.registry.initialize().catch(console.error);
+        this.registry.initialize().catch((error: any) => this.logger.error('Registry initialization failed:', error));
     }
 
     // For testing purposes - allow registry to be replaced
@@ -86,7 +92,7 @@ export class GetStandardsHandler {
                 }
             } catch (error) {
                 // Log security errors but continue with non-cached data
-                console.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
+                this.logger.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
             }
         }
 
@@ -125,7 +131,7 @@ export class GetStandardsHandler {
                     }
                 } catch (error) {
                     // Log security errors but continue - caching failure shouldn't break the response
-                    console.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
+                    this.logger.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
                 }
             }
 
@@ -172,7 +178,7 @@ export class GetStandardsHandler {
                 return { ...cached, responseTime: 0 };
             }
         } catch (error) {
-            console.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
+            this.logger.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
         }
 
         try {
@@ -216,7 +222,7 @@ export class GetStandardsHandler {
                     mcpCache.setSearch(cacheKey, response);
                 }
             } catch (error) {
-                console.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
+                this.logger.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
             }
 
             return response;
@@ -255,7 +261,7 @@ export class GetStandardsHandler {
                 return { ...cached, responseTime: 0 };
             }
         } catch (error) {
-            console.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
+            this.logger.warn('Cache access error:', error instanceof Error ? error.message : 'Unknown error');
         }
 
         try {
@@ -432,7 +438,7 @@ export class GetStandardsHandler {
                     mcpCache.setValidation(cacheKey, response);
                 }
             } catch (error) {
-                console.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
+                this.logger.warn('Cache storage error:', error instanceof Error ? error.message : 'Unknown error');
             }
 
             return response;
@@ -720,11 +726,13 @@ export const getStandardsHandlerInsecure = new GetStandardsHandler(false);
 export class StandardsRegistryHandler {
     private registry: StandardsRegistry;
     private useSecureCache: boolean;
+    private logger: Logger;
 
-    constructor(useSecureCache: boolean = true, dbPath?: string) {
+    constructor(useSecureCache: boolean = true, dbPath?: string, logger?: Logger) {
         this.registry = new StandardsRegistry(dbPath || './standards-registry.db');
         this.useSecureCache = useSecureCache;
-        this.registry.initialize().catch(console.error);
+        this.logger = logger || PerformanceFactory.getLogger() as any;
+        this.registry.initialize().catch((error: any) => this.logger.error('Registry initialization failed:', error));
     }
 
     /**
