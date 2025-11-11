@@ -4,8 +4,7 @@
 
 ## Overview
 
-Phase 4 (Implementation) workflows manage the iterative sprint-based development cycle using a **story-centric workflow
-** where each story moves through a defined lifecycle from creation to completion.
+Phase 4 (Implementation) workflows manage the iterative sprint-based development cycle using a **story-centric workflow** where each story moves through a defined lifecycle from creation to completion.
 
 **Key principle:** One story at a time, move it through the entire lifecycle before starting the next.
 
@@ -101,7 +100,7 @@ graph TB
 ## Quick Reference
 
 | Workflow                       | Agent | When                             | Purpose                                     |
-|--------------------------------|-------|----------------------------------|---------------------------------------------|
+| ------------------------------ | ----- | -------------------------------- | ------------------------------------------- |
 | **sprint-planning**            | SM    | Once at Phase 4 start            | Initialize sprint tracking file             |
 | **epic-tech-context**          | SM    | Per epic                         | Generate epic-specific technical guidance   |
 | **validate-epic-tech-context** | SM    | Optional after epic-tech-context | Validate tech spec against checklist        |
@@ -123,8 +122,7 @@ graph TB
 
 ### SM (Scrum Master) - Primary Implementation Orchestrator
 
-**Workflows:** sprint-planning, epic-tech-context, validate-epic-tech-context, create-story, validate-create-story,
-story-context, validate-story-context, story-ready-for-dev, epic-retrospective, correct-course
+**Workflows:** sprint-planning, epic-tech-context, validate-epic-tech-context, create-story, validate-create-story, story-context, validate-story-context, story-ready-for-dev, epic-retrospective, correct-course
 
 **Responsibilities:**
 
@@ -208,13 +206,11 @@ Complete each story's full lifecycle before starting the next. This prevents con
 
 ### Epic-Level Technical Context
 
-Generate detailed technical guidance per epic (not per story) using `epic-tech-context`. This provides just-in-time
-architecture without upfront over-planning.
+Generate detailed technical guidance per epic (not per story) using `epic-tech-context`. This provides just-in-time architecture without upfront over-planning.
 
 ### Story Context (Optional)
 
-Use `story-context` to assemble focused context XML for each story, pulling from PRD, architecture, epic context, and
-codebase docs. Alternatively, use `story-ready-for-dev` to mark a story ready without generating context XML.
+Use `story-context` to assemble focused context XML for each story, pulling from PRD, architecture, epic context, and codebase docs. Alternatively, use `story-ready-for-dev` to mark a story ready without generating context XML.
 
 ### Quality Gates
 
@@ -275,15 +271,13 @@ A: No! Run once per epic, not per story. Use `story-context` or `story-ready-for
 A: No, it's optional. You can use `story-ready-for-dev` to mark a story ready without generating context XML.
 
 **Q: Can I work on multiple stories in parallel?**
-A: Not recommended. Complete one story's full lifecycle before starting the next. Prevents context switching and ensures
-quality.
+A: Not recommended. Complete one story's full lifecycle before starting the next. Prevents context switching and ensures quality.
 
 **Q: What if code review finds issues?**
 A: DEV runs `develop-story` to make fixes, re-runs tests, then runs `code-review` again until it passes.
 
 **Q: When do I run validations?**
-A: Validations are optional quality gates. Use them when you want independent review of epic tech specs, story drafts,
-or story context before proceeding.
+A: Validations are optional quality gates. Use them when you want independent review of epic tech specs, story drafts, or story context before proceeding.
 
 ---
 

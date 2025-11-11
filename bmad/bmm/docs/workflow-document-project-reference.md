@@ -7,21 +7,16 @@
 
 ## Purpose
 
-Analyzes and documents brownfield projects by scanning codebase, architecture, and patterns to create comprehensive
-reference documentation for AI-assisted development. Generates a master index and multiple documentation files tailored
-to project structure and type.
+Analyzes and documents brownfield projects by scanning codebase, architecture, and patterns to create comprehensive reference documentation for AI-assisted development. Generates a master index and multiple documentation files tailored to project structure and type.
 
-**NEW in v1.2.0:** Context-safe architecture with scan levels, resumability, and write-as-you-go pattern to prevent
-context exhaustion.
+**NEW in v1.2.0:** Context-safe architecture with scan levels, resumability, and write-as-you-go pattern to prevent context exhaustion.
 
 ---
 
 ## Key Features
 
-- **Multi-Project Type Support**: Handles web, backend, mobile, CLI, game, embedded, data, infra, library, desktop, and
-  extension projects
-- **Multi-Part Detection**: Automatically detects and documents projects with separate client/server or multiple
-  services
+- **Multi-Project Type Support**: Handles web, backend, mobile, CLI, game, embedded, data, infra, library, desktop, and extension projects
+- **Multi-Part Detection**: Automatically detects and documents projects with separate client/server or multiple services
 - **Three Scan Levels** (NEW v1.2.0): Quick (2-5 min), Deep (10-30 min), Exhaustive (30-120 min)
 - **Resumability** (NEW v1.2.0): Interrupt and resume workflows without losing progress
 - **Write-as-you-go** (NEW v1.2.0): Documents written immediately to prevent context exhaustion
@@ -135,12 +130,12 @@ Your choice [1/2/3]:
 3. **Discovers Documentation** - Finds existing README, CONTRIBUTING, ARCHITECTURE files
 4. **Analyzes Tech Stack** - Parses package files, identifies frameworks, versions, dependencies
 5. **Conditional Scanning** - Performs targeted analysis based on project type requirements:
-    - API routes and endpoints
-    - Database models and schemas
-    - State management patterns
-    - UI component libraries
-    - Configuration and security
-    - CI/CD and deployment configs
+   - API routes and endpoints
+   - Database models and schemas
+   - State management patterns
+   - UI component libraries
+   - Configuration and security
+   - CI/CD and deployment configs
 6. **Generates Source Tree** - Creates annotated directory structure with critical paths
 7. **Extracts Dev Instructions** - Documents setup, build, run, and test commands
 8. **Creates Architecture Docs** - Generates detailed architecture using matched templates
@@ -187,9 +182,9 @@ The workflow uses a single comprehensive CSV file:
 - Location: `/bmad/bmm/workflows/document-project/documentation-requirements.csv`
 - 12 project types (web, mobile, backend, cli, library, desktop, game, data, extension, infra, embedded)
 - 24 columns combining:
-    - **Detection columns**: `project_type_id`, `key_file_patterns` (identifies project type from codebase)
-    - **Requirement columns**: `requires_api_scan`, `requires_data_models`, `requires_ui_components`, etc.
-    - **Pattern columns**: `critical_directories`, `test_file_patterns`, `config_patterns`, etc.
+  - **Detection columns**: `project_type_id`, `key_file_patterns` (identifies project type from codebase)
+  - **Requirement columns**: `requires_api_scan`, `requires_data_models`, `requires_ui_components`, etc.
+  - **Pattern columns**: `critical_directories`, `test_file_patterns`, `config_patterns`, etc.
 - Self-contained: All project detection AND scanning requirements in one file
 - Architecture patterns inferred from tech stack (no external registry needed)
 
@@ -326,8 +321,7 @@ When you run the workflow on a project that already has documentation, you'll be
 2. **Deep-dive into specific area** - Generate EXHAUSTIVE documentation for a particular feature/module/folder
 3. **Cancel** - Keep existing documentation
 
-Deep-dive mode performs **comprehensive, file-by-file analysis** of a specific area, reading EVERY file completely and
-documenting:
+Deep-dive mode performs **comprehensive, file-by-file analysis** of a specific area, reading EVERY file completely and documenting:
 
 - All exports with complete signatures
 - All imports and dependencies
@@ -349,10 +343,10 @@ documenting:
 1. Workflow detects existing `index.md`
 2. Offers deep-dive option
 3. Suggests areas based on project structure:
-    - API route groups
-    - Feature modules
-    - UI component areas
-    - Services/business logic
+   - API route groups
+   - Feature modules
+   - UI component areas
+   - Services/business logic
 4. You select area or specify custom path
 5. Workflow reads EVERY file in that area
 6. Generates `deep-dive-{area-name}.md` with complete analysis

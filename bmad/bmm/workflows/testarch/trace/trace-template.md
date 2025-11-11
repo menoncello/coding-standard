@@ -11,7 +11,7 @@
 ### Coverage Summary
 
 | Priority  | Total Criteria | FULL Coverage | Coverage % | Status       |
-|-----------|----------------|---------------|------------|--------------|
+| --------- | -------------- | ------------- | ---------- | ------------ |
 | P0        | {P0_TOTAL}     | {P0_FULL}     | {P0_PCT}%  | {P0_STATUS}  |
 | P1        | {P1_TOTAL}     | {P1_FULL}     | {P1_PCT}%  | {P1_STATUS}  |
 | P2        | {P2_TOTAL}     | {P2_FULL}     | {P2_PCT}%  | {P2_STATUS}  |
@@ -32,18 +32,18 @@
 
 - **Coverage:** {COVERAGE_STATUS} {STATUS_ICON}
 - **Tests:**
-    - `{TEST_ID}` - {TEST_FILE}:{LINE}
-        - **Given:** {GIVEN}
-        - **When:** {WHEN}
-        - **Then:** {THEN}
-    - `{TEST_ID_2}` - {TEST_FILE_2}:{LINE}
-        - **Given:** {GIVEN_2}
-        - **When:** {WHEN_2}
-        - **Then:** {THEN_2}
+  - `{TEST_ID}` - {TEST_FILE}:{LINE}
+    - **Given:** {GIVEN}
+    - **When:** {WHEN}
+    - **Then:** {THEN}
+  - `{TEST_ID_2}` - {TEST_FILE_2}:{LINE}
+    - **Given:** {GIVEN_2}
+    - **When:** {WHEN_2}
+    - **Then:** {THEN_2}
 
 - **Gaps:** (if PARTIAL or UNIT-ONLY or INTEGRATION-ONLY)
-    - Missing: {MISSING_SCENARIO_1}
-    - Missing: {MISSING_SCENARIO_2}
+  - Missing: {MISSING_SCENARIO_1}
+  - Missing: {MISSING_SCENARIO_2}
 
 - **Recommendation:** {RECOMMENDATION_TEXT}
 
@@ -53,14 +53,14 @@
 
 - **Coverage:** FULL ✅
 - **Tests:**
-    - `1.3-E2E-001` - tests/e2e/auth.spec.ts:12
-        - **Given:** User has valid credentials
-        - **When:** User submits login form
-        - **Then:** User is redirected to dashboard
-    - `1.3-UNIT-001` - tests/unit/auth-service.spec.ts:8
-        - **Given:** Valid email and password hash
-        - **When:** validateCredentials is called
-        - **Then:** Returns user object
+  - `1.3-E2E-001` - tests/e2e/auth.spec.ts:12
+    - **Given:** User has valid credentials
+    - **When:** User submits login form
+    - **Then:** User is redirected to dashboard
+  - `1.3-UNIT-001` - tests/unit/auth-service.spec.ts:8
+    - **Given:** Valid email and password hash
+    - **When:** validateCredentials is called
+    - **Then:** Returns user object
 
 ---
 
@@ -68,19 +68,18 @@
 
 - **Coverage:** PARTIAL ⚠️
 - **Tests:**
-    - `1.3-E2E-003` - tests/e2e/auth.spec.ts:44
-        - **Given:** User requests password reset
-        - **When:** User clicks reset link in email
-        - **Then:** User can set new password
+  - `1.3-E2E-003` - tests/e2e/auth.spec.ts:44
+    - **Given:** User requests password reset
+    - **When:** User clicks reset link in email
+    - **Then:** User can set new password
 
 - **Gaps:**
-    - Missing: Email delivery validation
-    - Missing: Expired token handling (error path)
-    - Missing: Invalid token handling (security test)
-    - Missing: Unit test for token generation logic
+  - Missing: Email delivery validation
+  - Missing: Expired token handling (error path)
+  - Missing: Invalid token handling (security test)
+  - Missing: Unit test for token generation logic
 
-- **Recommendation:** Add `1.3-API-001` for email service integration testing and `1.3-UNIT-003` for token generation
-  logic. Add `1.3-E2E-004` for error path validation (expired/invalid tokens).
+- **Recommendation:** Add `1.3-API-001` for email service integration testing and `1.3-UNIT-003` for token generation logic. Add `1.3-E2E-004` for error path validation (expired/invalid tokens).
 
 ---
 
@@ -91,10 +90,10 @@
 {CRITICAL_GAP_COUNT} gaps found. **Do not release until resolved.**
 
 1. **{CRITERION_ID}: {CRITERION_DESCRIPTION}** (P0)
-    - Current Coverage: {COVERAGE_STATUS}
-    - Missing Tests: {MISSING_TEST_DESCRIPTION}
-    - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
-    - Impact: {IMPACT_DESCRIPTION}
+   - Current Coverage: {COVERAGE_STATUS}
+   - Missing Tests: {MISSING_TEST_DESCRIPTION}
+   - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
+   - Impact: {IMPACT_DESCRIPTION}
 
 ---
 
@@ -103,10 +102,10 @@
 {HIGH_GAP_COUNT} gaps found. **Address before PR merge.**
 
 1. **{CRITERION_ID}: {CRITERION_DESCRIPTION}** (P1)
-    - Current Coverage: {COVERAGE_STATUS}
-    - Missing Tests: {MISSING_TEST_DESCRIPTION}
-    - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
-    - Impact: {IMPACT_DESCRIPTION}
+   - Current Coverage: {COVERAGE_STATUS}
+   - Missing Tests: {MISSING_TEST_DESCRIPTION}
+   - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
+   - Impact: {IMPACT_DESCRIPTION}
 
 ---
 
@@ -115,8 +114,8 @@
 {MEDIUM_GAP_COUNT} gaps found. **Address in nightly test improvements.**
 
 1. **{CRITERION_ID}: {CRITERION_DESCRIPTION}** (P2)
-    - Current Coverage: {COVERAGE_STATUS}
-    - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
+   - Current Coverage: {COVERAGE_STATUS}
+   - Recommend: {RECOMMENDED_TEST_ID} ({RECOMMENDED_TEST_LEVEL})
 
 ---
 
@@ -125,7 +124,7 @@
 {LOW_GAP_COUNT} gaps found. **Optional - add if time permits.**
 
 1. **{CRITERION_ID}: {CRITERION_DESCRIPTION}** (P3)
-    - Current Coverage: {COVERAGE_STATUS}
+   - Current Coverage: {COVERAGE_STATUS}
 
 ---
 
@@ -175,14 +174,14 @@
 #### Unacceptable Duplication ⚠️
 
 - {CRITERION_ID}: Same validation at E2E and Component level
-    - Recommendation: Remove {TEST_ID} or consolidate with {OTHER_TEST_ID}
+  - Recommendation: Remove {TEST_ID} or consolidate with {OTHER_TEST_ID}
 
 ---
 
 ### Coverage by Test Level
 
 | Test Level | Tests             | Criteria Covered     | Coverage %       |
-|------------|-------------------|----------------------|------------------|
+| ---------- | ----------------- | -------------------- | ---------------- |
 | E2E        | {E2E_COUNT}       | {E2E_CRITERIA}       | {E2E_PCT}%       |
 | API        | {API_COUNT}       | {API_CRITERIA}       | {API_PCT}%       |
 | Component  | {COMP_COUNT}      | {COMP_CRITERIA}      | {COMP_PCT}%      |
@@ -213,8 +212,7 @@
 
 **Immediate Actions (Before PR Merge)**
 
-1. **Add P1 Password Reset Tests** - Implement `1.3-API-001` for email service integration and `1.3-E2E-004` for error
-   path validation. P1 coverage currently at 80%, target is 90%.
+1. **Add P1 Password Reset Tests** - Implement `1.3-API-001` for email service integration and `1.3-E2E-004` for error path validation. P1 coverage currently at 80%, target is 90%.
 2. **Optimize Slow E2E Test** - Refactor `1.3-E2E-001` to use faster fixture setup. Currently 145s, target is <90s.
 
 **Short-term Actions (This Sprint)**
@@ -321,13 +319,13 @@
 
 #### P0 Criteria (Must ALL Pass)
 
-| Criterion | Threshold | Actual | Status |
+| Criterion             | Threshold | Actual                    | Status   |
 | --------------------- | --------- | ------------------------- | -------- | -------- |
-| P0 Coverage | 100% | {p0_coverage}% | {✅ PASS | ❌ FAIL} |
-| P0 Test Pass Rate | 100% | {p0_pass_rate}% | {✅ PASS | ❌ FAIL} |
-| Security Issues | 0 | {security_issue_count} | {✅ PASS | ❌ FAIL} |
-| Critical NFR Failures | 0 | {critical_nfr_fail_count} | {✅ PASS | ❌ FAIL} |
-| Flaky Tests | 0 | {flaky_test_count} | {✅ PASS | ❌ FAIL} |
+| P0 Coverage           | 100%      | {p0_coverage}%            | {✅ PASS | ❌ FAIL} |
+| P0 Test Pass Rate     | 100%      | {p0_pass_rate}%           | {✅ PASS | ❌ FAIL} |
+| Security Issues       | 0         | {security_issue_count}    | {✅ PASS | ❌ FAIL} |
+| Critical NFR Failures | 0         | {critical_nfr_fail_count} | {✅ PASS | ❌ FAIL} |
+| Flaky Tests           | 0         | {flaky_test_count}        | {✅ PASS | ❌ FAIL} |
 
 **P0 Evaluation**: {✅ ALL PASS | ❌ ONE OR MORE FAILED}
 
@@ -335,12 +333,12 @@
 
 #### P1 Criteria (Required for PASS, May Accept for CONCERNS)
 
-| Criterion | Threshold | Actual | Status |
+| Criterion              | Threshold                 | Actual               | Status   |
 | ---------------------- | ------------------------- | -------------------- | -------- | ----------- | -------- |
-| P1 Coverage | ≥{min_p1_coverage}% | {p1_coverage}% | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
-| P1 Test Pass Rate | ≥{min_p1_pass_rate}% | {p1_pass_rate}% | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
+| P1 Coverage            | ≥{min_p1_coverage}%       | {p1_coverage}%       | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
+| P1 Test Pass Rate      | ≥{min_p1_pass_rate}%      | {p1_pass_rate}%      | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
 | Overall Test Pass Rate | ≥{min_overall_pass_rate}% | {overall_pass_rate}% | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
-| Overall Coverage | ≥{min_coverage}% | {overall_coverage}% | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
+| Overall Coverage       | ≥{min_coverage}%          | {overall_coverage}%  | {✅ PASS | ⚠️ CONCERNS | ❌ FAIL} |
 
 **P1 Evaluation**: {✅ ALL PASS | ⚠️ SOME CONCERNS | ❌ FAILED}
 
@@ -349,7 +347,7 @@
 #### P2/P3 Criteria (Informational, Don't Block)
 
 | Criterion         | Actual          | Notes                                                        |
-|-------------------|-----------------|--------------------------------------------------------------|
+| ----------------- | --------------- | ------------------------------------------------------------ |
 | P2 Test Pass Rate | {p2_pass_rate}% | {allow_p2_failures ? "Tracked, doesn't block" : "Evaluated"} |
 | P3 Test Pass Rate | {p3_pass_rate}% | {allow_p3_failures ? "Tracked, doesn't block" : "Evaluated"} |
 
@@ -369,15 +367,11 @@
 
 **Example (PASS):**
 
-> All P0 criteria met with 100% coverage and pass rates across critical tests. All P1 criteria exceeded thresholds with
-> 98% overall pass rate and 92% coverage. No security issues detected. No flaky tests in validation. Feature is ready for
-> production deployment with standard monitoring.
+> All P0 criteria met with 100% coverage and pass rates across critical tests. All P1 criteria exceeded thresholds with 98% overall pass rate and 92% coverage. No security issues detected. No flaky tests in validation. Feature is ready for production deployment with standard monitoring.
 
 **Example (CONCERNS):**
 
-> All P0 criteria met, ensuring critical user journeys are protected. However, P1 coverage (88%) falls below threshold (
-> 90%) due to missing E2E test for AC-5 edge case. Overall pass rate (96%) is excellent. Issues are non-critical and have
-> acceptable workarounds. Risk is low enough to deploy with enhanced monitoring.
+> All P0 criteria met, ensuring critical user journeys are protected. However, P1 coverage (88%) falls below threshold (90%) due to missing E2E test for AC-5 edge case. Overall pass rate (96%) is excellent. Issues are non-critical and have acceptable workarounds. Risk is low enough to deploy with enhanced monitoring.
 
 **Example (FAIL):**
 
@@ -391,9 +385,7 @@
 
 **Example (WAIVED):**
 
-> Original decision was FAIL due to P0 test failure in legacy Excel 2007 export module (affects <1% of users). However,
-> release contains critical GDPR compliance features required by regulatory deadline (Oct 15). Business has approved
-> waiver given:
+> Original decision was FAIL due to P0 test failure in legacy Excel 2007 export module (affects <1% of users). However, release contains critical GDPR compliance features required by regulatory deadline (Oct 15). Business has approved waiver given:
 >
 > - Regulatory priority overrides legacy module risk
 > - Workaround available (use Excel 2010+)
@@ -409,12 +401,12 @@
 List unresolved P1/P2 issues that don't block release but should be tracked:
 
 1. **{Risk Description}**
-    - **Priority**: P1 | P2
-    - **Probability**: Low | Medium | High
-    - **Impact**: Low | Medium | High
-    - **Risk Score**: {probability × impact}
-    - **Mitigation**: {workaround or monitoring plan}
-    - **Remediation**: {fix in next sprint/release}
+   - **Priority**: P1 | P2
+   - **Probability**: Low | Medium | High
+   - **Impact**: Low | Medium | High
+   - **Risk Score**: {probability × impact}
+   - **Mitigation**: {workaround or monitoring plan}
+   - **Remediation**: {fix in next sprint/release}
 
 **Overall Residual Risk**: {LOW | MEDIUM | HIGH}
 
@@ -458,7 +450,7 @@ List unresolved P1/P2 issues that don't block release but should be tracked:
 Top blockers requiring immediate attention:
 
 | Priority | Issue         | Description         | Owner        | Due Date     | Status             |
-|----------|---------------|---------------------|--------------|--------------|--------------------|
+| -------- | ------------- | ------------------- | ------------ | ------------ | ------------------ |
 | P0       | {issue_title} | {brief_description} | {owner_name} | {YYYY-MM-DD} | {OPEN/IN_PROGRESS} |
 | P0       | {issue_title} | {brief_description} | {owner_name} | {YYYY-MM-DD} | {OPEN/IN_PROGRESS} |
 | P1       | {issue_title} | {brief_description} | {owner_name} | {YYYY-MM-DD} | {OPEN/IN_PROGRESS} |
@@ -472,81 +464,81 @@ Top blockers requiring immediate attention:
 #### For PASS Decision ✅
 
 1. **Proceed to deployment**
-    - Deploy to staging environment
-    - Validate with smoke tests
-    - Monitor key metrics for 24-48 hours
-    - Deploy to production with standard monitoring
+   - Deploy to staging environment
+   - Validate with smoke tests
+   - Monitor key metrics for 24-48 hours
+   - Deploy to production with standard monitoring
 
 2. **Post-Deployment Monitoring**
-    - {metric_1_to_monitor}
-    - {metric_2_to_monitor}
-    - {alert_thresholds}
+   - {metric_1_to_monitor}
+   - {metric_2_to_monitor}
+   - {alert_thresholds}
 
 3. **Success Criteria**
-    - {success_criterion_1}
-    - {success_criterion_2}
+   - {success_criterion_1}
+   - {success_criterion_2}
 
 ---
 
 #### For CONCERNS Decision ⚠️
 
 1. **Deploy with Enhanced Monitoring**
-    - Deploy to staging with extended validation period
-    - Enable enhanced logging/monitoring for known risk areas:
-        - {risk_area_1}
-        - {risk_area_2}
-    - Set aggressive alerts for potential issues
-    - Deploy to production with caution
+   - Deploy to staging with extended validation period
+   - Enable enhanced logging/monitoring for known risk areas:
+     - {risk_area_1}
+     - {risk_area_2}
+   - Set aggressive alerts for potential issues
+   - Deploy to production with caution
 
 2. **Create Remediation Backlog**
-    - Create story: "{fix_title_1}" (Priority: {priority})
-    - Create story: "{fix_title_2}" (Priority: {priority})
-    - Target sprint: {next_sprint}
+   - Create story: "{fix_title_1}" (Priority: {priority})
+   - Create story: "{fix_title_2}" (Priority: {priority})
+   - Target sprint: {next_sprint}
 
 3. **Post-Deployment Actions**
-    - Monitor {specific_areas} closely for {time_period}
-    - Weekly status updates on remediation progress
-    - Re-assess after fixes deployed
+   - Monitor {specific_areas} closely for {time_period}
+   - Weekly status updates on remediation progress
+   - Re-assess after fixes deployed
 
 ---
 
 #### For FAIL Decision ❌
 
 1. **Block Deployment Immediately**
-    - Do NOT deploy to any environment
-    - Notify stakeholders of blocking issues
-    - Escalate to tech lead and PM
+   - Do NOT deploy to any environment
+   - Notify stakeholders of blocking issues
+   - Escalate to tech lead and PM
 
 2. **Fix Critical Issues**
-    - Address P0 blockers listed in Critical Issues section
-    - Owner assignments confirmed
-    - Due dates agreed upon
-    - Daily standup on blocker resolution
+   - Address P0 blockers listed in Critical Issues section
+   - Owner assignments confirmed
+   - Due dates agreed upon
+   - Daily standup on blocker resolution
 
 3. **Re-Run Gate After Fixes**
-    - Re-run full test suite after fixes
-    - Re-run `bmad tea *trace` workflow
-    - Verify decision is PASS before deploying
+   - Re-run full test suite after fixes
+   - Re-run `bmad tea *trace` workflow
+   - Verify decision is PASS before deploying
 
 ---
 
 #### For WAIVED Decision 🔓
 
 1. **Deploy with Business Approval**
-    - Confirm waiver approver has signed off
-    - Document waiver in release notes
-    - Notify all stakeholders of waived risks
+   - Confirm waiver approver has signed off
+   - Document waiver in release notes
+   - Notify all stakeholders of waived risks
 
 2. **Aggressive Monitoring**
-    - {enhanced_monitoring_plan}
-    - {escalation_procedures}
-    - Daily checks on waived risk areas
+   - {enhanced_monitoring_plan}
+   - {escalation_procedures}
+   - Daily checks on waived risk areas
 
 3. **Mandatory Remediation**
-    - Fix MUST be completed by {due_date}
-    - Issue CANNOT be waived in next release
-    - Track remediation progress weekly
-    - Verify fix in next gate
+   - Fix MUST be completed by {due_date}
+   - Issue CANNOT be waived in next release
+   - Track remediation progress weekly
+   - Verify fix in next gate
 
 ---
 

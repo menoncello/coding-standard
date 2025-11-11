@@ -9,7 +9,7 @@
 ## Decision Summary
 
 | Category | Decision | Version | Affects Epics | Rationale |
-|----------|----------|---------|---------------|-----------|
+| -------- | -------- | ------- | ------------- | --------- |
 
 {{decision_table_rows}}
 

@@ -2,17 +2,11 @@
 
 ## Principle
 
-Run only the tests you need, when you need them. Use tags/grep to slice suites by risk priority (not directory
-structure), filter by spec patterns or git diff to focus on impacted areas, and combine priority metadata (P0-P3) with
-change detection to optimize pre-commit vs. CI execution. Document the selection strategy clearly so teams understand
-when full regression is mandatory.
+Run only the tests you need, when you need them. Use tags/grep to slice suites by risk priority (not directory structure), filter by spec patterns or git diff to focus on impacted areas, and combine priority metadata (P0-P3) with change detection to optimize pre-commit vs. CI execution. Document the selection strategy clearly so teams understand when full regression is mandatory.
 
 ## Rationale
 
-Running the entire test suite on every commit wastes time and resources. Smart test selection provides fast feedback (
-smoke tests in minutes, full regression in hours) while maintaining confidence. The "32+ ways of selective testing"
-philosophy balances speed with coverage: quick loops for developers, comprehensive validation before deployment. Poorly
-documented selection leads to confusion about when tests run and why.
+Running the entire test suite on every commit wastes time and resources. Smart test selection provides fast feedback (smoke tests in minutes, full regression in hours) while maintaining confidence. The "32+ ways of selective testing" philosophy balances speed with coverage: quick loops for developers, comprehensive validation before deployment. Poorly documented selection leads to confusion about when tests run and why.
 
 ## Pattern Examples
 

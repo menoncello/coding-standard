@@ -9,15 +9,12 @@
 
 ## Overview
 
-Expands test automation coverage by generating comprehensive test suites at appropriate levels (E2E, API, Component,
-Unit) with supporting infrastructure. This workflow operates in **dual mode**:
+Expands test automation coverage by generating comprehensive test suites at appropriate levels (E2E, API, Component, Unit) with supporting infrastructure. This workflow operates in **dual mode**:
 
-1. **BMad-Integrated Mode**: Works WITH BMad artifacts (story, tech-spec, PRD, test-design) to expand coverage after
-   story implementation
+1. **BMad-Integrated Mode**: Works WITH BMad artifacts (story, tech-spec, PRD, test-design) to expand coverage after story implementation
 2. **Standalone Mode**: Works WITHOUT BMad artifacts - analyzes existing codebase and generates tests independently
 
-**Core Principle**: Generate prioritized, deterministic tests that avoid duplicate coverage and follow testing best
-practices.
+**Core Principle**: Generate prioritized, deterministic tests that avoid duplicate coverage and follow testing best practices.
 
 ---
 
@@ -52,65 +49,54 @@ practices.
 1. **Detect Execution Mode**
 
    Check if BMad artifacts are available:
-    - If `{story_file}` variable is set → BMad-Integrated Mode
-    - If `{target_feature}` or `{target_files}` set → Standalone Mode
-    - If neither set → Auto-discover mode (scan codebase for features needing tests)
+   - If `{story_file}` variable is set → BMad-Integrated Mode
+   - If `{target_feature}` or `{target_files}` set → Standalone Mode
+   - If neither set → Auto-discover mode (scan codebase for features needing tests)
 
 2. **Load BMad Artifacts (If Available)**
 
    **BMad-Integrated Mode:**
-    - Read story markdown from `{story_file}`
-    - Extract acceptance criteria and technical requirements
-    - Load tech-spec.md if `{use_tech_spec}` is true
-    - Load test-design.md if `{use_test_design}` is true
-    - Load PRD.md if `{use_prd}` is true
-    - Note: These are **optional enhancements**, not hard requirements
+   - Read story markdown from `{story_file}`
+   - Extract acceptance criteria and technical requirements
+   - Load tech-spec.md if `{use_tech_spec}` is true
+   - Load test-design.md if `{use_test_design}` is true
+   - Load PRD.md if `{use_prd}` is true
+   - Note: These are **optional enhancements**, not hard requirements
 
    **Standalone Mode:**
-    - Skip BMad artifact loading
-    - Proceed directly to source code analysis
+   - Skip BMad artifact loading
+   - Proceed directly to source code analysis
 
 3. **Load Framework Configuration**
-    - Read test framework config (playwright.config.ts or cypress.config.ts)
-    - Identify test directory structure from `{test_dir}`
-    - Check existing test patterns in `{test_dir}`
-    - Note test runner capabilities (parallel execution, fixtures, etc.)
+   - Read test framework config (playwright.config.ts or cypress.config.ts)
+   - Identify test directory structure from `{test_dir}`
+   - Check existing test patterns in `{test_dir}`
+   - Note test runner capabilities (parallel execution, fixtures, etc.)
 
 4. **Analyze Existing Test Coverage**
 
    If `{analyze_coverage}` is true:
-    - Search `{test_dir}` for existing test files
-    - Identify tested features vs untested features
-    - Map tests to source files (coverage gaps)
-    - Check existing fixture and factory patterns
+   - Search `{test_dir}` for existing test files
+   - Identify tested features vs untested features
+   - Map tests to source files (coverage gaps)
+   - Check existing fixture and factory patterns
 
 5. **Load Knowledge Base Fragments**
 
    **Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to load:
-    - `test-levels-framework.md` - Test level selection (E2E vs API vs Component vs Unit with decision matrix, 467
-      lines, 4 examples)
-    - `test-priorities-matrix.md` - Priority classification (P0-P3 with automated scoring, risk mapping, 389 lines, 2
-      examples)
-    - `fixture-architecture.md` - Test fixture patterns (pure function → fixture → mergeTests, auto-cleanup, 406 lines,
-      5 examples)
-    - `data-factories.md` - Factory patterns with faker (overrides, nested factories, API seeding, 498 lines, 5
-      examples)
-    - `selective-testing.md` - Targeted test execution strategies (tag-based, spec filters, diff-based, promotion rules,
-      727 lines, 4 examples)
-    - `ci-burn-in.md` - Flaky test detection patterns (10-iteration burn-in, sharding, selective execution, 678 lines, 4
-      examples)
-    - `test-quality.md` - Test design principles (deterministic, isolated, explicit assertions, length/time limits, 658
-      lines, 5 examples)
-    - `network-first.md` - Route interception patterns (intercept before navigate, HAR capture, deterministic waiting,
-      489 lines, 5 examples)
+   - `test-levels-framework.md` - Test level selection (E2E vs API vs Component vs Unit with decision matrix, 467 lines, 4 examples)
+   - `test-priorities-matrix.md` - Priority classification (P0-P3 with automated scoring, risk mapping, 389 lines, 2 examples)
+   - `fixture-architecture.md` - Test fixture patterns (pure function → fixture → mergeTests, auto-cleanup, 406 lines, 5 examples)
+   - `data-factories.md` - Factory patterns with faker (overrides, nested factories, API seeding, 498 lines, 5 examples)
+   - `selective-testing.md` - Targeted test execution strategies (tag-based, spec filters, diff-based, promotion rules, 727 lines, 4 examples)
+   - `ci-burn-in.md` - Flaky test detection patterns (10-iteration burn-in, sharding, selective execution, 678 lines, 4 examples)
+   - `test-quality.md` - Test design principles (deterministic, isolated, explicit assertions, length/time limits, 658 lines, 5 examples)
+   - `network-first.md` - Route interception patterns (intercept before navigate, HAR capture, deterministic waiting, 489 lines, 5 examples)
 
    **Healing Knowledge (If `{auto_heal_failures}` is true):**
-    - `test-healing-patterns.md` - Common failure patterns and automated fixes (stale selectors, race conditions,
-      dynamic data, network errors, hard waits, 648 lines, 5 examples)
-    - `selector-resilience.md` - Selector debugging and refactoring guide (data-testid > ARIA > text > CSS hierarchy,
-      anti-patterns, 541 lines, 4 examples)
-    - `timing-debugging.md` - Race condition identification and fixes (network-first, deterministic waiting, async
-      debugging, 370 lines, 3 examples)
+   - `test-healing-patterns.md` - Common failure patterns and automated fixes (stale selectors, race conditions, dynamic data, network errors, hard waits, 648 lines, 5 examples)
+   - `selector-resilience.md` - Selector debugging and refactoring guide (data-testid > ARIA > text > CSS hierarchy, anti-patterns, 541 lines, 4 examples)
+   - `timing-debugging.md` - Race condition identification and fixes (network-first, deterministic waiting, async debugging, 370 lines, 3 examples)
 
 ---
 
@@ -121,20 +107,20 @@ practices.
 1. **Determine What Needs Testing**
 
    **BMad-Integrated Mode (story available):**
-    - Map acceptance criteria from story to test scenarios
-    - Identify features implemented in this story
-    - Check if story has existing ATDD tests (from `*atdd` workflow)
-    - Expand beyond ATDD with edge cases and negative paths
+   - Map acceptance criteria from story to test scenarios
+   - Identify features implemented in this story
+   - Check if story has existing ATDD tests (from `*atdd` workflow)
+   - Expand beyond ATDD with edge cases and negative paths
 
    **Standalone Mode (no story):**
-    - If `{target_feature}` specified: Analyze that specific feature
-    - If `{target_files}` specified: Analyze those specific files
-    - If `{auto_discover_features}` is true: Scan `{source_dir}` for features
-    - Prioritize features with:
-        - No test coverage (highest priority)
-        - Complex business logic
-        - External integrations (API calls, database, auth)
-        - Critical user paths (login, checkout, etc.)
+   - If `{target_feature}` specified: Analyze that specific feature
+   - If `{target_files}` specified: Analyze those specific files
+   - If `{auto_discover_features}` is true: Scan `{source_dir}` for features
+   - Prioritize features with:
+     - No test coverage (highest priority)
+     - Complex business logic
+     - External integrations (API calls, database, auth)
+     - Critical user paths (login, checkout, etc.)
 
 2. **Apply Test Level Selection Framework**
 
@@ -143,77 +129,77 @@ practices.
    For each feature or acceptance criterion, determine appropriate test level:
 
    **E2E (End-to-End)**:
-    - Critical user journeys (login, checkout, core workflows)
-    - Multi-system integration
-    - Full user-facing scenarios
-    - Characteristics: High confidence, slow, brittle
+   - Critical user journeys (login, checkout, core workflows)
+   - Multi-system integration
+   - Full user-facing scenarios
+   - Characteristics: High confidence, slow, brittle
 
    **API (Integration)**:
-    - Business logic validation
-    - Service contracts and data transformations
-    - Backend integration without UI
-    - Characteristics: Fast feedback, stable, good balance
+   - Business logic validation
+   - Service contracts and data transformations
+   - Backend integration without UI
+   - Characteristics: Fast feedback, stable, good balance
 
    **Component**:
-    - UI component behavior (buttons, forms, modals)
-    - Interaction testing (click, hover, keyboard)
-    - State management within component
-    - Characteristics: Fast, isolated, granular
+   - UI component behavior (buttons, forms, modals)
+   - Interaction testing (click, hover, keyboard)
+   - State management within component
+   - Characteristics: Fast, isolated, granular
 
    **Unit**:
-    - Pure business logic and algorithms
-    - Edge cases and error handling
-    - Minimal dependencies
-    - Characteristics: Fastest, most granular
+   - Pure business logic and algorithms
+   - Edge cases and error handling
+   - Minimal dependencies
+   - Characteristics: Fastest, most granular
 
 3. **Avoid Duplicate Coverage**
 
    **Critical principle:** Don't test same behavior at multiple levels unless necessary
-    - Use E2E for critical happy path only
-    - Use API tests for business logic variations
-    - Use component tests for UI interaction edge cases
-    - Use unit tests for pure logic edge cases
+   - Use E2E for critical happy path only
+   - Use API tests for business logic variations
+   - Use component tests for UI interaction edge cases
+   - Use unit tests for pure logic edge cases
 
    **Example:**
-    - E2E: User can log in with valid credentials → Dashboard loads
-    - API: POST /auth/login returns 401 for invalid credentials
-    - API: POST /auth/login returns 200 and JWT token for valid credentials
-    - Component: LoginForm disables submit button when fields are empty
-    - Unit: validateEmail() returns false for malformed email addresses
+   - E2E: User can log in with valid credentials → Dashboard loads
+   - API: POST /auth/login returns 401 for invalid credentials
+   - API: POST /auth/login returns 200 and JWT token for valid credentials
+   - Component: LoginForm disables submit button when fields are empty
+   - Unit: validateEmail() returns false for malformed email addresses
 
 4. **Assign Test Priorities**
 
    **Knowledge Base Reference**: `test-priorities-matrix.md`
 
    **P0 (Critical - Every commit)**:
-    - Critical user paths that must always work
-    - Security-critical functionality (auth, permissions)
-    - Data integrity scenarios
-    - Run in pre-commit hooks or PR checks
+   - Critical user paths that must always work
+   - Security-critical functionality (auth, permissions)
+   - Data integrity scenarios
+   - Run in pre-commit hooks or PR checks
 
    **P1 (High - PR to main)**:
-    - Important features with high user impact
-    - Integration points between systems
-    - Error handling for common failures
-    - Run before merging to main branch
+   - Important features with high user impact
+   - Integration points between systems
+   - Error handling for common failures
+   - Run before merging to main branch
 
    **P2 (Medium - Nightly)**:
-    - Edge cases with moderate impact
-    - Less-critical feature variations
-    - Performance/load testing
-    - Run in nightly CI builds
+   - Edge cases with moderate impact
+   - Less-critical feature variations
+   - Performance/load testing
+   - Run in nightly CI builds
 
    **P3 (Low - On-demand)**:
-    - Nice-to-have validations
-    - Rarely-used features
-    - Exploratory testing scenarios
-    - Run manually or weekly
+   - Nice-to-have validations
+   - Rarely-used features
+   - Exploratory testing scenarios
+   - Run manually or weekly
 
    **Priority Variables:**
-    - `{include_p0}` - Always include (default: true)
-    - `{include_p1}` - High priority (default: true)
-    - `{include_p2}` - Medium priority (default: true)
-    - `{include_p3}` - Low priority (default: false)
+   - `{include_p0}` - Always include (default: true)
+   - `{include_p1}` - High priority (default: true)
+   - `{include_p2}` - Medium priority (default: true)
+   - `{include_p3}` - Low priority (default: false)
 
 5. **Create Test Coverage Plan**
 
@@ -255,15 +241,15 @@ practices.
    **Knowledge Base Reference**: `fixture-architecture.md`
 
    Check existing fixtures in `tests/support/fixtures/`:
-    - If missing or incomplete, create fixture architecture
-    - Use Playwright's `test.extend()` pattern
-    - Ensure all fixtures have auto-cleanup in teardown
+   - If missing or incomplete, create fixture architecture
+   - Use Playwright's `test.extend()` pattern
+   - Ensure all fixtures have auto-cleanup in teardown
 
    **Common fixtures to create/enhance:**
-    - **authenticatedUser**: User with valid session (auto-deletes user after test)
-    - **apiRequest**: Authenticated API client with base URL and headers
-    - **mockNetwork**: Network mocking for external services
-    - **testDatabase**: Database with test data (auto-cleanup after test)
+   - **authenticatedUser**: User with valid session (auto-deletes user after test)
+   - **apiRequest**: Authenticated API client with base URL and headers
+   - **mockNetwork**: Network mocking for external services
+   - **testDatabase**: Database with test data (auto-cleanup after test)
 
    **Example fixture:**
 
@@ -296,14 +282,14 @@ practices.
    **Knowledge Base Reference**: `data-factories.md`
 
    Check existing factories in `tests/support/factories/`:
-    - If missing or incomplete, create factory architecture
-    - Use `@faker-js/faker` for all random data (no hardcoded values)
-    - Support overrides for specific test scenarios
+   - If missing or incomplete, create factory architecture
+   - Use `@faker-js/faker` for all random data (no hardcoded values)
+   - Support overrides for specific test scenarios
 
    **Common factories to create/enhance:**
-    - User factory (email, password, name, role)
-    - Product factory (name, price, description, SKU)
-    - Order factory (items, total, status, customer)
+   - User factory (email, password, name, role)
+   - Product factory (name, price, description, SKU)
+   - Order factory (items, total, status, customer)
 
    **Example factory:**
 
@@ -334,10 +320,10 @@ practices.
    If `{update_helpers}` is true:
 
    Check `tests/support/helpers/` for common utilities:
-    - **waitFor**: Polling helper for complex conditions
-    - **retry**: Retry helper for flaky operations
-    - **testData**: Test data generation helpers
-    - **assertions**: Custom assertion helpers
+   - **waitFor**: Polling helper for complex conditions
+   - **retry**: Retry helper for flaky operations
+   - **testData**: Test data generation helpers
+   - **assertions**: Custom assertion helpers
 
    **Example helper:**
 
@@ -415,12 +401,12 @@ practices.
    ```
 
    **Critical patterns:**
-    - Tag tests with priority: `[P0]`, `[P1]`, `[P2]`, `[P3]` in test name
-    - One assertion per test (atomic tests)
-    - Explicit waits (no hard waits/sleeps)
-    - Network-first approach (route interception before navigation)
-    - data-testid selectors for stability
-    - Clear Given-When-Then structure
+   - Tag tests with priority: `[P0]`, `[P1]`, `[P2]`, `[P3]` in test name
+   - One assertion per test (atomic tests)
+   - Explicit waits (no hard waits/sleeps)
+   - Network-first approach (route interception before navigation)
+   - data-testid selectors for stability
+   - Clear Given-When-Then structure
 
 3. **Write API Tests (If Applicable)**
 
@@ -559,22 +545,22 @@ practices.
 7. **Enforce Quality Standards**
 
    **For every test:**
-    - ✅ Uses Given-When-Then format
-    - ✅ Has clear, descriptive name with priority tag
-    - ✅ One assertion per test (atomic)
-    - ✅ No hard waits or sleeps (use explicit waits)
-    - ✅ Self-cleaning (uses fixtures with auto-cleanup)
-    - ✅ Deterministic (no flaky patterns)
-    - ✅ Fast (under {max_test_duration} seconds)
-    - ✅ Lean (test file under {max_file_lines} lines)
+   - ✅ Uses Given-When-Then format
+   - ✅ Has clear, descriptive name with priority tag
+   - ✅ One assertion per test (atomic)
+   - ✅ No hard waits or sleeps (use explicit waits)
+   - ✅ Self-cleaning (uses fixtures with auto-cleanup)
+   - ✅ Deterministic (no flaky patterns)
+   - ✅ Fast (under {max_test_duration} seconds)
+   - ✅ Lean (test file under {max_file_lines} lines)
 
    **Forbidden patterns:**
-    - ❌ Hard waits: `await page.waitForTimeout(2000)`
-    - ❌ Conditional flow: `if (await element.isVisible()) { ... }`
-    - ❌ Try-catch for test logic (use for cleanup only)
-    - ❌ Hardcoded test data (use factories)
-    - ❌ Page objects (keep tests simple and direct)
-    - ❌ Shared state between tests
+   - ❌ Hard waits: `await page.waitForTimeout(2000)`
+   - ❌ Conditional flow: `if (await element.isVisible()) { ... }`
+   - ❌ Try-catch for test logic (use for cleanup only)
+   - ❌ Hardcoded test data (use factories)
+   - ❌ Page objects (keep tests simple and direct)
+   - ❌ Shared state between tests
 
 ---
 
@@ -587,8 +573,8 @@ practices.
 1. **Validate Generated Tests**
 
    Always validate (auto_validate is always true):
-    - Run generated tests to verify they work
-    - Continue with healing if config.tea_use_mcp_enhancements is true
+   - Run generated tests to verify they work
+   - Continue with healing if config.tea_use_mcp_enhancements is true
 
 2. **Run Generated Tests**
 
@@ -599,21 +585,21 @@ practices.
    ```
 
    Capture results:
-    - Total tests run
-    - Passing tests count
-    - Failing tests count
-    - Error messages and stack traces for failures
+   - Total tests run
+   - Passing tests count
+   - Failing tests count
+   - Error messages and stack traces for failures
 
 3. **Evaluate Results**
 
    **If ALL tests pass:**
-    - ✅ Generate report with success summary
-    - Proceed to Step 6 (Documentation and Scripts)
+   - ✅ Generate report with success summary
+   - Proceed to Step 6 (Documentation and Scripts)
 
    **If tests FAIL:**
-    - Check config.tea_use_mcp_enhancements setting
-    - If true: Enter healing loop (Step 5.4)
-    - If false: Document failures for manual review, proceed to Step 6
+   - Check config.tea_use_mcp_enhancements setting
+   - If true: Enter healing loop (Step 5.4)
+   - If false: Document failures for manual review, proceed to Step 6
 
 4. **Healing Loop (If config.tea_use_mcp_enhancements is true)**
 
@@ -624,93 +610,93 @@ practices.
    **A. Load Healing Knowledge Fragments**
 
    Consult `tea-index.csv` to load healing patterns:
-    - `test-healing-patterns.md` - Common failure patterns and fixes
-    - `selector-resilience.md` - Selector debugging and refactoring
-    - `timing-debugging.md` - Race condition identification and fixes
+   - `test-healing-patterns.md` - Common failure patterns and fixes
+   - `selector-resilience.md` - Selector debugging and refactoring
+   - `timing-debugging.md` - Race condition identification and fixes
 
    **B. Identify Failure Pattern**
 
    Analyze error message and stack trace to classify failure type:
 
    **Stale Selector Failure:**
-    - Error contains: "locator resolved to 0 elements", "element not found", "unable to find element"
-    - Extract selector from error message
-    - Apply selector healing (knowledge from `selector-resilience.md`):
-        - If CSS class → Replace with `page.getByTestId()`
-        - If nth() → Replace with `filter({ hasText })`
-        - If ID → Replace with data-testid
-        - If complex XPath → Replace with ARIA role
+   - Error contains: "locator resolved to 0 elements", "element not found", "unable to find element"
+   - Extract selector from error message
+   - Apply selector healing (knowledge from `selector-resilience.md`):
+     - If CSS class → Replace with `page.getByTestId()`
+     - If nth() → Replace with `filter({ hasText })`
+     - If ID → Replace with data-testid
+     - If complex XPath → Replace with ARIA role
 
    **Race Condition Failure:**
-    - Error contains: "timeout waiting for", "element not visible", "timed out retrying"
-    - Detect missing network waits or hard waits in test code
-    - Apply timing healing (knowledge from `timing-debugging.md`):
-        - Add network-first interception before navigate
-        - Replace `waitForTimeout()` with `waitForResponse()`
-        - Add explicit element state waits (`waitFor({ state: 'visible' })`)
+   - Error contains: "timeout waiting for", "element not visible", "timed out retrying"
+   - Detect missing network waits or hard waits in test code
+   - Apply timing healing (knowledge from `timing-debugging.md`):
+     - Add network-first interception before navigate
+     - Replace `waitForTimeout()` with `waitForResponse()`
+     - Add explicit element state waits (`waitFor({ state: 'visible' })`)
 
    **Dynamic Data Failure:**
-    - Error contains: "Expected 'User 123' but received 'User 456'", timestamp mismatches
-    - Identify hardcoded assertions
-    - Apply data healing (knowledge from `test-healing-patterns.md`):
-        - Replace hardcoded IDs with regex (`/User \d+/`)
-        - Replace hardcoded dates with dynamic generation
-        - Capture dynamic values and use in assertions
+   - Error contains: "Expected 'User 123' but received 'User 456'", timestamp mismatches
+   - Identify hardcoded assertions
+   - Apply data healing (knowledge from `test-healing-patterns.md`):
+     - Replace hardcoded IDs with regex (`/User \d+/`)
+     - Replace hardcoded dates with dynamic generation
+     - Capture dynamic values and use in assertions
 
    **Network Error Failure:**
-    - Error contains: "API call failed", "500 error", "network error"
-    - Detect missing route interception
-    - Apply network healing (knowledge from `test-healing-patterns.md`):
-        - Add `page.route()` or `cy.intercept()` for API mocking
-        - Mock error scenarios (500, 429, timeout)
+   - Error contains: "API call failed", "500 error", "network error"
+   - Detect missing route interception
+   - Apply network healing (knowledge from `test-healing-patterns.md`):
+     - Add `page.route()` or `cy.intercept()` for API mocking
+     - Mock error scenarios (500, 429, timeout)
 
    **Hard Wait Detection:**
-    - Scan test code for `page.waitForTimeout()`, `cy.wait(number)`, `sleep()`
-    - Apply hard wait healing (knowledge from `timing-debugging.md`):
-        - Replace with event-based waits
-        - Add network response waits
-        - Use element state changes
+   - Scan test code for `page.waitForTimeout()`, `cy.wait(number)`, `sleep()`
+   - Apply hard wait healing (knowledge from `timing-debugging.md`):
+     - Replace with event-based waits
+     - Add network response waits
+     - Use element state changes
 
    **C. MCP Healing Mode (If MCP Tools Available)**
 
    If Playwright MCP tools are available in your IDE:
 
    Use MCP tools for interactive healing:
-    - `playwright_test_debug_test`: Pause on failure for visual inspection
-    - `browser_snapshot`: Capture visual context at failure point
-    - `browser_console_messages`: Retrieve console logs for JS errors
-    - `browser_network_requests`: Analyze network activity
-    - `browser_generate_locator`: Generate better selectors interactively
+   - `playwright_test_debug_test`: Pause on failure for visual inspection
+   - `browser_snapshot`: Capture visual context at failure point
+   - `browser_console_messages`: Retrieve console logs for JS errors
+   - `browser_network_requests`: Analyze network activity
+   - `browser_generate_locator`: Generate better selectors interactively
 
    Apply MCP-generated fixes to test code.
 
    **D. Pattern-Based Healing Mode (Fallback)**
 
    If MCP unavailable, use pattern-based analysis:
-    - Parse error message and stack trace
-    - Match against failure patterns from knowledge base
-    - Apply fixes programmatically:
-        - Selector fixes: Use suggestions from `selector-resilience.md`
-        - Timing fixes: Apply patterns from `timing-debugging.md`
-        - Data fixes: Use patterns from `test-healing-patterns.md`
+   - Parse error message and stack trace
+   - Match against failure patterns from knowledge base
+   - Apply fixes programmatically:
+     - Selector fixes: Use suggestions from `selector-resilience.md`
+     - Timing fixes: Apply patterns from `timing-debugging.md`
+     - Data fixes: Use patterns from `test-healing-patterns.md`
 
    **E. Apply Healing Fix**
-    - Modify test file with healed code
-    - Re-run test to validate fix
-    - If test passes: Mark as healed, move to next failure
-    - If test fails: Increment iteration count, try different pattern
+   - Modify test file with healed code
+   - Re-run test to validate fix
+   - If test passes: Mark as healed, move to next failure
+   - If test fails: Increment iteration count, try different pattern
 
    **F. Iteration Limit Handling**
 
    After 3 failed healing attempts:
 
    Always mark unfixable tests:
-    - Mark test with `test.fixme()` instead of `test()`
-    - Add detailed comment explaining:
-        - What failure occurred
-        - What healing was attempted (3 iterations)
-        - Why healing failed
-        - Manual investigation needed
+   - Mark test with `test.fixme()` instead of `test()`
+   - Add detailed comment explaining:
+     - What failure occurred
+     - What healing was attempted (3 iterations)
+     - Why healing failed
+     - Manual investigation needed
 
    ```typescript
    test.fixme('[P1] should handle complex interaction', async ({ page }) => {
@@ -773,9 +759,9 @@ practices.
    ```
 
 6. **Update Test Files with Healing Results**
-    - Save healed test code to files
-    - Mark unfixable tests with `test.fixme()` and detailed comments
-    - Preserve original test logic in comments (for debugging)
+   - Save healed test code to files
+   - Mark unfixable tests with `test.fixme()` and detailed comments
+   - Preserve original test logic in comments (for debugging)
 
 ---
 
@@ -788,12 +774,12 @@ practices.
    If `{update_readme}` is true:
 
    Create or update `tests/README.md` with:
-    - Overview of test suite structure
-    - How to run tests (all, specific files, by priority)
-    - Fixture and factory usage examples
-    - Priority tagging convention ([P0], [P1], [P2], [P3])
-    - How to write new tests
-    - Common patterns and anti-patterns
+   - Overview of test suite structure
+   - How to run tests (all, specific files, by priority)
+   - Fixture and factory usage examples
+   - Priority tagging convention ([P0], [P1], [P2], [P3])
+   - How to write new tests
+   - Common patterns and anti-patterns
 
    **Example section:**
 
@@ -820,10 +806,10 @@ practices.
    ````
 
    ## Priority Tags
-    - **[P0]**: Critical paths, run every commit
-    - **[P1]**: High priority, run on PR to main
-    - **[P2]**: Medium priority, run nightly
-    - **[P3]**: Low priority, run on-demand
+   - **[P0]**: Critical paths, run every commit
+   - **[P1]**: High priority, run on PR to main
+   - **[P2]**: Medium priority, run nightly
+   - **[P3]**: Low priority, run on-demand
 
    ```
 
@@ -851,10 +837,10 @@ practices.
 3. **Run Test Suite**
 
    If `{run_tests_after_generation}` is true:
-    - Run full test suite locally
-    - Capture results (passing/failing counts)
-    - Verify no flaky patterns (tests should be deterministic)
-    - Document any setup requirements or known issues
+   - Run full test suite locally
+   - Capture results (passing/failing counts)
+   - Verify no flaky patterns (tests should be deterministic)
+   - Document any setup requirements or known issues
 
 ---
 
@@ -925,38 +911,38 @@ practices.
    ## Coverage Analysis
 
    **Total Tests:** 7
-    - P0: 1 test (critical path)
-    - P1: 5 tests (high priority)
-    - P2: 1 test (medium priority)
+   - P0: 1 test (critical path)
+   - P1: 5 tests (high priority)
+   - P2: 1 test (medium priority)
 
    **Test Levels:**
-    - E2E: 2 tests (user journeys)
-    - API: 3 tests (business logic)
-    - Component: 2 tests (UI behavior)
+   - E2E: 2 tests (user journeys)
+   - API: 3 tests (business logic)
+   - Component: 2 tests (UI behavior)
 
    **Coverage Status:**
-    - ✅ All acceptance criteria covered
-    - ✅ Happy path covered (E2E + API)
-    - ✅ Error cases covered (API)
-    - ✅ UI validation covered (Component)
-    - ⚠️ Edge case: Password reset flow not yet covered (future story)
+   - ✅ All acceptance criteria covered
+   - ✅ Happy path covered (E2E + API)
+   - ✅ Error cases covered (API)
+   - ✅ UI validation covered (Component)
+   - ⚠️ Edge case: Password reset flow not yet covered (future story)
 
    ## Definition of Done
-    - [x] All tests follow Given-When-Then format
-    - [x] All tests use data-testid selectors
-    - [x] All tests have priority tags
-    - [x] All tests are self-cleaning (fixtures with auto-cleanup)
-    - [x] No hard waits or flaky patterns
-    - [x] Test files under 300 lines
-    - [x] All tests run under 1.5 minutes each
-    - [x] README updated with test execution instructions
-    - [x] package.json scripts updated
+   - [x] All tests follow Given-When-Then format
+   - [x] All tests use data-testid selectors
+   - [x] All tests have priority tags
+   - [x] All tests are self-cleaning (fixtures with auto-cleanup)
+   - [x] No hard waits or flaky patterns
+   - [x] Test files under 300 lines
+   - [x] All tests run under 1.5 minutes each
+   - [x] README updated with test execution instructions
+   - [x] package.json scripts updated
 
    ## Next Steps
-    1. Review generated tests with team
-    2. Run tests in CI pipeline: `npm run test:e2e`
-    3. Integrate with quality gate: `bmad tea *gate`
-    4. Monitor for flaky tests in burn-in loop
+   1. Review generated tests with team
+   2. Run tests in CI pipeline: `npm run test:e2e`
+   3. Integrate with quality gate: `bmad tea *gate`
+   4. Monitor for flaky tests in burn-in loop
 
    ````
 
@@ -1179,25 +1165,20 @@ test('should login', async ({ page }) => {
 
 **Core Fragments (Auto-loaded in Step 1):**
 
-- `test-levels-framework.md` - E2E vs API vs Component vs Unit decision framework with characteristics matrix (467
-  lines, 4 examples)
+- `test-levels-framework.md` - E2E vs API vs Component vs Unit decision framework with characteristics matrix (467 lines, 4 examples)
 - `test-priorities-matrix.md` - P0-P3 classification with automated scoring and risk mapping (389 lines, 2 examples)
 - `fixture-architecture.md` - Pure function → fixture → mergeTests composition with auto-cleanup (406 lines, 5 examples)
 - `data-factories.md` - Factory patterns with faker: overrides, nested factories, API seeding (498 lines, 5 examples)
 - `selective-testing.md` - Tag-based, spec filters, diff-based selection, promotion rules (727 lines, 4 examples)
 - `ci-burn-in.md` - 10-iteration burn-in loop, parallel sharding, selective execution (678 lines, 4 examples)
-- `test-quality.md` - Deterministic tests, isolated with cleanup, explicit assertions, length/time optimization (658
-  lines, 5 examples)
+- `test-quality.md` - Deterministic tests, isolated with cleanup, explicit assertions, length/time optimization (658 lines, 5 examples)
 - `network-first.md` - Intercept before navigate, HAR capture, deterministic waiting strategies (489 lines, 5 examples)
 
 **Healing Fragments (Auto-loaded if `{auto_heal_failures}` enabled):**
 
-- `test-healing-patterns.md` - Common failure patterns: stale selectors, race conditions, dynamic data, network errors,
-  hard waits (648 lines, 5 examples)
-- `selector-resilience.md` - Selector hierarchy (data-testid > ARIA > text > CSS), dynamic patterns, anti-patterns
-  refactoring (541 lines, 4 examples)
-- `timing-debugging.md` - Race condition prevention, deterministic waiting, async debugging techniques (370 lines, 3
-  examples)
+- `test-healing-patterns.md` - Common failure patterns: stale selectors, race conditions, dynamic data, network errors, hard waits (648 lines, 5 examples)
+- `selector-resilience.md` - Selector hierarchy (data-testid > ARIA > text > CSS), dynamic patterns, anti-patterns refactoring (541 lines, 4 examples)
+- `timing-debugging.md` - Race condition prevention, deterministic waiting, async debugging techniques (370 lines, 3 examples)
 
 **Manual Reference (Optional):**
 

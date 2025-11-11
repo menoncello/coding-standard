@@ -4,12 +4,9 @@
 
 ## Overview
 
-Phase 2 (Planning) workflows are **required** for all projects. They transform strategic vision into actionable
-requirements using a **scale-adaptive system** that automatically selects the right planning depth based on project
-complexity.
+Phase 2 (Planning) workflows are **required** for all projects. They transform strategic vision into actionable requirements using a **scale-adaptive system** that automatically selects the right planning depth based on project complexity.
 
-**Key principle:** One unified entry point (`workflow-init`) intelligently routes to the appropriate planning
-methodology - from quick tech-specs to comprehensive PRDs.
+**Key principle:** One unified entry point (`workflow-init`) intelligently routes to the appropriate planning methodology - from quick tech-specs to comprehensive PRDs.
 
 **When to use:** All projects require planning. The system adapts depth automatically based on complexity.
 
@@ -94,7 +91,7 @@ graph TB
 ## Quick Reference
 
 | Workflow                     | Agent         | Track       | Purpose                                    | Typical Stories |
-|------------------------------|---------------|-------------|--------------------------------------------|-----------------|
+| ---------------------------- | ------------- | ----------- | ------------------------------------------ | --------------- |
 | **workflow-init**            | PM/Analyst    | All         | Entry point: discovery + routing           | N/A             |
 | **tech-spec**                | PM            | Quick Flow  | Technical document → Story or Epic+Stories | 1-15            |
 | **prd**                      | PM            | BMad Method | Strategic PRD                              | 10-50+          |
@@ -146,8 +143,7 @@ BMM uses three distinct planning tracks that adapt to project complexity:
 
 **Example:** "Customer dashboard", "E-commerce platform", "Add search to existing app"
 
-**Why Architecture for Brownfield?** Distills massive codebase context into focused solution design for your specific
-project.
+**Why Architecture for Brownfield?** Distills massive codebase context into focused solution design for your specific project.
 
 ---
 
@@ -165,8 +161,7 @@ project.
 
 **Documents Phase 2:** PRD.md + epics + epic files + story files
 
-**Documents Phase 3:** architecture.md + security-architecture.md (optional) + devops-strategy.md (optional) +
-secops-strategy.md (optional)
+**Documents Phase 3:** architecture.md + security-architecture.md (optional) + devops-strategy.md (optional) + secops-strategy.md (optional)
 
 **Example:** "Multi-tenant SaaS", "HIPAA-compliant portal", "Add SOC2 audit logging"
 
@@ -189,8 +184,7 @@ The system guides but never forces. You can override recommendations.
 
 ### workflow-init (Entry Point)
 
-**Purpose:** Single unified entry point for all planning. Discovers project needs and intelligently routes to
-appropriate track.
+**Purpose:** Single unified entry point for all planning. Discovers project needs and intelligently routes to appropriate track.
 
 **Agent:** PM (orchestrates others as needed)
 
@@ -207,8 +201,7 @@ appropriate track.
 
 ### tech-spec (Quick Flow)
 
-**Purpose:** Lightweight technical specification for simple changes (Quick Flow track). Produces technical document and
-story or epic+stories structure.
+**Purpose:** Lightweight technical specification for simple changes (Quick Flow track). Produces technical document and story or epic+stories structure.
 
 **Agent:** PM
 
@@ -223,17 +216,16 @@ story or epic+stories structure.
 **Key Outputs:**
 
 - **tech-spec.md** - Technical document containing:
-    - Problem statement and solution
-    - Source tree changes
-    - Implementation details
-    - Testing strategy
-    - Acceptance criteria
+  - Problem statement and solution
+  - Source tree changes
+  - Implementation details
+  - Testing strategy
+  - Acceptance criteria
 - **Story file(s)** - Single story OR epic+stories structure (1-15 stories typically)
 
 **Skip To Phase:** 4 (Implementation) - no Phase 3 architecture needed
 
-**Example:** "Fix null pointer when user has no profile image" → Single file change, null check, unit test, no DB
-migration.
+**Example:** "Fix null pointer when user has no profile image" → Single file change, null check, unit test, no DB migration.
 
 ---
 
@@ -265,8 +257,7 @@ migration.
 
 **Integration:** Feeds into Architecture (Phase 3)
 
-**Example:** E-commerce checkout → 3 epics (Guest Checkout, Payment Processing, Order Management), 21 stories, 4-6 week
-delivery.
+**Example:** E-commerce checkout → 3 epics (Guest Checkout, Payment Processing, Order Management), 21 stories, 4-6 week delivery.
 
 ---
 
@@ -297,8 +288,7 @@ delivery.
 
 **Integration:** Feeds into Architecture (Phase 3)
 
-**Example:** Roguelike card game → Core concept (Slay the Spire meets Hades), 3 characters, 120 cards, 50 enemies, Epic
-breakdown with 26 stories.
+**Example:** Roguelike card game → Core concept (Slay the Spire meets Hades), 3 characters, 120 cards, 50 enemies, Epic breakdown with 26 stories.
 
 ---
 
@@ -366,8 +356,7 @@ breakdown with 26 stories.
 
 **Integration:** Feeds PRD or updates epics, then Architecture (Phase 3)
 
-**Example:** Dashboard redesign → Card-based layout with split-pane toggle, 5 card components, 12 color tokens,
-responsive grid, 3 epics (Layout, Visualization, Accessibility).
+**Example:** Dashboard redesign → Card-based layout with split-pane toggle, 5 card components, 12 color tokens, responsive grid, 3 epics (Layout, Visualization, Accessibility).
 
 ---
 
@@ -438,7 +427,7 @@ responsive grid, 3 epics (Layout, Visualization, Accessibility).
 Planning outputs feed into Solutioning:
 
 | Planning Output     | Solutioning Input                    | Track Decision               |
-|---------------------|--------------------------------------|------------------------------|
+| ------------------- | ------------------------------------ | ---------------------------- |
 | tech-spec.md        | Skip Phase 3 → Phase 4 directly      | Quick Flow (no architecture) |
 | PRD.md              | **architecture** (Level 3-4)         | BMad Method (recommended)    |
 | GDD.md              | **architecture** (game tech)         | BMad Method (recommended)    |
@@ -464,8 +453,7 @@ Let the entry point guide you. It prevents over-planning simple features or unde
 
 ### 2. Trust the Recommendation
 
-If `workflow-init` suggests BMad Method, there's likely complexity you haven't considered. Review carefully before
-overriding.
+If `workflow-init` suggests BMad Method, there's likely complexity you haven't considered. Review carefully before overriding.
 
 ### 3. Iterate on Requirements
 
@@ -591,8 +579,7 @@ A: Run `workflow-init`. It analyzes your project and routes to the right plannin
 A: No. Simple changes use `tech-spec` (Quick Flow). Only BMad Method and Enterprise tracks create PRDs.
 
 **Q: Can I skip Phase 3 (Solutioning)?**
-A: Yes for Quick Flow. Optional for BMad Method (simple projects). Required for BMad Method (complex projects) and
-Enterprise.
+A: Yes for Quick Flow. Optional for BMad Method (simple projects). Required for BMad Method (complex projects) and Enterprise.
 
 **Q: How do I know which track to choose?**
 A: Use `workflow-init` - it recommends based on your description. Story counts are guidance, not definitions.

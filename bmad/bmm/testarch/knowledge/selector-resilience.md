@@ -2,16 +2,13 @@
 
 ## Principle
 
-Robust selectors follow a strict hierarchy: **data-testid > ARIA roles > text content > CSS/IDs** (last resort).
-Selectors must be resilient to UI changes (styling, layout, content updates) and remain human-readable for maintenance.
+Robust selectors follow a strict hierarchy: **data-testid > ARIA roles > text content > CSS/IDs** (last resort). Selectors must be resilient to UI changes (styling, layout, content updates) and remain human-readable for maintenance.
 
 ## Rationale
 
-**The Problem**: Brittle selectors (CSS classes, nth-child, complex XPath) break when UI styling changes, elements are
-reordered, or design updates occur. This causes test maintenance burden and false negatives.
+**The Problem**: Brittle selectors (CSS classes, nth-child, complex XPath) break when UI styling changes, elements are reordered, or design updates occur. This causes test maintenance burden and false negatives.
 
-**The Solution**: Prioritize semantic selectors that reflect user intent (ARIA roles, accessible names, test IDs). Use
-dynamic filtering for lists instead of nth() indexes. Validate selectors during code review and refactor proactively.
+**The Solution**: Prioritize semantic selectors that reflect user intent (ARIA roles, accessible names, test IDs). Use dynamic filtering for lists instead of nth() indexes. Validate selectors during code review and refactor proactively.
 
 **Why This Matters**:
 
@@ -523,10 +520,8 @@ Before deploying selectors:
 
 ## Integration Points
 
-- **Used in workflows**: `*atdd` (generate tests with robust selectors), `*automate` (healing selector failures),
-  `*test-review` (validate selector quality)
-- **Related fragments**: `test-healing-patterns.md` (selector failure diagnosis), `fixture-architecture.md` (page object
-  alternatives), `test-quality.md` (maintainability standards)
+- **Used in workflows**: `*atdd` (generate tests with robust selectors), `*automate` (healing selector failures), `*test-review` (validate selector quality)
+- **Related fragments**: `test-healing-patterns.md` (selector failure diagnosis), `fixture-architecture.md` (page object alternatives), `test-quality.md` (maintainability standards)
 - **Tools**: Playwright Inspector (Pick Locator), DevTools console, Playwright MCP browser_generate_locator (optional)
 
 _Source: Playwright selector best practices, accessibility guidelines (ARIA), production test maintenance patterns_

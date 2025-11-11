@@ -3,14 +3,7 @@
   "title": "Project Scan Report Schema",
   "description": "State tracking file for document-project workflow resumability",
   "type": "object",
-  "required": [
-    "workflow_version",
-    "timestamps",
-    "mode",
-    "scan_level",
-    "completed_steps",
-    "current_step"
-  ],
+  "required": ["workflow_version", "timestamps", "mode", "scan_level", "completed_steps", "current_step"],
   "properties": {
     "workflow_version": {
       "type": "string",
@@ -19,10 +12,7 @@
     },
     "timestamps": {
       "type": "object",
-      "required": [
-        "started",
-        "last_updated"
-      ],
+      "required": ["started", "last_updated"],
       "properties": {
         "started": {
           "type": "string",
@@ -43,20 +33,12 @@
     },
     "mode": {
       "type": "string",
-      "enum": [
-        "initial_scan",
-        "full_rescan",
-        "deep_dive"
-      ],
+      "enum": ["initial_scan", "full_rescan", "deep_dive"],
       "description": "Workflow execution mode"
     },
     "scan_level": {
       "type": "string",
-      "enum": [
-        "quick",
-        "deep",
-        "exhaustive"
-      ],
+      "enum": ["quick", "deep", "exhaustive"],
       "description": "Scan depth level (deep_dive mode always uses exhaustive)"
     },
     "project_root": {
@@ -71,10 +53,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "step",
-          "status"
-        ],
+        "required": ["step", "status"],
         "properties": {
           "step": {
             "type": "string",
@@ -82,11 +61,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "completed",
-              "partial",
-              "failed"
-            ]
+            "enum": ["completed", "partial", "failed"]
           },
           "timestamp": {
             "type": "string",
@@ -94,9 +69,7 @@
           },
           "outputs": {
             "type": "array",
-            "items": {
-              "type": "string"
-            },
+            "items": { "type": "string" },
             "description": "Files written during this step"
           },
           "summary": {
@@ -117,18 +90,10 @@
         "project_classification": {
           "type": "object",
           "properties": {
-            "repository_type": {
-              "type": "string"
-            },
-            "parts_count": {
-              "type": "integer"
-            },
-            "primary_language": {
-              "type": "string"
-            },
-            "architecture_type": {
-              "type": "string"
-            }
+            "repository_type": { "type": "string" },
+            "parts_count": { "type": "integer" },
+            "primary_language": { "type": "string" },
+            "architecture_type": { "type": "string" }
           }
         },
         "technology_stack": {
@@ -136,12 +101,8 @@
           "items": {
             "type": "object",
             "properties": {
-              "part_id": {
-                "type": "string"
-              },
-              "tech_summary": {
-                "type": "string"
-              }
+              "part_id": { "type": "string" },
+              "tech_summary": { "type": "string" }
             }
           }
         },
@@ -151,15 +112,9 @@
           "items": {
             "type": "object",
             "properties": {
-              "path": {
-                "type": "string"
-              },
-              "files_scanned": {
-                "type": "integer"
-              },
-              "summary": {
-                "type": "string"
-              }
+              "path": { "type": "string" },
+              "files_scanned": { "type": "integer" },
+              "summary": { "type": "string" }
             }
           }
         }
@@ -167,9 +122,7 @@
     },
     "outputs_generated": {
       "type": "array",
-      "items": {
-        "type": "string"
-      },
+      "items": { "type": "string" },
       "description": "List of all output files generated"
     },
     "resume_instructions": {
@@ -185,9 +138,7 @@
         },
         "validation_errors": {
           "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "items": { "type": "string" }
         }
       }
     },
@@ -197,22 +148,11 @@
       "items": {
         "type": "object",
         "properties": {
-          "target_name": {
-            "type": "string"
-          },
-          "target_path": {
-            "type": "string"
-          },
-          "files_analyzed": {
-            "type": "integer"
-          },
-          "output_file": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
+          "target_name": { "type": "string" },
+          "target_path": { "type": "string" },
+          "files_analyzed": { "type": "integer" },
+          "output_file": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
         }
       }
     }

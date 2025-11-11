@@ -12,13 +12,16 @@ import {
     GET_STANDARDS_TOOL,
     SEARCH_STANDARDS_TOOL,
     VALIDATE_CODE_TOOL,
+    ADD_STANDARD_TOOL,
+    REMOVE_STANDARD_TOOL,
+    REGISTRY_STATS_TOOL,
     GetStandardsRequest,
     SearchStandardsRequest,
     ValidateCodeRequest,
     PerformanceMetrics
 } from '../types/mcp.js';
 import {McpErrorHandler} from './handlers/errorHandler.js';
-import {getStandardsHandler} from './handlers/toolHandlers.js';
+import {getStandardsHandler, standardsRegistryHandler} from './handlers/toolHandlers.js';
 import {performance} from 'perf_hooks';
 
 class CodingStandardsServer {
@@ -50,6 +53,9 @@ class CodingStandardsServer {
                     GET_STANDARDS_TOOL,
                     SEARCH_STANDARDS_TOOL,
                     VALIDATE_CODE_TOOL,
+                    ADD_STANDARD_TOOL,
+                    REMOVE_STANDARD_TOOL,
+                    REGISTRY_STATS_TOOL,
                 ],
             };
         });
@@ -70,6 +76,15 @@ class CodingStandardsServer {
 
                     case 'validateCode':
                         return await this.handleValidateCode(args as ValidateCodeRequest, startTime);
+
+                    case 'addStandard':
+                        return await this.handleAddStandard(args, startTime);
+
+                    case 'removeStandard':
+                        return await this.handleRemoveStandard(args, startTime);
+
+                    case 'getRegistryStats':
+                        return await this.handleGetRegistryStats(startTime);
 
                     default:
                         throw McpErrorHandler.methodNotFound(name);
@@ -148,6 +163,80 @@ class CodingStandardsServer {
                         violations: metrics.result.violations,
                         score: metrics.result.score,
                         responseTime: metrics.responseTime,
+                        serverMetrics: {
+                            startupTime: this.startTime,
+                            memoryUsage: process.memoryUsage().heapUsed / 1024 / 1024, // MB
+                            timestamp: new Date().toISOString()
+                        }
+                    }, null, 2)
+                }
+            ]
+        };
+    }
+
+    private async handleAddStandard(request: any, startTime: number) {
+        const result = await standardsRegistryHandler.addStandard(request);
+        const responseTime = performance.now() - startTime;
+
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify({
+                        success: result.success,
+                        id: result.id,
+                        message: result.message,
+                        responseTime,
+                        serverMetrics: {
+                            startupTime: this.startTime,
+                            memoryUsage: process.memoryUsage().heapUsed / 1024 / 1024, // MB
+                            timestamp: new Date().toISOString()
+                        }
+                    }, null, 2)
+                }
+            ]
+        };
+    }
+
+    private async handleRemoveStandard(request: any, startTime: number) {
+        const result = await standardsRegistryHandler.removeStandard(request);
+        const responseTime = performance.now() - startTime;
+
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify({
+                        success: result.success,
+                        message: result.message,
+                        responseTime,
+                        serverMetrics: {
+                            startupTime: this.startTime,
+                            memoryUsage: process.memoryUsage().heapUsed / 1024 / 1024, // MB
+                            timestamp: new Date().toISOString()
+                        }
+                    }, null, 2)
+                }
+            ]
+        };
+    }
+
+    private async handleGetRegistryStats(startTime: number) {
+        const stats = await standardsRegistryHandler.getRegistryStats();
+        const responseTime = performance.now() - startTime;
+
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify({
+                        registryStats: {
+                            totalRules: stats.totalRules,
+                            rulesByCategory: stats.rulesByCategory,
+                            rulesByTechnology: stats.rulesByTechnology,
+                            cacheStats: stats.cacheStats
+                        },
+                        responseTime,
                         serverMetrics: {
                             startupTime: this.startTime,
                             memoryUsage: process.memoryUsage().heapUsed / 1024 / 1024, // MB

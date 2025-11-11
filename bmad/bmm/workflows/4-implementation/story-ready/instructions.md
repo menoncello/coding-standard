@@ -2,20 +2,17 @@
 
 <critical>The workflow execution engine is governed by: {project_root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>Communicate all responses in {communication_language} and language MUST be tailored to
-{user_skill_level}</critical>
+<critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 
 <workflow>
 
-<critical>This workflow is run by SM agent AFTER user reviews a drafted story and confirms it's ready for
-development</critical>
+<critical>This workflow is run by SM agent AFTER user reviews a drafted story and confirms it's ready for development</critical>
 <critical>Simple workflow: Update story file status to Ready</critical>
 
 <step n="1" goal="Find drafted story to mark ready" tag="sprint-status">
 
-<action>If {{story_path}} is provided → use it directly; extract story_key from filename or metadata; GOTO
-mark_ready</action>
+<action>If {{story_path}} is provided → use it directly; extract story_key from filename or metadata; GOTO mark_ready</action>
 
 <critical>MUST read COMPLETE sprint-status.yaml file from start to end to preserve order</critical>
 <action>Load the FULL file: {{output_folder}}/sprint-status.yaml</action>
@@ -103,12 +100,12 @@ You may need to run sprint-planning to refresh tracking.
 **Next Steps:**
 
 1. **Recommended:** Run `story-context` workflow to generate implementation context
-    - This creates a comprehensive context XML for the DEV agent
-    - Includes relevant architecture, dependencies, and existing code
+   - This creates a comprehensive context XML for the DEV agent
+   - Includes relevant architecture, dependencies, and existing code
 
 2. **Alternative:** Skip context generation and go directly to `dev-story` workflow
-    - Faster, but DEV agent will have less context
-    - Only recommended for simple, well-understood stories
+   - Faster, but DEV agent will have less context
+   - Only recommended for simple, well-understood stories
 
 **To proceed:**
 

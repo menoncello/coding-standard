@@ -9,9 +9,7 @@
 
 ## Overview
 
-Generates failing acceptance tests BEFORE implementation following TDD's red-green-refactor cycle. This workflow creates
-comprehensive test coverage at appropriate levels (E2E, API, Component) with supporting infrastructure (fixtures,
-factories, mocks) and provides an implementation checklist to guide development.
+Generates failing acceptance tests BEFORE implementation following TDD's red-green-refactor cycle. This workflow creates comprehensive test coverage at appropriate levels (E2E, API, Component) with supporting infrastructure (fixtures, factories, mocks) and provides an implementation checklist to guide development.
 
 **Core Principle**: Tests fail first (red phase), then guide development to green, then enable confident refactoring.
 
@@ -33,45 +31,36 @@ factories, mocks) and provides an implementation checklist to guide development.
 ### Actions
 
 1. **Read Story Markdown**
-    - Load story file from `{story_file}` variable
-    - Extract acceptance criteria (all testable requirements)
-    - Identify affected systems and components
-    - Note any technical constraints or dependencies
+   - Load story file from `{story_file}` variable
+   - Extract acceptance criteria (all testable requirements)
+   - Identify affected systems and components
+   - Note any technical constraints or dependencies
 
 2. **Load Framework Configuration**
-    - Read framework config (playwright.config.ts or cypress.config.ts)
-    - Identify test directory structure
-    - Check existing fixture patterns
-    - Note test runner capabilities
+   - Read framework config (playwright.config.ts or cypress.config.ts)
+   - Identify test directory structure
+   - Check existing fixture patterns
+   - Note test runner capabilities
 
 3. **Load Existing Test Patterns**
-    - Search `{test_dir}` for similar tests
-    - Identify reusable fixtures and helpers
-    - Check data factory patterns
-    - Note naming conventions
+   - Search `{test_dir}` for similar tests
+   - Identify reusable fixtures and helpers
+   - Check data factory patterns
+   - Note naming conventions
 
 4. **Load Knowledge Base Fragments**
 
    **Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to load:
-    - `fixture-architecture.md` - Test fixture patterns with auto-cleanup (pure function → fixture → mergeTests
-      composition, 406 lines, 5 examples)
-    - `data-factories.md` - Factory patterns using faker (override patterns, nested factories, API seeding, 498 lines, 5
-      examples)
-    - `component-tdd.md` - Component test strategies (red-green-refactor, provider isolation, accessibility, visual
-      regression, 480 lines, 4 examples)
-    - `network-first.md` - Route interception patterns (intercept before navigate, HAR capture, deterministic waiting,
-      489 lines, 5 examples)
-    - `test-quality.md` - Test design principles (deterministic tests, isolated with cleanup, explicit assertions,
-      length limits, execution time optimization, 658 lines, 5 examples)
-    - `test-healing-patterns.md` - Common failure patterns and healing strategies (stale selectors, race conditions,
-      dynamic data, network errors, hard waits, 648 lines, 5 examples)
-    - `selector-resilience.md` - Selector best practices (data-testid > ARIA > text > CSS hierarchy, dynamic patterns,
-      anti-patterns, 541 lines, 4 examples)
-    - `timing-debugging.md` - Race condition prevention and async debugging (network-first, deterministic waiting,
-      anti-patterns, 370 lines, 3 examples)
+   - `fixture-architecture.md` - Test fixture patterns with auto-cleanup (pure function → fixture → mergeTests composition, 406 lines, 5 examples)
+   - `data-factories.md` - Factory patterns using faker (override patterns, nested factories, API seeding, 498 lines, 5 examples)
+   - `component-tdd.md` - Component test strategies (red-green-refactor, provider isolation, accessibility, visual regression, 480 lines, 4 examples)
+   - `network-first.md` - Route interception patterns (intercept before navigate, HAR capture, deterministic waiting, 489 lines, 5 examples)
+   - `test-quality.md` - Test design principles (deterministic tests, isolated with cleanup, explicit assertions, length limits, execution time optimization, 658 lines, 5 examples)
+   - `test-healing-patterns.md` - Common failure patterns and healing strategies (stale selectors, race conditions, dynamic data, network errors, hard waits, 648 lines, 5 examples)
+   - `selector-resilience.md` - Selector best practices (data-testid > ARIA > text > CSS hierarchy, dynamic patterns, anti-patterns, 541 lines, 4 examples)
+   - `timing-debugging.md` - Race condition prevention and async debugging (network-first, deterministic waiting, anti-patterns, 370 lines, 3 examples)
 
-**Halt Condition:** If story has no acceptance criteria or framework is missing, HALT with message: "ATDD requires clear
-acceptance criteria and test framework setup"
+**Halt Condition:** If story has no acceptance criteria or framework is missing, HALT with message: "ATDD requires clear acceptance criteria and test framework setup"
 
 ---
 
@@ -84,23 +73,23 @@ acceptance criteria and test framework setup"
    Determine mode based on scenario complexity:
 
    **AI Generation Mode (DEFAULT)**:
-    - Clear acceptance criteria with standard patterns
-    - Uses: AI-generated tests from requirements
-    - Appropriate for: CRUD, auth, navigation, API tests
-    - Fastest approach
+   - Clear acceptance criteria with standard patterns
+   - Uses: AI-generated tests from requirements
+   - Appropriate for: CRUD, auth, navigation, API tests
+   - Fastest approach
 
    **Recording Mode (OPTIONAL - Complex UI)**:
-    - Complex UI interactions (drag-drop, wizards, multi-page flows)
-    - Uses: Interactive test recording with Playwright MCP
-    - Appropriate for: Visual workflows, unclear requirements
-    - Only if config.tea_use_mcp_enhancements is true AND MCP available
+   - Complex UI interactions (drag-drop, wizards, multi-page flows)
+   - Uses: Interactive test recording with Playwright MCP
+   - Appropriate for: Visual workflows, unclear requirements
+   - Only if config.tea_use_mcp_enhancements is true AND MCP available
 
 2. **AI Generation Mode (DEFAULT - Continue to Step 2)**
 
    For standard scenarios:
-    - Continue with existing workflow (Step 2: Select Test Levels and Strategy)
-    - AI generates tests based on acceptance criteria from Step 1
-    - Use knowledge base patterns for test structure
+   - Continue with existing workflow (Step 2: Select Test Levels and Strategy)
+   - AI generates tests based on acceptance criteria from Step 1
+   - Use knowledge base patterns for test structure
 
 3. **Recording Mode (OPTIONAL - Complex UI Only)**
 
@@ -109,11 +98,11 @@ acceptance criteria and test framework setup"
    **A. Check MCP Availability**
 
    If Playwright MCP tools are available in your IDE:
-    - Use MCP recording mode (Step 3.B)
+   - Use MCP recording mode (Step 3.B)
 
    If MCP unavailable:
-    - Fallback to AI generation mode (silent, automatic)
-    - Continue to Step 2
+   - Fallback to AI generation mode (silent, automatic)
+   - Continue to Step 2
 
    **B. Interactive Test Recording (MCP-Based)**
 
@@ -161,24 +150,24 @@ acceptance criteria and test framework setup"
    ```
 
    **When to Use Recording Mode:**
-    - ✅ Complex UI interactions (drag-drop, multi-step forms, wizards)
-    - ✅ Visual workflows (modals, dialogs, animations)
-    - ✅ Unclear requirements (exploratory, discovering expected behavior)
-    - ✅ Multi-page flows (checkout, registration, onboarding)
-    - ❌ NOT for simple CRUD (AI generation faster)
-    - ❌ NOT for API-only tests (no UI to record)
+   - ✅ Complex UI interactions (drag-drop, multi-step forms, wizards)
+   - ✅ Visual workflows (modals, dialogs, animations)
+   - ✅ Unclear requirements (exploratory, discovering expected behavior)
+   - ✅ Multi-page flows (checkout, registration, onboarding)
+   - ❌ NOT for simple CRUD (AI generation faster)
+   - ❌ NOT for API-only tests (no UI to record)
 
    **When to Use AI Generation (Default):**
-    - ✅ Clear acceptance criteria available
-    - ✅ Standard patterns (login, CRUD, navigation)
-    - ✅ Need many tests quickly
-    - ✅ API/backend tests (no UI interaction)
+   - ✅ Clear acceptance criteria available
+   - ✅ Standard patterns (login, CRUD, navigation)
+   - ✅ Need many tests quickly
+   - ✅ API/backend tests (no UI interaction)
 
 4. **Proceed to Test Level Selection**
 
    After mode selection:
-    - AI Generation: Continue to Step 2 (Select Test Levels and Strategy)
-    - Recording: Skip to Step 4 (Build Data Infrastructure) - tests already generated
+   - AI Generation: Continue to Step 2 (Select Test Levels and Strategy)
+   - Recording: Skip to Step 4 (Build Data Infrastructure) - tests already generated
 
 ---
 
@@ -189,53 +178,53 @@ acceptance criteria and test framework setup"
 1. **Analyze Acceptance Criteria**
 
    For each acceptance criterion, determine:
-    - Does it require full user journey? → E2E test
-    - Does it test business logic/API contract? → API test
-    - Does it validate UI component behavior? → Component test
-    - Can it be unit tested? → Unit test
+   - Does it require full user journey? → E2E test
+   - Does it test business logic/API contract? → API test
+   - Does it validate UI component behavior? → Component test
+   - Can it be unit tested? → Unit test
 
 2. **Apply Test Level Selection Framework**
 
    **Knowledge Base Reference**: `test-levels-framework.md`
 
    **E2E (End-to-End)**:
-    - Critical user journeys (login, checkout, core workflow)
-    - Multi-system integration
-    - User-facing acceptance criteria
-    - **Characteristics**: High confidence, slow execution, brittle
+   - Critical user journeys (login, checkout, core workflow)
+   - Multi-system integration
+   - User-facing acceptance criteria
+   - **Characteristics**: High confidence, slow execution, brittle
 
    **API (Integration)**:
-    - Business logic validation
-    - Service contracts
-    - Data transformations
-    - **Characteristics**: Fast feedback, good balance, stable
+   - Business logic validation
+   - Service contracts
+   - Data transformations
+   - **Characteristics**: Fast feedback, good balance, stable
 
    **Component**:
-    - UI component behavior (buttons, forms, modals)
-    - Interaction testing
-    - Visual regression
-    - **Characteristics**: Fast, isolated, granular
+   - UI component behavior (buttons, forms, modals)
+   - Interaction testing
+   - Visual regression
+   - **Characteristics**: Fast, isolated, granular
 
    **Unit**:
-    - Pure business logic
-    - Edge cases
-    - Error handling
-    - **Characteristics**: Fastest, most granular
+   - Pure business logic
+   - Edge cases
+   - Error handling
+   - **Characteristics**: Fastest, most granular
 
 3. **Avoid Duplicate Coverage**
 
    Don't test same behavior at multiple levels unless necessary:
-    - Use E2E for critical happy path only
-    - Use API tests for complex business logic variations
-    - Use component tests for UI interaction edge cases
-    - Use unit tests for pure logic edge cases
+   - Use E2E for critical happy path only
+   - Use API tests for complex business logic variations
+   - Use component tests for UI interaction edge cases
+   - Use unit tests for pure logic edge cases
 
 4. **Prioritize Tests**
 
    If test-design document exists, align with priority levels:
-    - P0 scenarios → Must cover in failing tests
-    - P1 scenarios → Should cover if time permits
-    - P2/P3 scenarios → Optional for this iteration
+   - P0 scenarios → Must cover in failing tests
+   - P1 scenarios → Should cover if time permits
+   - P2/P3 scenarios → Optional for this iteration
 
 **Decision Point:** Set `primary_level` variable to main test level for this story (typically E2E or API)
 
@@ -285,11 +274,11 @@ acceptance criteria and test framework setup"
    ```
 
    **Critical patterns:**
-    - One assertion per test (atomic tests)
-    - Explicit waits (no hard waits/sleeps)
-    - Network-first approach (route interception before navigation)
-    - data-testid selectors for stability
-    - Clear Given-When-Then structure
+   - One assertion per test (atomic tests)
+   - Explicit waits (no hard waits/sleeps)
+   - Network-first approach (route interception before navigation)
+   - data-testid selectors for stability
+   - Clear Given-When-Then structure
 
 3. **Apply Network-First Pattern**
 
@@ -367,10 +356,10 @@ acceptance criteria and test framework setup"
 6. **Verify Tests Fail Initially**
 
    **Critical verification:**
-    - Run tests locally to confirm they fail
-    - Failure should be due to missing implementation, not test errors
-    - Failure messages should be clear and actionable
-    - All tests must be in RED phase before sharing with DEV
+   - Run tests locally to confirm they fail
+   - Failure should be due to missing implementation, not test errors
+   - Failure messages should be clear and actionable
+   - All tests must be in RED phase before sharing with DEV
 
 **Important:** Tests MUST fail initially. If a test passes before implementation, it's not a valid acceptance test.
 
@@ -400,10 +389,10 @@ acceptance criteria and test framework setup"
    ```
 
    **Factory principles:**
-    - Use faker for random data (no hardcoded values)
-    - Support overrides for specific scenarios
-    - Generate complete valid objects
-    - Include helper functions for bulk creation
+   - Use faker for random data (no hardcoded values)
+   - Support overrides for specific scenarios
+   - Generate complete valid objects
+   - Include helper functions for bulk creation
 
 2. **Create Test Fixtures**
 
@@ -433,10 +422,10 @@ acceptance criteria and test framework setup"
    ```
 
    **Fixture principles:**
-    - Auto-cleanup (always delete created data)
-    - Composable (fixtures can use other fixtures)
-    - Isolated (each test gets fresh data)
-    - Type-safe
+   - Auto-cleanup (always delete created data)
+   - Composable (fixtures can use other fixtures)
+   - Isolated (each test gets fresh data)
+   - Type-safe
 
 3. **Document Mock Requirements**
 
@@ -571,24 +560,24 @@ acceptance criteria and test framework setup"
 1. **Create ATDD Checklist Document**
 
    Use template structure at `{installed_path}/atdd-checklist-template.md`:
-    - Story summary
-    - Acceptance criteria breakdown
-    - Test files created (with paths)
-    - Data factories created
-    - Fixtures created
-    - Mock requirements
-    - Required data-testid attributes
-    - Implementation checklist
-    - Red-green-refactor workflow
-    - Execution commands
+   - Story summary
+   - Acceptance criteria breakdown
+   - Test files created (with paths)
+   - Data factories created
+   - Fixtures created
+   - Mock requirements
+   - Required data-testid attributes
+   - Implementation checklist
+   - Red-green-refactor workflow
+   - Execution commands
 
 2. **Verify All Tests Fail**
 
    Before finalizing:
-    - Run full test suite locally
-    - Confirm all tests in RED phase
-    - Document expected failure messages
-    - Ensure failures are due to missing implementation, not test bugs
+   - Run full test suite locally
+   - Confirm all tests in RED phase
+   - Document expected failure messages
+   - Ensure failures are due to missing implementation, not test bugs
 
 3. **Write to Output File**
 
@@ -711,10 +700,8 @@ test('should display user info', async ({ page }) => {
 - `component-tdd.md` - Red-green-refactor, provider isolation, accessibility, visual regression (480 lines, 4 examples)
 - `network-first.md` - Intercept before navigate, HAR capture, deterministic waiting (489 lines, 5 examples)
 - `test-quality.md` - Deterministic tests, cleanup, explicit assertions, length/time limits (658 lines, 5 examples)
-- `test-healing-patterns.md` - Common failure patterns: stale selectors, race conditions, dynamic data, network errors,
-  hard waits (648 lines, 5 examples)
-- `selector-resilience.md` - Selector hierarchy (data-testid > ARIA > text > CSS), dynamic patterns, anti-patterns (541
-  lines, 4 examples)
+- `test-healing-patterns.md` - Common failure patterns: stale selectors, race conditions, dynamic data, network errors, hard waits (648 lines, 5 examples)
+- `selector-resilience.md` - Selector hierarchy (data-testid > ARIA > text > CSS), dynamic patterns, anti-patterns (541 lines, 4 examples)
 - `timing-debugging.md` - Race condition prevention, deterministic waiting, async debugging (370 lines, 3 examples)
 
 **Reference for Test Level Selection:**

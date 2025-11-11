@@ -1,7 +1,6 @@
 # Project Brainstorming Context
 
-This context guide provides project-specific considerations for brainstorming sessions focused on software and product
-development.
+This context guide provides project-specific considerations for brainstorming sessions focused on software and product development.
 
 ## Session Focus Areas
 

@@ -1,0 +1,70 @@
+<story-context id="{bmad_folder}/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>1</storyId>
+    <title>standards-registry-system</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-10</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>bmad-ephemeral/stories/3-1-standards-registry-system.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>developer</asA>
+    <iWant>a semantic rule naming system</iWant>
+    <soThat>I can reference standards using intuitive names instead of complex patterns</soThat>
+    <tasks>- Implement StandardsRegistry core data structures (AC: 1, 2)
+- Develop SemanticNamingService for name resolution (AC: 1, 2, 3)
+- Create StandardValidator for input validation (AC: 4, 5)
+- Implement performance optimization and caching (AC: 2, 3)
+- Create comprehensive test suite (AC: 1, 2, 3, 4, 5)</tasks>
+  </story>
+
+  <acceptance_criteria>1. Given the standards registry is initialized, When I add a new standard with semantic name "react-component-naming" and pattern "^[A-Z][a-zA-Z0-9]*$", Then the standard is stored with all required metadata (description, category, technology, severity, examples)
+2. Given a standard is stored in the registry, When I retrieve it by its semantic name, Then the response time is under 30ms and all metadata is returned
+3. Given multiple standards are stored, When I search by category or technology, Then relevant standards are returned with sub-30ms response times
+4. Given I add a standard with the same semantic name as an existing one, When the registry processes the request, Then it provides a clear error message about the conflict
+5. Given I add invalid metadata or patterns, When the registry processes the request, Then it validates inputs and provides specific error messages</acceptance_criteria>
+
+  <artifacts>
+    <docs>
+      <doc path="bmad-ephemeral/stories/tech-spec-epic-3.md" title="Epic 3 Technical Specification" section="Detailed Design" snippet="Implements semantic rule naming system with StandardsRegistry core component and StandardRule interface containing id, semanticName, displayName, description, category, technology, pattern, severity, tags, examples, relatedRules, aliases, deprecated flags, and metadata." />
+      <doc path="docs/epics.md" title="Epic Breakdown" section="Epic 3: Dynamic Standard Management" snippet="Story 3.1 focuses on semantic rule naming system allowing developers to reference standards using intuitive names instead of complex patterns, with prerequisites requiring Epic 1 completion for caching infrastructure." />
+      <doc path="docs/PRD.md" title="Product Requirements Document" section="Performance Requirements" snippet="Ultra-fast response times: search &lt; 30ms, standard resolution &lt; 50ms, validation &lt; 20ms. High concurrency support: 100+ concurrent users, 1000+ QPS throughput." />
+      <doc path="docs/architecture.md" title="System Architecture" section="Cache-First Architecture" snippet="All data access follows Memory → SQLite → File system pattern. Multi-layer caching with 90%+ hit rates. SQLite with WAL mode for optimal performance. Atomic operations with proper error handling." />
+      <doc path="docs/test-architecture.md" title="Testing Architecture" section="Testing Standards" snippet="Bun test runner with >95% line coverage requirement. Mutation testing with Stryker for comprehensive coverage validation. Performance tests validate sub-30ms targets under load." />
+    </docs>
+    <code>
+      <code path="src/mcp/handlers/toolHandlers.ts" kind="handler" symbol="GetStandardsHandler" lines="1-50" reason="Existing MCP tool handler pattern showing how to integrate with cache and standards loader" />
+      <code path="src/cache/cache-manager.ts" kind="service" symbol="CacheManager" lines="1-50" reason="Core cache infrastructure with TTL, LRU eviction, and statistics - to extend for registry caching" />
+      <code path="src/types/database.ts" kind="types" symbol="CacheSchema" lines="17-30" reason="Database schema patterns showing TTL, metadata fields for registry persistence" />
+      <code path="src/standards/standards-loader.ts" kind="service" symbol="StandardsLoader" reason="Existing standards loading infrastructure to leverage for semantic naming" />
+      <code path="src/utils/performance-monitor.ts" kind="utility" symbol="performanceMonitor" reason="Performance monitoring infrastructure for sub-30ms targets" />
+    </code>
+    <dependencies>
+      <dependency ecosystem="bun-runtime" packages="bun >= 1.3.0, typescript ^5.0.0" />
+      <dependency ecosystem="mcp" packages="@modelcontextprotocol/sdk 0.5.0" />
+      <dependency ecosystem="testing" packages="@faker-js/faker ^10.1.0, @stryker-mutator/core ^9.3.0" />
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint name="Cache-First Architecture" requirement="All registry operations must follow Memory → SQLite → File system pattern established in Epic 1" />
+    <constraint name="Performance Targets" requirement="Sub-30ms response times for standard retrieval, sub-50ms for addition/modification operations" />
+    <constraint name="Data Model Alignment" requirement="Use StandardRule interface from tech spec with all required metadata fields" />
+    <constraint name="Error Handling" requirement="Follow established error handling patterns from MCP server architecture with structured error responses" />
+    <constraint name="Testing Coverage" requirement="Unit tests with Bun test runner achieving >95% line coverage" />
+  </constraints>
+  <interfaces>
+    <interface name="addStandard" kind="MCP Tool" signature="tool: addStandard, arguments: {semanticName, pattern, description, category?, technology?, severity?, examples?}" path="src/mcp/handlers/toolHandlers.ts" />
+    <interface name="removeStandard" kind="MCP Tool" signature="tool: removeStandard, arguments: {semanticName, force?}" path="src/mcp/handlers/toolHandlers.ts" />
+    <interface name="searchStandards" kind="MCP Tool" signature="tool: searchStandards, arguments: {query, category?, technology?, fuzzy?, limit?}" path="src/mcp/handlers/toolHandlers.ts" />
+    <interface name="StandardsRegistry" kind="Class" signature="class StandardsRegistry { addRule(rule: StandardRule): Promise<void>; removeRule(semanticName: string): Promise<void>; getRule(semanticName: string): Promise<StandardRule | null>; searchRules(query: SearchQuery): Promise<StandardRule[]> }" path="src/standards/registry.ts" />
+    <interface name="StandardValidator" kind="Class" signature="class StandardValidator { validatePattern(pattern: string): ValidationResult; validateMetadata(metadata: RuleMetadata): ValidationResult; detectConflicts(rule: StandardRule): Conflict[] }" path="src/standards/validator.ts" />
+  </interfaces>
+  <tests>
+    <standards>Bun test runner with >95% line coverage requirement using mutation testing with Stryker for comprehensive validation. Performance tests must validate sub-30ms targets under load with 1000+ standards. Security testing required for input validation and ReDoS attack prevention.</standards>
+    <locations>tests/unit/standards/registry.test.ts, tests/unit/standards/semantic-naming.test.ts, tests/unit/standards/validator.test.ts, tests/integration/standards-system.test.ts, tests/performance/registry-performance.test.ts</locations>
+    <ideas>AC1: Test registry CRUD operations with metadata storage and retrieval. AC2: Performance tests for sub-30ms semantic name resolution. AC3: Search functionality tests with category and technology filtering. AC4: Conflict detection tests for duplicate semantic names. AC5: Input validation tests with invalid patterns and metadata error messages.</ideas>
+  </tests>
+</story-context>

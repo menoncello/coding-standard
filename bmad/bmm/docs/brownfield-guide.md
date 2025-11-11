@@ -28,8 +28,7 @@ Brownfield projects involve working within existing codebases rather than starti
 
 **Key Difference from Greenfield:** You must understand and respect existing patterns, architecture, and constraints.
 
-**Core Principle:** AI agents need comprehensive documentation to understand existing code before they can effectively
-plan or implement changes.
+**Core Principle:** AI agents need comprehensive documentation to understand existing code before they can effectively plan or implement changes.
 
 ---
 
@@ -42,7 +41,7 @@ For complete track details, see [Scale Adaptive System](./scale-adaptive-system.
 **Brownfield tracks at a glance:**
 
 | Track                 | Scope                      | Typical Stories | Key Difference                                  |
-|-----------------------|----------------------------|-----------------|-------------------------------------------------|
+| --------------------- | -------------------------- | --------------- | ----------------------------------------------- |
 | **Quick Flow**        | Bug fixes, small features  | 1-15            | Must understand affected code and patterns      |
 | **BMad Method**       | Feature sets, integrations | 10-50+          | Integrate with existing architecture            |
 | **Enterprise Method** | Enterprise expansions      | 30+             | Full system documentation + compliance required |
@@ -69,8 +68,7 @@ When you run `workflow-init`, it handles brownfield intelligently:
 
 **Step 3: Analyzes your description**
 
-- Keywords: "fix", "bug" → Quick Flow, "dashboard", "platform" → BMad Method, "enterprise", "multi-tenant" → Enterprise
-  Method
+- Keywords: "fix", "bug" → Quick Flow, "dashboard", "platform" → BMad Method, "enterprise", "multi-tenant" → Enterprise Method
 - Complexity assessment
 - Confirms suggested track with you
 
@@ -142,9 +140,9 @@ If you have documentation but files are huge (>500 lines, 10+ level 2 sections):
    bmad/core/tools/shard-doc.xml --input docs/massive-doc.md
    ```
 
-    - Splits on level 2 sections by default
-    - Creates organized, manageable files
-    - Preserves content integrity
+   - Splits on level 2 sections by default
+   - Creates organized, manageable files
+   - Preserves content integrity
 
 2. **Then:** Run `index-docs` task to create navigation:
 
@@ -157,7 +155,7 @@ If you have documentation but files are huge (>500 lines, 10+ level 2 sections):
 ### Four Real-World Scenarios
 
 | Scenario | You Have                                   | Action                     | Why                                     |
-|----------|--------------------------------------------|----------------------------|-----------------------------------------|
+| -------- | ------------------------------------------ | -------------------------- | --------------------------------------- |
 | **A**    | No documentation                           | `document-project`         | Only option - generate from scratch     |
 | **B**    | Docs exist but massive/outdated/incomplete | `document-project`         | Safer to regenerate than trust bad docs |
 | **C**    | Good docs but no structure                 | `shard-doc` → `index-docs` | Structure existing content for AI       |
@@ -170,9 +168,9 @@ If you have documentation but files are huge (>500 lines, 10+ level 2 sections):
 1. Load Analyst or Technical Writer (Paige) agent
 2. Run `*document-project`
 3. Choose scan level:
-    - **Quick** (2-5min): Pattern analysis, no source reading
-    - **Deep** (10-30min): Reads critical paths - **Recommended**
-    - **Exhaustive** (30-120min): Reads all files
+   - **Quick** (2-5min): Pattern analysis, no source reading
+   - **Deep** (10-30min): Reads critical paths - **Recommended**
+   - **Exhaustive** (30-120min): Reads all files
 
 **Outputs:**
 
@@ -260,8 +258,7 @@ Without AI-optimized documentation, workflows fail:
 
 **When in doubt, run document-project.**
 
-It's better to spend 10-30 minutes generating fresh, accurate docs than to waste hours debugging AI agents working from
-bad documentation.
+It's better to spend 10-30 minutes generating fresh, accurate docs than to waste hours debugging AI agents working from bad documentation.
 
 ---
 
@@ -433,10 +430,10 @@ Document in tech-spec/architecture:
 
 1. **Document:** Skip if auth system documented, else run `document-project` (Quick scan)
 2. **Plan:** Load PM → run `tech-spec`
-    - Analyzes bug
-    - Detects stack (Express, Jest)
-    - Confirms conventions
-    - Creates tech-spec.md + story
+   - Analyzes bug
+   - Detects stack (Express, Jest)
+   - Confirms conventions
+   - Creates tech-spec.md + story
 3. **Implement:** Load DEV → run `dev-story`
 4. **Review:** Load DEV → run `code-review`
 
@@ -454,10 +451,10 @@ Document in tech-spec/architecture:
 
 1. **Document:** Run `document-project` (Deep scan of auth module if not documented)
 2. **Plan:** Load PM → run `tech-spec`
-    - Detects Next.js 13.4, NextAuth.js
-    - Analyzes existing auth patterns
-    - Confirms conventions
-    - Creates tech-spec.md + epic + 3-5 stories
+   - Detects Next.js 13.4, NextAuth.js
+   - Analyzes existing auth patterns
+   - Confirms conventions
+   - Creates tech-spec.md + epic + 3-5 stories
 3. **Implement:** Load SM → `sprint-planning` → `create-story` → `story-context`
    Load DEV → `dev-story` for each story
 4. **Review:** Load DEV → `code-review`
@@ -479,9 +476,9 @@ Document in tech-spec/architecture:
 3. **Plan:** Load PM → `prd`
 4. **Solution:** Load Architect → `create-architecture` → `solutioning-gate-check`
 5. **Implement:** Sprint-based (10-15 stories)
-    - Load SM → `sprint-planning`
-    - Per epic: `epic-tech-context` → stories
-    - Load DEV → `dev-story` per story
+   - Load SM → `sprint-planning`
+   - Per epic: `epic-tech-context` → stories
+   - Load DEV → `dev-story` per story
 6. **Review:** Per story completion
 
 **Time:** 1-2 weeks
@@ -500,8 +497,8 @@ Document in tech-spec/architecture:
 2. **Analyze:** Load Analyst → `research` (WebSocket vs WebRTC vs CRDT)
 3. **Plan:** Load PM → `prd`
 4. **Solution:**
-    - Load Architect → `create-architecture` (extend for real-time layer)
-    - Load Architect → `solutioning-gate-check`
+   - Load Architect → `create-architecture` (extend for real-time layer)
+   - Load Architect → `solutioning-gate-check`
 5. **Implement:** Sprint-based (20-30 stories)
 
 **Time:** 3-6 weeks
@@ -518,16 +515,16 @@ Document in tech-spec/architecture:
 
 1. **Document:** Run `document-project` (Exhaustive) - **Mandatory**
 2. **Analyze:** **Required**
-    - `brainstorm-project` - Explore multi-tenancy approaches
-    - `research` - Database sharding, tenant isolation, pricing
-    - `product-brief` - Strategic document
+   - `brainstorm-project` - Explore multi-tenancy approaches
+   - `research` - Database sharding, tenant isolation, pricing
+   - `product-brief` - Strategic document
 3. **Plan:** Load PM → `prd` (comprehensive)
 4. **Solution:**
-    - `create-architecture` - Full system architecture
-    - `integration-planning` - Phased migration strategy
-    - `create-architecture` - Multi-tenancy architecture
-    - `validate-architecture` - External review
-    - `solutioning-gate-check` - Executive approval
+   - `create-architecture` - Full system architecture
+   - `integration-planning` - Phased migration strategy
+   - `create-architecture` - Multi-tenancy architecture
+   - `validate-architecture` - External review
+   - `solutioning-gate-check` - Executive approval
 5. **Implement:** Phased sprint-based (50+ stories)
 
 **Time:** 3-6 months
@@ -576,9 +573,9 @@ Document in tech-spec/architecture:
 1. Ensure `document-project` captured existing architecture
 2. Check `story-context` - should document integration points
 3. In tech-spec/architecture - explicitly document:
-    - Which existing modules to modify
-    - What APIs/services to integrate with
-    - Data flow between new and existing code
+   - Which existing modules to modify
+   - What APIs/services to integrate with
+   - Data flow between new and existing code
 4. Review architecture document for integration guidance
 
 ### Existing Tests Breaking

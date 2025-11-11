@@ -55,8 +55,7 @@
 
 **What changed:** AI agents collapse story duration from days to hours, making **epic-level ownership** practical.
 
-**Impact:** Single developer with BMad Method can deliver in 1 day what previously required full team and multiple
-sprints.
+**Impact:** Single developer with BMad Method can deliver in 1 day what previously required full team and multiple sprints.
 
 ---
 
@@ -64,9 +63,7 @@ sprints.
 
 ### The Future is Now
 
-Product Managers and UX Designers are undergoing **the most significant transformation since the creation of these
-disciplines**. The emergence of AI agents is creating a new breed of technical product leaders who translate vision
-directly into working code.
+Product Managers and UX Designers are undergoing **the most significant transformation since the creation of these disciplines**. The emergence of AI agents is creating a new breed of technical product leaders who translate vision directly into working code.
 
 ### From Spec Writers to Code Orchestrators
 
@@ -124,8 +121,7 @@ directly into working code.
 - **UX designers generating code** with UXPin Merge, Figma-to-code tools
 - **Developers becoming orchestrators** reviewing AI output vs writing from scratch
 
-**The Bottom Line:** By 2026, successful PMs/UX will fluently operate in both vision and execution. **BMad Method
-provides the structured framework to make this transition.**
+**The Bottom Line:** By 2026, successful PMs/UX will fluently operate in both vision and execution. **BMad Method provides the structured framework to make this transition.**
 
 ---
 
@@ -167,8 +163,7 @@ bmad pm *create-epics-and-stories
 - Priority assignments (P0-P3)
 - Dependency mapping
 
-**Why it matters:** Stories become **work packages for cloud AI agents**. Each story is self-contained with full
-context.
+**Why it matters:** Stories become **work packages for cloud AI agents**. Each story is self-contained with full context.
 
 **PM Value:** No more "story refinement sessions" with engineering. AI agents execute directly from BMad stories.
 
@@ -187,8 +182,7 @@ bmad architect *create-architecture
 - Epic-specific technical guidance
 - Integration patterns and standards
 
-**Why it matters:** PMs can **understand and validate** technical decisions. Architecture is conversational, not
-template-driven.
+**Why it matters:** PMs can **understand and validate** technical decisions. Architecture is conversational, not template-driven.
 
 **PM Value:** Technical fluency built through guided architecture process. PMs learn while creating.
 
@@ -250,11 +244,9 @@ bmad ux *create-design
 - Accessibility guidelines
 - Responsive design specifications
 
-**Why it matters:** Design specs become **implementation-ready** for AI agents. No "lost in translation" between design
-and dev.
+**Why it matters:** Design specs become **implementation-ready** for AI agents. No "lost in translation" between design and dev.
 
-**UX Value:** Designs validated through working prototypes, not static mocks. Technical understanding built through BMad
-workflows.
+**UX Value:** Designs validated through working prototypes, not static mocks. Technical understanding built through BMad workflows.
 
 ### 6. PM Technical Skills Development
 
@@ -669,8 +661,7 @@ Traditional estimate: 2-3 years
 
 ### The Future (2026)
 
-PMs write BMad PRDs → Stories auto-fed to cloud AI agents → Parallel implementation → Human review of PRs → Continuous
-deployment
+PMs write BMad PRDs → Stories auto-fed to cloud AI agents → Parallel implementation → Human review of PRs → Continuous deployment
 
 **The future isn't AI replacing PMs—it's AI-augmented PMs becoming 10× more powerful.**
 
@@ -686,5 +677,4 @@ deployment
 
 ---
 
-_BMad Method fundamentally changes how PMs work, how teams structure work, and how products get built. Understanding
-these patterns is essential for enterprise success in the age of AI agents._
+_BMad Method fundamentally changes how PMs work, how teams structure work, and how products get built. Understanding these patterns is essential for enterprise success in the age of AI agents._

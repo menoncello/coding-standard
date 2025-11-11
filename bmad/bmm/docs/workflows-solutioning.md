@@ -4,12 +4,9 @@
 
 ## Overview
 
-Phase 3 (Solutioning) workflows translate **what** to build (from Planning) into **how** to build it (technical design).
-This phase prevents agent conflicts in multi-epic projects by documenting architectural decisions before implementation
-begins.
+Phase 3 (Solutioning) workflows translate **what** to build (from Planning) into **how** to build it (technical design). This phase prevents agent conflicts in multi-epic projects by documenting architectural decisions before implementation begins.
 
-**Key principle:** Make technical decisions explicit and documented so all agents implement consistently. Prevent one
-agent choosing REST while another chooses GraphQL.
+**Key principle:** Make technical decisions explicit and documented so all agents implement consistently. Prevent one agent choosing REST while another chooses GraphQL.
 
 **Required for:** BMad Method (complex projects), Enterprise Method
 
@@ -84,7 +81,7 @@ graph TB
 ## Quick Reference
 
 | Workflow                   | Agent     | Track                    | Purpose                                     |
-|----------------------------|-----------|--------------------------|---------------------------------------------|
+| -------------------------- | --------- | ------------------------ | ------------------------------------------- |
 | **architecture**           | Architect | BMad Method, Enterprise  | Technical architecture and design decisions |
 | **solutioning-gate-check** | Architect | BMad Complex, Enterprise | Validate planning/solutioning completeness  |
 
@@ -95,8 +92,7 @@ graph TB
 **When Solutioning is Required:**
 
 - **BMad Method:** Multi-epic projects need architecture to prevent conflicts
-- **Enterprise:** Same as BMad Method, plus optional extended workflows (test architecture, security architecture,
-  devops strategy) added AFTER architecture but BEFORE gate check
+- **Enterprise:** Same as BMad Method, plus optional extended workflows (test architecture, security architecture, devops strategy) added AFTER architecture but BEFORE gate check
 
 ---
 
@@ -121,7 +117,7 @@ Result: Consistent implementation, no conflicts
 ### Solutioning vs Planning
 
 | Aspect   | Planning (Phase 2) | Solutioning (Phase 3)    |
-|----------|--------------------|--------------------------|
+| -------- | ------------------ | ------------------------ |
 | Question | What and Why?      | How?                     |
 | Output   | Requirements       | Technical Design         |
 | Agent    | PM                 | Architect                |
@@ -135,8 +131,7 @@ Result: Consistent implementation, no conflicts
 
 ### architecture
 
-**Purpose:** Make technical decisions explicit to prevent agent conflicts. Produces decision-focused architecture
-document optimized for AI consistency.
+**Purpose:** Make technical decisions explicit to prevent agent conflicts. Produces decision-focused architecture document optimized for AI consistency.
 
 **Agent:** Architect
 
@@ -214,8 +209,7 @@ This is NOT a template filler. The architecture workflow:
 - Epic 2: Mobile App → Optimized queries
 ```
 
-**Example:** E-commerce platform → Monolith + PostgreSQL + Redis + Next.js + GraphQL, with ADRs explaining each choice
-and epic-specific guidance.
+**Example:** E-commerce platform → Monolith + PostgreSQL + Redis + Next.js + GraphQL, with ADRs explaining each choice and epic-specific guidance.
 
 **Integration:** Feeds into Phase 4 (Implementation). All dev agents reference architecture during implementation.
 
@@ -223,8 +217,7 @@ and epic-specific guidance.
 
 ### solutioning-gate-check
 
-**Purpose:** Systematically validate that planning and solutioning are complete and aligned before Phase 4
-implementation. Ensures PRD, architecture, and stories are cohesive with no gaps.
+**Purpose:** Systematically validate that planning and solutioning are complete and aligned before Phase 4 implementation. Ensures PRD, architecture, and stories are cohesive with no gaps.
 
 **Agent:** Architect
 
@@ -327,8 +320,7 @@ implementation. Ensures PRD, architecture, and stories are cohesive with no gaps
 6. Gate Decision with rationale
 7. Next Steps
 
-**Example:** E-commerce platform → CONCERNS ⚠️ due to missing security architecture and undefined payment gateway.
-Recommendation: Complete security section and add payment gateway ADR before proceeding.
+**Example:** E-commerce platform → CONCERNS ⚠️ due to missing security architecture and undefined payment gateway. Recommendation: Complete security section and add payment gateway ADR before proceeding.
 
 ---
 
@@ -364,13 +356,9 @@ Planning (prd by PM - same as BMad Method)
   → Phase 4 (Implementation)
 ```
 
-**Note on TEA (Test Architect):** TEA is fully operational with 8 workflows across all phases. TEA validates
-architecture testability during Phase 3 reviews but does not have a dedicated solutioning workflow. TEA's primary setup
-occurs in Phase 2 (`*framework`, `*ci`, `*test-design`) and testing execution in Phase 4 (`*atdd`, `*automate`,
-`*test-review`, `*trace`, `*nfr-assess`).
+**Note on TEA (Test Architect):** TEA is fully operational with 8 workflows across all phases. TEA validates architecture testability during Phase 3 reviews but does not have a dedicated solutioning workflow. TEA's primary setup occurs in Phase 2 (`*framework`, `*ci`, `*test-design`) and testing execution in Phase 4 (`*atdd`, `*automate`, `*test-review`, `*trace`, `*nfr-assess`).
 
-**Note:** Enterprise uses the same planning and architecture as BMad Method. The only difference is optional extended
-workflows added AFTER architecture but BEFORE gate check.
+**Note:** Enterprise uses the same planning and architecture as BMad Method. The only difference is optional extended workflows added AFTER architecture but BEFORE gate check.
 
 ### Solutioning → Implementation Handoff
 
@@ -433,15 +421,12 @@ Architecture documents are living. Update them as you learn during implementatio
 ### Enterprise
 
 - **Planning:** prd (PM) - same as BMad Method
-- **Solutioning:** architecture (Architect) → Optional extended workflows (security-architecture, devops-strategy) →
-  solutioning-gate-check (Architect)
+- **Solutioning:** architecture (Architect) → Optional extended workflows (security-architecture, devops-strategy) → solutioning-gate-check (Architect)
 - **Implementation:** sprint-planning → epic-tech-context → dev-story
 
-**Key Difference:** Enterprise adds optional extended workflows AFTER architecture but BEFORE gate check. Everything
-else is identical to BMad Method.
+**Key Difference:** Enterprise adds optional extended workflows AFTER architecture but BEFORE gate check. Everything else is identical to BMad Method.
 
-**Note:** TEA (Test Architect) operates across all phases and validates architecture testability but is not a Phase
-3-specific workflow. See [Test Architecture Guide](./test-architecture.md) for TEA's full lifecycle integration.
+**Note:** TEA (Test Architect) operates across all phases and validates architecture testability but is not a Phase 3-specific workflow. See [Test Architecture Guide](./test-architecture.md) for TEA's full lifecycle integration.
 
 ---
 
@@ -491,12 +476,10 @@ else is identical to BMad Method.
 A: No. Quick Flow skips it. BMad Method and Enterprise both require it.
 
 **Q: How do I know if I need architecture?**
-A: If you chose BMad Method or Enterprise track in planning (workflow-init), you need architecture to prevent agent
-conflicts.
+A: If you chose BMad Method or Enterprise track in planning (workflow-init), you need architecture to prevent agent conflicts.
 
 **Q: What's the difference between architecture and tech-spec?**
-A: Tech-spec is implementation-focused for simple changes. Architecture is system design for complex multi-epic
-projects.
+A: Tech-spec is implementation-focused for simple changes. Architecture is system design for complex multi-epic projects.
 
 **Q: Can I skip gate check?**
 A: Only for Quick Flow. BMad Method and Enterprise both require gate check before Phase 4.
@@ -505,8 +488,7 @@ A: Only for Quick Flow. BMad Method and Enterprise both require gate check befor
 A: Resolve the identified gaps (missing architecture sections, conflicting requirements) and re-run gate check.
 
 **Q: How long should architecture take?**
-A: BMad Method: 1-2 days for architecture. Enterprise: 2-3 days total (1-2 days architecture + 0.5-1 day optional
-extended workflows). If taking longer, you may be over-documenting.
+A: BMad Method: 1-2 days for architecture. Enterprise: 2-3 days total (1-2 days architecture + 0.5-1 day optional extended workflows). If taking longer, you may be over-documenting.
 
 **Q: Do ADRs need to be perfect?**
 A: No. ADRs capture key decisions with rationale. They should be concise (1 page max per ADR).

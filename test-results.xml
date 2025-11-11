@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="412" assertions="1644" failures="0" skipped="8" time="5.659019">
+  <testsuite name="tests/unit/errorHandler.test.ts" file="tests/unit/errorHandler.test.ts" tests="5" assertions="24" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="McpErrorHandler" file="tests/unit/errorHandler.test.ts" line="4" tests="5" assertions="24" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should create error with code and message" classname="McpErrorHandler" time="0" file="tests/unit/errorHandler.test.ts" line="5" assertions="3" />
+      <testcase name="should create error with data" classname="McpErrorHandler" time="0.000159" file="tests/unit/errorHandler.test.ts" line="13" assertions="2" />
+      <testcase name="should create specific error types" classname="McpErrorHandler" time="0.000104" file="tests/unit/errorHandler.test.ts" line="21" assertions="10" />
+      <testcase name="should identify MCP errors" classname="McpErrorHandler" time="0.000047" file="tests/unit/errorHandler.test.ts" line="43" assertions="2" />
+      <testcase name="should handle different error types" classname="McpErrorHandler" time="0.000046" file="tests/unit/errorHandler.test.ts" line="51" assertions="7" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/errorHandler-coverage.test.ts" file="tests/unit/errorHandler-coverage.test.ts" tests="32" assertions="83" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Error Handler Coverage Tests" file="tests/unit/errorHandler-coverage.test.ts" line="5" tests="32" assertions="83" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Method Not Found Errors" file="tests/unit/errorHandler-coverage.test.ts" line="6" tests="4" assertions="10" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should create method not found errors with proper format" classname="Method Not Found Errors &amp;gt; Error Handler Coverage Tests" time="0.000019" file="tests/unit/errorHandler-coverage.test.ts" line="7" assertions="3" />
+        <testcase name="should handle empty method names" classname="Method Not Found Errors &amp;gt; Error Handler Coverage Tests" time="0" file="tests/unit/errorHandler-coverage.test.ts" line="16" assertions="2" />
+        <testcase name="should handle special characters in method names" classname="Method Not Found Errors &amp;gt; Error Handler Coverage Tests" time="0.000138" file="tests/unit/errorHandler-coverage.test.ts" line="22" assertions="3" />
+        <testcase name="should handle null/undefined method names" classname="Method Not Found Errors &amp;gt; Error Handler Coverage Tests" time="0.000026" file="tests/unit/errorHandler-coverage.test.ts" line="30" assertions="2" />
+      </testsuite>
+      <testsuite name="Invalid Request Errors" file="tests/unit/errorHandler-coverage.test.ts" line="36" tests="4" assertions="5" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should create invalid request errors with custom messages" classname="Invalid Request Errors &amp;gt; Error Handler Coverage Tests" time="0.000019" file="tests/unit/errorHandler-coverage.test.ts" line="37" assertions="2" />
+        <testcase name="should handle empty error messages" classname="Invalid Request Errors &amp;gt; Error Handler Coverage Tests" time="0.000005" file="tests/unit/errorHandler-coverage.test.ts" line="45" assertions="1" />
+        <testcase name="should handle long error messages" classname="Invalid Request Errors &amp;gt; Error Handler Coverage Tests" time="0.000048" file="tests/unit/errorHandler-coverage.test.ts" line="50" assertions="1" />
+        <testcase name="should handle special characters in error messages" classname="Invalid Request Errors &amp;gt; Error Handler Coverage Tests" time="0.000024" file="tests/unit/errorHandler-coverage.test.ts" line="56" assertions="1" />
+      </testsuite>
+      <testsuite name="Invalid Parameters Errors" file="tests/unit/errorHandler-coverage.test.ts" line="63" tests="3" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should create invalid parameter errors" classname="Invalid Parameters Errors &amp;gt; Error Handler Coverage Tests" time="0.000081" file="tests/unit/errorHandler-coverage.test.ts" line="64" assertions="2" />
+        <testcase name="should handle multiple parameter validation errors" classname="Invalid Parameters Errors &amp;gt; Error Handler Coverage Tests" time="0.000095" file="tests/unit/errorHandler-coverage.test.ts" line="72" assertions="3" />
+        <testcase name="should handle complex validation messages" classname="Invalid Parameters Errors &amp;gt; Error Handler Coverage Tests" time="0.000014" file="tests/unit/errorHandler-coverage.test.ts" line="81" assertions="1" />
+      </testsuite>
+      <testsuite name="Generic Error Handling" file="tests/unit/errorHandler-coverage.test.ts" line="88" tests="13" assertions="45" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should handle standard Error instances" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0" file="tests/unit/errorHandler-coverage.test.ts" line="89" assertions="2" />
+        <testcase name="should handle McpError instances" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000033" file="tests/unit/errorHandler-coverage.test.ts" line="97" assertions="3" />
+        <testcase name="should handle custom error types" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000192" file="tests/unit/errorHandler-coverage.test.ts" line="106" assertions="2" />
+        <testcase name="should handle null/undefined errors" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000032" file="tests/unit/errorHandler-coverage.test.ts" line="121" assertions="4" />
+        <testcase name="should handle non-Error objects" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000057" file="tests/unit/errorHandler-coverage.test.ts" line="131" assertions="12" />
+        <testcase name="should preserve error codes from McpError" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000143" file="tests/unit/errorHandler-coverage.test.ts" line="148" assertions="8" />
+        <testcase name="should handle errors with stack traces" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000091" file="tests/unit/errorHandler-coverage.test.ts" line="165" assertions="3" />
+        <testcase name="should handle errors without stack traces" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000048" file="tests/unit/errorHandler-coverage.test.ts" line="175" assertions="2" />
+        <testcase name="should handle errors with additional properties" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000025" file="tests/unit/errorHandler-coverage.test.ts" line="184" assertions="2" />
+        <testcase name="should handle circular reference errors" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000109" file="tests/unit/errorHandler-coverage.test.ts" line="194" assertions="1" />
+        <testcase name="should handle very long error messages" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000157" file="tests/unit/errorHandler-coverage.test.ts" line="202" assertions="2" />
+        <testcase name="should handle Unicode error messages" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000005" file="tests/unit/errorHandler-coverage.test.ts" line="211" assertions="2" />
+        <testcase name="should handle JSON in error messages" classname="Generic Error Handling &amp;gt; Error Handler Coverage Tests" time="0.000231" file="tests/unit/errorHandler-coverage.test.ts" line="220" assertions="2" />
+      </testsuite>
+      <testsuite name="Error Message Sanitization" file="tests/unit/errorHandler-coverage.test.ts" line="230" tests="3" assertions="10" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should not expose sensitive information in error messages" classname="Error Message Sanitization &amp;gt; Error Handler Coverage Tests" time="0.000273" file="tests/unit/errorHandler-coverage.test.ts" line="231" assertions="4" />
+        <testcase name="should handle HTML in error messages" classname="Error Message Sanitization &amp;gt; Error Handler Coverage Tests" time="0.000023" file="tests/unit/errorHandler-coverage.test.ts" line="246" assertions="2" />
+        <testcase name="should handle newline characters in error messages" classname="Error Message Sanitization &amp;gt; Error Handler Coverage Tests" time="0.000147" file="tests/unit/errorHandler-coverage.test.ts" line="254" assertions="4" />
+      </testsuite>
+      <testsuite name="Performance Considerations" file="tests/unit/errorHandler-coverage.test.ts" line="265" tests="2" assertions="3" failures="0" skipped="0" time="0.002" hostname="pro2">
+        <testcase name="should handle errors efficiently" classname="Performance Considerations &amp;gt; Error Handler Coverage Tests" time="0.001784" file="tests/unit/errorHandler-coverage.test.ts" line="266" assertions="1" />
+        <testcase name="should handle large error objects efficiently" classname="Performance Considerations &amp;gt; Error Handler Coverage Tests" time="0.001164" file="tests/unit/errorHandler-coverage.test.ts" line="282" assertions="2" />
+      </testsuite>
+      <testsuite name="Edge Cases" file="tests/unit/errorHandler-coverage.test.ts" line="298" tests="3" assertions="4" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should handle empty error objects" classname="Edge Cases &amp;gt; Error Handler Coverage Tests" time="0.000076" file="tests/unit/errorHandler-coverage.test.ts" line="299" assertions="2" />
+        <testcase name="should handle error objects with only properties" classname="Edge Cases &amp;gt; Error Handler Coverage Tests" time="0.000052" file="tests/unit/errorHandler-coverage.test.ts" line="307" assertions="1" />
+        <testcase name="should handle errors with nested objects" classname="Edge Cases &amp;gt; Error Handler Coverage Tests" time="0.000035" file="tests/unit/errorHandler-coverage.test.ts" line="316" assertions="1" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/server.test.ts" file="tests/unit/server.test.ts" tests="24" assertions="38" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="CodingStandardsServer" file="tests/unit/server.test.ts" line="11" tests="3" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should initialize server with correct configuration" classname="CodingStandardsServer" time="0.000278" file="tests/unit/server.test.ts" line="22" assertions="1" />
+      <testcase name="should have tools capability" classname="CodingStandardsServer" time="0.000085" file="tests/unit/server.test.ts" line="26" assertions="1" />
+      <testcase name="should handle server startup metrics" classname="CodingStandardsServer" time="0.000034" file="tests/unit/server.test.ts" line="30" assertions="1" />
+    </testsuite>
+    <testsuite name="Server Request Handlers" file="tests/unit/server.test.ts" line="41" tests="5" assertions="9" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should handle ListToolsRequest correctly" classname="Server Request Handlers" time="0" file="tests/unit/server.test.ts" line="42" assertions="2" />
+      <testcase name="should handle getStandards tool calls" classname="Server Request Handlers" time="0" file="tests/unit/server.test.ts" line="54" assertions="2" />
+      <testcase name="should handle searchStandards tool calls" classname="Server Request Handlers" time="0" file="tests/unit/server.test.ts" line="66" assertions="2" />
+      <testcase name="should handle validateCode tool calls" classname="Server Request Handlers" time="0.000084" file="tests/unit/server.test.ts" line="78" assertions="2" />
+      <testcase name="should handle unknown tool names" classname="Server Request Handlers" time="0" file="tests/unit/server.test.ts" line="90" assertions="1" />
+    </testsuite>
+    <testsuite name="Server Error Handling" file="tests/unit/server.test.ts" line="95" tests="4" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should handle tool execution errors" classname="Server Error Handling" time="0.000088" file="tests/unit/server.test.ts" line="96" assertions="1" />
+      <testcase name="should wrap errors in McpError" classname="Server Error Handling" time="0.000021" file="tests/unit/server.test.ts" line="101" assertions="2" />
+      <testcase name="should validate requests properly" classname="Server Error Handling" time="0" file="tests/unit/server.test.ts" line="113" assertions="2" />
+      <testcase name="should handle invalid requests" classname="Server Error Handling" time="0.000028" file="tests/unit/server.test.ts" line="119" assertions="1" />
+    </testsuite>
+    <testsuite name="Server Performance" file="tests/unit/server.test.ts" line="124" tests="3" assertions="5" failures="0" skipped="0" time="0.012" hostname="pro2">
+      <testcase name="should maintain memory usage under target" classname="Server Performance" time="0.000143" file="tests/unit/server.test.ts" line="125" assertions="1" />
+      <testcase name="should execute operations with performance metrics" classname="Server Performance" time="0.011261" file="tests/unit/server.test.ts" line="138" assertions="2" />
+      <testcase name="should track response times correctly" classname="Server Performance" time="0.001314" file="tests/unit/server.test.ts" line="155" assertions="2" />
+    </testsuite>
+    <testsuite name="Server Response Format" file="tests/unit/server.test.ts" line="166" tests="4" assertions="9" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should format getStandards responses correctly" classname="Server Response Format" time="0.000241" file="tests/unit/server.test.ts" line="167" assertions="3" />
+      <testcase name="should format searchStandards responses correctly" classname="Server Response Format" time="0.000049" file="tests/unit/server.test.ts" line="192" assertions="1" />
+      <testcase name="should format validateCode responses correctly" classname="Server Response Format" time="0.00003" file="tests/unit/server.test.ts" line="214" assertions="2" />
+      <testcase name="should include server metrics in responses" classname="Server Response Format" time="0.000034" file="tests/unit/server.test.ts" line="238" assertions="3" />
+    </testsuite>
+    <testsuite name="Server Lifecycle" file="tests/unit/server.test.ts" line="251" tests="3" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should handle server startup" classname="Server Lifecycle" time="0.000055" file="tests/unit/server.test.ts" line="252" assertions="1" />
+      <testcase name="should handle transport connection" classname="Server Lifecycle" time="0.000077" file="tests/unit/server.test.ts" line="256" assertions="1" />
+      <testcase name="should handle startup errors gracefully" classname="Server Lifecycle" time="0.000025" file="tests/unit/server.test.ts" line="261" assertions="1" />
+    </testsuite>
+    <testsuite name="Concurrent Request Handling" file="tests/unit/server.test.ts" line="266" tests="2" assertions="3" failures="0" skipped="0" time="0.002" hostname="pro2">
+      <testcase name="should handle multiple simultaneous operations" classname="Concurrent Request Handling" time="0.001306" file="tests/unit/server.test.ts" line="267" assertions="2" />
+      <testcase name="should maintain performance under load" classname="Concurrent Request Handling" time="0.001232" file="tests/unit/server.test.ts" line="277" assertions="1" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/toolHandlers.test.ts" file="tests/unit/toolHandlers.test.ts" tests="15" assertions="35" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="GetStandardsHandler" file="tests/unit/toolHandlers.test.ts" line="5" tests="15" assertions="35" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="getStandards" file="tests/unit/toolHandlers.test.ts" line="6" tests="5" assertions="17" failures="0" skipped="0" time="0.001" hostname="pro2">
+        <testcase name="should return all standards when no filters provided" classname="getStandards &amp;gt; GetStandardsHandler" time="0.001663" file="tests/unit/toolHandlers.test.ts" line="7" assertions="5" />
+        <testcase name="should filter by technology" classname="getStandards &amp;gt; GetStandardsHandler" time="0.000146" file="tests/unit/toolHandlers.test.ts" line="20" assertions="4" />
+        <testcase name="should filter by category" classname="getStandards &amp;gt; GetStandardsHandler" time="0.000002" file="tests/unit/toolHandlers.test.ts" line="34" assertions="3" />
+        <testcase name="should filter by both technology and category" classname="getStandards &amp;gt; GetStandardsHandler" time="0.000121" file="tests/unit/toolHandlers.test.ts" line="44" assertions="4" />
+        <testcase name="should validate request parameters" classname="getStandards &amp;gt; GetStandardsHandler" time="0" file="tests/unit/toolHandlers.test.ts" line="56" assertions="1" />
+      </testsuite>
+      <testsuite name="searchStandards" file="tests/unit/toolHandlers.test.ts" line="64" tests="5" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should search standards by query" classname="searchStandards &amp;gt; GetStandardsHandler" time="0.000427" file="tests/unit/toolHandlers.test.ts" line="65" assertions="2" />
+        <testcase name="should filter by technology" classname="searchStandards &amp;gt; GetStandardsHandler" time="0.000062" file="tests/unit/toolHandlers.test.ts" line="79" assertions="2" />
+        <testcase name="should limit results" classname="searchStandards &amp;gt; GetStandardsHandler" time="0.000047" file="tests/unit/toolHandlers.test.ts" line="91" assertions="1" />
+        <testcase name="should validate required parameters" classname="searchStandards &amp;gt; GetStandardsHandler" time="0.000055" file="tests/unit/toolHandlers.test.ts" line="100" assertions="1" />
+        <testcase name="should validate optional parameters" classname="searchStandards &amp;gt; GetStandardsHandler" time="0.000123" file="tests/unit/toolHandlers.test.ts" line="107" assertions="1" />
+      </testsuite>
+      <testsuite name="validateCode" file="tests/unit/toolHandlers.test.ts" line="119" tests="5" assertions="11" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should validate correct code" classname="validateCode &amp;gt; GetStandardsHandler" time="0.000772" file="tests/unit/toolHandlers.test.ts" line="120" assertions="3" />
+        <testcase name="should validate TypeScript code" classname="validateCode &amp;gt; GetStandardsHandler" time="0.00016" file="tests/unit/toolHandlers.test.ts" line="132" assertions="3" />
+        <testcase name="should validate required parameters" classname="validateCode &amp;gt; GetStandardsHandler" time="0.000068" file="tests/unit/toolHandlers.test.ts" line="151" assertions="1" />
+        <testcase name="should validate optional parameters" classname="validateCode &amp;gt; GetStandardsHandler" time="0.000126" file="tests/unit/toolHandlers.test.ts" line="161" assertions="1" />
+        <testcase name="should handle different languages" classname="validateCode &amp;gt; GetStandardsHandler" time="0.000055" file="tests/unit/toolHandlers.test.ts" line="173" assertions="3" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/security/mcp-security.test.ts" file="tests/security/mcp-security.test.ts" tests="16" assertions="107" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="MCP Security Tests" file="tests/security/mcp-security.test.ts" line="6" tests="16" assertions="107" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Input Validation Security" file="tests/security/mcp-security.test.ts" line="7" tests="3" assertions="55" failures="0" skipped="0" time="0.007" hostname="pro2">
+        <testcase name="should sanitize input parameters against injection attempts" classname="Input Validation Security &amp;gt; MCP Security Tests" time="0.001752" file="tests/security/mcp-security.test.ts" line="8" assertions="50" />
+        <testcase name="should handle oversized input parameters" classname="Input Validation Security &amp;gt; MCP Security Tests" time="0.006648" file="tests/security/mcp-security.test.ts" line="50" assertions="0" />
+        <testcase name="should validate parameter types strictly" classname="Input Validation Security &amp;gt; MCP Security Tests" time="0.000362" file="tests/security/mcp-security.test.ts" line="77" assertions="5" />
+      </testsuite>
+      <testsuite name="Error Handling Security" file="tests/security/mcp-security.test.ts" line="108" tests="3" assertions="17" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should not leak sensitive information in error messages" classname="Error Handling Security &amp;gt; MCP Security Tests" time="0.00004" file="tests/security/mcp-security.test.ts" line="109" assertions="4" />
+        <testcase name="should sanitize file paths in error messages" classname="Error Handling Security &amp;gt; MCP Security Tests" time="0.000004" file="tests/security/mcp-security.test.ts" line="134" assertions="4" />
+        <testcase name="should handle malformed requests without crashing" classname="Error Handling Security &amp;gt; MCP Security Tests" time="0" file="tests/security/mcp-security.test.ts" line="157" assertions="9" />
+      </testsuite>
+      <testsuite name="Response Security" file="tests/security/mcp-security.test.ts" line="182" tests="2" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should not expose internal server information" classname="Response Security &amp;gt; MCP Security Tests" time="0.000114" file="tests/security/mcp-security.test.ts" line="183" assertions="5" />
+        <testcase name="should sanitize response data" classname="Response Security &amp;gt; MCP Security Tests" time="0.000055" file="tests/security/mcp-security.test.ts" line="197" assertions="3" />
+      </testsuite>
+      <testsuite name="Protocol Security" file="tests/security/mcp-security.test.ts" line="208" tests="3" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should validate MCP protocol compliance" classname="Protocol Security &amp;gt; MCP Security Tests" time="0.000026" file="tests/security/mcp-security.test.ts" line="209" assertions="4" />
+        <testcase name="should handle protocol violations gracefully" classname="Protocol Security &amp;gt; MCP Security Tests" time="0.000019" file="tests/security/mcp-security.test.ts" line="220" assertions="3" />
+        <testcase name="should enforce request size limits" classname="Protocol Security &amp;gt; MCP Security Tests" time="0.000168" file="tests/security/mcp-security.test.ts" line="237" assertions="1" />
+      </testsuite>
+      <testsuite name="Access Control" file="tests/security/mcp-security.test.ts" line="251" tests="3" assertions="17" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should validate tool access permissions" classname="Access Control &amp;gt; MCP Security Tests" time="0.000026" file="tests/security/mcp-security.test.ts" line="252" assertions="10" />
+        <testcase name="should limit operation scope" classname="Access Control &amp;gt; MCP Security Tests" time="0.000088" file="tests/security/mcp-security.test.ts" line="268" assertions="1" />
+        <testcase name="should prevent privilege escalation" classname="Access Control &amp;gt; MCP Security Tests" time="0.000098" file="tests/security/mcp-security.test.ts" line="278" assertions="6" />
+      </testsuite>
+      <testsuite name="Resource Limit Security" file="tests/security/mcp-security.test.ts" line="300" tests="2" assertions="2" failures="0" skipped="0" time="0.007" hostname="pro2">
+        <testcase name="should prevent resource exhaustion attacks" classname="Resource Limit Security &amp;gt; MCP Security Tests" time="0.000195" file="tests/security/mcp-security.test.ts" line="301" assertions="1" />
+        <testcase name="should handle memory pressure gracefully" classname="Resource Limit Security &amp;gt; MCP Security Tests" time="0.007212" file="tests/security/mcp-security.test.ts" line="325" assertions="1" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/performance-monitor.test.ts" file="tests/integration/performance-monitor.test.ts" tests="27" assertions="101" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="PerformanceMonitor Integration Tests" file="tests/integration/performance-monitor.test.ts" line="11" tests="18" assertions="71" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="timer operations" file="tests/integration/performance-monitor.test.ts" line="25" tests="3" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should start and end timers correctly" classname="timer operations &amp;gt; PerformanceMonitor Integration Tests" time="0.000066" file="tests/integration/performance-monitor.test.ts" line="26" assertions="4" />
+        <testcase name="should handle ending non-existent timers gracefully" classname="timer operations &amp;gt; PerformanceMonitor Integration Tests" time="0.00005" file="tests/integration/performance-monitor.test.ts" line="40" assertions="1" />
+        <testcase name="should track success and failure states" classname="timer operations &amp;gt; PerformanceMonitor Integration Tests" time="0.000185" file="tests/integration/performance-monitor.test.ts" line="45" assertions="2" />
+      </testsuite>
+      <testsuite name="direct metric recording" file="tests/integration/performance-monitor.test.ts" line="58" tests="2" assertions="4" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should record metrics directly" classname="direct metric recording &amp;gt; PerformanceMonitor Integration Tests" time="0.000049" file="tests/integration/performance-monitor.test.ts" line="59" assertions="3" />
+        <testcase name="should limit stored metrics to max size" classname="direct metric recording &amp;gt; PerformanceMonitor Integration Tests" time="0.000043" file="tests/integration/performance-monitor.test.ts" line="80" assertions="1" />
+      </testsuite>
+      <testsuite name="statistics calculation" file="tests/integration/performance-monitor.test.ts" line="105" tests="4" assertions="19" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should calculate basic statistics correctly" classname="statistics calculation &amp;gt; PerformanceMonitor Integration Tests" time="0.000043" file="tests/integration/performance-monitor.test.ts" line="148" assertions="7" />
+        <testcase name="should calculate memory statistics correctly" classname="statistics calculation &amp;gt; PerformanceMonitor Integration Tests" time="0.000019" file="tests/integration/performance-monitor.test.ts" line="160" assertions="2" />
+        <testcase name="should calculate requests per second for recent metrics" classname="statistics calculation &amp;gt; PerformanceMonitor Integration Tests" time="0.000014" file="tests/integration/performance-monitor.test.ts" line="167" assertions="1" />
+        <testcase name="should handle empty metrics correctly" classname="statistics calculation &amp;gt; PerformanceMonitor Integration Tests" time="0.000025" file="tests/integration/performance-monitor.test.ts" line="172" assertions="9" />
+      </testsuite>
+      <testsuite name="operation metrics" file="tests/integration/performance-monitor.test.ts" line="188" tests="2" assertions="13" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should group metrics by operation" classname="operation metrics &amp;gt; PerformanceMonitor Integration Tests" time="0.000159" file="tests/integration/performance-monitor.test.ts" line="219" assertions="11" />
+        <testcase name="should sort operations by last executed time" classname="operation metrics &amp;gt; PerformanceMonitor Integration Tests" time="0.000038" file="tests/integration/performance-monitor.test.ts" line="241" assertions="2" />
+      </testsuite>
+      <testsuite name="recent metrics" file="tests/integration/performance-monitor.test.ts" line="250" tests="2" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should return recent metrics" classname="recent metrics &amp;gt; PerformanceMonitor Integration Tests" time="0.000049" file="tests/integration/performance-monitor.test.ts" line="251" assertions="6" />
+        <testcase name="should handle count larger than available metrics" classname="recent metrics &amp;gt; PerformanceMonitor Integration Tests" time="0.000012" file="tests/integration/performance-monitor.test.ts" line="272" assertions="1" />
+      </testsuite>
+      <testsuite name="time range filtering" file="tests/integration/performance-monitor.test.ts" line="286" tests="1" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should filter metrics by time range" classname="time range filtering &amp;gt; PerformanceMonitor Integration Tests" time="0.000034" file="tests/integration/performance-monitor.test.ts" line="287" assertions="2" />
+      </testsuite>
+      <testsuite name="performance targets" file="tests/integration/performance-monitor.test.ts" line="314" tests="2" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should check performance targets correctly" classname="performance targets &amp;gt; PerformanceMonitor Integration Tests" time="0.000055" file="tests/integration/performance-monitor.test.ts" line="315" assertions="5" />
+        <testcase name="should detect when targets are not met" classname="performance targets &amp;gt; PerformanceMonitor Integration Tests" time="0.000012" file="tests/integration/performance-monitor.test.ts" line="334" assertions="3" />
+      </testsuite>
+      <testsuite name="report generation" file="tests/integration/performance-monitor.test.ts" line="352" tests="1" assertions="5" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should generate performance report" classname="report generation &amp;gt; PerformanceMonitor Integration Tests" time="0.000084" file="tests/integration/performance-monitor.test.ts" line="353" assertions="5" />
+      </testsuite>
+      <testsuite name="data export" file="tests/integration/performance-monitor.test.ts" line="372" tests="1" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should export data correctly" classname="data export &amp;gt; PerformanceMonitor Integration Tests" time="0.000018" file="tests/integration/performance-monitor.test.ts" line="373" assertions="6" />
+      </testsuite>
+    </testsuite>
+    <testsuite name="measurePerformance decorator" file="tests/integration/performance-monitor.test.ts" line="396" tests="2" assertions="8" failures="0" skipped="0" time="0.051" hostname="pro2">
+      <testcase name="should measure function performance automatically" classname="measurePerformance decorator" time="0.051948" file="tests/integration/performance-monitor.test.ts" line="405" assertions="4" />
+      <testcase name="should handle function failures correctly" classname="measurePerformance decorator" time="0.000294" file="tests/integration/performance-monitor.test.ts" line="425" assertions="4" />
+    </testsuite>
+    <testsuite name="measureAsyncFunction helper" file="tests/integration/performance-monitor.test.ts" line="449" tests="2" assertions="7" failures="0" skipped="0" time="0.051" hostname="pro2">
+      <testcase name="should measure async function performance" classname="measureAsyncFunction helper" time="0.05189" file="tests/integration/performance-monitor.test.ts" line="458" assertions="4" />
+      <testcase name="should handle async function failures" classname="measureAsyncFunction helper" time="0.000297" file="tests/integration/performance-monitor.test.ts" line="474" assertions="3" />
+    </testsuite>
+    <testsuite name="MemoryMonitor Integration Tests" file="tests/integration/performance-monitor.test.ts" line="492" tests="5" assertions="15" failures="0" skipped="0" time="0.975" hostname="pro2">
+      <testcase name="should track memory usage over time" classname="MemoryMonitor Integration Tests" time="0.251422" file="tests/integration/performance-monitor.test.ts" line="504" assertions="4" />
+      <testcase name="should detect memory trends" classname="MemoryMonitor Integration Tests" time="0.201371" file="tests/integration/performance-monitor.test.ts" line="519" assertions="1" />
+      <testcase name="should handle no samples gracefully" classname="MemoryMonitor Integration Tests" time="0.000135" file="tests/integration/performance-monitor.test.ts" line="530" assertions="5" />
+      <testcase name="should clear samples correctly" classname="MemoryMonitor Integration Tests" time="0.151146" file="tests/integration/performance-monitor.test.ts" line="540" assertions="2" />
+      <testcase name="should restart monitoring correctly" classname="MemoryMonitor Integration Tests" time="0.372714" file="tests/integration/performance-monitor.test.ts" line="551" assertions="3" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/tool-handlers.test.ts" file="tests/integration/tool-handlers.test.ts" tests="35" assertions="112" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Tool Handlers Integration Tests" file="tests/integration/tool-handlers.test.ts" line="8" tests="35" assertions="112" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="getStandards" file="tests/integration/tool-handlers.test.ts" line="24" tests="9" assertions="28" failures="0" skipped="0" time="0.004" hostname="pro2">
+        <testcase name="should load standards from real file system" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.00405" file="tests/integration/tool-handlers.test.ts" line="25" assertions="12" />
+        <testcase name="should filter by technology" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000608" file="tests/integration/tool-handlers.test.ts" line="49" assertions="2" />
+        <testcase name="should filter by category" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000466" file="tests/integration/tool-handlers.test.ts" line="63" assertions="1" />
+        <testcase name="should filter by both technology and category" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000617" file="tests/integration/tool-handlers.test.ts" line="77" assertions="2" />
+        <testcase name="should use cache when enabled" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000423" file="tests/integration/tool-handlers.test.ts" line="93" assertions="3" />
+        <testcase name="should bypass cache when disabled" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000292" file="tests/integration/tool-handlers.test.ts" line="109" assertions="1" />
+        <testcase name="should record performance metrics" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000266" file="tests/integration/tool-handlers.test.ts" line="120" assertions="3" />
+        <testcase name="should handle empty results gracefully" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.0002" file="tests/integration/tool-handlers.test.ts" line="131" assertions="3" />
+        <testcase name="should validate request parameters" classname="getStandards &amp;gt; Tool Handlers Integration Tests" time="0.000062" file="tests/integration/tool-handlers.test.ts" line="143" assertions="1" />
+      </testsuite>
+      <testsuite name="searchStandards" file="tests/integration/tool-handlers.test.ts" line="154" tests="9" assertions="20" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should search across all standards" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000231" file="tests/integration/tool-handlers.test.ts" line="155" assertions="6" />
+        <testcase name="should limit search results" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000427" file="tests/integration/tool-handlers.test.ts" line="180" assertions="2" />
+        <testcase name="should filter search by technology" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000291" file="tests/integration/tool-handlers.test.ts" line="192" assertions="1" />
+        <testcase name="should perform fuzzy search by default" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000261" file="tests/integration/tool-handlers.test.ts" line="207" assertions="1" />
+        <testcase name="should perform exact search when fuzzy is disabled" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000556" file="tests/integration/tool-handlers.test.ts" line="218" assertions="1" />
+        <testcase name="should use cache for search results" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000388" file="tests/integration/tool-handlers.test.ts" line="237" assertions="2" />
+        <testcase name="should record performance metrics for search" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000215" file="tests/integration/tool-handlers.test.ts" line="252" assertions="3" />
+        <testcase name="should validate search request parameters" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0" file="tests/integration/tool-handlers.test.ts" line="268" assertions="1" />
+        <testcase name="should handle search with no results" classname="searchStandards &amp;gt; Tool Handlers Integration Tests" time="0.000409" file="tests/integration/tool-handlers.test.ts" line="279" assertions="3" />
+      </testsuite>
+      <testsuite name="validateCode" file="tests/integration/tool-handlers.test.ts" line="292" tests="13" assertions="56" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should validate TypeScript code" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000823" file="tests/integration/tool-handlers.test.ts" line="293" assertions="6" />
+        <testcase name="should validate JavaScript code" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000249" file="tests/integration/tool-handlers.test.ts" line="309" assertions="4" />
+        <testcase name="should detect missing semicolons" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000282" file="tests/integration/tool-handlers.test.ts" line="323" assertions="2" />
+        <testcase name="should detect formatting violations according to real Biome configuration" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000333" file="tests/integration/tool-handlers.test.ts" line="339" assertions="2" />
+        <testcase name="should respect useStrict flag" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000358" file="tests/integration/tool-handlers.test.ts" line="355" assertions="1" />
+        <testcase name="should filter by specific rules" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000288" file="tests/integration/tool-handlers.test.ts" line="367" assertions="2" />
+        <testcase name="should use cache for validation results" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000266" file="tests/integration/tool-handlers.test.ts" line="380" assertions="3" />
+        <testcase name="should record performance metrics for validation" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000304" file="tests/integration/tool-handlers.test.ts" line="397" assertions="3" />
+        <testcase name="should validate code with violations correctly" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000269" file="tests/integration/tool-handlers.test.ts" line="414" assertions="21" />
+        <testcase name="should handle valid code correctly" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000394" file="tests/integration/tool-handlers.test.ts" line="440" assertions="2" />
+        <testcase name="should validate code with mixed violations" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000326" file="tests/integration/tool-handlers.test.ts" line="452" assertions="2" />
+        <testcase name="should validate request parameters" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.00012" file="tests/integration/tool-handlers.test.ts" line="467" assertions="5" />
+        <testcase name="should handle empty code gracefully" classname="validateCode &amp;gt; Tool Handlers Integration Tests" time="0.000277" file="tests/integration/tool-handlers.test.ts" line="481" assertions="3" />
+      </testsuite>
+      <testsuite name="caching integration" file="tests/integration/tool-handlers.test.ts" line="495" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should work with cache for all operations" classname="caching integration &amp;gt; Tool Handlers Integration Tests" time="0.000396" file="tests/integration/tool-handlers.test.ts" line="496" assertions="3" />
+        <testcase name="should record cache hit metrics" classname="caching integration &amp;gt; Tool Handlers Integration Tests" time="0.000316" file="tests/integration/tool-handlers.test.ts" line="516" assertions="3" />
+      </testsuite>
+      <testsuite name="error handling" file="tests/integration/tool-handlers.test.ts" line="536" tests="2" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should handle standards loading errors gracefully" classname="error handling &amp;gt; Tool Handlers Integration Tests" time="0.000173" file="tests/integration/tool-handlers.test.ts" line="537" assertions="1" />
+        <testcase name="should record error metrics" classname="error handling &amp;gt; Tool Handlers Integration Tests" time="0.000046" file="tests/integration/tool-handlers.test.ts" line="554" assertions="1" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/mcp-protocol.test.ts" file="tests/integration/mcp-protocol.test.ts" tests="6" assertions="25" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="MCP Protocol Integration Tests" file="tests/integration/mcp-protocol.test.ts" line="7" tests="6" assertions="25" failures="0" skipped="0" time="0.007" hostname="pro2">
+      <testcase name="should list available tools" classname="MCP Protocol Integration Tests" time="0.001536" file="tests/integration/mcp-protocol.test.ts" line="51" assertions="4" />
+      <testcase name="should handle getStandards tool call" classname="MCP Protocol Integration Tests" time="0.003714" file="tests/integration/mcp-protocol.test.ts" line="67" assertions="6" />
+      <testcase name="should handle searchStandards tool call" classname="MCP Protocol Integration Tests" time="0.000964" file="tests/integration/mcp-protocol.test.ts" line="86" assertions="5" />
+      <testcase name="should handle validateCode tool call" classname="MCP Protocol Integration Tests" time="0.001305" file="tests/integration/mcp-protocol.test.ts" line="104" assertions="6" />
+      <testcase name="should handle tool call errors gracefully" classname="MCP Protocol Integration Tests" time="0.00219" file="tests/integration/mcp-protocol.test.ts" line="131" assertions="3" />
+      <testcase name="should handle unknown tool name" classname="MCP Protocol Integration Tests" time="0.000392" file="tests/integration/mcp-protocol.test.ts" line="161" assertions="1" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/cache-manager.test.ts" file="tests/integration/cache-manager.test.ts" tests="35" assertions="84" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="CacheManager Integration Tests" file="tests/integration/cache-manager.test.ts" line="5" tests="19" assertions="47" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="basic operations" file="tests/integration/cache-manager.test.ts" line="16" tests="4" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should store and retrieve values" classname="basic operations &amp;gt; CacheManager Integration Tests" time="0.000018" file="tests/integration/cache-manager.test.ts" line="17" assertions="1" />
+        <testcase name="should return null for non-existent keys" classname="basic operations &amp;gt; CacheManager Integration Tests" time="0.00001" file="tests/integration/cache-manager.test.ts" line="22" assertions="1" />
+        <testcase name="should delete values" classname="basic operations &amp;gt; CacheManager Integration Tests" time="0.000018" file="tests/integration/cache-manager.test.ts" line="26" assertions="3" />
+        <testcase name="should return false when deleting non-existent keys" classname="basic operations &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="34" assertions="1" />
+      </testsuite>
+      <testsuite name="TTL (Time To Live)" file="tests/integration/cache-manager.test.ts" line="39" tests="3" assertions="6" failures="0" skipped="0" time="0.173" hostname="pro2">
+        <testcase name="should expire values after TTL" classname="TTL (Time To Live) &amp;gt; CacheManager Integration Tests" time="0.061405" file="tests/integration/cache-manager.test.ts" line="40" assertions="2" />
+        <testcase name="should support custom TTL per entry" classname="TTL (Time To Live) &amp;gt; CacheManager Integration Tests" time="0.061301" file="tests/integration/cache-manager.test.ts" line="52" assertions="2" />
+        <testcase name="should not expire entries before TTL" classname="TTL (Time To Live) &amp;gt; CacheManager Integration Tests" time="0.051186" file="tests/integration/cache-manager.test.ts" line="62" assertions="2" />
+      </testsuite>
+      <testsuite name="LRU eviction" file="tests/integration/cache-manager.test.ts" line="74" tests="2" assertions="11" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should evict oldest entries when max size is reached" classname="LRU eviction &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="75" assertions="7" />
+        <testcase name="should update access order on retrieval" classname="LRU eviction &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="96" assertions="4" />
+      </testsuite>
+      <testsuite name="statistics" file="tests/integration/cache-manager.test.ts" line="117" tests="3" assertions="9" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should track cache hits and misses" classname="statistics &amp;gt; CacheManager Integration Tests" time="0.000255" file="tests/integration/cache-manager.test.ts" line="118" assertions="3" />
+        <testcase name="should calculate hit rate correctly" classname="statistics &amp;gt; CacheManager Integration Tests" time="0.000026" file="tests/integration/cache-manager.test.ts" line="134" assertions="3" />
+        <testcase name="should handle zero requests correctly" classname="statistics &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="149" assertions="3" />
+      </testsuite>
+      <testsuite name="cleanup" file="tests/integration/cache-manager.test.ts" line="157" tests="2" assertions="4" failures="0" skipped="0" time="0.061" hostname="pro2">
+        <testcase name="should remove expired entries" classname="cleanup &amp;gt; CacheManager Integration Tests" time="0.061755" file="tests/integration/cache-manager.test.ts" line="158" assertions="3" />
+        <testcase name="should return 0 when no expired entries" classname="cleanup &amp;gt; CacheManager Integration Tests" time="0.000067" file="tests/integration/cache-manager.test.ts" line="174" assertions="1" />
+      </testsuite>
+      <testsuite name="configuration" file="tests/integration/cache-manager.test.ts" line="181" tests="3" assertions="4" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should be able to enable/disable cache" classname="configuration &amp;gt; CacheManager Integration Tests" time="0.000004" file="tests/integration/cache-manager.test.ts" line="182" assertions="1" />
+        <testcase name="should update configuration" classname="configuration &amp;gt; CacheManager Integration Tests" time="0.000042" file="tests/integration/cache-manager.test.ts" line="189" assertions="1" />
+        <testcase name="should check if cache is enabled" classname="configuration &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="199" assertions="2" />
+      </testsuite>
+      <testsuite name="utility methods" file="tests/integration/cache-manager.test.ts" line="207" tests="2" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should check if key exists" classname="utility methods &amp;gt; CacheManager Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="208" assertions="3" />
+        <testcase name="should return all keys" classname="utility methods &amp;gt; CacheManager Integration Tests" time="0.000132" file="tests/integration/cache-manager.test.ts" line="218" assertions="4" />
+      </testsuite>
+    </testsuite>
+    <testsuite name="McpResponseCache Integration Tests" file="tests/integration/cache-manager.test.ts" line="232" tests="9" assertions="19" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="standards caching" file="tests/integration/cache-manager.test.ts" line="243" tests="2" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should cache and retrieve standards responses" classname="standards caching &amp;gt; McpResponseCache Integration Tests" time="0.000085" file="tests/integration/cache-manager.test.ts" line="244" assertions="1" />
+        <testcase name="should return null for non-existent standards responses" classname="standards caching &amp;gt; McpResponseCache Integration Tests" time="0.000043" file="tests/integration/cache-manager.test.ts" line="258" assertions="1" />
+      </testsuite>
+      <testsuite name="search caching" file="tests/integration/cache-manager.test.ts" line="264" tests="1" assertions="1" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should cache and retrieve search responses" classname="search caching &amp;gt; McpResponseCache Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="265" assertions="1" />
+      </testsuite>
+      <testsuite name="validation caching" file="tests/integration/cache-manager.test.ts" line="279" tests="1" assertions="1" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should cache and retrieve validation responses" classname="validation caching &amp;gt; McpResponseCache Integration Tests" time="0.00006" file="tests/integration/cache-manager.test.ts" line="280" assertions="1" />
+      </testsuite>
+      <testsuite name="combined statistics" file="tests/integration/cache-manager.test.ts" line="295" tests="2" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should provide combined statistics for all cache types" classname="combined statistics &amp;gt; McpResponseCache Integration Tests" time="0.000084" file="tests/integration/cache-manager.test.ts" line="296" assertions="4" />
+        <testcase name="should calculate combined hit rate correctly" classname="combined statistics &amp;gt; McpResponseCache Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="326" assertions="3" />
+      </testsuite>
+      <testsuite name="cache management" file="tests/integration/cache-manager.test.ts" line="354" tests="3" assertions="8" failures="0" skipped="0" time="0.061" hostname="pro2">
+        <testcase name="should clear all caches" classname="cache management &amp;gt; McpResponseCache Integration Tests" time="0.000066" file="tests/integration/cache-manager.test.ts" line="355" assertions="6" />
+        <testcase name="should cleanup expired entries" classname="cache management &amp;gt; McpResponseCache Integration Tests" time="0.061251" file="tests/integration/cache-manager.test.ts" line="387" assertions="1" />
+        <testcase name="should update configuration for all caches" classname="cache management &amp;gt; McpResponseCache Integration Tests" time="0.000056" file="tests/integration/cache-manager.test.ts" line="404" assertions="1" />
+      </testsuite>
+    </testsuite>
+    <testsuite name="CacheKeys Integration Tests" file="tests/integration/cache-manager.test.ts" line="428" tests="3" assertions="10" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should generate correct standards cache keys" classname="CacheKeys Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="429" assertions="4" />
+      <testcase name="should generate correct search cache keys" classname="CacheKeys Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="436" assertions="4" />
+      <testcase name="should generate correct validation cache keys" classname="CacheKeys Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="443" assertions="2" />
+    </testsuite>
+    <testsuite name="createCodeHash Integration Tests" file="tests/integration/cache-manager.test.ts" line="451" tests="4" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should generate consistent hashes for same input" classname="createCodeHash Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="452" assertions="3" />
+      <testcase name="should generate different hashes for different inputs" classname="createCodeHash Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="462" assertions="1" />
+      <testcase name="should handle empty strings" classname="createCodeHash Integration Tests" time="0" file="tests/integration/cache-manager.test.ts" line="471" assertions="2" />
+      <testcase name="should handle large code snippets" classname="createCodeHash Integration Tests" time="0.000411" file="tests/integration/cache-manager.test.ts" line="477" assertions="2" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/cache-performance.test.ts" file="tests/integration/cache-performance.test.ts" tests="8" assertions="125" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Caching and Performance Layer - Story 1.3" file="tests/integration/cache-performance.test.ts" line="7" tests="8" assertions="125" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="AC1: Performance Target" file="tests/integration/cache-performance.test.ts" line="61" tests="2" assertions="105" failures="0" skipped="0" time="0.007" hostname="pro2">
+        <testcase name="should respond under 30ms for cached standards with &gt;80% hit rate" classname="AC1: Performance Target &amp;gt; Caching and Performance Layer - Story 1.3" time="0.006228" file="tests/integration/cache-performance.test.ts" line="62" assertions="103" />
+        <testcase name="should maintain sub-30ms response times under concurrent load" classname="AC1: Performance Target &amp;gt; Caching and Performance Layer - Story 1.3" time="0.00195" file="tests/integration/cache-performance.test.ts" line="94" assertions="2" />
+      </testsuite>
+      <testsuite name="AC2: Memory Management" file="tests/integration/cache-performance.test.ts" line="128" tests="2" assertions="5" failures="0" skipped="0" time="0.006" hostname="pro2">
+        <testcase name="should use LRU eviction strategy under memory pressure" classname="AC2: Memory Management &amp;gt; Caching and Performance Layer - Story 1.3" time="0.004319" file="tests/integration/cache-performance.test.ts" line="129" assertions="3" />
+        <testcase name="should preserve frequently accessed standards during memory pressure" classname="AC2: Memory Management &amp;gt; Caching and Performance Layer - Story 1.3" time="0.00236" file="tests/integration/cache-performance.test.ts" line="214" assertions="2" />
+      </testsuite>
+      <testsuite name="AC3: Performance Monitoring" file="tests/integration/cache-performance.test.ts" line="285" tests="2" assertions="5" failures="0" skipped="0" time="1.133" hostname="pro2">
+        <testcase name="should track cache metrics that exceed targets over time" classname="AC3: Performance Monitoring &amp;gt; Caching and Performance Layer - Story 1.3" time="0.03078" file="tests/integration/cache-performance.test.ts" line="286" assertions="4" />
+        <testcase name="should detect SLA threshold violations and trigger alerts" classname="AC3: Performance Monitoring &amp;gt; Caching and Performance Layer - Story 1.3" time="1.103949" file="tests/integration/cache-performance.test.ts" line="344" assertions="1" />
+      </testsuite>
+      <testsuite name="AC4: Cache Warm-up" file="tests/integration/cache-performance.test.ts" line="405" tests="2" assertions="10" failures="0" skipped="0" time="0.004" hostname="pro2">
+        <testcase name="should complete warm-up within 200ms with critical standards pre-loaded" classname="AC4: Cache Warm-up &amp;gt; Caching and Performance Layer - Story 1.3" time="0.003577" file="tests/integration/cache-performance.test.ts" line="406" assertions="6" />
+        <testcase name="should handle warm-up failures gracefully and report partial success" classname="AC4: Cache Warm-up &amp;gt; Caching and Performance Layer - Story 1.3" time="0.001764" file="tests/integration/cache-performance.test.ts" line="469" assertions="4" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/standards-loader.test.ts" file="tests/integration/standards-loader.test.ts" tests="18" assertions="149" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="StandardsLoader Integration Tests" file="tests/integration/standards-loader.test.ts" line="7" tests="18" assertions="149" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="loadStandards" file="tests/integration/standards-loader.test.ts" line="20" tests="5" assertions="118" failures="0" skipped="0" time="0.008" hostname="pro2">
+        <testcase name="should load standards from real project configuration files" classname="loadStandards &amp;gt; StandardsLoader Integration Tests" time="0.00071" file="tests/integration/standards-loader.test.ts" line="21" assertions="111" />
+        <testcase name="should load Biome standards" classname="loadStandards &amp;gt; StandardsLoader Integration Tests" time="0.000417" file="tests/integration/standards-loader.test.ts" line="54" assertions="3" />
+        <testcase name="should load TypeScript standards (if available)" classname="loadStandards &amp;gt; StandardsLoader Integration Tests" time="0.00047" file="tests/integration/standards-loader.test.ts" line="66" assertions="1" />
+        <testcase name="should cache loaded standards" classname="loadStandards &amp;gt; StandardsLoader Integration Tests" time="0.000268" file="tests/integration/standards-loader.test.ts" line="78" assertions="1" />
+        <testcase name="should handle missing configuration files gracefully" classname="loadStandards &amp;gt; StandardsLoader Integration Tests" time="0.008607" file="tests/integration/standards-loader.test.ts" line="87" assertions="2" />
+      </testsuite>
+      <testsuite name="getStandardsByTechnology" file="tests/integration/standards-loader.test.ts" line="106" tests="2" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should filter standards by technology" classname="getStandardsByTechnology &amp;gt; StandardsLoader Integration Tests" time="0.000544" file="tests/integration/standards-loader.test.ts" line="107" assertions="6" />
+        <testcase name="should be case insensitive for technology filtering" classname="getStandardsByTechnology &amp;gt; StandardsLoader Integration Tests" time="0.000298" file="tests/integration/standards-loader.test.ts" line="124" assertions="2" />
+      </testsuite>
+      <testsuite name="getStandardsByCategory" file="tests/integration/standards-loader.test.ts" line="134" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should filter standards by category" classname="getStandardsByCategory &amp;gt; StandardsLoader Integration Tests" time="0.000256" file="tests/integration/standards-loader.test.ts" line="135" assertions="4" />
+        <testcase name="should be case insensitive for category filtering" classname="getStandardsByCategory &amp;gt; StandardsLoader Integration Tests" time="0.000206" file="tests/integration/standards-loader.test.ts" line="152" assertions="2" />
+      </testsuite>
+      <testsuite name="configuration file parsing" file="tests/integration/standards-loader.test.ts" line="162" tests="3" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should parse ESLint configuration correctly" classname="configuration file parsing &amp;gt; StandardsLoader Integration Tests" time="0.000081" file="tests/integration/standards-loader.test.ts" line="163" assertions="1" />
+        <testcase name="should parse Biome configuration correctly" classname="configuration file parsing &amp;gt; StandardsLoader Integration Tests" time="0.000164" file="tests/integration/standards-loader.test.ts" line="181" assertions="5" />
+        <testcase name="should parse TypeScript configuration correctly" classname="configuration file parsing &amp;gt; StandardsLoader Integration Tests" time="0.000156" file="tests/integration/standards-loader.test.ts" line="198" assertions="1" />
+      </testsuite>
+      <testsuite name="error handling" file="tests/integration/standards-loader.test.ts" line="216" tests="3" assertions="5" failures="0" skipped="0" time="0.001" hostname="pro2">
+        <testcase name="should handle invalid ESLint configuration" classname="error handling &amp;gt; StandardsLoader Integration Tests" time="0.001563" file="tests/integration/standards-loader.test.ts" line="217" assertions="1" />
+        <testcase name="should handle invalid JSON configuration" classname="error handling &amp;gt; StandardsLoader Integration Tests" time="0.000692" file="tests/integration/standards-loader.test.ts" line="238" assertions="1" />
+        <testcase name="should handle missing files gracefully" classname="error handling &amp;gt; StandardsLoader Integration Tests" time="0.000334" file="tests/integration/standards-loader.test.ts" line="259" assertions="3" />
+      </testsuite>
+      <testsuite name="performance" file="tests/integration/standards-loader.test.ts" line="282" tests="2" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should load standards within reasonable time" classname="performance &amp;gt; StandardsLoader Integration Tests" time="0.000341" file="tests/integration/standards-loader.test.ts" line="283" assertions="1" />
+        <testcase name="should be faster on second load due to caching" classname="performance &amp;gt; StandardsLoader Integration Tests" time="0.00045" file="tests/integration/standards-loader.test.ts" line="292" assertions="2" />
+      </testsuite>
+      <testsuite name="cache management" file="tests/integration/standards-loader.test.ts" line="308" tests="1" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should clear cache correctly" classname="cache management &amp;gt; StandardsLoader Integration Tests" time="0.000682" file="tests/integration/standards-loader.test.ts" line="309" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database-simple.test.ts" file="tests/integration/database-simple.test.ts" tests="4" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Database Simple Tests" file="tests/integration/database-simple.test.ts" line="4" tests="4" assertions="6" failures="0" skipped="0" time="0.011" hostname="pro2">
+      <testcase name="should initialize database" classname="Database Simple Tests" time="0.000032" file="tests/integration/database-simple.test.ts" line="34" assertions="1" />
+      <testcase name="should execute simple query" classname="Database Simple Tests" time="0.000236" file="tests/integration/database-simple.test.ts" line="38" assertions="2" />
+      <testcase name="should handle basic table operations" classname="Database Simple Tests" time="0.011619" file="tests/integration/database-simple.test.ts" line="44" assertions="2" />
+      <testcase name="should handle transactions" classname="Database Simple Tests" time="0.000385" file="tests/integration/database-simple.test.ts" line="65" assertions="1" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/cache-security.test.ts" file="tests/integration/cache-security.test.ts" tests="30" assertions="92" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Cache Security Integration Tests" file="tests/integration/cache-security.test.ts" line="21" tests="30" assertions="92" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Encryption Key Manager" file="tests/integration/cache-security.test.ts" line="22" tests="2" assertions="7" failures="0" skipped="0" time="0.201" hostname="pro2">
+        <testcase name="1.3-SEC-001 should generate and rotate encryption keys" classname="Encryption Key Manager &amp;gt; Cache Security Integration Tests" time="0.201784" file="tests/integration/cache-security.test.ts" line="38" assertions="5" />
+        <testcase name="1.3-SEC-002 should maintain decryption keys during rotation" classname="Encryption Key Manager &amp;gt; Cache Security Integration Tests" time="0.000084" file="tests/integration/cache-security.test.ts" line="63" assertions="2" />
+      </testsuite>
+      <testsuite name="Cache Encryption Service" file="tests/integration/cache-security.test.ts" line="72" tests="5" assertions="15" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.3-SEC-003 should encrypt data matching sensitive patterns" classname="Cache Encryption Service &amp;gt; Cache Security Integration Tests" time="0.000339" file="tests/integration/cache-security.test.ts" line="94" assertions="7" />
+        <testcase name="1.3-SEC-004 should not encrypt non-sensitive data" classname="Cache Encryption Service &amp;gt; Cache Security Integration Tests" time="0.000029" file="tests/integration/cache-security.test.ts" line="109" assertions="1" />
+        <testcase name="1.3-SEC-005 should decrypt encrypted data correctly" classname="Cache Encryption Service &amp;gt; Cache Security Integration Tests" time="0.000104" file="tests/integration/cache-security.test.ts" line="118" assertions="1" />
+        <testcase name="1.3-SEC-006 should handle decryption errors gracefully" classname="Cache Encryption Service &amp;gt; Cache Security Integration Tests" time="0.000199" file="tests/integration/cache-security.test.ts" line="128" assertions="1" />
+        <testcase name="1.3-SEC-007 should provide encryption status" classname="Cache Encryption Service &amp;gt; Cache Security Integration Tests" time="0.000137" file="tests/integration/cache-security.test.ts" line="146" assertions="5" />
+      </testsuite>
+      <testsuite name="Cache Access Control Service" file="tests/integration/cache-security.test.ts" line="157" tests="8" assertions="28" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.3-SEC-008 should create access context with default role" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000045" file="tests/integration/cache-security.test.ts" line="198" assertions="5" />
+        <testcase name="1.3-SEC-009 should create access context with specified role" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000002" file="tests/integration/cache-security.test.ts" line="208" assertions="5" />
+        <testcase name="1.3-SEC-010 should enforce read permissions correctly" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.00009" file="tests/integration/cache-security.test.ts" line="218" assertions="6" />
+        <testcase name="1.3-SEC-011 should enforce write permissions correctly" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0" file="tests/integration/cache-security.test.ts" line="238" assertions="2" />
+        <testcase name="1.3-SEC-012 should enforce delete permissions correctly" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000051" file="tests/integration/cache-security.test.ts" line="246" assertions="2" />
+        <testcase name="1.3-SEC-013 should enforce clear permissions correctly" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000018" file="tests/integration/cache-security.test.ts" line="254" assertions="2" />
+        <testcase name="1.3-SEC-014 should log audit events" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000071" file="tests/integration/cache-security.test.ts" line="262" assertions="5" />
+        <testcase name="1.3-SEC-015 should limit audit log size" classname="Cache Access Control Service &amp;gt; Cache Security Integration Tests" time="0.000055" file="tests/integration/cache-security.test.ts" line="279" assertions="1" />
+      </testsuite>
+      <testsuite name="Secure Cache Manager" file="tests/integration/cache-security.test.ts" line="292" tests="7" assertions="22" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.3-SEC-016 should store and retrieve data with encryption" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000264" file="tests/integration/cache-security.test.ts" line="315" assertions="1" />
+        <testcase name="1.3-SEC-017 should enforce access control on get operations" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000367" file="tests/integration/cache-security.test.ts" line="325" assertions="3" />
+        <testcase name="1.3-SEC-018 should enforce access control on set operations" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000047" file="tests/integration/cache-security.test.ts" line="385" assertions="2" />
+        <testcase name="1.3-SEC-019 should enforce access control on delete operations" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000127" file="tests/integration/cache-security.test.ts" line="439" assertions="1" />
+        <testcase name="1.3-SEC-020 should enforce access control on clear operations" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000095" file="tests/integration/cache-security.test.ts" line="451" assertions="2" />
+        <testcase name="1.3-SEC-021 should provide enhanced statistics" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.000059" file="tests/integration/cache-security.test.ts" line="468" assertions="10" />
+        <testcase name="1.3-SEC-022 should filter keys based on access permissions" classname="Secure Cache Manager &amp;gt; Cache Security Integration Tests" time="0.0001" file="tests/integration/cache-security.test.ts" line="497" assertions="3" />
+      </testsuite>
+      <testsuite name="Secure MCP Response Cache" file="tests/integration/cache-security.test.ts" line="516" tests="6" assertions="15" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.3-SEC-023 should cache and retrieve standards responses with security" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000117" file="tests/integration/cache-security.test.ts" line="536" assertions="1" />
+        <testcase name="1.3-SEC-024 should cache and retrieve search responses with security" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000082" file="tests/integration/cache-security.test.ts" line="569" assertions="1" />
+        <testcase name="1.3-SEC-025 should cache and retrieve validation responses with security" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000054" file="tests/integration/cache-security.test.ts" line="604" assertions="1" />
+        <testcase name="1.3-SEC-026 should provide security compliance report" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000065" file="tests/integration/cache-security.test.ts" line="631" assertions="8" />
+        <testcase name="1.3-SEC-027 should provide comprehensive audit logging" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000138" file="tests/integration/cache-security.test.ts" line="655" assertions="3" />
+        <testcase name="1.3-SEC-028 should maintain performance under security overhead" classname="Secure MCP Response Cache &amp;gt; Cache Security Integration Tests" time="0.000679" file="tests/integration/cache-security.test.ts" line="676" assertions="1" />
+      </testsuite>
+      <testsuite name="Security Integration with Performance Requirements" file="tests/integration/cache-security.test.ts" line="699" tests="2" assertions="5" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.3-SEC-029 should maintain sub-30ms response times with security" classname="Security Integration with Performance Requirements &amp;gt; Cache Security Integration Tests" time="0.000036" file="tests/integration/cache-security.test.ts" line="700" assertions="3" />
+        <testcase name="1.3-SEC-030 should handle encryption failures gracefully" classname="Security Integration with Performance Requirements &amp;gt; Cache Security Integration Tests" time="0.000082" file="tests/integration/cache-security.test.ts" line="735" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/performance/load.test.ts" file="tests/performance/load.test.ts" tests="4" assertions="19" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Performance and Load Tests" file="tests/performance/load.test.ts" line="4" tests="4" assertions="19" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should handle sub-50ms response times" classname="Performance and Load Tests" time="0.000277" file="tests/performance/load.test.ts" line="5" assertions="2" />
+      <testcase name="should handle concurrent requests without performance degradation" classname="Performance and Load Tests" time="0.000212" file="tests/performance/load.test.ts" line="30" assertions="3" />
+      <testcase name="should maintain memory usage under target during load" classname="Performance and Load Tests" time="0.00025" file="tests/performance/load.test.ts" line="72" assertions="11" />
+      <testcase name="should handle complex requests efficiently" classname="Performance and Load Tests" time="0.000286" file="tests/performance/load.test.ts" line="103" assertions="3" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/database/ttl-calculator.test.ts" file="tests/unit/database/ttl-calculator.test.ts" tests="16" assertions="40" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="TTL Calculator Unit Tests" file="tests/unit/database/ttl-calculator.test.ts" line="7" tests="6" assertions="11" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="TTL calculation for cache entries" file="tests/unit/database/ttl-calculator.test.ts" line="18" tests="3" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should calculate TTL based on access frequency" classname="TTL calculation for cache entries &amp;gt; TTL Calculator Unit Tests" time="0.000724" file="tests/unit/database/ttl-calculator.test.ts" line="19" assertions="3" />
+        <testcase name="should enforce minimum and maximum TTL limits" classname="TTL calculation for cache entries &amp;gt; TTL Calculator Unit Tests" time="0.00001" file="tests/unit/database/ttl-calculator.test.ts" line="34" assertions="2" />
+        <testcase name="should handle content type TTL multipliers" classname="TTL calculation for cache entries &amp;gt; TTL Calculator Unit Tests" time="0" file="tests/unit/database/ttl-calculator.test.ts" line="48" assertions="2" />
+      </testsuite>
+      <testsuite name="TTL expiration checking" file="tests/unit/database/ttl-calculator.test.ts" line="63" tests="3" assertions="4" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should identify expired entries correctly" classname="TTL expiration checking &amp;gt; TTL Calculator Unit Tests" time="0.000048" file="tests/unit/database/ttl-calculator.test.ts" line="64" assertions="1" />
+        <testcase name="should identify valid entries correctly" classname="TTL expiration checking &amp;gt; TTL Calculator Unit Tests" time="0.000009" file="tests/unit/database/ttl-calculator.test.ts" line="78" assertions="1" />
+        <testcase name="should calculate remaining TTL correctly" classname="TTL expiration checking &amp;gt; TTL Calculator Unit Tests" time="0.000022" file="tests/unit/database/ttl-calculator.test.ts" line="92" assertions="2" />
+      </testsuite>
+    </testsuite>
+    <testsuite name="Search Query Parser Unit Tests" file="tests/unit/database/ttl-calculator.test.ts" line="109" tests="10" assertions="29" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Query parsing and tokenization" file="tests/unit/database/ttl-calculator.test.ts" line="120" tests="4" assertions="12" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should parse simple search terms" classname="Query parsing and tokenization &amp;gt; Search Query Parser Unit Tests" time="0.000322" file="tests/unit/database/ttl-calculator.test.ts" line="121" assertions="4" />
+        <testcase name="should handle quoted phrases correctly" classname="Query parsing and tokenization &amp;gt; Search Query Parser Unit Tests" time="0.000008" file="tests/unit/database/ttl-calculator.test.ts" line="135" assertions="2" />
+        <testcase name="should parse field-specific searches" classname="Query parsing and tokenization &amp;gt; Search Query Parser Unit Tests" time="0.000055" file="tests/unit/database/ttl-calculator.test.ts" line="147" assertions="3" />
+        <testcase name="should handle boolean operators" classname="Query parsing and tokenization &amp;gt; Search Query Parser Unit Tests" time="0.000098" file="tests/unit/database/ttl-calculator.test.ts" line="160" assertions="3" />
+      </testsuite>
+      <testsuite name="FTS query generation" file="tests/unit/database/ttl-calculator.test.ts" line="174" tests="3" assertions="10" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should generate FTS5 compatible queries" classname="FTS query generation &amp;gt; Search Query Parser Unit Tests" time="0.000031" file="tests/unit/database/ttl-calculator.test.ts" line="175" assertions="5" />
+        <testcase name="should handle fuzzy search queries" classname="FTS query generation &amp;gt; Search Query Parser Unit Tests" time="0" file="tests/unit/database/ttl-calculator.test.ts" line="195" assertions="3" />
+        <testcase name="should boost terms in query generation" classname="FTS query generation &amp;gt; Search Query Parser Unit Tests" time="0.000091" file="tests/unit/database/ttl-calculator.test.ts" line="213" assertions="2" />
+      </testsuite>
+      <testsuite name="Query optimization" file="tests/unit/database/ttl-calculator.test.ts" line="232" tests="3" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should remove stop words from queries" classname="Query optimization &amp;gt; Search Query Parser Unit Tests" time="0.000062" file="tests/unit/database/ttl-calculator.test.ts" line="233" assertions="4" />
+        <testcase name="should limit term count for performance" classname="Query optimization &amp;gt; Search Query Parser Unit Tests" time="0.000064" file="tests/unit/database/ttl-calculator.test.ts" line="248" assertions="1" />
+        <testcase name="should suggest spelling corrections for low-quality matches" classname="Query optimization &amp;gt; Search Query Parser Unit Tests" time="0.000205" file="tests/unit/database/ttl-calculator.test.ts" line="260" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/cache/cache-statistics.test.ts" file="tests/unit/cache/cache-statistics.test.ts" tests="14" assertions="57" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="CacheStatistics - Unit Tests" file="tests/unit/cache/cache-statistics.test.ts" line="4" tests="14" assertions="57" failures="0" skipped="0" time="0" hostname="pro2">
+      <testcase name="should initialize with zero statistics" classname="CacheStatistics - Unit Tests" time="0.000159" file="tests/unit/cache/cache-statistics.test.ts" line="12" assertions="8" />
+      <testcase name="should record cache hits correctly" classname="CacheStatistics - Unit Tests" time="0.000135" file="tests/unit/cache/cache-statistics.test.ts" line="28" assertions="4" />
+      <testcase name="should record cache misses correctly" classname="CacheStatistics - Unit Tests" time="0.000093" file="tests/unit/cache/cache-statistics.test.ts" line="55" assertions="4" />
+      <testcase name="should calculate hit rate correctly for mixed hits/misses" classname="CacheStatistics - Unit Tests" time="0.000035" file="tests/unit/cache/cache-statistics.test.ts" line="77" assertions="2" />
+      <testcase name="should record evictions correctly" classname="CacheStatistics - Unit Tests" time="0.00002" file="tests/unit/cache/cache-statistics.test.ts" line="92" assertions="1" />
+      <testcase name="should track memory usage through time series data" classname="CacheStatistics - Unit Tests" time="0.000021" file="tests/unit/cache/cache-statistics.test.ts" line="105" assertions="1" />
+      <testcase name="should destroy statistics correctly" classname="CacheStatistics - Unit Tests" time="0" file="tests/unit/cache/cache-statistics.test.ts" line="126" assertions="4" />
+      <testcase name="should provide analytics data" classname="CacheStatistics - Unit Tests" time="0.000053" file="tests/unit/cache/cache-statistics.test.ts" line="144" assertions="6" />
+      <testcase name="should export statistics in different formats" classname="CacheStatistics - Unit Tests" time="0.000109" file="tests/unit/cache/cache-statistics.test.ts" line="162" assertions="4" />
+      <testcase name="should generate performance report" classname="CacheStatistics - Unit Tests" time="0.000103" file="tests/unit/cache/cache-statistics.test.ts" line="178" assertions="6" />
+      <testcase name="should predict performance when enabled" classname="CacheStatistics - Unit Tests" time="0.000086" file="tests/unit/cache/cache-statistics.test.ts" line="196" assertions="7" />
+      <testcase name="should handle predictive analysis when disabled" classname="CacheStatistics - Unit Tests" time="0.000077" file="tests/unit/cache/cache-statistics.test.ts" line="230" assertions="5" />
+      <testcase name="should handle alert generation" classname="CacheStatistics - Unit Tests" time="0.000054" file="tests/unit/cache/cache-statistics.test.ts" line="247" assertions="1" />
+      <testcase name="should handle different event types" classname="CacheStatistics - Unit Tests" time="0.000025" file="tests/unit/cache/cache-statistics.test.ts" line="273" assertions="4" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/cache/cache-warming.test.ts" file="tests/unit/cache/cache-warming.test.ts" tests="11" assertions="37" failures="0" skipped="1" time="0" hostname="pro2">
+    <testsuite name="CacheWarmer - Unit Tests" file="tests/unit/cache/cache-warming.test.ts" line="6" tests="11" assertions="37" failures="0" skipped="1" time="0.101" hostname="pro2">
+      <testcase name="should initialize with default configuration" classname="CacheWarmer - Unit Tests" time="0.000375" file="tests/unit/cache/cache-warming.test.ts" line="62" assertions="4" />
+      <testcase name="should record access patterns correctly" classname="CacheWarmer - Unit Tests" time="0.000712" file="tests/unit/cache/cache-warming.test.ts" line="71" assertions="8" />
+      <testcase name="should warm up cache using data provider" classname="CacheWarmer - Unit Tests" time="0" file="tests/unit/cache/cache-warming.test.ts" line="95" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="should handle empty warmup candidates gracefully" classname="CacheWarmer - Unit Tests" time="0.000235" file="tests/unit/cache/cache-warming.test.ts" line="115" assertions="4" />
+      <testcase name="should prioritize critical items for warmup" classname="CacheWarmer - Unit Tests" time="0.000162" file="tests/unit/cache/cache-warming.test.ts" line="126" assertions="2" />
+      <testcase name="should calculate warmup scores based on frequency and recency" classname="CacheWarmer - Unit Tests" time="0.000097" file="tests/unit/cache/cache-warming.test.ts" line="146" assertions="3" />
+      <testcase name="should handle concurrent warmup requests" classname="CacheWarmer - Unit Tests" time="0.101412" file="tests/unit/cache/cache-warming.test.ts" line="172" assertions="1" />
+      <testcase name="should track comprehensive access analytics" classname="CacheWarmer - Unit Tests" time="0.000381" file="tests/unit/cache/cache-warming.test.ts" line="202" assertions="8" />
+      <testcase name="should handle data provider errors gracefully" classname="CacheWarmer - Unit Tests" time="0.000417" file="tests/unit/cache/cache-warming.test.ts" line="234" assertions="3" />
+      <testcase name="should respect warmup timeout" classname="CacheWarmer - Unit Tests" time="0.000163" file="tests/unit/cache/cache-warming.test.ts" line="257" assertions="2" />
+      <testcase name="should warm up critical standards through PerformanceCache" classname="CacheWarmer - Unit Tests" time="0.000342" file="tests/unit/cache/cache-warming.test.ts" line="285" assertions="2" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/cache/lru-cache.test.ts" file="tests/unit/cache/lru-cache.test.ts" tests="18" assertions="50" failures="0" skipped="1" time="0" hostname="pro2">
+    <testsuite name="LRUCache - Performance Layer" file="tests/unit/cache/lru-cache.test.ts" line="5" tests="18" assertions="50" failures="0" skipped="1" time="0" hostname="pro2">
+      <testcase name="should store and retrieve values correctly" classname="LRUCache - Performance Layer" time="0.000067" file="tests/unit/cache/lru-cache.test.ts" line="23" assertions="1" />
+      <testcase name="should return undefined for non-existent keys" classname="LRUCache - Performance Layer" time="0.000021" file="tests/unit/cache/lru-cache.test.ts" line="36" assertions="1" />
+      <testcase name="should evict least recently used items when capacity exceeded" classname="LRUCache - Performance Layer" time="0.000088" file="tests/unit/cache/lru-cache.test.ts" line="45" assertions="4" />
+      <testcase name="should update access order on get operations" classname="LRUCache - Performance Layer" time="0.000061" file="tests/unit/cache/lru-cache.test.ts" line="66" assertions="6" />
+      <testcase name="should handle TTL expiration correctly" classname="LRUCache - Performance Layer" time="0" file="tests/unit/cache/lru-cache.test.ts" line="87" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="should clear all items" classname="LRUCache - Performance Layer" time="0.00002" file="tests/unit/cache/lru-cache.test.ts" line="104" assertions="5" />
+      <testcase name="should provide cache statistics" classname="LRUCache - Performance Layer" time="0" file="tests/unit/cache/lru-cache.test.ts" line="121" assertions="8" />
+      <testcase name="should handle complex objects as values" classname="LRUCache - Performance Layer" time="0.000143" file="tests/unit/cache/lru-cache.test.ts" line="146" assertions="3" />
+      <testcase name="should delete specific items" classname="LRUCache - Performance Layer" time="0" file="tests/unit/cache/lru-cache.test.ts" line="163" assertions="5" />
+      <testcase name="should return false when deleting non-existent item" classname="LRUCache - Performance Layer" time="0" file="tests/unit/cache/lru-cache.test.ts" line="180" assertions="1" />
+      <testcase name="should check if key exists" classname="LRUCache - Performance Layer" time="0" file="tests/unit/cache/lru-cache.test.ts" line="189" assertions="2" />
+      <testcase name="should handle concurrent access correctly" classname="LRUCache - Performance Layer" time="0.000371" file="tests/unit/cache/lru-cache.test.ts" line="202" assertions="2" />
+      <testsuite name="Memory Pressure Handling" file="tests/unit/cache/lru-cache.test.ts" line="225" tests="2" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should detect memory pressure levels correctly" classname="Memory Pressure Handling &amp;gt; LRUCache - Performance Layer" time="0.000058" file="tests/unit/cache/lru-cache.test.ts" line="226" assertions="1" />
+        <testcase name="should force eviction under memory pressure" classname="Memory Pressure Handling &amp;gt; LRUCache - Performance Layer" time="0.00015" file="tests/unit/cache/lru-cache.test.ts" line="248" assertions="2" />
+      </testsuite>
+      <testsuite name="Performance Requirements" file="tests/unit/cache/lru-cache.test.ts" line="271" tests="2" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should meet sub-30ms response time requirement" classname="Performance Requirements &amp;gt; LRUCache - Performance Layer" time="0.000937" file="tests/unit/cache/lru-cache.test.ts" line="272" assertions="1" />
+        <testcase name="should maintain &gt;80% hit rate for frequent access" classname="Performance Requirements &amp;gt; LRUCache - Performance Layer" time="0.000217" file="tests/unit/cache/lru-cache.test.ts" line="292" assertions="1" />
+      </testsuite>
+      <testsuite name="Enhanced Metrics" file="tests/unit/cache/lru-cache.test.ts" line="317" tests="2" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should track detailed performance metrics" classname="Enhanced Metrics &amp;gt; LRUCache - Performance Layer" time="0.00005" file="tests/unit/cache/lru-cache.test.ts" line="318" assertions="5" />
+        <testcase name="should track memory pressure level in metrics" classname="Enhanced Metrics &amp;gt; LRUCache - Performance Layer" time="0.000035" file="tests/unit/cache/lru-cache.test.ts" line="334" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/cache/cache-security.test.ts" file="tests/unit/cache/cache-security.test.ts" tests="33" assertions="106" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="Cache Security Unit Tests" file="tests/unit/cache/cache-security.test.ts" line="12" tests="33" assertions="106" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="EncryptionKeyManager" file="tests/unit/cache/cache-security.test.ts" line="13" tests="4" assertions="13" failures="0" skipped="0" time="1.2" hostname="pro2">
+        <testcase name="should generate 256-bit encryption key" classname="EncryptionKeyManager &amp;gt; Cache Security Unit Tests" time="0.000075" file="tests/unit/cache/cache-security.test.ts" line="29" assertions="3" />
+        <testcase name="should provide decryption keys including previous keys" classname="EncryptionKeyManager &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="36" assertions="2" />
+        <testcase name="should handle key rotation correctly" classname="EncryptionKeyManager &amp;gt; Cache Security Unit Tests" time="1.200423" file="tests/unit/cache/cache-security.test.ts" line="44" assertions="7" />
+        <testcase name="should clean up resources properly" classname="EncryptionKeyManager &amp;gt; Cache Security Unit Tests" time="0.000042" file="tests/unit/cache/cache-security.test.ts" line="77" assertions="1" />
+      </testsuite>
+      <testsuite name="CacheEncryptionService" file="tests/unit/cache/cache-security.test.ts" line="88" tests="17" assertions="36" failures="0" skipped="0" time="0" hostname="pro2">
+        <testsuite name="Pattern Matching" file="tests/unit/cache/cache-security.test.ts" line="109" tests="4" assertions="7" failures="0" skipped="0" time="0" hostname="pro2">
+          <testcase name="should identify sensitive data by content" classname="Pattern Matching &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="110" assertions="2" />
+          <testcase name="should identify sensitive data by key" classname="Pattern Matching &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000228" file="tests/unit/cache/cache-security.test.ts" line="122" assertions="3" />
+          <testcase name="should not encrypt non-sensitive data" classname="Pattern Matching &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000023" file="tests/unit/cache/cache-security.test.ts" line="134" assertions="1" />
+          <testcase name="should handle complex nested data structures" classname="Pattern Matching &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="145" assertions="1" />
+        </testsuite>
+        <testsuite name="Encryption/Decryption" file="tests/unit/cache/cache-security.test.ts" line="167" tests="6" assertions="12" failures="0" skipped="0" time="0" hostname="pro2">
+          <testcase name="should encrypt and decrypt data correctly" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.00013" file="tests/unit/cache/cache-security.test.ts" line="168" assertions="1" />
+          <testcase name="should handle string data" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.00002" file="tests/unit/cache/cache-security.test.ts" line="181" assertions="1" />
+          <testcase name="should handle numeric data" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000051" file="tests/unit/cache/cache-security.test.ts" line="190" assertions="1" />
+          <testcase name="should handle boolean data" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000014" file="tests/unit/cache/cache-security.test.ts" line="199" assertions="1" />
+          <testcase name="should handle array data" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="208" assertions="1" />
+          <testcase name="should preserve data types through encryption/decryption" classname="Encryption/Decryption &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="220" assertions="7" />
+        </testsuite>
+        <testsuite name="Error Handling" file="tests/unit/cache/cache-security.test.ts" line="244" tests="3" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+          <testcase name="should handle corrupted encrypted data" classname="Error Handling &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.00032" file="tests/unit/cache/cache-security.test.ts" line="245" assertions="1" />
+          <testcase name="should handle missing encryption metadata" classname="Error Handling &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000137" file="tests/unit/cache/cache-security.test.ts" line="263" assertions="1" />
+          <testcase name="should fail gracefully when encryption is disabled" classname="Error Handling &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000036" file="tests/unit/cache/cache-security.test.ts" line="281" assertions="1" />
+        </testsuite>
+        <testsuite name="Access Control Integration" file="tests/unit/cache/cache-security.test.ts" line="298" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+          <testcase name="should attach access control information to encrypted entries" classname="Access Control Integration &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000023" file="tests/unit/cache/cache-security.test.ts" line="299" assertions="4" />
+          <testcase name="should validate access permissions during decryption" classname="Access Control Integration &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000165" file="tests/unit/cache/cache-security.test.ts" line="325" assertions="2" />
+        </testsuite>
+        <testsuite name="Status and Configuration" file="tests/unit/cache/cache-security.test.ts" line="367" tests="2" assertions="8" failures="0" skipped="0" time="0" hostname="pro2">
+          <testcase name="should provide correct status information" classname="Status and Configuration &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0.000029" file="tests/unit/cache/cache-security.test.ts" line="368" assertions="6" />
+          <testcase name="should handle disabled encryption" classname="Status and Configuration &amp;gt; CacheEncryptionService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="379" assertions="2" />
+        </testsuite>
+      </testsuite>
+      <testsuite name="CacheAccessControlService" file="tests/unit/cache/cache-security.test.ts" line="399" tests="12" assertions="57" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should create access context correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.000084" file="tests/unit/cache/cache-security.test.ts" line="439" assertions="10" />
+        <testcase name="should use default role when not specified" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="454" assertions="3" />
+        <testcase name="should use default permissions for unknown roles" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="462" assertions="4" />
+        <testcase name="should enforce read permissions correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.00009" file="tests/unit/cache/cache-security.test.ts" line="471" assertions="5" />
+        <testcase name="should enforce write permissions correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.000005" file="tests/unit/cache/cache-security.test.ts" line="488" assertions="3" />
+        <testcase name="should enforce delete permissions correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="498" assertions="3" />
+        <testcase name="should enforce clear permissions correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.000053" file="tests/unit/cache/cache-security.test.ts" line="508" assertions="3" />
+        <testcase name="should log audit events correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.00002" file="tests/unit/cache/cache-security.test.ts" line="518" assertions="12" />
+        <testcase name="should limit audit log size" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0.000068" file="tests/unit/cache/cache-security.test.ts" line="544" assertions="1" />
+        <testcase name="should clear audit log" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="556" assertions="2" />
+        <testcase name="should handle disabled access control" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="566" assertions="5" />
+        <testcase name="should handle key pattern matching correctly" classname="CacheAccessControlService &amp;gt; Cache Security Unit Tests" time="0" file="tests/unit/cache/cache-security.test.ts" line="592" assertions="6" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/unit/cache/performance-layer.test.ts" file="tests/unit/cache/performance-layer.test.ts" tests="17" assertions="32" failures="0" skipped="5" time="0" hostname="pro2">
+    <testsuite name="PerformanceCache - Multi-layer Orchestration" file="tests/unit/cache/performance-layer.test.ts" line="9" tests="17" assertions="32" failures="0" skipped="5" time="0" hostname="pro2">
+      <testsuite name="Basic Multi-layer Operations" file="tests/unit/cache/performance-layer.test.ts" line="42" tests="4" assertions="2" failures="0" skipped="3" time="0" hostname="pro2">
+        <testcase name="should set and get values from memory cache" classname="Basic Multi-layer Operations &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000291" file="tests/unit/cache/performance-layer.test.ts" line="43" assertions="2" />
+        <testcase name="should return null for non-existent keys" classname="Basic Multi-layer Operations &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="55" assertions="0">
+          <skipped />
+        </testcase>
+        <testcase name="should check key existence across layers" classname="Basic Multi-layer Operations &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="63" assertions="0">
+          <skipped />
+        </testcase>
+        <testcase name="should delete values from all layers" classname="Basic Multi-layer Operations &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="72" assertions="0">
+          <skipped />
+        </testcase>
+      </testsuite>
+      <testsuite name="Layer Orchestration" file="tests/unit/cache/performance-layer.test.ts" line="84" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should promote items from persistent to memory cache" classname="Layer Orchestration &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.00012" file="tests/unit/cache/performance-layer.test.ts" line="85" assertions="2" />
+        <testcase name="should handle cache layer fallback correctly" classname="Layer Orchestration &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="100" assertions="4" />
+      </testsuite>
+      <testsuite name="Performance Monitoring" file="tests/unit/cache/performance-layer.test.ts" line="118" tests="3" assertions="9" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should track comprehensive cache statistics" classname="Performance Monitoring &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000078" file="tests/unit/cache/performance-layer.test.ts" line="119" assertions="5" />
+        <testcase name="should track SLA compliance" classname="Performance Monitoring &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000091" file="tests/unit/cache/performance-layer.test.ts" line="134" assertions="3" />
+        <testcase name="should measure response times" classname="Performance Monitoring &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000279" file="tests/unit/cache/performance-layer.test.ts" line="146" assertions="1" />
+      </testsuite>
+      <testsuite name="Cache Warming" file="tests/unit/cache/performance-layer.test.ts" line="163" tests="2" assertions="6" failures="0" skipped="1" time="0" hostname="pro2">
+        <testcase name="should warm up cache with critical standards" classname="Cache Warming &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000038" file="tests/unit/cache/performance-layer.test.ts" line="164" assertions="6" />
+        <testcase name="should handle warmup timeout gracefully" classname="Cache Warming &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="179" assertions="0">
+          <skipped />
+        </testcase>
+      </testsuite>
+      <testsuite name="Cache Optimization" file="tests/unit/cache/performance-layer.test.ts" line="209" tests="2" assertions="2" failures="0" skipped="1" time="0" hostname="pro2">
+        <testcase name="should optimize cache performance" classname="Cache Optimization &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000274" file="tests/unit/cache/performance-layer.test.ts" line="210" assertions="2" />
+        <testcase name="should clear all cache layers" classname="Cache Optimization &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0" file="tests/unit/cache/performance-layer.test.ts" line="225" assertions="0">
+          <skipped />
+        </testcase>
+      </testsuite>
+      <testsuite name="Configuration" file="tests/unit/cache/performance-layer.test.ts" line="247" tests="2" assertions="4" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should handle disabled persistent cache" classname="Configuration &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000083" file="tests/unit/cache/performance-layer.test.ts" line="248" assertions="2" />
+        <testcase name="should handle disabled SLA monitoring" classname="Configuration &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.00007" file="tests/unit/cache/performance-layer.test.ts" line="275" assertions="2" />
+      </testsuite>
+      <testsuite name="Error Handling" file="tests/unit/cache/performance-layer.test.ts" line="302" tests="2" assertions="3" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="should handle cache operations gracefully" classname="Error Handling &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000132" file="tests/unit/cache/performance-layer.test.ts" line="303" assertions="1" />
+        <testcase name="should handle concurrent operations" classname="Error Handling &amp;gt; PerformanceCache - Multi-layer Orchestration" time="0.000125" file="tests/unit/cache/performance-layer.test.ts" line="316" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/schema.test.ts" file="tests/integration/database/schema.test.ts" tests="8" assertions="35" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="P1 - Database Schema and Migration Tests" file="tests/integration/database/schema.test.ts" line="7" tests="8" assertions="35" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Database Schema Validation" file="tests/integration/database/schema.test.ts" line="54" tests="3" assertions="18" failures="0" skipped="0" time="0.004" hostname="pro2">
+        <testcase name="1.2-SCHEMA-001 should validate schema correctly (AC: 1,3,4)" classname="Database Schema Validation &amp;gt; P1 - Database Schema and Migration Tests" time="0.000609" file="tests/integration/database/schema.test.ts" line="55" assertions="8" />
+        <testcase name="1.2-SCHEMA-002 should provide table statistics (AC: 1)" classname="Database Schema Validation &amp;gt; P1 - Database Schema and Migration Tests" time="0.000965" file="tests/integration/database/schema.test.ts" line="72" assertions="7" />
+        <testcase name="1.2-SCHEMA-003 should optimize database tables (AC: 2)" classname="Database Schema Validation &amp;gt; P1 - Database Schema and Migration Tests" time="0.004116" file="tests/integration/database/schema.test.ts" line="98" assertions="3" />
+      </testsuite>
+      <testsuite name="Migration Management" file="tests/integration/database/schema.test.ts" line="112" tests="3" assertions="14" failures="0" skipped="0" time="0.003" hostname="pro2">
+        <testcase name="1.2-MIGRATION-001 should track applied migrations (AC: 3)" classname="Migration Management &amp;gt; P1 - Database Schema and Migration Tests" time="0.003643" file="tests/integration/database/schema.test.ts" line="113" assertions="7" />
+        <testcase name="1.2-MIGRATION-002 should validate migration integrity (AC: 3)" classname="Migration Management &amp;gt; P1 - Database Schema and Migration Tests" time="0.000231" file="tests/integration/database/schema.test.ts" line="135" assertions="3" />
+        <testcase name="1.2-MIGRATION-003 should get migration status (AC: 3)" classname="Migration Management &amp;gt; P1 - Database Schema and Migration Tests" time="0.000244" file="tests/integration/database/schema.test.ts" line="147" assertions="4" />
+      </testsuite>
+      <testsuite name="Schema Constraints and Validation" file="tests/integration/database/schema.test.ts" line="161" tests="2" assertions="3" failures="0" skipped="0" time="0.002" hostname="pro2">
+        <testcase name="1.2-SCHEMA-004 should enforce foreign key constraints (AC: 1,4)" classname="Schema Constraints and Validation &amp;gt; P1 - Database Schema and Migration Tests" time="0.002147" file="tests/integration/database/schema.test.ts" line="162" assertions="2" />
+        <testcase name="1.2-SCHEMA-005 should handle schema versioning (AC: 3)" classname="Schema Constraints and Validation &amp;gt; P1 - Database Schema and Migration Tests" time="0.000968" file="tests/integration/database/schema.test.ts" line="173" assertions="1" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/cache.test.ts" file="tests/integration/database/cache.test.ts" tests="7" assertions="25" failures="0" skipped="1" time="0" hostname="pro2">
+    <testsuite name="P0 - Cache Backend Tests" file="tests/integration/database/cache.test.ts" line="7" tests="7" assertions="25" failures="0" skipped="1" time="0" hostname="pro2">
+      <testsuite name="Cache Storage and Retrieval" file="tests/integration/database/cache.test.ts" line="73" tests="4" assertions="15" failures="0" skipped="1" time="0.001" hostname="pro2">
+        <testcase name="1.2-CACHE-001 should store and retrieve cache entries (AC: 1)" classname="Cache Storage and Retrieval &amp;gt; P0 - Cache Backend Tests" time="0.000916" file="tests/integration/database/cache.test.ts" line="74" assertions="1" />
+        <testcase name="1.2-CACHE-002 should respect TTL expiration (AC: 1)" classname="Cache Storage and Retrieval &amp;gt; P0 - Cache Backend Tests" time="0" file="tests/integration/database/cache.test.ts" line="87" assertions="0">
+          <skipped />
+        </testcase>
+        <testcase name="1.2-CACHE-003 should persist cache to disk (AC: 1)" classname="Cache Storage and Retrieval &amp;gt; P0 - Cache Backend Tests" time="0.001291" file="tests/integration/database/cache.test.ts" line="120" assertions="11" />
+        <testcase name="1.2-CACHE-004 should track access metadata (AC: 1)" classname="Cache Storage and Retrieval &amp;gt; P0 - Cache Backend Tests" time="0.000913" file="tests/integration/database/cache.test.ts" line="143" assertions="3" />
+      </testsuite>
+      <testsuite name="Cache Management" file="tests/integration/database/cache.test.ts" line="171" tests="2" assertions="7" failures="0" skipped="0" time="0.003" hostname="pro2">
+        <testcase name="1.2-CACHE-005 should provide extended statistics (AC: 1)" classname="Cache Management &amp;gt; P0 - Cache Backend Tests" time="0.001106" file="tests/integration/database/cache.test.ts" line="172" assertions="4" />
+        <testcase name="1.2-CACHE-006 should invalidate cache by pattern (AC: 1)" classname="Cache Management &amp;gt; P0 - Cache Backend Tests" time="0.002208" file="tests/integration/database/cache.test.ts" line="198" assertions="3" />
+      </testsuite>
+      <testsuite name="Cache Performance" file="tests/integration/database/cache.test.ts" line="226" tests="1" assertions="3" failures="0" skipped="0" time="0.011" hostname="pro2">
+        <testcase name="1.2-CACHE-007 should handle large datasets efficiently (AC: 1)" classname="Cache Performance &amp;gt; P0 - Cache Backend Tests" time="0.011196" file="tests/integration/database/cache.test.ts" line="227" assertions="3" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/connection.test.ts" file="tests/integration/database/connection.test.ts" tests="6" assertions="14" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="P0 - Database Connection Tests" file="tests/integration/database/connection.test.ts" line="6" tests="6" assertions="14" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Database Initialization" file="tests/integration/database/connection.test.ts" line="51" tests="2" assertions="7" failures="0" skipped="0" time="0.003" hostname="pro2">
+        <testcase name="1.2-DB-001 should initialize database with WAL mode (AC: 4)" classname="Database Initialization &amp;gt; P0 - Database Connection Tests" time="0.002045" file="tests/integration/database/connection.test.ts" line="52" assertions="4" />
+        <testcase name="1.2-DB-002 should handle concurrent operations without blocking (AC: 4)" classname="Database Initialization &amp;gt; P0 - Database Connection Tests" time="0.001716" file="tests/integration/database/connection.test.ts" line="65" assertions="3" />
+      </testsuite>
+      <testsuite name="Transaction Management" file="tests/integration/database/connection.test.ts" line="90" tests="2" assertions="2" failures="0" skipped="0" time="0" hostname="pro2">
+        <testcase name="1.2-DB-003 should handle transactions correctly (AC: 1,4)" classname="Transaction Management &amp;gt; P0 - Database Connection Tests" time="0.000205" file="tests/integration/database/connection.test.ts" line="91" assertions="1" />
+        <testcase name="1.2-DB-004 should rollback transactions on error (AC: 3)" classname="Transaction Management &amp;gt; P0 - Database Connection Tests" time="0.000517" file="tests/integration/database/connection.test.ts" line="114" assertions="1" />
+      </testsuite>
+      <testsuite name="Database Health and Recovery" file="tests/integration/database/connection.test.ts" line="143" tests="2" assertions="5" failures="0" skipped="0" time="0.009" hostname="pro2">
+        <testcase name="1.2-DB-005 should detect database corruption (AC: 3)" classname="Database Health and Recovery &amp;gt; P0 - Database Connection Tests" time="0.003295" file="tests/integration/database/connection.test.ts" line="144" assertions="3" />
+        <testcase name="1.2-DB-006 should handle database recovery scenarios (AC: 3)" classname="Database Health and Recovery &amp;gt; P0 - Database Connection Tests" time="0.006007" file="tests/integration/database/connection.test.ts" line="156" assertions="2" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/search.test.ts" file="tests/integration/database/search.test.ts" tests="8" assertions="43" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="P1 - FTS Search Engine Tests" file="tests/integration/database/search.test.ts" line="7" tests="8" assertions="43" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Search Indexing" file="tests/integration/database/search.test.ts" line="54" tests="3" assertions="14" failures="0" skipped="0" time="0.005" hostname="pro2">
+        <testcase name="1.2-SEARCH-001 should index and search standards (AC: 2)" classname="Search Indexing &amp;gt; P1 - FTS Search Engine Tests" time="0.002814" file="tests/integration/database/search.test.ts" line="55" assertions="4" />
+        <testcase name="1.2-SEARCH-002 should provide relevant search results with BM25 ranking (AC: 2)" classname="Search Indexing &amp;gt; P1 - FTS Search Engine Tests" time="0.001047" file="tests/integration/database/search.test.ts" line="78" assertions="6" />
+        <testcase name="1.2-SEARCH-003 should support fuzzy search (AC: 2)" classname="Search Indexing &amp;gt; P1 - FTS Search Engine Tests" time="0.002397" file="tests/integration/database/search.test.ts" line="116" assertions="4" />
+      </testsuite>
+      <testsuite name="Search Filtering" file="tests/integration/database/search.test.ts" line="139" tests="2" assertions="8" failures="0" skipped="0" time="0.002" hostname="pro2">
+        <testcase name="1.2-SEARCH-004 should filter by technology and category (AC: 2)" classname="Search Filtering &amp;gt; P1 - FTS Search Engine Tests" time="0.001605" file="tests/integration/database/search.test.ts" line="140" assertions="5" />
+        <testcase name="1.2-SEARCH-005 should provide search suggestions (AC: 2)" classname="Search Filtering &amp;gt; P1 - FTS Search Engine Tests" time="0.001699" file="tests/integration/database/search.test.ts" line="179" assertions="3" />
+      </testsuite>
+      <testsuite name="Search Index Health" file="tests/integration/database/search.test.ts" line="202" tests="2" assertions="6" failures="0" skipped="0" time="0.001" hostname="pro2">
+        <testcase name="1.2-SEARCH-006 should maintain search index health (AC: 2)" classname="Search Index Health &amp;gt; P1 - FTS Search Engine Tests" time="0.001376" file="tests/integration/database/search.test.ts" line="203" assertions="4" />
+        <testcase name="1.2-SEARCH-007 should remove standards from index (AC: 2)" classname="Search Index Health &amp;gt; P1 - FTS Search Engine Tests" time="0.000994" file="tests/integration/database/search.test.ts" line="220" assertions="2" />
+      </testsuite>
+      <testsuite name="Search Performance" file="tests/integration/database/search.test.ts" line="243" tests="1" assertions="15" failures="0" skipped="0" time="0.076" hostname="pro2">
+        <testcase name="1.2-SEARCH-008 should handle search queries under 100ms (AC: 2)" classname="Search Performance &amp;gt; P1 - FTS Search Engine Tests" time="0.07649" file="tests/integration/database/search.test.ts" line="244" assertions="15" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/performance.test.ts" file="tests/integration/database/performance.test.ts" tests="8" assertions="164" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="P1 - Database Performance Tests" file="tests/integration/database/performance.test.ts" line="9" tests="8" assertions="164" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Database Connection Performance" file="tests/integration/database/performance.test.ts" line="81" tests="2" assertions="5" failures="0" skipped="0" time="0.027" hostname="pro2">
+        <testcase name="1.2-PERF-001 should initialize database under 100ms (AC: 4)" classname="Database Connection Performance &amp;gt; P1 - Database Performance Tests" time="0.012544" file="tests/integration/database/performance.test.ts" line="82" assertions="1" />
+        <testcase name="1.2-PERF-002 should handle concurrent operations efficiently (AC: 2,4)" classname="Database Connection Performance &amp;gt; P1 - Database Performance Tests" time="0.015272" file="tests/integration/database/performance.test.ts" line="115" assertions="4" />
+      </testsuite>
+      <testsuite name="Cache Performance" file="tests/integration/database/performance.test.ts" line="145" tests="2" assertions="105" failures="0" skipped="0" time="0.046" hostname="pro2">
+        <testcase name="1.2-PERF-003 should store and retrieve cached data under 10ms (AC: 1)" classname="Cache Performance &amp;gt; P1 - Database Performance Tests" time="0.012428" file="tests/integration/database/performance.test.ts" line="146" assertions="3" />
+        <testcase name="1.2-PERF-004 should handle large cache datasets efficiently (AC: 1)" classname="Cache Performance &amp;gt; P1 - Database Performance Tests" time="0.03422" file="tests/integration/database/performance.test.ts" line="166" assertions="102" />
+      </testsuite>
+      <testsuite name="Search Performance" file="tests/integration/database/performance.test.ts" line="197" tests="2" assertions="27" failures="0" skipped="0" time="0.46" hostname="pro2">
+        <testcase name="1.2-PERF-005 should perform FTS search under 100ms (AC: 2)" classname="Search Performance &amp;gt; P1 - Database Performance Tests" time="0.23683" file="tests/integration/database/performance.test.ts" line="198" assertions="18" />
+        <testcase name="1.2-PERF-006 should maintain performance with complex queries (AC: 2)" classname="Search Performance &amp;gt; P1 - Database Performance Tests" time="0.224343" file="tests/integration/database/performance.test.ts" line="242" assertions="9" />
+      </testsuite>
+      <testsuite name="Database Performance Monitoring" file="tests/integration/database/performance.test.ts" line="277" tests="2" assertions="27" failures="0" skipped="0" time="0.084" hostname="pro2">
+        <testcase name="1.2-PERF-007 should track and report performance metrics (AC: 2)" classname="Database Performance Monitoring &amp;gt; P1 - Database Performance Tests" time="0.013934" file="tests/integration/database/performance.test.ts" line="278" assertions="22" />
+        <testcase name="1.2-PERF-008 should identify performance bottlenecks (AC: 2)" classname="Database Performance Monitoring &amp;gt; P1 - Database Performance Tests" time="0.071299" file="tests/integration/database/performance.test.ts" line="314" assertions="5" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/integration/database/recovery.test.ts" file="tests/integration/database/recovery.test.ts" tests="7" assertions="41" failures="0" skipped="0" time="0" hostname="pro2">
+    <testsuite name="P2 - Database Recovery and Analytics Tests" file="tests/integration/database/recovery.test.ts" line="8" tests="7" assertions="41" failures="0" skipped="0" time="0" hostname="pro2">
+      <testsuite name="Database Recovery" file="tests/integration/database/recovery.test.ts" line="88" tests="4" assertions="28" failures="0" skipped="0" time="0.217" hostname="pro2">
+        <testcase name="1.2-RECOVERY-001 should create and validate backups (AC: 3)" classname="Database Recovery &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.006348" file="tests/integration/database/recovery.test.ts" line="89" assertions="7" />
+        <testcase name="1.2-RECOVERY-002 should detect database corruption (AC: 3)" classname="Database Recovery &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.000848" file="tests/integration/database/recovery.test.ts" line="118" assertions="3" />
+        <testcase name="1.2-RECOVERY-003 should restore from backup (AC: 3)" classname="Database Recovery &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.210149" file="tests/integration/database/recovery.test.ts" line="132" assertions="7" />
+        <testcase name="1.2-RECOVERY-004 should handle automatic recovery scenarios (AC: 3)" classname="Database Recovery &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.001517" file="tests/integration/database/recovery.test.ts" line="191" assertions="11" />
+      </testsuite>
+      <testsuite name="Database Analytics" file="tests/integration/database/recovery.test.ts" line="211" tests="3" assertions="13" failures="0" skipped="0" time="0.155" hostname="pro2">
+        <testcase name="1.2-ANALYTICS-001 should record and retrieve analytics events (AC: 1)" classname="Database Analytics &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.051302" file="tests/integration/database/recovery.test.ts" line="212" assertions="6" />
+        <testcase name="1.2-ANALYTICS-002 should provide analytics summaries (AC: 1)" classname="Database Analytics &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.052333" file="tests/integration/database/recovery.test.ts" line="263" assertions="4" />
+        <testcase name="1.2-ANALYTICS-003 should track usage patterns over time (AC: 1)" classname="Database Analytics &amp;gt; P2 - Database Recovery and Analytics Tests" time="0.052558" file="tests/integration/database/recovery.test.ts" line="298" assertions="3" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

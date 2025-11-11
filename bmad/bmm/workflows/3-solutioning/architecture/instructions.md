@@ -4,18 +4,13 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on
-{user_skill_level}</critical>
-<critical>The goal is ARCHITECTURAL DECISIONS that prevent AI agent conflicts, not detailed implementation
-specs</critical>
+<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {user_skill_level}</critical>
+<critical>The goal is ARCHITECTURAL DECISIONS that prevent AI agent conflicts, not detailed implementation specs</critical>
 <critical>Communicate all responses in {communication_language} and tailor to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>This workflow replaces architecture with a conversation-driven approach</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
-<critical>ELICITATION POINTS: After completing each major architectural decision area (identified by template-output
-tags for decision_record, project_structure, novel_pattern_designs, implementation_patterns, and architecture_document),
-invoke advanced elicitation to refine decisions before proceeding</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
+<critical>ELICITATION POINTS: After completing each major architectural decision area (identified by template-output tags for decision_record, project_structure, novel_pattern_designs, implementation_patterns, and architecture_document), invoke advanced elicitation to refine decisions before proceeding</critical>
 
 <step n="0" goal="Validate workflow readiness" tag="workflow-status">
 <action>Check if {output_folder}/bmm-workflow-status.yaml exists</action>
@@ -42,8 +37,7 @@ invoke advanced elicitation to refine decisions before proceeding</critical>
   <check if="project_level < 3">
     <output>**Note: Level {{project_level}} Project**
 
-The Detailed Architecture is typically for Level 3-4 projects, but can be used for any project that needs architectural
-planning.
+The Detailed Architecture is typically for Level 3-4 projects, but can be used for any project that needs architectural planning.
 
 For Level {{project_level}}, we'll keep the architecture appropriately scoped.
 </output>
@@ -96,22 +90,15 @@ Architect: `create-prd`
 <action>Check for UX specification using fuzzy matching:
 <action>Attempt to locate: {ux_spec_file}</action>
 <check if="ux_spec_found">
-<action>Load UX spec and extract architectural implications: - Component complexity (simple forms vs rich
-interactions) - Animation/transition requirements - Real-time update needs (live data, collaborative features) -
-Platform-specific UI requirements - Accessibility standards (WCAG compliance level) - Responsive design breakpoints -
-Offline capability requirements - Performance expectations (load times, interaction responsiveness)
+<action>Load UX spec and extract architectural implications: - Component complexity (simple forms vs rich interactions) - Animation/transition requirements - Real-time update needs (live data, collaborative features) - Platform-specific UI requirements - Accessibility standards (WCAG compliance level) - Responsive design breakpoints - Offline capability requirements - Performance expectations (load times, interaction responsiveness)
 </action>
 </check>
 </action>
 
-<action>Extract and understand from PRD: - Functional Requirements (what it must do) - Non-Functional Requirements (
-performance, security, compliance, etc.) - Epic structure and user stories - Acceptance criteria - Any technical
-constraints mentioned
+<action>Extract and understand from PRD: - Functional Requirements (what it must do) - Non-Functional Requirements (performance, security, compliance, etc.) - Epic structure and user stories - Acceptance criteria - Any technical constraints mentioned
 </action>
 
-<action>Count and assess project scale: - Number of epics: {{epic_count}} - Number of stories: {{story_count}} -
-Complexity indicators (real-time, multi-tenant, regulated, etc.) - UX complexity level (if UX spec exists) - Novel
-features
+<action>Count and assess project scale: - Number of epics: {{epic_count}} - Number of stories: {{story_count}} - Complexity indicators (real-time, multi-tenant, regulated, etc.) - UX complexity level (if UX spec exists) - Novel features
 </action>
 
 <action>Reflect understanding back to {user_name}:
@@ -137,9 +124,7 @@ I see {{epic_count}} epics with {{story_count}} total stories.
 <step n="2" goal="Discover and evaluate starter templates">
   <critical>Modern starter templates make many good architectural decisions by default</critical>
 
-<action>Based on PRD analysis, identify the primary technology domain: - Web application → Look for Next.js, Vite, Remix
-starters - Mobile app → Look for React Native, Expo, Flutter starters - API/Backend → Look for NestJS, Express, Fastify
-starters - CLI tool → Look for CLI framework starters - Full-stack → Look for T3, RedwoodJS, Blitz starters
+<action>Based on PRD analysis, identify the primary technology domain: - Web application → Look for Next.js, Vite, Remix starters - Mobile app → Look for React Native, Expo, Flutter starters - API/Backend → Look for NestJS, Express, Fastify starters - CLI tool → Look for CLI framework starters - Full-stack → Look for T3, RedwoodJS, Blitz starters
 </action>
 
   <check if="ux_spec_loaded">
@@ -260,9 +245,7 @@ starters - CLI tool → Look for CLI framework starters - Full-stack → Look fo
 <action>Load decision catalog: {decision_catalog}</action>
 <action>Load architecture patterns: {architecture_patterns}</action>
 
-<action>Analyze PRD against patterns to identify needed decisions: - Match functional requirements to known patterns -
-Identify which categories of decisions are needed - Flag any novel/unique aspects requiring special attention - Consider
-which decisions the starter template already made (if applicable)
+<action>Analyze PRD against patterns to identify needed decisions: - Match functional requirements to known patterns - Identify which categories of decisions are needed - Flag any novel/unique aspects requiring special attention - Consider which decisions the starter template already made (if applicable)
 </action>
 
 <action>Create decision priority list:
@@ -386,10 +369,7 @@ Provided by Starter: {{yes_if_from_starter}}
 <step n="5" goal="Address cross-cutting concerns">
   <critical>These decisions affect EVERY epic and story</critical>
 
-<action>Facilitate decisions for consistency patterns: - Error handling strategy (How will all agents handle errors?) -
-Logging approach (Structured? Format? Levels?) - Date/time handling (Timezone? Format? Library?) - Authentication
-pattern (Where? How? Token format?) - API response format (Structure? Status codes? Errors?) - Testing strategy (Unit?
-Integration? E2E?)
+<action>Facilitate decisions for consistency patterns: - Error handling strategy (How will all agents handle errors?) - Logging approach (Structured? Format? Levels?) - Date/time handling (Timezone? Format? Library?) - Authentication pattern (Where? How? Token format?) - API response format (Structure? Status codes? Errors?) - Testing strategy (Unit? Integration? E2E?)
 </action>
 
   <check if="{user_skill_level} == 'beginner'">
@@ -402,16 +382,14 @@ Integration? E2E?)
 <step n="6" goal="Define project structure and boundaries">
   <action>Based on all decisions made, define the project structure</action>
 
-<action>Create comprehensive source tree: - Root configuration files - Source code organization - Test file locations -
-Build/dist directories - Documentation structure
+<action>Create comprehensive source tree: - Root configuration files - Source code organization - Test file locations - Build/dist directories - Documentation structure
 </action>
 
 <action>Map epics to architectural boundaries:
 "Epic: {{epic_name}} → Lives in {{module/directory/service}}"
 </action>
 
-<action>Define integration points: - Where do components communicate? - What are the API boundaries? - How do services
-interact?
+<action>Define integration points: - Where do components communicate? - What are the API boundaries? - How do services interact?
 </action>
 
 <template-output>project_structure</template-output>
@@ -421,10 +399,7 @@ interact?
 <step n="7" goal="Design novel architectural patterns" optional="true">
   <critical>Some projects require INVENTING new patterns, not just choosing existing ones</critical>
 
-<action>Scan PRD for concepts that don't have standard solutions: - Novel interaction patterns (e.g., "swipe to match"
-before Tinder existed) - Unique multi-component workflows (e.g., "viral invitation system") - New data relationships (
-e.g., "social graph" before Facebook) - Unprecedented user experiences (e.g., "ephemeral messages" before Snapchat) -
-Complex state machines crossing multiple epics
+<action>Scan PRD for concepts that don't have standard solutions: - Novel interaction patterns (e.g., "swipe to match" before Tinder existed) - Unique multi-component workflows (e.g., "viral invitation system") - New data relationships (e.g., "social graph" before Facebook) - Unprecedented user experiences (e.g., "ephemeral messages" before Snapchat) - Complex state machines crossing multiple epics
 </action>
 
   <check if="novel_patterns_detected">
@@ -591,16 +566,13 @@ Enforcement: "All agents MUST follow this pattern"
 <step n="9" goal="Validate architectural coherence">
   <action>Run coherence checks:</action>
 
-<action>Check decision compatibility: - Do all decisions work together? - Are there any conflicting choices? - Do the
-versions align properly?
+<action>Check decision compatibility: - Do all decisions work together? - Are there any conflicting choices? - Do the versions align properly?
 </action>
 
-<action>Verify epic coverage: - Does every epic have architectural support? - Are all user stories implementable with
-these decisions? - Are there any gaps?
+<action>Verify epic coverage: - Does every epic have architectural support? - Are all user stories implementable with these decisions? - Are there any gaps?
 </action>
 
-<action>Validate pattern completeness: - Are there any patterns we missed that agents would need? - Do novel patterns
-integrate with standard architecture? - Are implementation patterns comprehensive enough?
+<action>Validate pattern completeness: - Are there any patterns we missed that agents would need? - Do novel patterns integrate with standard architecture? - Are implementation patterns comprehensive enough?
 </action>
 
   <check if="issues_found">
@@ -621,15 +593,7 @@ integrate with standard architecture? - Are implementation patterns comprehensiv
 
 <action>Load template: {architecture_template}</action>
 
-<action>Generate sections: 1. Executive Summary (2-3 sentences about the architecture approach) 2. Project
-Initialization (starter command if applicable) 3. Decision Summary Table (with verified versions and epic mapping) 4.
-Complete Project Structure (full tree, no placeholders) 5. Epic to Architecture Mapping (every epic placed) 6.
-Technology Stack Details (versions, configurations) 7. Integration Points (how components connect) 8. Novel Pattern
-Designs (if any were created) 9. Implementation Patterns (all consistency rules) 10. Consistency Rules (naming,
-organization, formats) 11. Data Architecture (models and relationships) 12. API Contracts (request/response formats) 13.
-Security Architecture (auth, authorization, data protection) 14. Performance Considerations (from NFRs) 15. Deployment
-Architecture (where and how) 16. Development Environment (setup and prerequisites) 17. Architecture Decision Records (
-key decisions with rationale)
+<action>Generate sections: 1. Executive Summary (2-3 sentences about the architecture approach) 2. Project Initialization (starter command if applicable) 3. Decision Summary Table (with verified versions and epic mapping) 4. Complete Project Structure (full tree, no placeholders) 5. Epic to Architecture Mapping (every epic placed) 6. Technology Stack Details (versions, configurations) 7. Integration Points (how components connect) 8. Novel Pattern Designs (if any were created) 9. Implementation Patterns (all consistency rules) 10. Consistency Rules (naming, organization, formats) 11. Data Architecture (models and relationships) 12. API Contracts (request/response formats) 13. Security Architecture (auth, authorization, data protection) 14. Performance Considerations (from NFRs) 15. Deployment Architecture (where and how) 16. Development Environment (setup and prerequisites) 17. Architecture Decision Records (key decisions with rationale)
 </action>
 
 <action>Fill template with all collected decisions and patterns</action>

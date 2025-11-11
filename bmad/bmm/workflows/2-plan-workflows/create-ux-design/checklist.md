@@ -130,13 +130,13 @@
 
 - [ ] **All required components identified** (from design system + custom)
 - [ ] **Custom components fully specified**:
-    - Purpose and user-facing value
-    - Content/data displayed
-    - User actions available
-    - All states (default, hover, active, loading, error, disabled)
-    - Variants (sizes, styles, layouts)
-    - Behavior on interaction
-    - Accessibility considerations
+  - Purpose and user-facing value
+  - Content/data displayed
+  - User actions available
+  - All states (default, hover, active, loading, error, disabled)
+  - Variants (sizes, styles, layouts)
+  - Behavior on interaction
+  - Accessibility considerations
 - [ ] **Design system components customization needs** documented
 
 ---
@@ -213,22 +213,22 @@
 
 - [ ] **Review epics.md file** for alignment with UX design
 - [ ] **New stories identified** during UX design that weren't in epics.md:
-    - [ ] Custom component build stories (if significant)
-    - [ ] UX pattern implementation stories
-    - [ ] Animation/transition stories
-    - [ ] Responsive adaptation stories
-    - [ ] Accessibility implementation stories
-    - [ ] Edge case handling stories discovered during journey design
-    - [ ] Onboarding/empty state stories
-    - [ ] Error state handling stories
+  - [ ] Custom component build stories (if significant)
+  - [ ] UX pattern implementation stories
+  - [ ] Animation/transition stories
+  - [ ] Responsive adaptation stories
+  - [ ] Accessibility implementation stories
+  - [ ] Edge case handling stories discovered during journey design
+  - [ ] Onboarding/empty state stories
+  - [ ] Error state handling stories
 
 ### Story Complexity Adjustments
 
 - [ ] **Existing stories complexity reassessed** based on UX design:
-    - [ ] Stories that are now more complex (UX revealed additional requirements)
-    - [ ] Stories that are simpler (design system handles more than expected)
-    - [ ] Stories that should be split (UX design shows multiple components/flows)
-    - [ ] Stories that can be combined (UX design shows they're tightly coupled)
+  - [ ] Stories that are now more complex (UX revealed additional requirements)
+  - [ ] Stories that are simpler (design system handles more than expected)
+  - [ ] Stories that should be split (UX design shows multiple components/flows)
+  - [ ] Stories that can be combined (UX design shows they're tightly coupled)
 
 ### Epic Alignment
 
@@ -243,8 +243,7 @@
 - [ ] **Update epics.md** OR flag for architecture review first
 - [ ] **Rationale documented** for why new stories/changes are needed
 
-**Note:** If significant story changes are identified, consider running architecture workflow BEFORE updating epics.md,
-since architecture decisions might reveal additional adjustments needed.
+**Note:** If significant story changes are identified, consider running architecture workflow BEFORE updating epics.md, since architecture decisions might reveal additional adjustments needed.
 
 ---
 
@@ -308,5 +307,4 @@ since architecture decisions might reveal additional adjustments needed.
 
 ---
 
-_This checklist validates collaborative UX design facilitation, not template generation. A successful UX workflow
-creates design decisions WITH the user through visual exploration and informed choices._
+_This checklist validates collaborative UX design facilitation, not template generation. A successful UX workflow creates design decisions WITH the user through visual exploration and informed choices._

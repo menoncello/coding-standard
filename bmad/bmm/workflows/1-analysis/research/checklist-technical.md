@@ -157,11 +157,11 @@ For each evaluated technology:
 ### Technology Source Documentation
 
 - [ ] For each technology evaluated, sources documented:
-    - Official documentation URL
-    - Release notes/changelog URL for version
-    - Pricing page URL (if applicable)
-    - Community/GitHub URL
-    - Benchmark source URLs
+  - Official documentation URL
+  - Release notes/changelog URL for version
+  - Pricing page URL (if applicable)
+  - Community/GitHub URL
+  - Benchmark source URLs
 - [ ] Comparison data cites source for each claim
 - [ ] Architecture pattern sources cited (articles, books, official guides)
 

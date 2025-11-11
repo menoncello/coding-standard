@@ -229,10 +229,8 @@ Outcome: {{outcome}} (Critical: {{critical_count}}, Major: {{major_count}}, Mino
 
 **Severity Levels:**
 
-- **CRITICAL** = Missing previous story reference, missing tech spec cite, unresolved review items not called out, story
-  not in epics
-- **MAJOR** = Missing arch docs, missing files from previous story, vague Dev Notes, ACs don't match source, no testing
-  subtasks
+- **CRITICAL** = Missing previous story reference, missing tech spec cite, unresolved review items not called out, story not in epics
+- **MAJOR** = Missing arch docs, missing files from previous story, vague Dev Notes, ACs don't match source, no testing subtasks
 - **MINOR** = Vague citations, orphan tasks, missing Change Log
 
 **Outcome Triggers:**

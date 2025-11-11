@@ -5,14 +5,13 @@
 <critical>This generates a single user story for Level 0 atomic changes</critical>
 <critical>Level 0 = single file change, bug fix, or small isolated task</critical>
 <critical>This workflow runs AFTER tech-spec.md has been completed</critical>
-<critical>Output format MUST match create-story template for compatibility with story-context and dev-story
-workflows</critical>
+<critical>Output format MUST match create-story template for compatibility with story-context and dev-story workflows</critical>
 
 <step n="1" goal="Load tech spec and extract the change">
 
 <action>Read the completed tech-spec.md file from {output_folder}/tech-spec.md</action>
 <action>Load bmm-workflow-status.yaml from {output_folder}/bmm-workflow-status.yaml (if exists)</action>
-<action>Extract dev_story_location from config (where stories are stored)</action>
+<action>Extract dev_ephemeral_location from config (where stories are stored)</action>
 
 <action>Extract from the ENHANCED tech-spec structure:
 
@@ -43,7 +42,7 @@ workflows</critical>
 </example>
 
 <action>Set story_filename = "story-{slug}.md"</action>
-<action>Set story_path = "{dev_story_location}/story-{slug}.md"</action>
+<action>Set story_path = "{dev_ephemeral_location}/story-{slug}.md"</action>
 
 </step>
 
@@ -99,8 +98,7 @@ workflows</critical>
 Since tech-spec is now context-rich, populate all new template fields:
 
 - dependencies: Extract from "Development Context" and "Implementation Details → Integration Points"
-- existing_code_references: Extract from "Development Context → Relevant Existing Code" and "Developer Resources → Key
-  Code Locations"
+- existing_code_references: Extract from "Development Context → Relevant Existing Code" and "Developer Resources → Key Code Locations"
   </guidelines>
 
 <action>Initialize story file using user_story_template</action>

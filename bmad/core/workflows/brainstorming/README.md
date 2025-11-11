@@ -6,14 +6,11 @@ last-redoc-date: 2025-09-28
 
 ## Overview
 
-The brainstorming workflow facilitates interactive brainstorming sessions using diverse creative techniques. This
-workflow acts as an AI facilitator guiding users through various ideation methods to generate and refine creative
-solutions in a structured, energetic, and highly interactive manner.
+The brainstorming workflow facilitates interactive brainstorming sessions using diverse creative techniques. This workflow acts as an AI facilitator guiding users through various ideation methods to generate and refine creative solutions in a structured, energetic, and highly interactive manner.
 
 ## Key Features
 
-- **36 Creative Techniques**: Comprehensive library spanning collaborative, structured, creative, deep, theatrical,
-  wild, and introspective approaches
+- **36 Creative Techniques**: Comprehensive library spanning collaborative, structured, creative, deep, theatrical, wild, and introspective approaches
 - **Interactive Facilitation**: AI acts as a skilled facilitator using "Yes, and..." methodology
 - **Flexible Approach Selection**: User-guided, AI-recommended, random, or progressive technique flows
 - **Context-Aware Sessions**: Supports domain-specific brainstorming through context document input
@@ -38,7 +35,7 @@ workflow brainstorming --data /path/to/context.md
 
 ### Configuration
 
-The workflow leverages configuration from `/bmad/cis/config.yaml`:
+The workflow leverages configuration from `bmad/cis/config.yaml`:
 
 - **output_folder**: Where session results are saved
 - **user_name**: Session participant identification
@@ -188,7 +185,7 @@ The workflow includes 36 techniques organized into 7 categories:
 ## Requirements
 
 - No special software requirements
-- Access to the CIS module configuration (`/bmad/cis/config.yaml`)
+- Access to the CIS module configuration (`bmad/cis/config.yaml`)
 - Active participation and engagement throughout the interactive session
 - Optional: Domain context document for focused brainstorming
 
@@ -255,10 +252,10 @@ To customize this workflow:
 ## Version History
 
 - **v1.0.0** - Initial release
-    - 36 creative techniques across 7 categories
-    - Interactive facilitation with energy monitoring
-    - Comprehensive structured reporting
-    - Context-aware session guidance
+  - 36 creative techniques across 7 categories
+  - Interactive facilitation with energy monitoring
+  - Comprehensive structured reporting
+  - Context-aware session guidance
 
 ## Support
 

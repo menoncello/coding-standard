@@ -1,11 +1,9 @@
 # Implementation Ready Check - Workflow Instructions
 
 <critical>The workflow execution engine is governed by: {project-root}/bmad/core/tasks/workflow.xml</critical>
-<critical>You MUST have already loaded and processed:
-{project-root}/bmad/bmm/workflows/3-solutioning/solutioning-gate-check/workflow.yaml</critical>
+<critical>You MUST have already loaded and processed: {project-root}/bmad/bmm/workflows/3-solutioning/solutioning-gate-check/workflow.yaml</critical>
 <critical>Communicate all findings and analysis in {communication_language} throughout the assessment</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
 
 <workflow>
 
@@ -31,9 +29,7 @@ vs sharded document discovery automatically</critical>
   <action>Get project_level from YAML metadata</action>
   <action>Find first non-completed workflow (next expected workflow)</action>
 
-<action>Based on the project_level, understand what artifacts should exist: - Level 0-1: Tech spec and simple stories
-only (no PRD, minimal solutioning) - Level 2: PRD, tech spec, epics/stories (no separate architecture doc) - Level 3-4:
-Full suite - PRD, architecture document, epics/stories, possible UX artifacts
+<action>Based on the project_level, understand what artifacts should exist: - Level 0-1: Tech spec and simple stories only (no PRD, minimal solutioning) - Level 2: PRD, tech spec, epics/stories (no separate architecture doc) - Level 3-4: Full suite - PRD, architecture document, epics/stories, possible UX artifacts
 </action>
 
   <check if="solutioning-gate-check status is file path (already completed)">
@@ -57,8 +53,7 @@ Full suite - PRD, architecture document, epics/stories, possible UX artifacts
 <action>Set standalone_mode = false</action>
 </check>
 
-<critical>The validation approach must adapt to the project level - don't look for documents that shouldn't exist at
-lower levels</critical>
+<critical>The validation approach must adapt to the project level - don't look for documents that shouldn't exist at lower levels</critical>
 
 <template-output>project_context</template-output>
 </step>

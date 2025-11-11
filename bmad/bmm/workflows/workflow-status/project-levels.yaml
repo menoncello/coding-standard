@@ -45,15 +45,15 @@ levels:
 # Quick detection hints for workflow-init
 detection_hints:
   keywords:
-    level_0: [ "fix", "bug", "typo", "small change", "quick update", "patch" ]
-    level_1: [ "simple", "basic", "small feature", "add", "minor" ]
-    level_2: [ "dashboard", "several features", "admin panel", "medium" ]
-    level_3: [ "platform", "integration", "complex", "system", "architecture" ]
-    level_4: [ "enterprise", "multi-tenant", "multiple products", "ecosystem", "scale" ]
+    level_0: ["fix", "bug", "typo", "small change", "quick update", "patch"]
+    level_1: ["simple", "basic", "small feature", "add", "minor"]
+    level_2: ["dashboard", "several features", "admin panel", "medium"]
+    level_3: ["platform", "integration", "complex", "system", "architecture"]
+    level_4: ["enterprise", "multi-tenant", "multiple products", "ecosystem", "scale"]
 
   story_counts:
-    level_0: [ 1, 1 ]
-    level_1: [ 1, 10 ]
-    level_2: [ 5, 15 ]
-    level_3: [ 12, 40 ]
-    level_4: [ 40, 999 ]
+    level_0: [1, 1]
+    level_1: [1, 10]
+    level_2: [5, 15]
+    level_3: [12, 40]
+    level_4: [40, 999]

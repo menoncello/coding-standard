@@ -110,9 +110,7 @@ Installation → Configuration → First Use → Automation → Advanced Feature
 
 **YOU MUST RETURN YOUR COMPLETE JOURNEY MAPS IN YOUR FINAL MESSAGE.**
 
-Your final report MUST include all the user journey maps you've created in full detail. Do not just describe the
-journeys or summarize findings - provide the complete, formatted journey documentation that can be directly integrated
-into product documents.
+Your final report MUST include all the user journey maps you've created in full detail. Do not just describe the journeys or summarize findings - provide the complete, formatted journey documentation that can be directly integrated into product documents.
 
 Include in your final report:
 
@@ -122,5 +120,4 @@ Include in your final report:
 4. Epic boundary recommendations based on journeys
 5. Priority insights for MVP and feature sequencing
 
-Remember: Your output will be used directly by the parent agent to populate document sections. Provide complete,
-ready-to-use content, not summaries or references.
+Remember: Your output will be used directly by the parent agent to populate document sections. Provide complete, ready-to-use content, not summaries or references.

@@ -91,5 +91,4 @@
 
 ---
 
-_This research prompt was generated using the BMad Method Research Workflow, incorporating best practices from ChatGPT
-Deep Research, Gemini Deep Research, Grok DeepSearch, and Claude Projects (2025)._
+_This research prompt was generated using the BMad Method Research Workflow, incorporating best practices from ChatGPT Deep Research, Gemini Deep Research, Grok DeepSearch, and Claude Projects (2025)._

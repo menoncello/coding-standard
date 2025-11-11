@@ -1,10 +1,8 @@
 # Architecture Document Validation Checklist
 
-**Purpose**: Validate the architecture document itself is complete, implementable, and provides clear guidance for AI
-agents.
+**Purpose**: Validate the architecture document itself is complete, implementable, and provides clear guidance for AI agents.
 
-**Note**: This checklist validates the ARCHITECTURE DOCUMENT only. For cross-workflow validation (PRD → Architecture →
-Stories alignment), use the solutioning-gate-check workflow.
+**Note**: This checklist validates the ARCHITECTURE DOCUMENT only. For cross-workflow validation (PRD → Architecture → Stories alignment), use the solutioning-gate-check workflow.
 
 ---
 
@@ -137,10 +135,10 @@ Stories alignment), use the solutioning-gate-check workflow.
 - [ ] Executive summary exists (2-3 sentences maximum)
 - [ ] Project initialization section (if using starter template)
 - [ ] Decision summary table with ALL required columns:
-    - Category
-    - Decision
-    - Version
-    - Rationale
+  - Category
+  - Decision
+  - Version
+  - Rationale
 - [ ] Project structure section shows complete source tree
 - [ ] Implementation patterns section comprehensive
 - [ ] Novel patterns section (if applicable)
@@ -239,10 +237,8 @@ Stories alignment), use the solutioning-gate-check workflow.
 
 ---
 
-**Next Step**: Run the **solutioning-gate-check** workflow to validate alignment between PRD, Architecture, and Stories
-before beginning implementation.
+**Next Step**: Run the **solutioning-gate-check** workflow to validate alignment between PRD, Architecture, and Stories before beginning implementation.
 
 ---
 
-_This checklist validates architecture document quality only. Use solutioning-gate-check for comprehensive readiness
-validation._
+_This checklist validates architecture document quality only. Use solutioning-gate-check for comprehensive readiness validation._

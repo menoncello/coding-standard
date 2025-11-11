@@ -21,10 +21,10 @@
 - [ ] PRD.md loaded (if available)
 - [ ] Story file loaded (if applicable)
 - [ ] Relevant knowledge fragments loaded from `tea-index.csv`:
-    - [ ] `nfr-criteria.md`
-    - [ ] `ci-burn-in.md`
-    - [ ] `test-quality.md`
-    - [ ] `playwright-config.md` (if using Playwright)
+  - [ ] `nfr-criteria.md`
+  - [ ] `ci-burn-in.md`
+  - [ ] `test-quality.md`
+  - [ ] `playwright-config.md` (if using Playwright)
 
 ---
 

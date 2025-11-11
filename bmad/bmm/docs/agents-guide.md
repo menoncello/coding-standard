@@ -22,12 +22,9 @@
 
 ## Overview
 
-The BMad Method Module (BMM) provides a comprehensive team of specialized AI agents that guide you through the complete
-software development lifecycle. Each agent embodies a specific role with unique expertise, communication style, and
-decision-making principles.
+The BMad Method Module (BMM) provides a comprehensive team of specialized AI agents that guide you through the complete software development lifecycle. Each agent embodies a specific role with unique expertise, communication style, and decision-making principles.
 
-**Philosophy:** AI agents act as expert collaborators, not code monkeys. They bring decades of simulated experience to
-guide strategic decisions, facilitate creative thinking, and execute technical work with precision.
+**Philosophy:** AI agents act as expert collaborators, not code monkeys. They bring decades of simulated experience to guide strategic decisions, facilitate creative thinking, and execute technical work with precision.
 
 ### All BMM Agents
 
@@ -83,8 +80,7 @@ guide strategic decisions, facilitate creative thinking, and execute technical w
 - `correct-course` - Handle mid-project changes
 - `workflow-init` - Initialize workflow tracking
 
-**Communication Style:** Direct and analytical. Asks probing questions to uncover root causes. Uses data to support
-recommendations. Precise about priorities and trade-offs.
+**Communication Style:** Direct and analytical. Asks probing questions to uncover root causes. Uses data to support recommendations. Precise about priorities and trade-offs.
 
 **Expertise:**
 
@@ -119,8 +115,7 @@ recommendations. Precise about priorities and trade-offs.
 - `document-project` - Brownfield comprehensive documentation
 - `workflow-init` - Initialize workflow tracking
 
-**Communication Style:** Analytical and systematic. Presents findings with data support. Asks questions to uncover
-hidden requirements. Structures information hierarchically.
+**Communication Style:** Analytical and systematic. Presents findings with data support. Asks questions to uncover hidden requirements. Structures information hierarchically.
 
 **Expertise:**
 
@@ -153,8 +148,7 @@ hidden requirements. Structures information hierarchically.
 - `validate-architecture` - Validate architecture document
 - `solutioning-gate-check` - Validate readiness for Phase 4
 
-**Communication Style:** Comprehensive yet pragmatic. Uses architectural metaphors. Balances technical depth with
-accessibility. Connects decisions to business value.
+**Communication Style:** Comprehensive yet pragmatic. Uses architectural metaphors. Balances technical depth with accessibility. Connects decisions to business value.
 
 **Expertise:**
 
@@ -165,8 +159,7 @@ accessibility. Connects decisions to business value.
 - Performance optimization
 - System migration strategies
 
-**See Also:** [Architecture Workflow Reference](./workflow-architecture-reference.md) for detailed architecture workflow
-capabilities.
+**See Also:** [Architecture Workflow Reference](./workflow-architecture-reference.md) for detailed architecture workflow capabilities.
 
 ---
 
@@ -199,8 +192,7 @@ capabilities.
 - `epic-retrospective` - Post-epic review
 - `correct-course` - Handle changes during implementation
 
-**Communication Style:** Task-oriented and efficient. Direct and eliminates ambiguity. Focuses on clear handoffs and
-developer-ready specifications.
+**Communication Style:** Task-oriented and efficient. Direct and eliminates ambiguity. Focuses on clear handoffs and developer-ready specifications.
 
 **Expertise:**
 
@@ -228,20 +220,19 @@ developer-ready specifications.
 
 - `workflow-status` - Check what to do next
 - `develop-story` - Implement story with:
-    - Task-by-task iteration
-    - Test-driven development
-    - Multi-run capability (initial + fixes)
-    - Strict file boundary enforcement
+  - Task-by-task iteration
+  - Test-driven development
+  - Multi-run capability (initial + fixes)
+  - Strict file boundary enforcement
 - `code-review` - Senior developer-level review with:
-    - Story context awareness
-    - Epic-tech-context alignment
-    - Repository docs reference
-    - MCP server best practices
-    - Web search fallback
+  - Story context awareness
+  - Epic-tech-context alignment
+  - Repository docs reference
+  - MCP server best practices
+  - Web search fallback
 - `story-done` - Mark story complete and advance queue
 
-**Communication Style:** Succinct and checklist-driven. Cites file paths and acceptance criteria IDs. Only asks
-questions when inputs are missing.
+**Communication Style:** Succinct and checklist-driven. Cites file paths and acceptance criteria IDs. Only asks questions when inputs are missing.
 
 **Critical Principles:**
 
@@ -283,10 +274,10 @@ questions when inputs are missing.
 
 - `workflow-status` - Check what to do next
 - `framework` - Initialize production-ready test framework:
-    - Smart framework selection (Playwright vs Cypress)
-    - Fixture architecture
-    - Auto-cleanup patterns
-    - Network-first approaches
+  - Smart framework selection (Playwright vs Cypress)
+  - Fixture architecture
+  - Auto-cleanup patterns
+  - Network-first approaches
 - `atdd` - Generate E2E tests first, before implementation
 - `automate` - Comprehensive test automation
 - `test-design` - Create test scenarios with risk-based approach
@@ -331,14 +322,13 @@ questions when inputs are missing.
 
 - `workflow-status` - Check what to do next
 - `create-design` - Conduct design thinking workshop to define UX specification with:
-    - Visual exploration and generation
-    - Collaborative decision-making
-    - AI-assisted design tools (v0, Lovable)
-    - Accessibility considerations
+  - Visual exploration and generation
+  - Collaborative decision-making
+  - AI-assisted design tools (v0, Lovable)
+  - Accessibility considerations
 - `validate-design` - Validate UX specification and design artifacts
 
-**Communication Style:** Empathetic and user-focused. Uses storytelling to explain design decisions. Creative yet
-data-informed. Advocates for user needs over technical convenience.
+**Communication Style:** Empathetic and user-focused. Uses storytelling to explain design decisions. Creative yet data-informed. Advocates for user needs over technical convenience.
 
 **Expertise:**
 
@@ -371,11 +361,11 @@ data-informed. Advocates for user needs over technical convenience.
 **Workflows:**
 
 - `document-project` - Comprehensive project documentation with:
-    - Three scan levels (Quick, Deep, Exhaustive)
-    - Multi-part project detection
-    - Resumability (interrupt and continue)
-    - Write-as-you-go architecture
-    - Deep-dive mode for targeted analysis
+  - Three scan levels (Quick, Deep, Exhaustive)
+  - Multi-part project detection
+  - Resumability (interrupt and continue)
+  - Write-as-you-go architecture
+  - Deep-dive mode for targeted analysis
 
 **Actions:**
 
@@ -389,8 +379,7 @@ data-informed. Advocates for user needs over technical convenience.
 - `create-user-guide` - User-facing guides and tutorials (TODO)
 - `audit-docs` - Documentation quality review (TODO)
 
-**Communication Style:** Patient teacher who makes documentation approachable. Uses examples and analogies. Balances
-technical precision with accessibility.
+**Communication Style:** Patient teacher who makes documentation approachable. Uses examples and analogies. Balances technical precision with accessibility.
 
 **Critical Standards:**
 
@@ -400,8 +389,7 @@ technical precision with accessibility.
 - Microsoft Manual of Style for technical writing
 - Task-oriented writing approach
 
-**See Also:** [Document Project Workflow Reference](./workflow-document-project-reference.md) for detailed brownfield
-documentation capabilities.
+**See Also:** [Document Project Workflow Reference](./workflow-document-project-reference.md) for detailed brownfield documentation capabilities.
 
 ---
 
@@ -428,15 +416,14 @@ documentation capabilities.
 - `brainstorm-game` - Game-specific ideation
 - `create-game-brief` - Game vision and strategy
 - `create-gdd` - Complete Game Design Document with:
-    - Game-type-specific injection (24+ game types)
-    - Universal template structure
-    - Platform vs game type separation
-    - Gameplay-first philosophy
+  - Game-type-specific injection (24+ game types)
+  - Universal template structure
+  - Platform vs game type separation
+  - Gameplay-first philosophy
 - `narrative` - Narrative design document for story-driven games
 - `research` - Game market research
 
-**Communication Style:** Enthusiastic and player-focused. Frames challenges as design problems to solve. Celebrates
-creative breakthroughs.
+**Communication Style:** Enthusiastic and player-focused. Frames challenges as design problems to solve. Celebrates creative breakthroughs.
 
 **Principles:**
 
@@ -474,8 +461,7 @@ creative breakthroughs.
 - `story-done` - Mark story done after DoD complete
 - `code-review` - Perform thorough clean context QA code review on a story
 
-**Communication Style:** Direct and energetic. Execution-focused. Breaks down complex game challenges into actionable
-steps. Celebrates performance wins.
+**Communication Style:** Direct and energetic. Execution-focused. Breaks down complex game challenges into actionable steps. Celebrates performance wins.
 
 **Expertise:**
 
@@ -508,8 +494,7 @@ steps. Celebrates performance wins.
 - `solutioning-gate-check` - Validate Phase 3→4 transition
 - `correct-course` - Handle technical changes
 
-**Communication Style:** Calm and measured. Systematic thinking about complex systems. Uses chess metaphors and military
-strategy. Emphasizes balance and elegance.
+**Communication Style:** Calm and measured. Systematic thinking about complex systems. Uses chess metaphors and military strategy. Emphasizes balance and elegance.
 
 **Expertise:**
 
@@ -545,8 +530,7 @@ strategy. Emphasizes balance and elegance.
 - `list-tasks` - Show all available tasks from task-manifest.csv
 - `list-workflows` - Show all available workflows from workflow-manifest.csv
 
-**Communication Style:** Direct and comprehensive. Refers to himself in third person ("BMad Master recommends...").
-Expert-level communication focused on efficient execution. Presents information systematically using numbered lists.
+**Communication Style:** Direct and comprehensive. Refers to himself in third person ("BMad Master recommends..."). Expert-level communication focused on efficient execution. Presents information systematically using numbered lists.
 
 **Principles:**
 
@@ -556,8 +540,7 @@ Expert-level communication focused on efficient execution. Presents information 
 
 **Special Role:**
 
-- **Party Mode Orchestrator:** Loads agent manifest, applies customizations, moderates discussions, summarizes when
-  conversations become circular
+- **Party Mode Orchestrator:** Loads agent manifest, applies customizations, moderates discussions, summarizes when conversations become circular
 - **Knowledge Custodian:** Maintains awareness of all installed modules, agents, workflows, and tasks
 - **Workflow Facilitator:** Guides users to appropriate workflows based on current project state
 
@@ -567,8 +550,7 @@ Expert-level communication focused on efficient execution. Presents information 
 
 ## Party Mode: Multi-Agent Collaboration
 
-Get all your installed agents in one conversation for multi-perspective discussions, retrospectives, and collaborative
-decision-making.
+Get all your installed agents in one conversation for multi-perspective discussions, retrospectives, and collaborative decision-making.
 
 **Quick Start:**
 
@@ -577,8 +559,7 @@ decision-making.
 # OR from any agent: *party-mode
 ```
 
-**What happens:** BMad Master orchestrates 2-3 relevant agents per message. They discuss, debate, and collaborate in
-real-time.
+**What happens:** BMad Master orchestrates 2-3 relevant agents per message. They discuss, debate, and collaborate in real-time.
 
 **Best for:** Strategic decisions, creative brainstorming, post-mortems, sprint retrospectives, complex problem-solving.
 
@@ -613,7 +594,7 @@ Each agent displays their available workflows when loaded. Look for:
 Some workflows are available to multiple agents:
 
 | Workflow           | Agents                            | Purpose                                     |
-|--------------------|-----------------------------------|---------------------------------------------|
+| ------------------ | --------------------------------- | ------------------------------------------- |
 | `workflow-status`  | ALL agents                        | Check current state and get recommendations |
 | `workflow-init`    | PM, Analyst, Game Designer        | Initialize workflow tracking                |
 | `correct-course`   | PM, Architect, SM, Game Architect | Change management during implementation     |
@@ -624,7 +605,7 @@ Some workflows are available to multiple agents:
 Many workflows have optional validation workflows that perform independent review:
 
 | Validation                   | Agent       | Validates                          |
-|------------------------------|-------------|------------------------------------|
+| ---------------------------- | ----------- | ---------------------------------- |
 | `validate-prd`               | PM          | PRD + Epics + Stories completeness |
 | `validate-tech-spec`         | PM          | Technical specification quality    |
 | `validate-architecture`      | Architect   | Architecture document              |
@@ -958,18 +939,18 @@ TEA can be invoked at any phase:
 Quick reference for agent selection:
 
 | Agent                   | Icon | Primary Phase      | Key Workflows                                 | Best For                              |
-|-------------------------|------|--------------------|-----------------------------------------------|---------------------------------------|
+| ----------------------- | ---- | ------------------ | --------------------------------------------- | ------------------------------------- |
 | **Analyst**             | 📊   | 1 (Analysis)       | brainstorm, brief, research, document-project | Discovery, requirements, brownfield   |
 | **PM**                  | 📋   | 2 (Planning)       | prd, tech-spec, epics-stories                 | Planning, requirements docs           |
 | **UX Designer**         | 🎨   | 2 (Planning)       | create-design, validate-design                | UX-heavy projects, design             |
-| **Architect**           | 🏗️  | 3 (Solutioning)    | architecture, gate-check                      | Technical design, architecture        |
+| **Architect**           | 🏗️   | 3 (Solutioning)    | architecture, gate-check                      | Technical design, architecture        |
 | **SM**                  | 🏃   | 4 (Implementation) | sprint-planning, create-story, story-context  | Story management, sprint coordination |
 | **DEV**                 | 💻   | 4 (Implementation) | develop-story, code-review, story-done        | Implementation, coding                |
 | **TEA**                 | 🧪   | All Phases         | framework, atdd, automate, trace, ci          | Testing, quality assurance            |
 | **Paige (Tech Writer)** | 📚   | All Phases         | document-project, diagrams, validation        | Documentation, diagrams               |
 | **Game Designer**       | 🎲   | 1-2 (Games)        | brainstorm-game, gdd, narrative               | Game design, creative vision          |
-| **Game Developer**      | 🕹️  | 4 (Games)          | develop-story, story-done, code-review        | Game implementation                   |
-| **Game Architect**      | 🏛️  | 3 (Games)          | architecture, gate-check                      | Game systems architecture             |
+| **Game Developer**      | 🕹️   | 4 (Games)          | develop-story, story-done, code-review        | Game implementation                   |
+| **Game Architect**      | 🏛️   | 3 (Games)          | architecture, gate-check                      | Game systems architecture             |
 | **BMad Master**         | 🧙   | Meta               | party-mode, list tasks/workflows              | Orchestration, multi-agent            |
 
 ### Agent Capabilities Summary
@@ -1015,7 +996,6 @@ Quick reference for agent selection:
 - [Phase 2: Planning Workflows](./workflows-planning.md)
 - [Phase 3: Solutioning Workflows](./workflows-solutioning.md)
 - [Phase 4: Implementation Workflows](./workflows-implementation.md)
-
 <!-- Testing & QA Workflows documentation to be added -->
 
 **Advanced References:**

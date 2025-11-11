@@ -9,9 +9,7 @@
 
 ## Overview
 
-Plans comprehensive test coverage strategy with risk assessment, priority classification, and execution ordering. This
-workflow generates a test design document that identifies high-risk areas, maps requirements to test levels, prioritizes
-scenarios (P0-P3), and provides resource estimates for the testing effort.
+Plans comprehensive test coverage strategy with risk assessment, priority classification, and execution ordering. This workflow generates a test design document that identifies high-risk areas, maps requirements to test levels, prioritizes scenarios (P0-P3), and provides resource estimates for the testing effort.
 
 ---
 
@@ -31,38 +29,32 @@ scenarios (P0-P3), and provides resource estimates for the testing effort.
 ### Actions
 
 1. **Read Requirements Documentation**
-    - Load PRD.md for high-level product requirements
-    - Read epics.md or specific epic for feature scope
-    - Read story markdown for detailed acceptance criteria
-    - Identify all testable requirements
+   - Load PRD.md for high-level product requirements
+   - Read epics.md or specific epic for feature scope
+   - Read story markdown for detailed acceptance criteria
+   - Identify all testable requirements
 
 2. **Load Architecture Context**
-    - Read architecture.md for system design
-    - Read tech-spec for implementation details
-    - Identify technical constraints and dependencies
-    - Note integration points and external systems
+   - Read architecture.md for system design
+   - Read tech-spec for implementation details
+   - Identify technical constraints and dependencies
+   - Note integration points and external systems
 
 3. **Analyze Existing Test Coverage**
-    - Search for existing test files in `{test_dir}`
-    - Identify coverage gaps
-    - Note areas with insufficient testing
-    - Check for flaky or outdated tests
+   - Search for existing test files in `{test_dir}`
+   - Identify coverage gaps
+   - Note areas with insufficient testing
+   - Check for flaky or outdated tests
 
 4. **Load Knowledge Base Fragments**
 
    **Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to load:
-    - `risk-governance.md` - Risk classification framework (6 categories: TECH, SEC, PERF, DATA, BUS, OPS), automated
-      scoring, gate decision engine, owner tracking (625 lines, 4 examples)
-    - `probability-impact.md` - Risk scoring methodology (probability × impact matrix, automated classification, dynamic
-      re-assessment, gate integration, 604 lines, 4 examples)
-    - `test-levels-framework.md` - Test level selection guidance (E2E vs API vs Component vs Unit with decision matrix,
-      characteristics, when to use each, 467 lines, 4 examples)
-    - `test-priorities-matrix.md` - P0-P3 prioritization criteria (automated priority calculation, risk-based mapping,
-      tagging strategy, time budgets, 389 lines, 2 examples)
+   - `risk-governance.md` - Risk classification framework (6 categories: TECH, SEC, PERF, DATA, BUS, OPS), automated scoring, gate decision engine, owner tracking (625 lines, 4 examples)
+   - `probability-impact.md` - Risk scoring methodology (probability × impact matrix, automated classification, dynamic re-assessment, gate integration, 604 lines, 4 examples)
+   - `test-levels-framework.md` - Test level selection guidance (E2E vs API vs Component vs Unit with decision matrix, characteristics, when to use each, 467 lines, 4 examples)
+   - `test-priorities-matrix.md` - P0-P3 prioritization criteria (automated priority calculation, risk-based mapping, tagging strategy, time budgets, 389 lines, 2 examples)
 
-**Halt Condition:** If story data or acceptance criteria are missing, check if brownfield exploration is needed. If
-neither requirements NOR exploration possible, HALT with message: "Test design requires clear requirements, acceptance
-criteria, or brownfield app URL for exploration"
+**Halt Condition:** If story data or acceptance criteria are missing, check if brownfield exploration is needed. If neither requirements NOR exploration possible, HALT with message: "Test design requires clear requirements, acceptance criteria, or brownfield app URL for exploration"
 
 ---
 
@@ -75,21 +67,21 @@ criteria, or brownfield app URL for exploration"
    Determine mode based on context:
 
    **Requirements-Based Mode (DEFAULT)**:
-    - Have clear story/PRD with acceptance criteria
-    - Uses: Existing workflow (Steps 2-4)
-    - Appropriate for: Documented features, greenfield projects
+   - Have clear story/PRD with acceptance criteria
+   - Uses: Existing workflow (Steps 2-4)
+   - Appropriate for: Documented features, greenfield projects
 
    **Exploratory Mode (OPTIONAL - Brownfield)**:
-    - Missing/incomplete requirements AND brownfield application exists
-    - Uses: UI exploration to discover functionality
-    - Appropriate for: Undocumented brownfield apps, legacy systems
+   - Missing/incomplete requirements AND brownfield application exists
+   - Uses: UI exploration to discover functionality
+   - Appropriate for: Undocumented brownfield apps, legacy systems
 
 2. **Requirements-Based Mode (DEFAULT - Skip to Step 2)**
 
    If requirements are clear:
-    - Continue with existing workflow (Step 2: Assess and Classify Risks)
-    - Use loaded requirements from Step 1
-    - Proceed with risk assessment based on documented requirements
+   - Continue with existing workflow (Step 2: Assess and Classify Risks)
+   - Use loaded requirements from Step 1
+   - Proceed with risk assessment based on documented requirements
 
 3. **Exploratory Mode (OPTIONAL - Brownfield Apps)**
 
@@ -98,10 +90,10 @@ criteria, or brownfield app URL for exploration"
    **A. Check MCP Availability**
 
    If config.tea_use_mcp_enhancements is true AND Playwright MCP tools available:
-    - Use MCP-assisted exploration (Step 3.B)
+   - Use MCP-assisted exploration (Step 3.B)
 
    If MCP unavailable OR config.tea_use_mcp_enhancements is false:
-    - Use manual exploration fallback (Step 3.C)
+   - Use manual exploration fallback (Step 3.C)
 
    **B. MCP-Assisted Exploration (If MCP Tools Available)**
 
@@ -130,17 +122,17 @@ criteria, or brownfield app URL for exploration"
    ```
 
    **Discovery Documentation:**
-    - Create list of discovered features (pages, workflows, forms)
-    - Identify user journeys (navigation paths)
-    - Map API endpoints (from network requests)
-    - Note error states (from console messages)
-    - Capture screenshots for visual reference
+   - Create list of discovered features (pages, workflows, forms)
+   - Identify user journeys (navigation paths)
+   - Map API endpoints (from network requests)
+   - Note error states (from console messages)
+   - Capture screenshots for visual reference
 
    **Convert to Test Scenarios:**
-    - Transform discoveries into testable requirements
-    - Prioritize based on user flow criticality
-    - Identify risks from discovered functionality
-    - Continue with Step 2 (Assess and Classify Risks) using discovered requirements
+   - Transform discoveries into testable requirements
+   - Prioritize based on user flow criticality
+   - Identify risks from discovered functionality
+   - Continue with Step 2 (Assess and Classify Risks) using discovered requirements
 
    **C. Manual Exploration Fallback (If MCP Unavailable)**
 
@@ -168,15 +160,15 @@ criteria, or brownfield app URL for exploration"
    ```
 
    Wait for user to provide exploration findings, then:
-    - Parse user-provided discovery documentation
-    - Convert to testable requirements
-    - Continue with Step 2 (risk assessment)
+   - Parse user-provided discovery documentation
+   - Convert to testable requirements
+   - Continue with Step 2 (risk assessment)
 
 4. **Proceed to Risk Assessment**
 
    After mode selection (Requirements-Based OR Exploratory):
-    - Continue to Step 2: Assess and Classify Risks
-    - Use requirements from documentation (Requirements-Based) OR discoveries (Exploratory)
+   - Continue to Step 2: Assess and Classify Risks
+   - Use requirements from documentation (Requirements-Based) OR discoveries (Exploratory)
 
 ---
 
@@ -187,66 +179,66 @@ criteria, or brownfield app URL for exploration"
 1. **Identify Genuine Risks**
 
    Filter requirements to isolate actual risks (not just features):
-    - Unresolved technical gaps
-    - Security vulnerabilities
-    - Performance bottlenecks
-    - Data loss or corruption potential
-    - Business impact failures
-    - Operational deployment issues
+   - Unresolved technical gaps
+   - Security vulnerabilities
+   - Performance bottlenecks
+   - Data loss or corruption potential
+   - Business impact failures
+   - Operational deployment issues
 
 2. **Classify Risks by Category**
 
    Use these standard risk categories:
 
    **TECH** (Technical/Architecture):
-    - Architecture flaws
-    - Integration failures
-    - Scalability issues
-    - Technical debt
+   - Architecture flaws
+   - Integration failures
+   - Scalability issues
+   - Technical debt
 
    **SEC** (Security):
-    - Missing access controls
-    - Authentication bypass
-    - Data exposure
-    - Injection vulnerabilities
+   - Missing access controls
+   - Authentication bypass
+   - Data exposure
+   - Injection vulnerabilities
 
    **PERF** (Performance):
-    - SLA violations
-    - Response time degradation
-    - Resource exhaustion
-    - Scalability limits
+   - SLA violations
+   - Response time degradation
+   - Resource exhaustion
+   - Scalability limits
 
    **DATA** (Data Integrity):
-    - Data loss
-    - Data corruption
-    - Inconsistent state
-    - Migration failures
+   - Data loss
+   - Data corruption
+   - Inconsistent state
+   - Migration failures
 
    **BUS** (Business Impact):
-    - User experience degradation
-    - Business logic errors
-    - Revenue impact
-    - Compliance violations
+   - User experience degradation
+   - Business logic errors
+   - Revenue impact
+   - Compliance violations
 
    **OPS** (Operations):
-    - Deployment failures
-    - Configuration errors
-    - Monitoring gaps
-    - Rollback issues
+   - Deployment failures
+   - Configuration errors
+   - Monitoring gaps
+   - Rollback issues
 
 3. **Score Risk Probability**
 
    Rate likelihood (1-3):
-    - **1 (Unlikely)**: <10% chance, edge case
-    - **2 (Possible)**: 10-50% chance, known scenario
-    - **3 (Likely)**: >50% chance, common occurrence
+   - **1 (Unlikely)**: <10% chance, edge case
+   - **2 (Possible)**: 10-50% chance, known scenario
+   - **3 (Likely)**: >50% chance, common occurrence
 
 4. **Score Risk Impact**
 
    Rate severity (1-3):
-    - **1 (Minor)**: Cosmetic, workaround exists, limited users
-    - **2 (Degraded)**: Feature impaired, workaround difficult, affects many users
-    - **3 (Critical)**: System failure, data loss, no workaround, blocks usage
+   - **1 (Minor)**: Cosmetic, workaround exists, limited users
+   - **2 (Degraded)**: Feature impaired, workaround difficult, affects many users
+   - **3 (Critical)**: System failure, data loss, no workaround, blocks usage
 
 5. **Calculate Risk Score**
 
@@ -266,17 +258,17 @@ criteria, or brownfield app URL for exploration"
 7. **Request Clarification**
 
    If evidence is missing or assumptions required:
-    - Document assumptions clearly
-    - Request user clarification
-    - Do NOT speculate on business impact
+   - Document assumptions clearly
+   - Request user clarification
+   - Do NOT speculate on business impact
 
 8. **Plan Mitigations**
 
    For each high-priority risk:
-    - Define mitigation strategy
-    - Assign owner (dev, QA, ops)
-    - Set timeline
-    - Update residual risk expectation
+   - Define mitigation strategy
+   - Assign owner (dev, QA, ops)
+   - Set timeline
+   - Update residual risk expectation
 
 ---
 
@@ -287,10 +279,10 @@ criteria, or brownfield app URL for exploration"
 1. **Break Down Acceptance Criteria**
 
    Convert each acceptance criterion into atomic test scenarios:
-    - One scenario per testable behavior
-    - Scenarios are independent
-    - Scenarios are repeatable
-    - Scenarios tie back to risk mitigations
+   - One scenario per testable behavior
+   - Scenarios are independent
+   - Scenarios are repeatable
+   - Scenarios tie back to risk mitigations
 
 2. **Select Appropriate Test Levels**
 
@@ -299,28 +291,28 @@ criteria, or brownfield app URL for exploration"
    Map requirements to optimal test levels (avoid duplication):
 
    **E2E (End-to-End)**:
-    - Critical user journeys
-    - Multi-system integration
-    - Production-like environment
-    - Highest confidence, slowest execution
+   - Critical user journeys
+   - Multi-system integration
+   - Production-like environment
+   - Highest confidence, slowest execution
 
    **API (Integration)**:
-    - Service contracts
-    - Business logic validation
-    - Fast feedback
-    - Good for complex scenarios
+   - Service contracts
+   - Business logic validation
+   - Fast feedback
+   - Good for complex scenarios
 
    **Component**:
-    - UI component behavior
-    - Interaction testing
-    - Visual regression
-    - Fast, isolated
+   - UI component behavior
+   - Interaction testing
+   - Visual regression
+   - Fast, isolated
 
    **Unit**:
-    - Business logic
-    - Edge cases
-    - Error handling
-    - Fastest, most granular
+   - Business logic
+   - Edge cases
+   - Error handling
+   - Fastest, most granular
 
    **Avoid duplicate coverage**: Don't test same behavior at multiple levels unless necessary.
 
@@ -329,45 +321,45 @@ criteria, or brownfield app URL for exploration"
    **Knowledge Base Reference**: `test-priorities-matrix.md`
 
    **P0 (Critical)**:
-    - Blocks core user journey
-    - High-risk areas (score ≥6)
-    - Revenue-impacting
-    - Security-critical
-    - **Run on every commit**
+   - Blocks core user journey
+   - High-risk areas (score ≥6)
+   - Revenue-impacting
+   - Security-critical
+   - **Run on every commit**
 
    **P1 (High)**:
-    - Important user features
-    - Medium-risk areas (score 3-4)
-    - Common workflows
-    - **Run on PR to main**
+   - Important user features
+   - Medium-risk areas (score 3-4)
+   - Common workflows
+   - **Run on PR to main**
 
    **P2 (Medium)**:
-    - Secondary features
-    - Low-risk areas (score 1-2)
-    - Edge cases
-    - **Run nightly or weekly**
+   - Secondary features
+   - Low-risk areas (score 1-2)
+   - Edge cases
+   - **Run nightly or weekly**
 
    **P3 (Low)**:
-    - Nice-to-have
-    - Exploratory
-    - Performance benchmarks
-    - **Run on-demand**
+   - Nice-to-have
+   - Exploratory
+   - Performance benchmarks
+   - **Run on-demand**
 
 4. **Outline Data and Tooling Prerequisites**
 
    For each test scenario, identify:
-    - Test data requirements (factories, fixtures)
-    - External services (mocks, stubs)
-    - Environment setup
-    - Tools and dependencies
+   - Test data requirements (factories, fixtures)
+   - External services (mocks, stubs)
+   - Environment setup
+   - Tools and dependencies
 
 5. **Define Execution Order**
 
    Recommend test execution sequence:
-    1. **Smoke tests** (P0 subset, <5 min)
-    2. **P0 tests** (critical paths, <10 min)
-    3. **P1 tests** (important features, <30 min)
-    4. **P2/P3 tests** (full regression, <60 min)
+   1. **Smoke tests** (P0 subset, <5 min)
+   2. **P0 tests** (critical paths, <10 min)
+   3. **P1 tests** (important features, <30 min)
+   4. **P2/P3 tests** (full regression, <60 min)
 
 ---
 
@@ -526,21 +518,15 @@ Examples:
 
 **Core Fragments (Auto-loaded in Step 1):**
 
-- `risk-governance.md` - Risk classification (6 categories), automated scoring, gate decision engine, coverage
-  traceability, owner tracking (625 lines, 4 examples)
-- `probability-impact.md` - Probability × impact matrix, automated classification thresholds, dynamic re-assessment,
-  gate integration (604 lines, 4 examples)
-- `test-levels-framework.md` - E2E vs API vs Component vs Unit decision framework with characteristics matrix (467
-  lines, 4 examples)
-- `test-priorities-matrix.md` - P0-P3 automated priority calculation, risk-based mapping, tagging strategy, time
-  budgets (389 lines, 2 examples)
+- `risk-governance.md` - Risk classification (6 categories), automated scoring, gate decision engine, coverage traceability, owner tracking (625 lines, 4 examples)
+- `probability-impact.md` - Probability × impact matrix, automated classification thresholds, dynamic re-assessment, gate integration (604 lines, 4 examples)
+- `test-levels-framework.md` - E2E vs API vs Component vs Unit decision framework with characteristics matrix (467 lines, 4 examples)
+- `test-priorities-matrix.md` - P0-P3 automated priority calculation, risk-based mapping, tagging strategy, time budgets (389 lines, 2 examples)
 
 **Reference for Test Planning:**
 
-- `selective-testing.md` - Execution strategy: tag-based, spec filters, diff-based selection, promotion rules (727
-  lines, 4 examples)
-- `fixture-architecture.md` - Data setup patterns: pure function → fixture → mergeTests, auto-cleanup (406 lines, 5
-  examples)
+- `selective-testing.md` - Execution strategy: tag-based, spec filters, diff-based selection, promotion rules (727 lines, 4 examples)
+- `fixture-architecture.md` - Data setup patterns: pure function → fixture → mergeTests, auto-cleanup (406 lines, 5 examples)
 
 **Manual Reference (Optional):**
 

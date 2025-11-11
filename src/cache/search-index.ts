@@ -78,7 +78,10 @@ export class FtsSearchEngine {
 
             const indexTime = performance.now() - startTime;
 
-            console.log(`Indexed standard ${standard.id} in ${indexTime.toFixed(2)}ms`);
+            // Suppress debug messages during tests to reduce noise
+          if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+              console.log(`Indexed standard ${standard.id} in ${indexTime.toFixed(2)}ms`);
+          }
 
         } catch (error) {
             console.error(`Failed to index standard ${standard.id}:`, error);
@@ -105,7 +108,10 @@ export class FtsSearchEngine {
                 console.warn(`Failed to rebuild FTS5 index after removing ${standardId}:`, error);
             }
 
-            console.log(`Removed standard ${standardId} from search index`);
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log(`Removed standard ${standardId} from search index`);
+            }
 
         } catch (error) {
             console.error(`Failed to remove standard ${standardId}:`, error);
@@ -563,7 +569,10 @@ export class FtsSearchEngine {
             // Analyze content table for query optimization
             await this.db.execute(`ANALYZE ${this.contentTable}`);
 
-            console.log('Search index optimized successfully');
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log('Search index optimized successfully');
+            }
 
         } catch (error) {
             console.error('Failed to optimize search index:', error);
@@ -580,7 +589,10 @@ export class FtsSearchEngine {
             // FTS5 will automatically sync via content parameter triggers
             await this.db.execute(`DELETE FROM ${this.contentTable}`);
 
-            console.log('Search index cleared');
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log('Search index cleared');
+            }
 
         } catch (error) {
             console.error('Failed to clear search index:', error);

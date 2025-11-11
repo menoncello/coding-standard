@@ -2,18 +2,13 @@
 
 ## Principle
 
-Race conditions arise when tests make assumptions about asynchronous timing (network, animations, state updates). *
-*Deterministic waiting** eliminates flakiness by explicitly waiting for observable events (network responses, element
-state changes) instead of arbitrary timeouts.
+Race conditions arise when tests make assumptions about asynchronous timing (network, animations, state updates). **Deterministic waiting** eliminates flakiness by explicitly waiting for observable events (network responses, element state changes) instead of arbitrary timeouts.
 
 ## Rationale
 
-**The Problem**: Tests pass locally but fail in CI (different timing), or pass/fail randomly (race conditions). Hard
-waits (`waitForTimeout`, `sleep`) mask timing issues without solving them.
+**The Problem**: Tests pass locally but fail in CI (different timing), or pass/fail randomly (race conditions). Hard waits (`waitForTimeout`, `sleep`) mask timing issues without solving them.
 
-**The Solution**: Replace all hard waits with event-based waits (`waitForResponse`, `waitFor({ state })`). Implement
-network-first pattern (intercept before navigate). Use explicit state checks (loading spinner detached, data loaded).
-This makes tests deterministic regardless of network speed or system load.
+**The Solution**: Replace all hard waits with event-based waits (`waitForResponse`, `waitFor({ state })`). Implement network-first pattern (intercept before navigate). Use explicit state checks (loading spinner detached, data loaded). This makes tests deterministic regardless of network speed or system load.
 
 **Why This Matters**:
 
@@ -370,11 +365,8 @@ Before deploying tests:
 
 ## Integration Points
 
-- **Used in workflows**: `*automate` (healing timing failures), `*test-review` (detect hard wait anti-patterns),
-  `*framework` (configure timeout standards)
-- **Related fragments**: `test-healing-patterns.md` (race condition diagnosis), `network-first.md` (interception
-  patterns), `playwright-config.md` (timeout configuration), `visual-debugging.md` (trace viewer analysis)
+- **Used in workflows**: `*automate` (healing timing failures), `*test-review` (detect hard wait anti-patterns), `*framework` (configure timeout standards)
+- **Related fragments**: `test-healing-patterns.md` (race condition diagnosis), `network-first.md` (interception patterns), `playwright-config.md` (timeout configuration), `visual-debugging.md` (trace viewer analysis)
 - **Tools**: Playwright Inspector (`--debug`), Trace Viewer (`--trace on`), DevTools Network tab
 
-_Source: Playwright timing best practices, network-first pattern from test-resources-for-ai, production race condition
-debugging_
+_Source: Playwright timing best practices, network-first pattern from test-resources-for-ai, production race condition debugging_

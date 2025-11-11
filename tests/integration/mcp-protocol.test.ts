@@ -51,11 +51,14 @@ describe('MCP Protocol Integration Tests', () => {
     test('should list available tools', async () => {
         const result = await client.listTools();
 
-        expect(result.tools).toHaveLength(3);
+        expect(result.tools).toHaveLength(6);
         expect(result.tools.map(t => t.name)).toEqual([
             'getStandards',
             'searchStandards',
-            'validateCode'
+            'validateCode',
+            'addStandard',
+            'removeStandard',
+            'getRegistryStats'
         ]);
 
         // Check tool schemas
@@ -156,6 +159,81 @@ class testClass {
                 }
             })
         ).rejects.toThrow();
+    });
+
+    test('should handle addStandard tool call', async () => {
+        // Use a unique pattern to avoid conflicts with existing rules
+        const uniquePattern = `^Test-[A-Z][a-zA-Z0-9]*-${Date.now()}$`;
+        const semanticName = `test-naming-convention-${Date.now()}`;
+
+        const result = await client.callTool({
+            name: 'addStandard',
+            arguments: {
+                semanticName,
+                pattern: uniquePattern,
+                description: 'Test naming convention for classes',
+                category: 'naming',
+                technology: 'typescript',
+                severity: 'error'
+            }
+        });
+
+        expect(result.content).toHaveLength(1);
+        expect(result.content[0].type).toBe('text');
+
+        const response = JSON.parse(result.content[0].text as string);
+
+        // Check that we got a valid response structure
+        expect(response).toHaveProperty('success');
+        expect(response).toHaveProperty('message');
+        expect(response).toHaveProperty('responseTime');
+
+        // Should be successful with unique pattern
+        expect(response.success).toBe(true);
+        expect(response.id).toBeDefined();
+        expect(response.responseTime).toBeGreaterThanOrEqual(0);
+    });
+
+    test('should handle removeStandard tool call', async () => {
+        // Use a unique semantic name that likely doesn't exist yet
+        const semanticName = `nonexistent-standard-${Date.now()}`;
+
+        const result = await client.callTool({
+            name: 'removeStandard',
+            arguments: {
+                semanticName,
+                force: true
+            }
+        });
+
+        expect(result.content).toHaveLength(1);
+        expect(result.content[0].type).toBe('text');
+
+        const response = JSON.parse(result.content[0].text as string);
+        expect(response).toHaveProperty('success');
+        expect(response).toHaveProperty('message');
+        expect(response).toHaveProperty('responseTime');
+
+        // Should handle both existing and non-existent standards
+        expect(typeof response.success).toBe('boolean');
+        expect(response.responseTime).toBeGreaterThanOrEqual(0);
+    });
+
+    test('should handle getRegistryStats tool call', async () => {
+        const result = await client.callTool({
+            name: 'getRegistryStats',
+            arguments: {}
+        });
+
+        expect(result.content).toHaveLength(1);
+        expect(result.content[0].type).toBe('text');
+
+        const response = JSON.parse(result.content[0].text as string);
+        expect(response.registryStats).toBeDefined();
+        expect(response.registryStats.totalRules).toBeGreaterThanOrEqual(0);
+        expect(response.registryStats.rulesByCategory).toBeDefined();
+        expect(response.registryStats.rulesByTechnology).toBeDefined();
+        expect(response.responseTime).toBeGreaterThanOrEqual(0);
     });
 
     test('should handle unknown tool name', async () => {

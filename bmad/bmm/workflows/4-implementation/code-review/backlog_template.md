@@ -9,4 +9,4 @@ Routing guidance:
 - Same-epic improvements may also be captured under the epic Tech Spec `Post-Review Follow-ups` section.
 
 | Date | Story | Epic | Type | Severity | Owner | Status | Notes |
-|------|-------|------|------|----------|-------|--------|-------|
+| ---- | ----- | ---- | ---- | -------- | ----- | ------ | ----- |

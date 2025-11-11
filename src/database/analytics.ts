@@ -74,7 +74,10 @@ export class DatabaseAnalytics {
 
         // If already using in-memory fallback, skip database operations
         if (this.useInMemoryFallback) {
-            console.debug('Using in-memory fallback for analytics recording');
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.debug('Using in-memory fallback for analytics recording');
+            }
             this.inMemoryEvents.push(eventData);
             return;
         }

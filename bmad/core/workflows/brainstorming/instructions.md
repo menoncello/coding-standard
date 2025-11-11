@@ -178,14 +178,14 @@ For each technique:
 
 1. **Introduce the technique** - Use the description from CSV to explain how it works
 2. **Provide the first prompt** - Use facilitation_prompts from CSV (pipe-separated prompts)
-    - Parse facilitation_prompts field and select appropriate prompts
-    - These are your conversation starters and follow-ups
+   - Parse facilitation_prompts field and select appropriate prompts
+   - These are your conversation starters and follow-ups
 3. **Wait for their response** - Let them generate ideas
 4. **Build on their ideas** - Use "Yes, and..." or "That reminds me..." or "What if we also..."
 5. **Ask follow-up questions** - "Tell me more about...", "How would that work?", "What else?"
 6. **Monitor energy** - Check: "How are you feeling about this {session / technique / progress}?"
-    - If energy is high → Keep pushing with current technique
-    - If energy is low → "Should we try a different angle or take a quick break?"
+   - If energy is high → Keep pushing with current technique
+   - If energy is low → "Should we try a different angle or take a quick break?"
 7. **Keep momentum** - Celebrate: "Great! You've generated [X] ideas so far!"
 8. **Document everything** - Capture all ideas for the final report
 
@@ -195,8 +195,8 @@ Example facilitation flow for any technique:
 1. Introduce: "Let's try [technique_name]. [Adapt description from CSV to their context]."
 
 2. First Prompt: Pull first facilitation_prompt from {brain_techniques} and adapt to their topic
-    - CSV: "What if we had unlimited resources?"
-    - Adapted: "What if you had unlimited resources for [their_topic]?"
+   - CSV: "What if we had unlimited resources?"
+   - Adapted: "What if you had unlimited resources for [their_topic]?"
 
 3. Build on Response: Use "Yes, and..." or "That reminds me..." or "Building on that..."
 
@@ -277,12 +277,9 @@ For each priority:
 3. Determine resource needs
 4. Set realistic timeline
 
-<template-output>priority_1_name, priority_1_rationale, priority_1_steps, priority_1_resources, priority_1_timeline<
-/template-output>
-<template-output>priority_2_name, priority_2_rationale, priority_2_steps, priority_2_resources, priority_2_timeline<
-/template-output>
-<template-output>priority_3_name, priority_3_rationale, priority_3_steps, priority_3_resources, priority_3_timeline<
-/template-output>
+<template-output>priority_1_name, priority_1_rationale, priority_1_steps, priority_1_resources, priority_1_timeline</template-output>
+<template-output>priority_2_name, priority_2_rationale, priority_2_steps, priority_2_resources, priority_2_timeline</template-output>
+<template-output>priority_3_name, priority_3_rationale, priority_3_steps, priority_3_resources, priority_3_timeline</template-output>
 
 </step>
 

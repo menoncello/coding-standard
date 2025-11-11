@@ -97,7 +97,10 @@ export class DatabaseConnection {
             this.isInitialized = true;
             const initTime = performance.now() - startTime;
 
-            console.log(`Database initialized in ${initTime.toFixed(2)}ms`);
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log(`Database initialized in ${initTime.toFixed(2)}ms`);
+            }
 
         } catch (error) {
             throw new Error(`Database initialization failed: ${error}`);
@@ -191,7 +194,10 @@ export class DatabaseConnection {
                                             sql.includes('sqlite_stat');
 
                     if (isAnalysisOperation) {
-                        console.debug('Database locked during analysis operation, continuing:', error.message);
+                        // Suppress debug messages during tests to reduce noise
+                        if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                            console.debug('Database locked during analysis operation, continuing:', error.message);
+                        }
                         return []; // Return empty result for analysis operations
                     }
 
@@ -203,7 +209,10 @@ export class DatabaseConnection {
                                      error.message.includes('test-data');
 
                     if (isTestEnv) {
-                        console.debug('Disk I/O error in test environment, using fallback behavior:', error.message);
+                        // Suppress debug messages during tests to reduce noise
+                        if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                            console.debug('Disk I/O error in test environment, using fallback behavior:', error.message);
+                        }
                         // For test environments, provide fallback behavior that allows tests to continue
                         if (sql.trim().toUpperCase().startsWith('SELECT') ||
                             sql.trim().toUpperCase().startsWith('PRAGMA')) {
@@ -232,7 +241,10 @@ export class DatabaseConnection {
                                      error.message.includes('test-data');
 
                     if (isTestEnv) {
-                        console.debug('Table not found in test environment, falling back:', error.message);
+                        // Suppress debug messages during tests to reduce noise
+                if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                    console.debug('Table not found in test environment, falling back:', error.message);
+                }
                         // Return empty result for SELECT queries on missing tables
                         if (sql.trim().toUpperCase().startsWith('SELECT') ||
                             sql.trim().toUpperCase().startsWith('PRAGMA')) {
