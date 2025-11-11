@@ -3,6 +3,7 @@ import { StandardRule, SearchQuery, SearchResult, RegistryStats, RegistryConfig,
 import { StandardValidator } from './validator.js';
 import { SemanticNamingService } from './semantic-naming.js';
 import { performanceMonitor } from '../utils/performance-monitor.js';
+import { Logger, LoggerFactory } from '../utils/logger/logger-factory.js';
 
 /**
  * Standards Registry with memory → SQLite → file system architecture
@@ -14,8 +15,11 @@ export class StandardsRegistry {
     private config: RegistryConfig;
     private rules: Map<string, StandardRule> = new Map();
     private isInitialized = false;
+    private logger: Logger;
 
-    constructor(dbPath: string = './standards-registry.db', config?: Partial<RegistryConfig>) {
+    constructor(dbPath: string = './standards-registry.db', config?: Partial<RegistryConfig>, logger?: Logger) {
+        this.logger = logger || LoggerFactory.getInstance();
+
         this.config = {
             cacheEnabled: true,
             cacheTtl: 5 * 60 * 1000, // 5 minutes
@@ -204,7 +208,7 @@ export class StandardsRegistry {
                 // Log warnings
                 if (validation.warnings.length > 0) {
                     const warningMessages = validation.warnings.map(w => `${w.field}: ${w.message}`).join('; ');
-                    console.warn(`Validation warnings for rule ${rule.semanticName}: ${warningMessages}`);
+                    this.logger.warn(`Validation warnings for rule ${rule.semanticName}: ${warningMessages}`);
                 }
             }
 

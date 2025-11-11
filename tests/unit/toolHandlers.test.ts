@@ -4,8 +4,17 @@ import {McpErrorHandler} from '../../src/mcp/handlers/errorHandler.js';
 import {rmSync, existsSync} from 'node:fs';
 import { StandardsRegistry } from '../../src/standards/registry.js';
 import { StandardRule } from '../../src/standards/types.js';
+// Factory imports
+import { DatabaseFactory } from '../../src/factories/database-factory.js';
+import { CacheFactory } from '../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../src/utils/logger/logger-factory.js';
 
 describe('GetStandardsHandler', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let testHandler: GetStandardsHandler;
     let registry: StandardsRegistry;
     const testDbPath = './test-standards-registry.db';
@@ -88,7 +97,7 @@ describe('GetStandardsHandler', () => {
         await seedTestData(registry);
 
         // Create test handler using the same registry
-        testHandler = new GetStandardsHandler(false, testDbPath);
+        testHandler = ToolHandlersFactory.createGetStandardsHandler(false, testDbPath);
 
         // Replace the handler's registry with our seeded one
         testHandler['registry'] = registry;

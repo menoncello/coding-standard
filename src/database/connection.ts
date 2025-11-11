@@ -1,5 +1,6 @@
 import { Database } from 'bun:sqlite';
 import { DatabaseConfig, DatabaseMetrics, ConnectionPoolConfig } from '../types/database.js';
+import { Logger } from '../utils/logger/logger.js';
 
 /**
  * Database connection manager with WAL mode and connection pooling
@@ -10,8 +11,9 @@ export class DatabaseConnection {
     private metrics: DatabaseMetrics;
     private isInitialized = false;
     private initPromise: Promise<void> | null = null;
+    private logger: Logger;
 
-    constructor(config: Partial<DatabaseConfig> = {}) {
+    constructor(config: Partial<DatabaseConfig> = {}, logger: Logger) {
         this.config = {
             path: './data/coding-standards.db',
             walMode: true,
@@ -37,6 +39,8 @@ export class DatabaseConnection {
             databaseSize: 0,
             journalSize: 0
         };
+
+        this.logger = logger;
     }
 
     /**
@@ -97,10 +101,7 @@ export class DatabaseConnection {
             this.isInitialized = true;
             const initTime = performance.now() - startTime;
 
-            // Suppress debug messages during tests to reduce noise
-            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
-                console.log(`Database initialized in ${initTime.toFixed(2)}ms`);
-            }
+            this.logger.info(`Database initialized in ${initTime.toFixed(2)}ms`);
 
         } catch (error) {
             throw new Error(`Database initialization failed: ${error}`);
@@ -194,10 +195,7 @@ export class DatabaseConnection {
                                             sql.includes('sqlite_stat');
 
                     if (isAnalysisOperation) {
-                        // Suppress debug messages during tests to reduce noise
-                        if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
-                            console.debug('Database locked during analysis operation, continuing:', error.message);
-                        }
+                        this.logger.debug('Database locked during analysis operation, continuing:', error.message);
                         return []; // Return empty result for analysis operations
                     }
 
@@ -209,10 +207,7 @@ export class DatabaseConnection {
                                      error.message.includes('test-data');
 
                     if (isTestEnv) {
-                        // Suppress debug messages during tests to reduce noise
-                        if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
-                            console.debug('Disk I/O error in test environment, using fallback behavior:', error.message);
-                        }
+                        this.logger.debug('Disk I/O error in test environment, using fallback behavior:', error.message);
                         // For test environments, provide fallback behavior that allows tests to continue
                         if (sql.trim().toUpperCase().startsWith('SELECT') ||
                             sql.trim().toUpperCase().startsWith('PRAGMA')) {
@@ -232,7 +227,7 @@ export class DatabaseConnection {
                     }
                 } else if (error.message.includes('cannot rollback') || error.message.includes('cannot commit')) {
                     // Handle transaction errors gracefully - don't treat as critical error
-                    console.debug(`Transaction operation failed: ${error.message}`);
+                    this.logger.debug(`Transaction operation failed: ${error.message}`);
                     return { changes: 0, lastInsertRowid: 0 };
                 } else if (error.message.includes('no such table')) {
                     // Handle missing table errors in test environment
@@ -241,10 +236,7 @@ export class DatabaseConnection {
                                      error.message.includes('test-data');
 
                     if (isTestEnv) {
-                        // Suppress debug messages during tests to reduce noise
-                if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
-                    console.debug('Table not found in test environment, falling back:', error.message);
-                }
+                        this.logger.debug('Table not found in test environment, falling back:', error.message);
                         // Return empty result for SELECT queries on missing tables
                         if (sql.trim().toUpperCase().startsWith('SELECT') ||
                             sql.trim().toUpperCase().startsWith('PRAGMA')) {
@@ -294,7 +286,7 @@ export class DatabaseConnection {
                     try {
                         await this.execute('ROLLBACK');
                     } catch (rollbackError) {
-                        console.debug('Rollback operation failed:', rollbackError);
+                        this.logger.debug('Rollback operation failed:', rollbackError);
                     }
                     transactionActive = false;
                 }
@@ -304,7 +296,7 @@ export class DatabaseConnection {
                     (error.message.includes('database table is locked') ||
                      error.message.includes('database is locked'))) {
                     retries++;
-                    console.debug(`Transaction retry ${retries}/${maxRetries} due to: ${error.message}`);
+                    this.logger.debug(`Transaction retry ${retries}/${maxRetries} due to: ${error.message}`);
                     // Wait a short time before retrying
                     await new Promise(resolve => setTimeout(resolve, 10 * retries));
                     continue;
@@ -440,26 +432,26 @@ export class DatabaseConnection {
                         // Don't treat table lock as critical error during close
                         if (checkpointError instanceof Error &&
                             checkpointError.message.includes('database table is locked')) {
-                            console.debug('Final checkpoint skipped due to table lock during close - this is normal in test environments');
+                            this.logger.debug('Final checkpoint skipped due to table lock during close - this is normal in test environments');
                         } else {
-                            console.warn('Final checkpoint failed during close:', checkpointError);
+                            this.logger.warn('Final checkpoint failed during close:', checkpointError);
                         }
                         // Continue with close even if checkpoint fails
                     }
                 }
             } catch (error) {
-                console.warn('Database cleanup error during close:', error);
+                this.logger.warn('Database cleanup error during close:', error);
             }
 
             try {
                 this.db.close();
             } catch (closeError) {
-                console.warn('Database close error:', closeError);
+                this.logger.warn('Database close error:', closeError);
                 // Force close if graceful close fails
                 try {
                     this.db.close();
                 } catch (forceCloseError) {
-                    console.warn('Force close also failed:', forceCloseError);
+                    this.logger.warn('Force close also failed:', forceCloseError);
                 }
             }
 

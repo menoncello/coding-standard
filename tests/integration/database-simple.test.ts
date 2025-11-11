@@ -1,17 +1,22 @@
 import { test, expect, describe, beforeAll, afterAll } from 'bun:test';
 import { DatabaseConnection } from '../../src/database/connection.js';
+// Factory imports
+import { DatabaseFactory } from '../../src/factories/database-factory.js';
+import { LoggerFactory } from '../../src/utils/logger/logger-factory.js';
 
 describe('Database Simple Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let db: DatabaseConnection;
 
     beforeAll(async () => {
-        db = new DatabaseConnection({
+        db = DatabaseFactory.createDatabaseConnection({
             path: './test-simple.db',
             walMode: true,
             foreignKeys: true,
             cacheSize: 1000,
             busyTimeout: 5000
-        });
+        }, testLogger);
 
         await db.initialize();
     });
@@ -27,7 +32,7 @@ describe('Database Simple Tests', () => {
             if (fs.existsSync('./test-simple.db-wal')) fs.unlinkSync('./test-simple.db-wal');
             if (fs.existsSync('./test-simple.db-shm')) fs.unlinkSync('./test-simple.db-shm');
         } catch (error) {
-            console.warn('Failed to cleanup test files:', error);
+            testLogger.warn('Failed to cleanup test files:', error);
         }
     });
 

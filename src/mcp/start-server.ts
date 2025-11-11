@@ -1,9 +1,11 @@
 #!/usr/bin/env bun
 
-import CodingStandardsServer from './server.js';
+import { McpFactory } from '../factories/mcp-factory.js';
+import { LoggerFactory } from '../utils/logger/logger-factory.js';
 
-const server = new CodingStandardsServer();
+const logger = LoggerFactory.getInstance();
+const server = McpFactory.createServer();
 server.run().catch((error) => {
-    console.error('Server failed to start:', error);
+    logger.error('Server failed to start:', error);
     process.exit(1);
 });

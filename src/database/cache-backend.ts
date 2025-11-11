@@ -1,6 +1,7 @@
 import { CacheManager, CacheConfig, CacheEntry } from '../cache/cache-manager.js';
 import { DatabaseConnection } from './connection.js';
 import { CacheSchema, CacheStats } from '../types/database.js';
+import { Logger } from '../utils/logger/logger.js';
 
 /**
  * SQLite cache configuration
@@ -12,6 +13,7 @@ export interface SqliteCacheConfig extends CacheConfig {
     cleanupInterval: number; // Cleanup expired entries interval in ms
     compressionEnabled: boolean;
     encryptionKey?: string;
+    logger?: Logger;
 }
 
 /**
@@ -24,11 +26,13 @@ export class SqliteCacheBackend<T = any> extends CacheManager<T> {
     private cleanupTimer: Timer | null = null;
     private isDirty = false;
     private tableName = 'standards_cache';
+    private logger: Logger;
 
-    constructor(config: SqliteCacheConfig) {
+    constructor(config: SqliteCacheConfig, logger: Logger) {
         super(config);
         this.config = config;
         this.db = config.database || null;
+        this.logger = logger;
 
         if (config.persistToDisk && this.db) {
             this.startBackgroundTasks();

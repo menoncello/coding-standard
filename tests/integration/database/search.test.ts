@@ -3,8 +3,17 @@ import { DatabaseConnection } from '../../../src/database/connection.js';
 import { DatabaseSchema } from '../../../src/database/schema.js';
 import { FtsSearchEngine } from '../../../src/cache/search-index.js';
 import { createSearchableStandards, createStandard } from '../../support/factories/standard-factory.js';
+// Factory imports
+import { DatabaseFactory } from '../../../src/factories/database-factory.js';
+import { CacheFactory } from '../../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../../src/utils/logger/logger-factory.js';
 
 describe('P1 - FTS Search Engine Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let db: DatabaseConnection;
     let schema: DatabaseSchema;
     let searchEngine: FtsSearchEngine;
@@ -12,13 +21,13 @@ describe('P1 - FTS Search Engine Tests', () => {
 
     beforeAll(async () => {
         testDbPath = `./test-data-${Date.now()}.db`;
-        db = new DatabaseConnection({
+        db = DatabaseFactory.createDatabaseConnection({
             path: testDbPath,
             walMode: true,
             foreignKeys: true,
             cacheSize: 1000,
             busyTimeout: 5000
-        });
+        }, testLogger);
 
         await db.initialize();
         schema = new DatabaseSchema(db);

@@ -1,4 +1,6 @@
 import { performance } from 'node:perf_hooks';
+import { Logger } from './logger/logger.js';
+import { LoggerFactory } from './logger/logger-factory.js';
 
 /**
  * Performance metrics interface
@@ -59,6 +61,11 @@ export class PerformanceMonitor {
     private initialStartTime: number = Date.now();
     private maxMetrics: number = 10000; // Keep last 10,000 metrics
     private operationTimers = new Map<string, number>();
+    private logger: Logger;
+
+    constructor(logger: Logger) {
+        this.logger = logger;
+    }
 
     /**
      * Start timing an operation
@@ -75,10 +82,7 @@ export class PerformanceMonitor {
     endTimer(timerId: string, operation: string, success: boolean = true, cacheHit: boolean = false, data?: any): number {
         const startTime = this.operationTimers.get(timerId);
         if (!startTime) {
-            // Silently handle missing timers during tests to avoid console noise
-            if (process.env.NODE_ENV !== 'test') {
-                console.warn(`Timer ${timerId} not found`);
-            }
+            this.logger.warn(`Timer ${timerId} not found`);
             return 0;
         }
 
@@ -326,7 +330,7 @@ ${operations.map(op => `  ${op.operation}: ${op.count} requests, ${Math.round(op
 /**
  * Global performance monitor instance
  */
-export const performanceMonitor = new PerformanceMonitor();
+export const performanceMonitor = new PerformanceMonitor(LoggerFactory.getInstance());
 
 /**
  * Decorator to automatically measure function performance

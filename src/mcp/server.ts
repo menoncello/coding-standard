@@ -23,13 +23,18 @@ import {
 import {McpErrorHandler} from './handlers/errorHandler.js';
 import {getStandardsHandler, standardsRegistryHandler} from './handlers/toolHandlers.js';
 import {performance} from 'perf_hooks';
+import { LoggerFactory } from '../utils/logger/logger-factory.js';
 
-class CodingStandardsServer {
+type Logger = ReturnType<typeof LoggerFactory.createLogger>;
+
+export default class CodingStandardsServer {
     private server: Server;
     private startTime: number;
+    private logger: Logger;
 
-    constructor() {
+    constructor(logger: Logger) {
         this.startTime = performance.now();
+        this.logger = logger;
         this.server = new Server(
             {
                 name: 'coding-standards-server',
@@ -265,17 +270,16 @@ class CodingStandardsServer {
     async run(): Promise<void> {
         const transport = new StdioServerTransport();
         await this.server.connect(transport);
-        console.error('Coding Standards MCP Server running on stdio');
+        this.logger.info('Coding Standards MCP Server running on stdio');
     }
 }
 
 // Start server if this file is run directly
 if (import.meta.main) {
-    const server = new CodingStandardsServer();
+    const logger = LoggerFactory.getInstance();
+    const server = new CodingStandardsServer(logger);
     server.run().catch((error) => {
-        console.error('Server failed to start:', error);
+        logger.error('Server failed to start:', error);
         process.exit(1);
     });
 }
-
-export default CodingStandardsServer;

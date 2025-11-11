@@ -7,12 +7,21 @@ import {
     memoryMonitor,
     MemoryMonitor
 } from '../../src/utils/performance-monitor.js';
+// Factory imports
+import { DatabaseFactory } from '../../src/factories/database-factory.js';
+import { CacheFactory } from '../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../src/factories/standards-factory.js';
+import { LoggerFactory } from '../../src/utils/logger/logger-factory.js';
 
 describe('PerformanceMonitor Integration Tests', () => {
+    // Test logger setup
+const testLogger = LoggerFactory.createTestLogger(true);
     let monitor: PerformanceMonitor;
 
     beforeEach(() => {
-        monitor = new PerformanceMonitor();
+        monitor = PerformanceFactory.createPerformanceMonitor();
         // Clear the global performance monitor to ensure clean state for decorator tests
         performanceMonitor.clearMetrics();
     });
@@ -78,7 +87,7 @@ describe('PerformanceMonitor Integration Tests', () => {
         });
 
         test('should limit stored metrics to max size', () => {
-            const smallMonitor = new PerformanceMonitor();
+            const smallMonitor = PerformanceFactory.createPerformanceMonitor();
             (smallMonitor as any).maxMetrics = 3;
 
             // Add more metrics than the limit
@@ -170,7 +179,7 @@ describe('PerformanceMonitor Integration Tests', () => {
         });
 
         test('should handle empty metrics correctly', () => {
-            const emptyMonitor = new PerformanceMonitor();
+            const emptyMonitor = PerformanceFactory.createPerformanceMonitor();
             const stats = emptyMonitor.getStats();
 
             expect(stats.totalRequests).toBe(0);

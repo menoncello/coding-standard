@@ -3,13 +3,27 @@ import { StandardsLoader } from '../../src/standards/standards-loader.js';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
+// Factory imports
+import { DatabaseFactory } from '../../src/factories/database-factory.js';
+import { CacheFactory } from '../../src/factories/cache-factory.js';
+import { ToolHandlersFactory } from '../../src/factories/tool-handlers-factory.js';
+import { PerformanceFactory } from '../../src/factories/performance-factory.js';
+import { StandardsFactory } from '../../src/factories/standards-factory.js';
 
 describe('StandardsLoader Integration Tests', () => {
+    // Test logger setup - using dummy logger to avoid import issues
+const testLogger = {
+    debug: () => {},
+    info: () => {},
+    warn: () => {},
+    error: () => {},
+    log: () => {}
+};
     let loader: StandardsLoader;
     let testProjectRoot: string;
 
     beforeEach(async () => {
-        loader = new StandardsLoader();
+        loader = StandardsFactory.createStandardsLoader();
         testProjectRoot = process.cwd();
     });
 
@@ -89,7 +103,7 @@ describe('StandardsLoader Integration Tests', () => {
             mkdirSync(tempDir, { recursive: true });
 
             try {
-                const tempLoader = new StandardsLoader(tempDir);
+                const tempLoader = StandardsFactory.createStandardsLoader(tempDir);
                 const standards = await tempLoader.loadStandards();
 
                 // Should not crash and should return empty array when no config files exist
@@ -223,7 +237,7 @@ describe('StandardsLoader Integration Tests', () => {
                 const invalidEslintPath = path.join(tempDir, 'eslint.config.js');
                 writeFileSync(invalidEslintPath, 'invalid javascript code {');
 
-                const tempLoader = new StandardsLoader(tempDir);
+                const tempLoader = StandardsFactory.createStandardsLoader(tempDir);
                 const standards = await tempLoader.loadStandards();
 
                 // Should not crash, just skip the invalid config
@@ -244,7 +258,7 @@ describe('StandardsLoader Integration Tests', () => {
                 const invalidJsonPath = path.join(tempDir, 'biome.json');
                 writeFileSync(invalidJsonPath, '{ invalid json }');
 
-                const tempLoader = new StandardsLoader(tempDir);
+                const tempLoader = StandardsFactory.createStandardsLoader(tempDir);
                 const standards = await tempLoader.loadStandards();
 
                 // Should not crash, just skip the invalid config
@@ -261,7 +275,7 @@ describe('StandardsLoader Integration Tests', () => {
             mkdirSync(tempDir, { recursive: true });
 
             try {
-                const tempLoader = new StandardsLoader(tempDir);
+                const tempLoader = StandardsFactory.createStandardsLoader(tempDir);
 
                 // Should not crash when files don't exist
                 const eslintStandards = await tempLoader['loadESLintStandards']();

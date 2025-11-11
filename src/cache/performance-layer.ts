@@ -5,7 +5,8 @@
 
 import { LRUCache, LRUCacheMetrics, MemoryPressureLevel } from './lru-cache.js';
 import { SqliteCacheBackend } from '../database/cache-backend.js';
-import { PerformanceMonitor } from '../utils/performance-monitor.js';
+import { PerformanceFactory } from '../factories/performance-factory.js';
+import { Logger } from '../utils/logger/logger.js';
 
 /**
  * Cache layer types
@@ -103,15 +104,17 @@ export interface PerformanceCacheStats {
 export class PerformanceCache<T = any> {
     private memoryCache: LRUCache<T>;
     private persistentCache: SqliteCacheBackend<T> | null = null;
-    private performanceMonitor: PerformanceMonitor;
+    private performanceMonitor: any;
     private config: PerformanceCacheConfig;
     private stats: PerformanceCacheStats;
     private origins = new Map<string, CacheOrigin>();
     private slaViolations: SLAViolation[] = [];
+    private logger: Logger;
 
-    constructor(config: Partial<PerformanceCacheConfig> = {}) {
+    constructor(config: Partial<PerformanceCacheConfig> = {}, logger?: Logger) {
         this.config = this.mergeConfig(config);
-        this.performanceMonitor = new PerformanceMonitor();
+        this.logger = logger || PerformanceFactory.getLogger() as any;
+        this.performanceMonitor = PerformanceFactory.createPerformanceMonitor();
 
         // Initialize memory cache
         this.memoryCache = new LRUCache<T>({
@@ -127,7 +130,7 @@ export class PerformanceCache<T = any> {
             this.persistentCache = new SqliteCacheBackend<T>({
                 maxSize: this.config.persistentCache.maxSize,
                 defaultTtl: this.config.persistentCache.ttl
-            });
+            }, this.logger);
         }
 
         // Initialize statistics
@@ -197,7 +200,7 @@ export class PerformanceCache<T = any> {
 
         } catch (error) {
             this.performanceMonitor.endTimer(timerId, 'cache_get', false, false);
-            console.error('Cache get error:', error);
+            this.logger.error('Cache get error:', error);
             return null;
         }
     }
@@ -220,7 +223,7 @@ export class PerformanceCache<T = any> {
             this.performanceMonitor.endTimer(timerId, 'cache_set', true);
         } catch (error) {
             this.performanceMonitor.endTimer(timerId, 'cache_set', false);
-            console.error('Cache set error:', error);
+            this.logger.error('Cache set error:', error);
         }
     }
 
@@ -323,7 +326,7 @@ export class PerformanceCache<T = any> {
                         await this.set(key, data);
                     }
                 } catch (error) {
-                    console.warn(`Failed to warm up cache for key ${key}:`, error);
+                    this.logger.warn(`Failed to warm up cache for key ${key}:`, error);
                 }
             });
 
@@ -346,7 +349,7 @@ export class PerformanceCache<T = any> {
 
         } catch (error) {
             this.performanceMonitor.endTimer(timerId, 'cache_warmup', false);
-            console.error('Cache warmup failed:', error);
+            this.logger.error('Cache warmup failed:', error);
         }
     }
 
@@ -518,7 +521,7 @@ export class PerformanceCache<T = any> {
         this.slaViolations = this.slaViolations.filter(v => v.timestamp > cutoff);
 
         // Log violation
-        console.warn(`SLA Violation: ${violation.type} for ${violation.layer} - ` +
+        this.logger.warn(`SLA Violation: ${violation.type} for ${violation.layer} - ` +
                     `Actual: ${violation.actualValue}, Target: ${violation.targetValue}`);
     }
 
