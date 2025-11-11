@@ -41,26 +41,37 @@ describe('Cache Security Unit Tests', () => {
             expect(decryptionKeys.length).toBeGreaterThanOrEqual(1);
         });
 
-        test('should handle key rotation correctly', (done) => {
+        test('should handle key rotation correctly', async () => {
             const originalKey = keyManager.getCurrentKey();
-            let rotated = false;
+            expect(keyManager.hasActiveRotationTimer()).toBe(true);
 
-            // Check for rotation after interval
-            const checkRotation = setInterval(() => {
-                const newKey = keyManager.getCurrentKey();
-                if (!rotated && !newKey.equals(originalKey)) {
-                    rotated = true;
-                    expect(newKey).not.toEqual(originalKey);
+            // Test automatic rotation
+            const beforeRotation = keyManager.getCurrentKey();
+
+            // Wait for automatic key rotation (interval is 1000ms, so wait longer)
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    const newKey = keyManager.getCurrentKey();
+                    expect(newKey).not.toEqual(beforeRotation);
 
                     const decryptionKeys = keyManager.getDecryptionKeys();
                     expect(decryptionKeys.length).toBeGreaterThanOrEqual(2);
                     expect(decryptionKeys).toContain(originalKey);
                     expect(decryptionKeys).toContain(newKey);
 
-                    clearInterval(checkRotation);
-                    done();
-                }
-            }, 100);
+                    resolve();
+                }, 1200); // Wait longer than the rotation interval
+            });
+
+            // Test manual rotation
+            const beforeManualRotation = keyManager.getCurrentKey();
+            keyManager.forceKeyRotation();
+            const afterManualRotation = keyManager.getCurrentKey();
+
+            expect(afterManualRotation).not.toEqual(beforeManualRotation);
+
+            const finalDecryptionKeys = keyManager.getDecryptionKeys();
+            expect(finalDecryptionKeys.length).toBeGreaterThanOrEqual(2);
         });
 
         test('should clean up resources properly', () => {

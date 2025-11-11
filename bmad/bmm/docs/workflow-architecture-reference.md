@@ -7,19 +7,15 @@
 
 ## Overview
 
-The Decision Architecture workflow is a complete reimagining of how architectural decisions are made in the BMAD Method.
-Instead of template-driven documentation, this workflow facilitates an intelligent conversation that produces a *
-*decision-focused architecture document** optimized for preventing AI agent conflicts during implementation.
+The Decision Architecture workflow is a complete reimagining of how architectural decisions are made in the BMAD Method. Instead of template-driven documentation, this workflow facilitates an intelligent conversation that produces a **decision-focused architecture document** optimized for preventing AI agent conflicts during implementation.
 
 ---
 
 ## Core Philosophy
 
-**The Problem**: When multiple AI agents implement different parts of a system, they make conflicting technical
-decisions leading to incompatible implementations.
+**The Problem**: When multiple AI agents implement different parts of a system, they make conflicting technical decisions leading to incompatible implementations.
 
-**The Solution**: A "consistency contract" that documents all critical technical decisions upfront, ensuring every agent
-follows the same patterns and uses the same technologies.
+**The Solution**: A "consistency contract" that documents all critical technical decisions upfront, ensuring every agent follows the same patterns and uses the same technologies.
 
 ---
 
@@ -107,7 +103,7 @@ Step 12: Final review and update workflow status
 ## How It's Different from Old architecture
 
 | Aspect               | Old Workflow                                 | New Workflow                                    |
-|----------------------|----------------------------------------------|-------------------------------------------------|
+| -------------------- | -------------------------------------------- | ----------------------------------------------- |
 | **Approach**         | Template-driven                              | Conversation-driven                             |
 | **Project Types**    | 11 rigid types with 22+ files                | Infinite flexibility with intelligent discovery |
 | **User Interaction** | Output sections with "Continue?"             | Collaborative decision facilitation             |
@@ -122,21 +118,21 @@ Step 12: Final review and update workflow status
 ## Expected Inputs
 
 - **PRD** (Product Requirements Document) with:
-    - Functional Requirements
-    - Non-Functional Requirements
-    - Performance and compliance needs
+  - Functional Requirements
+  - Non-Functional Requirements
+  - Performance and compliance needs
 
 - **Epics** file with:
-    - User stories
-    - Acceptance criteria
-    - Dependencies
+  - User stories
+  - Acceptance criteria
+  - Dependencies
 
 - **UX Spec** (Optional but valuable) with:
-    - Interface designs and interaction patterns
-    - Accessibility requirements (WCAG levels)
-    - Animation and transition needs
-    - Platform-specific UI requirements
-    - Performance expectations for interactions
+  - Interface designs and interaction patterns
+  - Accessibility requirements (WCAG levels)
+  - Animation and transition needs
+  - Platform-specific UI requirements
+  - Performance expectations for interactions
 
 ---
 

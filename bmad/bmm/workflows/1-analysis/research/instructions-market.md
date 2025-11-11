@@ -2,27 +2,19 @@
 
 <critical>The workflow execution engine is governed by: {project_root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on
-{user_skill_level}</critical>
-<critical>This is a HIGHLY INTERACTIVE workflow - collaborate with user throughout, don't just gather info and
-disappear</critical>
-<critical>Web research is MANDATORY - use WebSearch tool with {{current_year}} for all market intelligence
-gathering</critical>
+<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {user_skill_level}</critical>
+<critical>This is a HIGHLY INTERACTIVE workflow - collaborate with user throughout, don't just gather info and disappear</critical>
+<critical>Web research is MANDATORY - use WebSearch tool with {{current_year}} for all market intelligence gathering</critical>
 <critical>Communicate all responses in {communication_language} and tailor to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 
 <critical>🚨 ANTI-HALLUCINATION PROTOCOL - MANDATORY 🚨</critical>
-<critical>NEVER invent market data - if you cannot find reliable data, explicitly state: "I could not find verified data
-for [X]"</critical>
+<critical>NEVER invent market data - if you cannot find reliable data, explicitly state: "I could not find verified data for [X]"</critical>
 <critical>EVERY statistic, market size, growth rate, or competitive claim MUST have a cited source with URL</critical>
-<critical>For CRITICAL claims (TAM/SAM/SOM, market size, growth rates), require 2+ independent sources that
-agree</critical>
-<critical>When data sources conflict (e.g., different market size estimates), present ALL estimates with sources and
-explain variance</critical>
-<critical>Mark data
-confidence: [Verified - 2+ sources], [Single source - verify], [Estimated - low confidence]</critical>
-<critical>Clearly label: FACT (sourced data), ANALYSIS (your interpretation), PROJECTION (
-forecast/speculation)</critical>
+<critical>For CRITICAL claims (TAM/SAM/SOM, market size, growth rates), require 2+ independent sources that agree</critical>
+<critical>When data sources conflict (e.g., different market size estimates), present ALL estimates with sources and explain variance</critical>
+<critical>Mark data confidence: [Verified - 2+ sources], [Single source - verify], [Estimated - low confidence]</critical>
+<critical>Clearly label: FACT (sourced data), ANALYSIS (your interpretation), PROJECTION (forecast/speculation)</critical>
 <critical>After each WebSearch, extract and store source URLs - include them in the report</critical>
 <critical>If a claim seems suspicious or too convenient, STOP and cross-verify with additional searches</critical>
 
@@ -72,22 +64,21 @@ Collaboratively define scope:
 Work with the user to establish:
 
 1. **Market Category Definition**
-    - Primary category/industry
-    - Adjacent or overlapping markets
-    - Where this fits in the value chain
+   - Primary category/industry
+   - Adjacent or overlapping markets
+   - Where this fits in the value chain
 
 2. **Geographic Scope**
-    - Global, regional, or country-specific?
-    - Primary markets vs. expansion markets
-    - Regulatory considerations by region
+   - Global, regional, or country-specific?
+   - Primary markets vs. expansion markets
+   - Regulatory considerations by region
 
 3. **Customer Segment Boundaries**
-    - B2B, B2C, or B2B2C?
-    - Primary vs. secondary segments
-    - Segment size estimates
+   - B2B, B2C, or B2B2C?
+   - Primary vs. secondary segments
+   - Segment size estimates
 
-<ask>Should we include adjacent markets in the TAM calculation? This could significantly increase market size but may be
-less immediately addressable.</ask>
+<ask>Should we include adjacent markets in the TAM calculation? This could significantly increase market size but may be less immediately addressable.</ask>
 
 <template-output>market_definition</template-output>
 <template-output>geographic_scope</template-output>
@@ -99,8 +90,7 @@ less immediately addressable.</ask>
 <critical>This step REQUIRES WebSearch tool usage - gather CURRENT data from {{current_year}}</critical>
 <critical>Share findings as you go - make this collaborative, not a black box</critical>
 
-<action>Let {user_name} know you're searching for current {{market_category}} market data: size, growth, analyst
-reports, recent trends. Tell them you'll share what you find in a few minutes and review it together.</action>
+<action>Let {user_name} know you're searching for current {{market_category}} market data: size, growth, analyst reports, recent trends. Tell them you'll share what you find in a few minutes and review it together.</action>
 
 <step n="3a" title="Search for market size and industry data">
 <action>Conduct systematic web searches using WebSearch tool:
@@ -181,8 +171,7 @@ Anything here surprise you or confirm what you suspected?"
 - Value created × Capturable percentage
 - Based on problem severity and alternative costs
 
-<ask>Which TAM calculation method seems most credible given our data? Should we use multiple methods and
-triangulate?</ask>
+<ask>Which TAM calculation method seems most credible given our data? Should we use multiple methods and triangulate?</ask>
 
 <template-output>tam_calculation</template-output>
 <template-output>tam_methodology</template-output>
@@ -277,8 +266,7 @@ For primary segment, identify:
 - Group dynamics
 - Peer influences
 
-<ask>Would you like to conduct actual customer interviews or surveys to validate these jobs? (We can create an interview
-guide)</ask>
+<ask>Would you like to conduct actual customer interviews or surveys to validate these jobs? (We can create an interview guide)</ask>
 
 <template-output>jobs_to_be_done</template-output>
 </step>
@@ -308,8 +296,7 @@ Analyze:
 <WebSearch>top {{product_category}} companies {{current_year}}</WebSearch>
 </action>
 
-<action>Present findings. Ask them to pick the 3-5 that matter most (most concerned about or curious to
-understand).</action>
+<action>Present findings. Ask them to pick the 3-5 that matter most (most concerned about or curious to understand).</action>
 </step>
 
 <step n="6b" title="Research each competitor together" repeat="for-each-selected-competitor">
@@ -535,8 +522,7 @@ Provide mitigation strategies.
 
 <critical>This is the last major content section - make it collaborative</critical>
 
-<action>Review the research journey together. Share high-level summaries of market size, competitive dynamics, customer
-insights. Ask what stands out most - what surprised them or confirmed their thinking.</action>
+<action>Review the research journey together. Share high-level summaries of market size, competitive dynamics, customer insights. Ask what stands out most - what surprised them or confirmed their thinking.</action>
 
 <action>Collaboratively craft the narrative:
 
@@ -548,8 +534,7 @@ insights. Ask what stands out most - what surprised them or confirmed their thin
 This should read like a strategic brief, not a data dump.
 </action>
 
-<action>Draft executive summary and share. Ask if it captures the essence and if anything is missing or
-overemphasized.</action>
+<action>Draft executive summary and share. Ask if it captures the essence and if anything is missing or overemphasized.</action>
 
 <template-output>executive_summary</template-output>
 </step>
@@ -587,7 +572,7 @@ Review every major claim in the report and verify:
 - [ ] Persona data is based on real research (cited)
 - [ ] Survey/interview data has sample size and source
 - [ ] Behavioral claims are backed by studies/data
-  </action>
+      </action>
 
 <action>Count and document source quality:
 
@@ -620,8 +605,7 @@ Generate the complete market research report using the template:
 Would you like me to strengthen any areas with additional research?"
 </action>
 
-<ask>Would you like to review any specific sections before finalizing? Are there any additional analyses you'd like to
-include?</ask>
+<ask>Would you like to review any specific sections before finalizing? Are there any additional analyses you'd like to include?</ask>
 
 <goto step="9a" if="user requests changes">Return to refine opportunities</goto>
 
@@ -679,8 +663,7 @@ include?</ask>
 {{#if standalone_mode != true}}
 
 - **Next workflow:** {{next_workflow}} ({{next_agent}} agent)
-- **Optional:** Review findings with stakeholders, or run additional analysis workflows (product-brief for software, or
-  install BMGD module for game-brief)
+- **Optional:** Review findings with stakeholders, or run additional analysis workflows (product-brief for software, or install BMGD module for game-brief)
 
 Check status anytime with: `workflow-status`
 {{else}}

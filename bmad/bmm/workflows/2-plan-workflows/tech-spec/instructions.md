@@ -4,17 +4,14 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>Communicate all responses in {communication_language} and language MUST be tailored to
-{user_skill_level}</critical>
+<critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>This is for Level 0-1 projects - tech-spec with context-rich story generation</critical>
 <critical>Level 0: tech-spec + single user story | Level 1: tech-spec + epic/stories</critical>
 <critical>LIVING DOCUMENT: Write to tech-spec.md continuously as you discover - never wait until the end</critical>
 <critical>CONTEXT IS KING: Gather ALL available context before generating specs</critical>
-<critical>DOCUMENT OUTPUT: Technical, precise, definitive. Specific versions only. User skill level ({user_skill_level})
-affects conversation style ONLY, not document content.</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
+<critical>DOCUMENT OUTPUT: Technical, precise, definitive. Specific versions only. User skill level ({user_skill_level}) affects conversation style ONLY, not document content.</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
 
 <step n="0" goal="Validate workflow readiness and detect project level" tag="workflow-status">
 <action>Check if {output_folder}/bmm-workflow-status.yaml exists</action>
@@ -126,19 +123,19 @@ This ensures the tech-spec is grounded in reality and gives developers everythin
 Search for and load (using dual-strategy: whole first, then sharded):
 
 1. **Product Brief:**
-    - Search pattern: {output*folder}/\_brief*.md
-    - Sharded: {output*folder}/\_brief*/index.md
-    - If found: Load completely and extract key context
+   - Search pattern: {output*folder}/\_brief*.md
+   - Sharded: {output*folder}/\_brief*/index.md
+   - If found: Load completely and extract key context
 
 2. **Research Documents:**
-    - Search pattern: {output*folder}/\_research*.md
-    - Sharded: {output*folder}/\_research*/index.md
-    - If found: Load completely and extract insights
+   - Search pattern: {output*folder}/\_research*.md
+   - Sharded: {output*folder}/\_research*/index.md
+   - If found: Load completely and extract insights
 
 3. **Document-Project Output (CRITICAL for brownfield):**
-    - Always check: {output_folder}/docs/index.md
-    - If found: This is the brownfield codebase map - load ALL shards!
-    - Extract: File structure, key modules, existing patterns, naming conventions
+   - Always check: {output_folder}/docs/index.md
+   - If found: This is the brownfield codebase map - load ALL shards!
+   - Extract: File structure, key modules, existing patterns, naming conventions
 
 Create a summary of what was found:
 
@@ -252,41 +249,41 @@ Store this as {{project_stack_summary}}
 Analyze the existing project structure:
 
 1. **Directory Structure:**
-    - Identify main code directories (src/, lib/, app/, components/, services/)
-    - Note organization patterns (feature-based, layer-based, domain-driven)
-    - Identify test directories and patterns
+   - Identify main code directories (src/, lib/, app/, components/, services/)
+   - Note organization patterns (feature-based, layer-based, domain-driven)
+   - Identify test directories and patterns
 
 2. **Code Patterns:**
-    - Look for dominant patterns (class-based, functional, MVC, microservices)
-    - Identify naming conventions (camelCase, snake_case, PascalCase)
-    - Note file organization patterns
+   - Look for dominant patterns (class-based, functional, MVC, microservices)
+   - Identify naming conventions (camelCase, snake_case, PascalCase)
+   - Note file organization patterns
 
 3. **Key Modules/Services:**
-    - Identify major modules or services already in place
-    - Note entry points (main.js, app.py, index.ts)
-    - Document important utilities or shared code
+   - Identify major modules or services already in place
+   - Note entry points (main.js, app.py, index.ts)
+   - Document important utilities or shared code
 
 4. **Testing Patterns & Standards (CRITICAL):**
-    - Identify test framework in use (from package.json/requirements.txt)
-    - Note test file naming patterns (.test.js, \_test.py, .spec.ts, Test.java)
-    - Document test organization (tests/, **tests**, spec/, test/)
-    - Look for test configuration files (jest.config.js, pytest.ini, .rspec)
-    - Check for coverage requirements (in CI config, test scripts)
-    - Identify mocking/stubbing libraries (jest.mock, unittest.mock, sinon)
-    - Note assertion styles (expect, assert, should)
+   - Identify test framework in use (from package.json/requirements.txt)
+   - Note test file naming patterns (.test.js, \_test.py, .spec.ts, Test.java)
+   - Document test organization (tests/, **tests**, spec/, test/)
+   - Look for test configuration files (jest.config.js, pytest.ini, .rspec)
+   - Check for coverage requirements (in CI config, test scripts)
+   - Identify mocking/stubbing libraries (jest.mock, unittest.mock, sinon)
+   - Note assertion styles (expect, assert, should)
 
 5. **Code Style & Conventions (MUST CONFORM):**
-    - Check for linter config (.eslintrc, .pylintrc, rubocop.yml)
-    - Check for formatter config (.prettierrc, .black, .editorconfig)
-    - Identify code style:
-        - Semicolons: yes/no (JavaScript/TypeScript)
-        - Quotes: single/double
-        - Indentation: spaces/tabs, size
-        - Line length limits
-    - Import/export patterns (named vs default, organization)
-    - Error handling patterns (try/catch, Result types, error classes)
-    - Logging patterns (console, winston, logging module, specific formats)
-    - Documentation style (JSDoc, docstrings, YARD, JavaDoc)
+   - Check for linter config (.eslintrc, .pylintrc, rubocop.yml)
+   - Check for formatter config (.prettierrc, .black, .editorconfig)
+   - Identify code style:
+     - Semicolons: yes/no (JavaScript/TypeScript)
+     - Quotes: single/double
+     - Indentation: spaces/tabs, size
+     - Line length limits
+   - Import/export patterns (named vs default, organization)
+   - Error handling patterns (try/catch, Result types, error classes)
+   - Logging patterns (console, winston, logging module, specific formats)
+   - Documentation style (JSDoc, docstrings, YARD, JavaDoc)
 
 Store this as {{existing_structure_summary}}
 
@@ -375,13 +372,13 @@ Engage warmly and get specific details:
 **Core Questions (adapt naturally, don't interrogate):**
 
 1. "What problem are you solving?"
-    - Listen for: Bug fix, missing feature, technical debt, improvement
-    - Capture as {{change_type}}
+   - Listen for: Bug fix, missing feature, technical debt, improvement
+   - Capture as {{change_type}}
 
 2. "Where in the codebase should this live?"
-    - If brownfield: "I see you have [existing modules]. Does this fit in any of those?"
-    - If greenfield: "Let's figure out the right structure for this."
-    - Capture affected areas
+   - If brownfield: "I see you have [existing modules]. Does this fit in any of those?"
+   - If greenfield: "Let's figure out the right structure for this."
+   - Capture affected areas
 
 3. <check if="brownfield">
    "Are there existing patterns or similar code I should follow?"
@@ -390,13 +387,13 @@ Engage warmly and get specific details:
    </check>
 
 4. "What's the expected behavior after this change?"
-    - Get specific success criteria
-    - Understand edge cases
+   - Get specific success criteria
+   - Understand edge cases
 
 5. "Any constraints or gotchas I should know about?"
-    - Technical limitations
-    - Dependencies on other systems
-    - Performance requirements
+   - Technical limitations
+   - Dependencies on other systems
+   - Performance requirements
 
 **Discovery Goals:**
 
@@ -419,13 +416,13 @@ Engage in deeper feature exploration:
 **Core Questions (natural conversation):**
 
 1. "What user need are you addressing?"
-    - Get to the core value
-    - Understand the user's pain point
+   - Get to the core value
+   - Understand the user's pain point
 
 2. "How should this integrate with existing code?"
-    - If brownfield: "I saw [existing features]. How does this relate?"
-    - Identify integration points
-    - Note dependencies
+   - If brownfield: "I saw [existing features]. How does this relate?"
+   - Identify integration points
+   - Note dependencies
 
 3. <check if="brownfield AND similar features exist">
    "Can you point me to similar features I can reference for patterns?"
@@ -434,19 +431,19 @@ Engage in deeper feature exploration:
    </check>
 
 4. "What's IN scope vs OUT of scope for this feature?"
-    - Define clear boundaries
-    - Identify MVP vs future enhancements
-    - Keep it focused (remind: Level 1 = 2-3 stories max)
+   - Define clear boundaries
+   - Identify MVP vs future enhancements
+   - Keep it focused (remind: Level 1 = 2-3 stories max)
 
 5. "Are there dependencies on other systems or services?"
-    - External APIs
-    - Databases
-    - Third-party libraries
+   - External APIs
+   - Databases
+   - Third-party libraries
 
 6. "What does success look like?"
-    - Measurable outcomes
-    - User-facing impact
-    - Technical validation
+   - Measurable outcomes
+   - User-facing impact
+   - Technical validation
 
 **Discovery Goals:**
 
@@ -1066,14 +1063,14 @@ The tech-spec is comprehensive enough to serve as the primary context document:
 **Option A - With Story Context (for complex changes):**
 
 1. Ask SM agent to run `create-story-context` for the story
-    - This generates additional XML context if needed
+   - This generates additional XML context if needed
 2. Then ask DEV agent to run `dev-story` to implement
 
 **Option B - Direct to Dev (most Level 0):**
 
 1. Ask DEV agent to run `dev-story` directly
-    - Tech-spec provides all the context needed!
-    - Story is ready to implement
+   - Tech-spec provides all the context needed!
+   - Story is ready to implement
 
 💡 **Tip:** Most Level 0 changes don't need separate story context since tech-spec is comprehensive!
 </check>
@@ -1088,13 +1085,13 @@ For the **first story** ({{first_story_name}}):
 **Option A - With Story Context (recommended for first story):**
 
 1. Ask SM agent to run `create-story-context` for story 1
-    - Generates focused context for this specific story
+   - Generates focused context for this specific story
 2. Then ask DEV agent to run `dev-story` to implement story 1
 
 **Option B - Direct to Dev:**
 
 1. Ask DEV agent to run `dev-story` for story 1
-    - Tech-spec has most context needed
+   - Tech-spec has most context needed
 
 After completing story 1, repeat for stories 2 and 3.
 

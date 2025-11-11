@@ -7,8 +7,7 @@
 <critical>Communicate all responses in {communication_language} and adapt to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>LIVING DOCUMENT: Write to epics.md continuously as you work - never wait until the end</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
 
 <workflow>
 

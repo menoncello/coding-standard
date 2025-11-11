@@ -1,7 +1,6 @@
 # BMM Documentation
 
-Complete guides for the BMad Method Module (BMM) - AI-powered agile development workflows that adapt to your project's
-complexity.
+Complete guides for the BMad Method Module (BMM) - AI-powered agile development workflows that adapt to your project's complexity.
 
 ---
 
@@ -10,10 +9,10 @@ complexity.
 **New to BMM?** Start here:
 
 - **[Quick Start Guide](./quick-start.md)** - Step-by-step guide to building your first project (15 min read)
-    - Installation and setup
-    - Understanding the four phases
-    - Running your first workflows
-    - Agent-based development flow
+  - Installation and setup
+  - Understanding the four phases
+  - Running your first workflows
+  - Agent-based development flow
 
 **Quick Path:** Install → workflow-init → Follow agent guidance
 
@@ -24,16 +23,16 @@ complexity.
 Understanding how BMM adapts to your needs:
 
 - **[Scale Adaptive System](./scale-adaptive-system.md)** - How BMM adapts to project size and complexity (42 min read)
-    - Three planning tracks (Quick Flow, BMad Method, Enterprise Method)
-    - Automatic track recommendation
-    - Documentation requirements per track
-    - Planning workflow routing
+  - Three planning tracks (Quick Flow, BMad Method, Enterprise Method)
+  - Automatic track recommendation
+  - Documentation requirements per track
+  - Planning workflow routing
 
 - **[Quick Spec Flow](./quick-spec-flow.md)** - Fast-track workflow for Quick Flow track (26 min read)
-    - Bug fixes and small features
-    - Rapid prototyping approach
-    - Auto-detection of stack and patterns
-    - Minutes to implementation
+  - Bug fixes and small features
+  - Rapid prototyping approach
+  - Auto-detection of stack and patterns
+  - Minutes to implementation
 
 ---
 
@@ -42,18 +41,18 @@ Understanding how BMM adapts to your needs:
 Complete guide to BMM's AI agent team:
 
 - **[Agents Guide](./agents-guide.md)** - Comprehensive agent reference (45 min read)
-    - 12 specialized BMM agents + BMad Master
-    - Agent roles, workflows, and when to use them
-    - Agent customization system
-    - Best practices and common patterns
+  - 12 specialized BMM agents + BMad Master
+  - Agent roles, workflows, and when to use them
+  - Agent customization system
+  - Best practices and common patterns
 
 - **[Party Mode Guide](./party-mode.md)** - Multi-agent collaboration (20 min read)
-    - How party mode works (19+ agents collaborate in real-time)
-    - When to use it (strategic, creative, cross-functional, complex)
-    - Example party compositions
-    - Multi-module integration (BMM + CIS + BMB + custom)
-    - Agent customization in party mode
-    - Best practices
+  - How party mode works (19+ agents collaborate in real-time)
+  - When to use it (strategic, creative, cross-functional, complex)
+  - Example party compositions
+  - Multi-module integration (BMM + CIS + BMB + custom)
+  - Agent customization in party mode
+  - Best practices
 
 ---
 
@@ -62,11 +61,11 @@ Complete guide to BMM's AI agent team:
 Comprehensive guide for brownfield development:
 
 - **[Brownfield Development Guide](./brownfield-guide.md)** - Complete guide for existing codebases (53 min read)
-    - Documentation phase strategies
-    - Track selection for brownfield
-    - Integration with existing patterns
-    - Phase-by-phase workflow guidance
-    - Common scenarios
+  - Documentation phase strategies
+  - Track selection for brownfield
+  - Integration with existing patterns
+  - Phase-by-phase workflow guidance
+  - Common scenarios
 
 ---
 
@@ -108,29 +107,29 @@ Essential reference materials:
 Comprehensive documentation for all BMM workflows organized by phase:
 
 - **[Phase 1: Analysis Workflows](./workflows-analysis.md)** - Optional exploration and research workflows (595 lines)
-    - brainstorm-project, product-brief, research, and more
-    - When to use analysis workflows
-    - Creative and strategic tools
+  - brainstorm-project, product-brief, research, and more
+  - When to use analysis workflows
+  - Creative and strategic tools
 
 - **[Phase 2: Planning Workflows](./workflows-planning.md)** - Scale-adaptive planning (967 lines)
-    - prd, tech-spec, gdd, narrative, ux
-    - Track-based planning approach (Quick Flow, BMad Method, Enterprise Method)
-    - Which planning workflow to use
+  - prd, tech-spec, gdd, narrative, ux
+  - Track-based planning approach (Quick Flow, BMad Method, Enterprise Method)
+  - Which planning workflow to use
 
 - **[Phase 3: Solutioning Workflows](./workflows-solutioning.md)** - Architecture and validation (638 lines)
-    - architecture, solutioning-gate-check
-    - Required for BMad Method and Enterprise Method tracks
-    - Preventing agent conflicts
+  - architecture, solutioning-gate-check
+  - Required for BMad Method and Enterprise Method tracks
+  - Preventing agent conflicts
 
 - **[Phase 4: Implementation Workflows](./workflows-implementation.md)** - Sprint-based development (1,634 lines)
-    - sprint-planning, create-story, dev-story, code-review
-    - Complete story lifecycle
-    - One-story-at-a-time discipline
+  - sprint-planning, create-story, dev-story, code-review
+  - Complete story lifecycle
+  - One-story-at-a-time discipline
 
 - **[Testing & QA Workflows](./test-architecture.md)** - Comprehensive quality assurance (1,420 lines)
-    - Test strategy, automation, quality gates
-    - TEA agent and test healing
-    - BMad-integrated vs standalone modes
+  - Test strategy, automation, quality gates
+  - TEA agent and test healing
+  - BMad-integrated vs standalone modes
 
 **Total: 34 workflows documented across all phases**
 
@@ -139,16 +138,16 @@ Comprehensive documentation for all BMM workflows organized by phase:
 For detailed technical documentation on specific complex workflows:
 
 - **[Document Project Workflow Reference](./workflow-document-project-reference.md)** - Technical deep-dive (445 lines)
-    - v1.2.0 context-safe architecture
-    - Scan levels, resumability, write-as-you-go
-    - Multi-part project detection
-    - Deep-dive mode for targeted analysis
+  - v1.2.0 context-safe architecture
+  - Scan levels, resumability, write-as-you-go
+  - Multi-part project detection
+  - Deep-dive mode for targeted analysis
 
 - **[Architecture Workflow Reference](./workflow-architecture-reference.md)** - Decision architecture guide (320 lines)
-    - Starter template intelligence
-    - Novel pattern design
-    - Implementation patterns for agent consistency
-    - Adaptive facilitation approach
+  - Starter template intelligence
+  - Novel pattern design
+  - Implementation patterns for agent consistency
+  - Adaptive facilitation approach
 
 ---
 
@@ -170,10 +169,10 @@ Quality assurance guidance:
 Understanding BMM components:
 
 - **[BMM Module README](../README.md)** - Overview of module structure
-    - Agent roster and roles
-    - Workflow organization
-    - Teams and collaboration
-    - Best practices
+  - Agent roster and roles
+  - Workflow organization
+  - Teams and collaboration
+  - Best practices
 
 ---
 
@@ -188,11 +187,11 @@ Understanding BMM components:
 ### Additional Documentation
 
 - **[IDE Setup Guides](../../../docs/ide-info/)** - Configure your development environment
-    - Claude Code
-    - Cursor
-    - Windsurf
-    - VS Code
-    - Other IDEs
+  - Claude Code
+  - Cursor
+  - Windsurf
+  - VS Code
+  - Other IDEs
 
 ---
 

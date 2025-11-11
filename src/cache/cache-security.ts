@@ -136,6 +136,20 @@ export class EncryptionKeyManager {
     }
 
     /**
+     * Manually trigger key rotation (for testing purposes)
+     */
+    forceKeyRotation(): void {
+        this.rotateKey();
+    }
+
+    /**
+     * Get key rotation timer info (for testing)
+     */
+    hasActiveRotationTimer(): boolean {
+        return this.keyRotationTimer !== undefined;
+    }
+
+    /**
      * Destroy all keys (cleanup)
      */
     destroy(): void {

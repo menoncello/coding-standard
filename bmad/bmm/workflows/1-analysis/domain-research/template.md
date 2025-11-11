@@ -177,5 +177,4 @@ Complexity: {complexity_level}
 
 ---
 
-_This domain brief was created through collaborative research between {user_name} and the AI facilitator. It should be
-referenced during PRD creation and updated as new domain insights emerge._
+_This domain brief was created through collaborative research between {user_name} and the AI facilitator. It should be referenced during PRD creation and updated as new domain insights emerge._

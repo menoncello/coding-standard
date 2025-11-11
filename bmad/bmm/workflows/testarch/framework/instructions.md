@@ -9,8 +9,7 @@
 
 ## Overview
 
-Initialize a production-ready test framework architecture (Playwright or Cypress) with fixtures, helpers, configuration,
-and best practices. This workflow scaffolds the complete testing infrastructure for modern web applications.
+Initialize a production-ready test framework architecture (Playwright or Cypress) with fixtures, helpers, configuration, and best practices. This workflow scaffolds the complete testing infrastructure for modern web applications.
 
 ---
 
@@ -29,20 +28,20 @@ and best practices. This workflow scaffolds the complete testing infrastructure 
 ### Actions
 
 1. **Validate package.json**
-    - Read `{project-root}/package.json`
-    - Extract project type (React, Vue, Angular, Next.js, Node, etc.)
-    - Identify bundler (Vite, Webpack, Rollup, esbuild)
-    - Note existing test dependencies
+   - Read `{project-root}/package.json`
+   - Extract project type (React, Vue, Angular, Next.js, Node, etc.)
+   - Identify bundler (Vite, Webpack, Rollup, esbuild)
+   - Note existing test dependencies
 
 2. **Check for Existing Framework**
-    - Search for `playwright.config.*`, `cypress.config.*`, `cypress.json`
-    - Check `package.json` for `@playwright/test` or `cypress` dependencies
-    - If found, HALT with message: "Existing test framework detected. Use workflow `upgrade-framework` instead."
+   - Search for `playwright.config.*`, `cypress.config.*`, `cypress.json`
+   - Check `package.json` for `@playwright/test` or `cypress` dependencies
+   - If found, HALT with message: "Existing test framework detected. Use workflow `upgrade-framework` instead."
 
 3. **Gather Context**
-    - Look for architecture documents (`architecture.md`, `tech-spec*.md`)
-    - Check for API documentation or endpoint lists
-    - Identify authentication requirements
+   - Look for architecture documents (`architecture.md`, `tech-spec*.md`)
+   - Check for API documentation or endpoint lists
+   - Identify authentication requirements
 
 **Halt Condition:** If preflight checks fail, stop immediately and report which requirement failed.
 
@@ -55,24 +54,24 @@ and best practices. This workflow scaffolds the complete testing infrastructure 
 1. **Framework Selection**
 
    **Default Logic:**
-    - **Playwright** (recommended for):
-        - Large repositories (100+ files)
-        - Performance-critical applications
-        - Multi-browser support needed
-        - Complex user flows requiring video/trace debugging
-        - Projects requiring worker parallelism
+   - **Playwright** (recommended for):
+     - Large repositories (100+ files)
+     - Performance-critical applications
+     - Multi-browser support needed
+     - Complex user flows requiring video/trace debugging
+     - Projects requiring worker parallelism
 
-    - **Cypress** (recommended for):
-        - Small teams prioritizing developer experience
-        - Component testing focus
-        - Real-time reloading during test development
-        - Simpler setup requirements
+   - **Cypress** (recommended for):
+     - Small teams prioritizing developer experience
+     - Component testing focus
+     - Real-time reloading during test development
+     - Simpler setup requirements
 
    **Detection Strategy:**
-    - Check `package.json` for existing preference
-    - Consider `project_size` variable from workflow config
-    - Use `framework_preference` variable if set
-    - Default to **Playwright** if uncertain
+   - Check `package.json` for existing preference
+   - Consider `project_size` variable from workflow config
+   - Use `framework_preference` variable if set
+   - Default to **Playwright** if uncertain
 
 2. **Create Directory Structure**
 
@@ -87,8 +86,7 @@ and best practices. This workflow scaffolds the complete testing infrastructure 
    │   └── README.md                 # Test suite documentation
    ```
 
-   **Note**: Users organize test files (e2e/, api/, integration/, component/) as needed. The **support/** folder is the
-   critical pattern for fixtures and helpers used across tests.
+   **Note**: Users organize test files (e2e/, api/, integration/, component/) as needed. The **support/** folder is the critical pattern for fixtures and helpers used across tests.
 
 3. **Generate Configuration File**
 
@@ -312,27 +310,27 @@ and best practices. This workflow scaffolds the complete testing infrastructure 
 ### Primary Artifacts Created
 
 1. **Configuration File**
-    - `playwright.config.ts` or `cypress.config.ts`
-    - Timeouts: action 15s, navigation 30s, test 60s
-    - Reporters: HTML + JUnit XML
+   - `playwright.config.ts` or `cypress.config.ts`
+   - Timeouts: action 15s, navigation 30s, test 60s
+   - Reporters: HTML + JUnit XML
 
 2. **Directory Structure**
-    - `tests/` with `e2e/`, `api/`, `support/` subdirectories
-    - `support/fixtures/` for test fixtures
-    - `support/helpers/` for utility functions
+   - `tests/` with `e2e/`, `api/`, `support/` subdirectories
+   - `support/fixtures/` for test fixtures
+   - `support/helpers/` for utility functions
 
 3. **Environment Configuration**
-    - `.env.example` with `TEST_ENV`, `BASE_URL`, `API_URL`
-    - `.nvmrc` with Node version
+   - `.env.example` with `TEST_ENV`, `BASE_URL`, `API_URL`
+   - `.nvmrc` with Node version
 
 4. **Test Infrastructure**
-    - Fixture architecture (`mergeTests` pattern)
-    - Data factories (faker-based, with auto-cleanup)
-    - Sample tests demonstrating patterns
+   - Fixture architecture (`mergeTests` pattern)
+   - Data factories (faker-based, with auto-cleanup)
+   - Sample tests demonstrating patterns
 
 5. **Documentation**
-    - `tests/README.md` with setup instructions
-    - Comments in config files explaining options
+   - `tests/README.md` with setup instructions
+   - Comments in config files explaining options
 
 ### README Contents
 
@@ -351,19 +349,13 @@ The generated `tests/README.md` should include:
 
 ### Knowledge Base Integration
 
-**Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to identify and load relevant knowledge
-fragments:
+**Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to identify and load relevant knowledge fragments:
 
-- `fixture-architecture.md` - Pure function → fixture → `mergeTests` composition with auto-cleanup (406 lines, 5
-  examples)
-- `data-factories.md` - Faker-based factories with overrides, nested factories, API seeding, auto-cleanup (498 lines, 5
-  examples)
-- `network-first.md` - Network-first testing safeguards: intercept before navigate, HAR capture, deterministic waiting (
-  489 lines, 5 examples)
-- `playwright-config.md` - Playwright-specific configuration: environment-based, timeout standards, artifact output,
-  parallelization, project config (722 lines, 5 examples)
-- `test-quality.md` - Test design principles: deterministic, isolated with cleanup, explicit assertions, length/time
-  limits (658 lines, 5 examples)
+- `fixture-architecture.md` - Pure function → fixture → `mergeTests` composition with auto-cleanup (406 lines, 5 examples)
+- `data-factories.md` - Faker-based factories with overrides, nested factories, API seeding, auto-cleanup (498 lines, 5 examples)
+- `network-first.md` - Network-first testing safeguards: intercept before navigate, HAR capture, deterministic waiting (489 lines, 5 examples)
+- `playwright-config.md` - Playwright-specific configuration: environment-based, timeout standards, artifact output, parallelization, project config (722 lines, 5 examples)
+- `test-quality.md` - Test design principles: deterministic, isolated with cleanup, explicit assertions, length/time limits (658 lines, 5 examples)
 
 ### Framework-Specific Guidance
 

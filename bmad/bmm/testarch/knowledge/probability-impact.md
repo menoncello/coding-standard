@@ -2,18 +2,13 @@
 
 ## Principle
 
-Risk scoring uses a **probability × impact** matrix (1-9 scale) to prioritize testing efforts. Higher scores (6-9)
-demand immediate action; lower scores (1-3) require documentation only. This systematic approach ensures testing
-resources focus on the highest-value risks.
+Risk scoring uses a **probability × impact** matrix (1-9 scale) to prioritize testing efforts. Higher scores (6-9) demand immediate action; lower scores (1-3) require documentation only. This systematic approach ensures testing resources focus on the highest-value risks.
 
 ## Rationale
 
-**The Problem**: Without quantifiable risk assessment, teams over-test low-value scenarios while missing critical risks.
-Gut feeling leads to inconsistent prioritization and missed edge cases.
+**The Problem**: Without quantifiable risk assessment, teams over-test low-value scenarios while missing critical risks. Gut feeling leads to inconsistent prioritization and missed edge cases.
 
-**The Solution**: Standardize risk evaluation with a 3×3 matrix (probability: 1-3, impact: 1-3). Multiply to derive risk
-score (1-9). Automate classification (DOCUMENT, MONITOR, MITIGATE, BLOCK) based on thresholds. This approach surfaces
-hidden risks early and justifies testing decisions to stakeholders.
+**The Solution**: Standardize risk evaluation with a 3×3 matrix (probability: 1-3, impact: 1-3). Multiply to derive risk score (1-9). Automate classification (DOCUMENT, MONITOR, MITIGATE, BLOCK) based on thresholds. This approach surfaces hidden risks early and justifies testing decisions to stakeholders.
 
 **Why This Matters**:
 
@@ -578,7 +573,7 @@ function generateGateSummary(result: Omit<GateResult, 'summary'>): string {
 ## Probability-Impact Threshold Summary
 
 | Score | Action   | Gate Impact          | Typical Use Case                       |
-|-------|----------|----------------------|----------------------------------------|
+| ----- | -------- | -------------------- | -------------------------------------- |
 | 1-3   | DOCUMENT | None                 | Cosmetic issues, low-priority bugs     |
 | 4-5   | MONITOR  | None (watch closely) | Edge cases, partial unknowns           |
 | 6-8   | MITIGATE | CONCERNS at gate     | High-impact scenarios needing coverage |
@@ -599,11 +594,8 @@ Before deploying risk matrix:
 
 ## Integration Points
 
-- **Used in workflows**: `*test-design` (initial risk assessment), `*trace` (gate decision Phase 2), `*nfr-assess` (
-  security/performance risks)
-- **Related fragments**: `risk-governance.md` (risk scoring matrix, gate decision engine), `test-priorities-matrix.md` (
-  P0-P3 mapping), `nfr-criteria.md` (impact assessment for NFRs)
+- **Used in workflows**: `*test-design` (initial risk assessment), `*trace` (gate decision Phase 2), `*nfr-assess` (security/performance risks)
+- **Related fragments**: `risk-governance.md` (risk scoring matrix, gate decision engine), `test-priorities-matrix.md` (P0-P3 mapping), `nfr-criteria.md` (impact assessment for NFRs)
 - **Tools**: TypeScript for type safety, markdown for reports, version control for audit trail
 
-_Source: Murat risk model summary, gate decision patterns from production systems, probability-impact matrix from risk
-governance practices_
+_Source: Murat risk model summary, gate decision patterns from production systems, probability-impact matrix from risk governance practices_

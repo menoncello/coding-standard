@@ -30,21 +30,21 @@
 ### High-Priority Risks (Score ≥6)
 
 | Risk ID | Category | Description   | Probability | Impact | Score | Mitigation   | Owner   | Timeline |
-|---------|----------|---------------|-------------|--------|-------|--------------|---------|----------|
+| ------- | -------- | ------------- | ----------- | ------ | ----- | ------------ | ------- | -------- |
 | R-001   | SEC      | {description} | 2           | 3      | 6     | {mitigation} | {owner} | {date}   |
 | R-002   | PERF     | {description} | 3           | 2      | 6     | {mitigation} | {owner} | {date}   |
 
 ### Medium-Priority Risks (Score 3-4)
 
 | Risk ID | Category | Description   | Probability | Impact | Score | Mitigation   | Owner   |
-|---------|----------|---------------|-------------|--------|-------|--------------|---------|
+| ------- | -------- | ------------- | ----------- | ------ | ----- | ------------ | ------- |
 | R-003   | TECH     | {description} | 2           | 2      | 4     | {mitigation} | {owner} |
 | R-004   | DATA     | {description} | 1           | 3      | 3     | {mitigation} | {owner} |
 
 ### Low-Priority Risks (Score 1-2)
 
 | Risk ID | Category | Description   | Probability | Impact | Score | Action  |
-|---------|----------|---------------|-------------|--------|-------|---------|
+| ------- | -------- | ------------- | ----------- | ------ | ----- | ------- |
 | R-005   | OPS      | {description} | 1           | 2      | 2     | Monitor |
 | R-006   | BUS      | {description} | 1           | 1      | 1     | Monitor |
 
@@ -66,7 +66,7 @@
 **Criteria**: Blocks core journey + High risk (≥6) + No workaround
 
 | Requirement   | Test Level | Risk Link | Test Count | Owner | Notes   |
-|---------------|------------|-----------|------------|-------|---------|
+| ------------- | ---------- | --------- | ---------- | ----- | ------- |
 | {requirement} | E2E        | R-001     | 3          | QA    | {notes} |
 | {requirement} | API        | R-002     | 5          | QA    | {notes} |
 
@@ -77,7 +77,7 @@
 **Criteria**: Important features + Medium risk (3-4) + Common workflows
 
 | Requirement   | Test Level | Risk Link | Test Count | Owner | Notes   |
-|---------------|------------|-----------|------------|-------|---------|
+| ------------- | ---------- | --------- | ---------- | ----- | ------- |
 | {requirement} | API        | R-003     | 4          | QA    | {notes} |
 | {requirement} | Component  | -         | 6          | DEV   | {notes} |
 
@@ -88,7 +88,7 @@
 **Criteria**: Secondary features + Low risk (1-2) + Edge cases
 
 | Requirement   | Test Level | Risk Link | Test Count | Owner | Notes   |
-|---------------|------------|-----------|------------|-------|---------|
+| ------------- | ---------- | --------- | ---------- | ----- | ------- |
 | {requirement} | API        | R-004     | 8          | QA    | {notes} |
 | {requirement} | Unit       | -         | 15         | DEV   | {notes} |
 
@@ -99,7 +99,7 @@
 **Criteria**: Nice-to-have + Exploratory + Performance benchmarks
 
 | Requirement   | Test Level | Test Count | Owner | Notes   |
-|---------------|------------|------------|-------|---------|
+| ------------- | ---------- | ---------- | ----- | ------- |
 | {requirement} | E2E        | 2          | QA    | {notes} |
 | {requirement} | Unit       | 8          | DEV   | {notes} |
 
@@ -154,7 +154,7 @@
 ### Test Development Effort
 
 | Priority  | Count             | Hours/Test | Total Hours       | Notes                   |
-|-----------|-------------------|------------|-------------------|-------------------------|
+| --------- | ----------------- | ---------- | ----------------- | ----------------------- |
 | P0        | {p0_count}        | 2.0        | {p0_hours}        | Complex setup, security |
 | P1        | {p1_count}        | 1.0        | {p1_hours}        | Standard coverage       |
 | P2        | {p2_count}        | 0.5        | {p2_hours}        | Simple scenarios        |
@@ -241,8 +241,8 @@
 ### Risks to Plan
 
 - **Risk**: {risk_to_plan}
-    - **Impact**: {impact}
-    - **Contingency**: {contingency}
+  - **Impact**: {impact}
+  - **Contingency**: {contingency}
 
 ---
 

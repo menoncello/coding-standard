@@ -6,8 +6,7 @@
 
 ## Overview
 
-The **Scale Adaptive System** intelligently routes projects to the right planning methodology based on complexity, not
-arbitrary story counts.
+The **Scale Adaptive System** intelligently routes projects to the right planning methodology based on complexity, not arbitrary story counts.
 
 ### The Problem
 
@@ -34,7 +33,7 @@ BMad Method adapts to three distinct planning tracks:
 ### Three Tracks at a Glance
 
 | Track                 | Planning Depth        | Time Investment | Best For                                   |
-|-----------------------|-----------------------|-----------------|--------------------------------------------|
+| --------------------- | --------------------- | --------------- | ------------------------------------------ |
 | **Quick Flow**        | Tech-spec only        | Hours to 1 day  | Simple features, bug fixes, clear scope    |
 | **BMad Method**       | PRD + Arch + UX       | 1-3 days        | Products, platforms, complex features      |
 | **Enterprise Method** | Method + Test/Sec/Ops | 3-7 days        | Enterprise needs, compliance, multi-tenant |
@@ -196,8 +195,7 @@ PRD → (Optional UX) → Architecture → Gate Check → Implement
 
 **Why Architecture for Brownfield?**
 
-Your brownfield documentation might be huge. Architecture workflow distills massive codebase context into a focused
-solution design specific to YOUR project. This keeps AI agents focused without getting lost in existing code.
+Your brownfield documentation might be huge. Architecture workflow distills massive codebase context into a focused solution design specific to YOUR project. This keeps AI agents focused without getting lost in existing code.
 
 **Benefits**:
 
@@ -340,7 +338,7 @@ Includes all BMad Method documents PLUS:
 ## Workflow Comparison
 
 | Track           | Analysis    | Planning  | Architecture | Security/Ops | Typical Stories |
-|-----------------|-------------|-----------|--------------|--------------|-----------------|
+| --------------- | ----------- | --------- | ------------ | ------------ | --------------- |
 | **Quick Flow**  | Optional    | Tech-spec | None         | None         | 1-15            |
 | **BMad Method** | Recommended | PRD + UX  | Required     | None         | 10-50+          |
 | **Enterprise**  | Required    | PRD + UX  | Required     | Required     | 30+             |
@@ -489,13 +487,11 @@ flowchart TD
 
 1. **Run document-project** to analyze existing codebase
 
-**Then Workflow**: 2. PRD for search feature 3. Architecture (integration design - highly recommended) 4. Implement
-following existing patterns
+**Then Workflow**: 2. PRD for search feature 3. Architecture (integration design - highly recommended) 4. Implement following existing patterns
 
 **Time**: 1-2 weeks
 
-**Why Method not Quick Flow?**: Integration with existing catalog system benefits from architecture planning to ensure
-consistency.
+**Why Method not Quick Flow?**: Integration with existing catalog system benefits from architecture planning to ensure consistency.
 
 ---
 
@@ -531,8 +527,7 @@ Always run `document-project` before starting brownfield planning. AI agents nee
 
 ### 2. Trust the Recommendation
 
-If `workflow-init` suggests BMad Method, there's probably complexity you haven't considered. Review carefully before
-overriding.
+If `workflow-init` suggests BMad Method, there's probably complexity you haven't considered. Review carefully before overriding.
 
 ### 3. Start Smaller if Uncertain
 
@@ -544,8 +539,7 @@ For BMad Method and Enterprise, gate checks prevent costly mistakes. Invest the 
 
 ### 5. Architecture is Optional but Recommended for Brownfield
 
-Brownfield BMad Method makes architecture optional, but it's highly recommended. It distills complex codebase into
-focused solution design.
+Brownfield BMad Method makes architecture optional, but it's highly recommended. It distills complex codebase into focused solution design.
 
 ### 6. Discovery Phase Based on Need
 
@@ -553,8 +547,7 @@ Brainstorming and research are offered regardless of track. Use them when you ne
 
 ### 7. Product Brief for Greenfield Method
 
-Product Brief is only offered for greenfield BMad Method and Enterprise. It's optional but helps with strategic
-thinking.
+Product Brief is only offered for greenfield BMad Method and Enterprise. It's optional but helps with strategic thinking.
 
 ---
 
@@ -572,9 +565,9 @@ thinking.
 - Methodology-based distinction (not story counts)
 - Story counts as guidance, not definitions
 - Clear track purposes:
-    - Quick Flow = Implementation-focused
-    - BMad Method = Product + system design
-    - Enterprise = Extended with security/ops
+  - Quick Flow = Implementation-focused
+  - BMad Method = Product + system design
+  - Enterprise = Extended with security/ops
 - Mutually exclusive paths chosen upfront
 - Educational decision-making
 
@@ -588,8 +581,7 @@ If you have existing projects using the old level system:
 - **Level 2-3** → BMad Method
 - **Level 4** → Enterprise Method
 
-Run `workflow-init` on existing projects to migrate to new tracking system. It detects existing planning artifacts and
-creates appropriate workflow tracking.
+Run `workflow-init` on existing projects to migrate to new tracking system. It detects existing planning artifacts and creates appropriate workflow tracking.
 
 ---
 

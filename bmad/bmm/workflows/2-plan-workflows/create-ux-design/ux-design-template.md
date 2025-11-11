@@ -108,14 +108,14 @@ _Generated using BMad Method - Create UX Design Workflow v1.0_
 This UX Design Specification was created through visual collaboration:
 
 - **Color Theme Visualizer**: {{color_themes_html}}
-    - Interactive HTML showing all color theme options explored
-    - Live UI component examples in each theme
-    - Side-by-side comparison and semantic color usage
+  - Interactive HTML showing all color theme options explored
+  - Live UI component examples in each theme
+  - Side-by-side comparison and semantic color usage
 
 - **Design Direction Mockups**: {{design_directions_html}}
-    - Interactive HTML with 6-8 complete design approaches
-    - Full-screen mockups of key screens
-    - Design philosophy and rationale for each direction
+  - Interactive HTML with 6-8 complete design approaches
+  - Full-screen mockups of key screens
+  - Design philosophy and rationale for each direction
 
 ### Optional Enhancement Deliverables
 
@@ -137,10 +137,9 @@ This UX Design Specification can serve as input to:
 ### Version History
 
 | Date     | Version | Changes                         | Author        |
-|----------|---------|---------------------------------|---------------|
+| -------- | ------- | ------------------------------- | ------------- |
 | {{date}} | 1.0     | Initial UX Design Specification | {{user_name}} |
 
 ---
 
-_This UX Design Specification was created through collaborative design facilitation, not template generation. All
-decisions were made with user input and are documented with rationale._
+_This UX Design Specification was created through collaborative design facilitation, not template generation. All decisions were made with user input and are documented with rationale._

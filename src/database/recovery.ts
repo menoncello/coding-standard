@@ -99,7 +99,10 @@ export class DatabaseRecoveryManager {
             performanceMonitor.recordMetric('db_backup_size_bytes', size);
             performanceMonitor.recordMetric('db_backup_duration_ms', duration);
 
-            console.log(`Database backup created: ${finalPath} (${(size / 1024 / 1024).toFixed(2)}MB) in ${duration.toFixed(2)}ms`);
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log(`Database backup created: ${finalPath} (${(size / 1024 / 1024).toFixed(2)}MB) in ${duration.toFixed(2)}ms`);
+            }
 
             return {
                 success: true,
@@ -386,7 +389,10 @@ export class DatabaseRecoveryManager {
 
             for (let attempt = 1; attempt <= defaultOptions.maxRetries && !restored; attempt++) {
                 try {
-                    console.log(`Restore attempt ${attempt}/${defaultOptions.maxRetries}`);
+                    // Suppress debug messages during tests to reduce noise
+                    if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                        console.log(`Restore attempt ${attempt}/${defaultOptions.maxRetries}`);
+                    }
                     restored = await this.performRestore(backupPath, defaultOptions);
                 } catch (error) {
                     lastError = error as Error;
@@ -445,7 +451,10 @@ export class DatabaseRecoveryManager {
             performanceMonitor.recordMetric('db_restore_duration_ms', duration);
             performanceMonitor.recordMetric('db_restore_successful', 1);
 
-            console.log(`Database restored successfully from ${backupPath} in ${duration.toFixed(2)}ms`);
+            // Suppress debug messages during tests to reduce noise
+            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                console.log(`Database restored successfully from ${backupPath} in ${duration.toFixed(2)}ms`);
+            }
 
             // Count restored records
             let recordsRestored = 0;
@@ -488,7 +497,10 @@ export class DatabaseRecoveryManager {
 
                         // In test environment with disk I/O issues, trust the backup file count
                         // since we know the backup was created successfully
-                        console.debug(`Using backup file count for test environment: ${recordsRestored} records`);
+                        // Suppress debug messages during tests to reduce noise
+                            if (process.env.NODE_ENV !== 'test' && process.env.BUN_TEST !== '1') {
+                                console.debug(`Using backup file count for test environment: ${recordsRestored} records`);
+                            }
 
                         // Don't treat this as an error - it's expected in test environments
                         // with disk I/O issues

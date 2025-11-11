@@ -125,11 +125,11 @@ export class SecureCacheManager<T = any> {
 
                 return decryptedData;
             } else if (context) {
-                // Access denied
+                // Access denied - return null instead of throwing exception
                 this.performanceMetrics.deniedRequests++;
                 const accessTime = performance.now() - startTime;
                 this.performanceMetrics.accessControlTime.push(accessTime);
-                throw new Error(`Access denied for cache key: ${key}`);
+                return null;
             } else {
                 // No context provided - use default permissions
                 const entry = this.cache.get(key);
@@ -250,11 +250,11 @@ export class SecureCacheManager<T = any> {
 
                 this.cache.clear();
             } else if (context) {
-                // Access denied
+                // Access denied - fail gracefully (do nothing)
                 this.performanceMetrics.deniedRequests++;
                 const accessTime = performance.now() - startTime;
                 this.performanceMetrics.accessControlTime.push(accessTime);
-                throw new Error('Access denied for cache clear operation');
+                return; // Fail gracefully - do nothing
             } else {
                 // No context provided - allow clear
                 this.cache.clear();

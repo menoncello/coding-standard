@@ -63,9 +63,7 @@
 Enter your choice (number or custom path):
 </ask>
 
-<action>Parse user input to determine: - target_type: "folder" | "file" | "feature" | "api_group" | "component_group" -
-target_path: Absolute path to scan - target_name: Human-readable name for documentation - target_scope: List of all
-files to analyze
+<action>Parse user input to determine: - target_type: "folder" | "file" | "feature" | "api_group" | "component_group" - target_path: Absolute path to scan - target_name: Human-readable name for documentation - target_scope: List of all files to analyze
 </action>
 
 <action>Store as {{deep_dive_target}}</action>
@@ -136,17 +134,12 @@ This will read EVERY file in this area. Proceed? [y/n]
     <action>Store all in file_inventory</action>
   </check>
 
-<action>For each file in file\*inventory, document: - **File Path:** Full path - **Purpose:** What this file does (1-2
-sentences) - **Lines of Code:** Total LOC - **Exports:** Complete list with signatures
+<action>For each file in file\*inventory, document: - **File Path:** Full path - **Purpose:** What this file does (1-2 sentences) - **Lines of Code:** Total LOC - **Exports:** Complete list with signatures
 
 - Functions: `functionName(param: Type): ReturnType` - Description
   _ Classes: `ClassName` - Description with key methods
   _ Types/Interfaces: `TypeName` - Description
-  \_ Constants: `CONSTANT_NAME: Type` - Description - **Imports/Dependencies:** What it uses and why - **Used By:**
-  Files that import this (dependents) - **Key Implementation Details:** Important logic, algorithms, patterns - **State
-  Management:** If applicable (Redux, Context, local state) - **Side Effects:** API calls, database queries, file I/O,
-  external services - **Error Handling:** Try/catch blocks, error boundaries, validation - **Testing:** Associated test
-  files and coverage - **Comments/TODOs:** Any inline documentation or planned work
+  \_ Constants: `CONSTANT_NAME: Type` - Description - **Imports/Dependencies:** What it uses and why - **Used By:** Files that import this (dependents) - **Key Implementation Details:** Important logic, algorithms, patterns - **State Management:** If applicable (Redux, Context, local state) - **Side Effects:** API calls, database queries, file I/O, external services - **Error Handling:** Try/catch blocks, error boundaries, validation - **Testing:** Associated test files and coverage - **Comments/TODOs:** Any inline documentation or planned work
   </action>
 
 <template-output>comprehensive_file_inventory</template-output>
@@ -161,12 +154,10 @@ sentences) - **Lines of Code:** Total LOC - **Exports:** Complete list with sign
     - Find leaf nodes (files that don't import others in scope)
   </action>
 
-<action>Trace data flow through the system: - Follow function calls and data transformations - Track API calls and their
-responses - Document state updates and propagation - Map database queries and mutations
+<action>Trace data flow through the system: - Follow function calls and data transformations - Track API calls and their responses - Document state updates and propagation - Map database queries and mutations
 </action>
 
-<action>Identify integration points: - External APIs consumed - Internal APIs/services called - Shared state accessed -
-Events published/subscribed - Database tables accessed
+<action>Identify integration points: - External APIs consumed - Internal APIs/services called - Shared state accessed - Events published/subscribed - Database tables accessed
 </action>
 
 <template-output>dependency_graph</template-output>
@@ -183,12 +174,10 @@ Events published/subscribed - Database tables accessed
     - Reusable utilities that could be used
   </action>
 
-<action>Identify code reuse opportunities: - Shared utilities available - Design patterns used elsewhere - Component
-libraries available - Helper functions that could apply
+<action>Identify code reuse opportunities: - Shared utilities available - Design patterns used elsewhere - Component libraries available - Helper functions that could apply
 </action>
 
-<action>Find reference implementations: - Similar features in other parts of codebase - Established patterns to follow -
-Testing approaches used elsewhere
+<action>Find reference implementations: - Similar features in other parts of codebase - Established patterns to follow - Testing approaches used elsewhere
 </action>
 
 <template-output>related_code_references</template-output>
@@ -210,9 +199,7 @@ Testing approaches used elsewhere
 
 <template-output>deep_dive_documentation</template-output>
 
-<action>Update state file: - Add to deep_dive_targets array: {"target_name": "{{target_name}}", "target_path": "
-{{target_path}}", "files_analyzed": {{file_count}}, "output_file": "deep-dive-{{sanitized_target_name}}.md", "
-timestamp": "{{now}}"} - Add output to outputs_generated - Update last_updated timestamp
+<action>Update state file: - Add to deep_dive_targets array: {"target_name": "{{target_name}}", "target_path": "{{target_path}}", "files_analyzed": {{file_count}}, "output_file": "deep-dive-{{sanitized_target_name}}.md", "timestamp": "{{now}}"} - Add output to outputs_generated - Update last_updated timestamp
 </action>
 </step>
 
@@ -234,8 +221,7 @@ Detailed exhaustive analysis of specific areas:
 
 <action>Add link to new deep-dive doc:
 
-- [{{target_name}} Deep-Dive](./deep-dive-{{sanitized_target_name}}.md) - Comprehensive analysis of
-  {{target_description}} ({{file_count}} files, {{total_loc}} LOC) - Generated {{date}}
+- [{{target_name}} Deep-Dive](./deep-dive-{{sanitized_target_name}}.md) - Comprehensive analysis of {{target_description}} ({{file_count}} files, {{total_loc}} LOC) - Generated {{date}}
   </action>
 
   <action>Update index metadata:

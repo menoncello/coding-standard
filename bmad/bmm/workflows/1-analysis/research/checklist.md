@@ -39,18 +39,18 @@
 ### Confidence Level Marking
 
 - [ ] Every major claim is marked with confidence level:
-    - **[Verified - 2+ sources]** = High confidence, multiple independent sources agree
-    - **[Single source - verify]** = Medium confidence, only one source found
-    - **[Estimated - low confidence]** = Low confidence, calculated/projected without strong sources
+  - **[Verified - 2+ sources]** = High confidence, multiple independent sources agree
+  - **[Single source - verify]** = Medium confidence, only one source found
+  - **[Estimated - low confidence]** = Low confidence, calculated/projected without strong sources
 - [ ] Low confidence claims are clearly flagged for user to verify independently
 - [ ] Speculative/projected data is labeled as PROJECTION or FORECAST, not presented as fact
 
 ### Fact vs Analysis vs Speculation
 
 - [ ] Clear distinction between:
-    - **FACT:** Sourced data with citations (e.g., "Market is $5.2B [Source: Gartner 2025]")
-    - **ANALYSIS:** Interpretation of facts (e.g., "This suggests strong growth momentum")
-    - **SPECULATION:** Educated guesses (e.g., "This trend may continue if...")
+  - **FACT:** Sourced data with citations (e.g., "Market is $5.2B [Source: Gartner 2025]")
+  - **ANALYSIS:** Interpretation of facts (e.g., "This suggests strong growth momentum")
+  - **SPECULATION:** Educated guesses (e.g., "This trend may continue if...")
 - [ ] Analysis and speculation are NOT presented as verified facts
 - [ ] Recommendations are based on sourced facts, not unsupported assumptions
 

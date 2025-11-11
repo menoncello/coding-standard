@@ -4,16 +4,13 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on
-{user_skill_level}</critical>
+<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {user_skill_level}</critical>
 <critical>The goal is COLLABORATIVE UX DESIGN through visual exploration, not content generation</critical>
 <critical>Communicate all responses in {communication_language} and tailor to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>SAVE PROGRESS after each major step - use <template-output> tags throughout</critical>
-<critical>DOCUMENT OUTPUT: Professional, specific, actionable UX design decisions WITH RATIONALE. User skill level (
-{user_skill_level}) affects conversation style ONLY, not document content.</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
+<critical>DOCUMENT OUTPUT: Professional, specific, actionable UX design decisions WITH RATIONALE. User skill level ({user_skill_level}) affects conversation style ONLY, not document content.</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
 
 <step n="0" goal="Validate workflow readiness" tag="workflow-status">
 <action>Check if {output_folder}/bmm-workflow-status.yaml exists</action>
@@ -57,8 +54,7 @@ vs sharded document discovery automatically</critical>
 <step n="1a" goal="Confirm project understanding or gather basic context">
   <critical>A UX designer must understand the WHY before designing the HOW</critical>
 
-<action>Attempt to load context documents using fuzzy matching: - PRD: {prd_file} - Product Brief: {brief_file} -
-Brainstorming: {brainstorm_file}
+<action>Attempt to load context documents using fuzzy matching: - PRD: {prd_file} - Product Brief: {brief_file} - Brainstorming: {brainstorm_file}
 </action>
 
   <check if="documents_found">
@@ -161,9 +157,7 @@ For each one, what do they do well from a UX perspective? What makes the experie
 <step n="1e" goal="Synthesize understanding and set facilitation mode">
   <critical>Now analyze complexity and set the right facilitation approach</critical>
 
-<action>Analyze project for UX complexity indicators: - Number of distinct user roles or personas - Number of primary
-user journeys - Interaction complexity (simple CRUD vs rich interactions) - Platform requirements (single vs
-multi-platform) - Real-time collaboration needs - Content creation vs consumption - Novel interaction patterns
+<action>Analyze project for UX complexity indicators: - Number of distinct user roles or personas - Number of primary user journeys - Interaction complexity (simple CRUD vs rich interactions) - Platform requirements (single vs multi-platform) - Real-time collaboration needs - Content creation vs consumption - Novel interaction patterns
 </action>
 
 <action>Based on {user_skill_level}, set facilitation approach:
@@ -306,8 +300,7 @@ Or tell me:
 <step n="3a" goal="Identify the defining experience">
   <critical>Every great app has a defining experience - identify it first</critical>
 
-<action>Based on PRD/brief analysis, identify the core user experience: - What is the primary action users will
-repeat? - What makes this app unique vs. competitors? - What should be delightfully easy?
+<action>Based on PRD/brief analysis, identify the core user experience: - What is the primary action users will repeat? - What makes this app unique vs. competitors? - What should be delightfully easy?
 </action>
 
 <ask>Let's identify your app's defining experience - the core interaction that, if we nail it, everything else follows.
@@ -416,9 +409,7 @@ Walk me through your mental model for this interaction - the ideal experience fr
 <step n="3d" goal="Define core experience principles">
   <critical>Establish the guiding principles for the entire experience</critical>
 
-<action>Based on the defining experience and any novel patterns, define the core experience principles: - Speed: How
-fast should key actions feel? - Guidance: How much hand-holding do users need? - Flexibility: How much control vs.
-simplicity? - Feedback: Subtle or celebratory?
+<action>Based on the defining experience and any novel patterns, define the core experience principles: - Speed: How fast should key actions feel? - Guidance: How much hand-holding do users need? - Flexibility: How much control vs. simplicity? - Feedback: Subtle or celebratory?
 </action>
 
 <output>Core experience principles established:
@@ -565,8 +556,7 @@ What speaks to you?
 
   </action>
 
-<action>Define spacing and layout foundation: - Base unit (4px, 8px system) - Spacing scale (xs, sm, md, lg, xl, 2xl,
-etc.) - Layout grid (12-column, custom, or design system default) - Container widths for different breakpoints
+<action>Define spacing and layout foundation: - Base unit (4px, 8px system) - Spacing scale (xs, sm, md, lg, xl, 2xl, etc.) - Layout grid (12-column, custom, or design system default) - Container widths for different breakpoints
 </action>
 
 <template-output>visual_foundation</template-output>
@@ -743,8 +733,7 @@ What speaks to you?
   <critical>User journeys are conversations, not just flowcharts</critical>
   <critical>Design WITH the user, exploring options for each key flow</critical>
 
-<action>Extract critical user journeys from PRD: - Primary user tasks - Conversion flows - Onboarding sequence - Content
-creation workflows - Any complex multi-step processes
+<action>Extract critical user journeys from PRD: - Primary user tasks - Conversion flows - Onboarding sequence - Content creation workflows - Any complex multi-step processes
 </action>
 
 <action>For each critical journey, identify the goal and current assumptions</action>
@@ -969,14 +958,11 @@ Component: {{custom_component_name}}
 
   </action>
 
-<output>I've identified {{pattern_count}} UX pattern categories that need consistent decisions across your app. Let's
-make these decisions together to ensure users get a consistent experience.
+<output>I've identified {{pattern_count}} UX pattern categories that need consistent decisions across your app. Let's make these decisions together to ensure users get a consistent experience.
 
-These patterns determine how {{project_name}} behaves in common situations - like how buttons work, how forms validate,
-how modals behave, etc.</output>
+These patterns determine how {{project_name}} behaves in common situations - like how buttons work, how forms validate, how modals behave, etc.</output>
 
-<ask>For each pattern category below, I'll present options and a recommendation. Tell me your preferences or ask
-questions.
+<ask>For each pattern category below, I'll present options and a recommendation. Tell me your preferences or ask questions.
 
 **Pattern Categories to Decide:**
 
@@ -997,9 +983,7 @@ For each one, do you want to:
 2. Focus only on the most critical patterns for your app (focused)
 3. Let me recommend defaults and you override where needed (efficient)</ask>
 
-<action>Based on user choice, facilitate pattern decisions with appropriate depth: - If thorough: Present all categories
-with options and reasoning - If focused: Identify 3-5 critical patterns based on app type - If efficient: Recommend
-smart defaults, ask for overrides
+<action>Based on user choice, facilitate pattern decisions with appropriate depth: - If thorough: Present all categories with options and reasoning - If focused: Identify 3-5 critical patterns based on app type - If efficient: Recommend smart defaults, ask for overrides
 
     For each pattern decision, document:
     - Pattern category
@@ -1024,19 +1008,19 @@ Target devices from PRD: {{devices}}
 For responsive design:
 
 1. **Desktop** (large screens):
-    - How should we use the extra space?
-    - Multi-column layouts?
-    - Side navigation?
+   - How should we use the extra space?
+   - Multi-column layouts?
+   - Side navigation?
 
 2. **Tablet** (medium screens):
-    - Simplified layout from desktop?
-    - Touch-optimized interactions?
-    - Portrait vs landscape considerations?
+   - Simplified layout from desktop?
+   - Touch-optimized interactions?
+   - Portrait vs landscape considerations?
 
 3. **Mobile** (small screens):
-    - Bottom navigation or hamburger menu?
-    - How do multi-column layouts collapse?
-    - Touch target sizes adequate?
+   - Bottom navigation or hamburger menu?
+   - How do multi-column layouts collapse?
+   - Touch target sizes adequate?
 
 What's most important for each screen size?
 </ask>
@@ -1162,8 +1146,7 @@ Based on your deployment intent: {{recommendation}}
 
 I can generate interactive HTML mockups using all your design choices:
 
-**1. Key Screens Showcase** - 6-8 panels showing your app's main screens (home, core action, settings, etc.) with your
-chosen:
+**1. Key Screens Showcase** - 6-8 panels showing your app's main screens (home, core action, settings, etc.) with your chosen:
 
 - Color theme and typography
 - Design direction and layout
@@ -1253,8 +1236,7 @@ Pick one, or tell me which flow you want to see!</ask>
 
     <output>✨ **Created: {journey_visualization_html}**
 
-Walk through the {{selected_journey}} flow step-by-step in your browser! This shows the exact experience users will
-have, with all your UX decisions applied.</output>
+Walk through the {{selected_journey}} flow step-by-step in your browser! This shows the exact experience users will have, with all your UX decisions applied.</output>
 </check>
 
   <check if="user_choice == 'something_else'">
@@ -1295,8 +1277,7 @@ Open in browser to explore!</output>
 {{#if tracking_mode == true}}
 
 - **Next required:** {{next_workflow}} ({{next_agent}} agent)
-- **Optional:** Run validation with \*validate-design, or generate additional UX artifacts (wireframes, prototypes,
-  etc.)
+- **Optional:** Run validation with \*validate-design, or generate additional UX artifacts (wireframes, prototypes, etc.)
 
 Check status anytime with: `workflow-status`
 {{else}}

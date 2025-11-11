@@ -46,7 +46,7 @@ export const createCachedStandard = (overrides: Partial<CachedStandard> = {}): C
 
     return {
         ...standard,
-        cacheKey: `standards:${standard.language}:${standard.category}:${faker.string.alphanumeric(8)}`,
+        cacheKey: `standards:${standard.technology}:${standard.category}:${faker.string.alphanumeric(8)}`,
         ttl: Date.now() + ttl,
         accessCount: faker.number.int({ min: 1, max: 100 }),
         lastAccessed: faker.date.between({ from: createdAt, to: new Date() }),

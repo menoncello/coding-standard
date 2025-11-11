@@ -9,8 +9,7 @@
 
 ## Overview
 
-This document provides the complete epic and story breakdown for {{project_name}}, decomposing the requirements from
-the [PRD](./PRD.md) into implementable stories.
+This document provides the complete epic and story breakdown for {{project_name}}, decomposing the requirements from the [PRD](./PRD.md) into implementable stories.
 
 {{epics_summary}}
 
@@ -50,5 +49,4 @@ So that {{value_benefit}}.
 
 ---
 
-_For implementation: Use the `create-story` workflow to generate individual story implementation plans from this epic
-breakdown._
+_For implementation: Use the `create-story` workflow to generate individual story implementation plans from this epic breakdown._

@@ -8,16 +8,14 @@
 
 Ever wanted to gather your entire AI team in one room and see what happens? That's party mode.
 
-Type `/bmad:core:workflows:party-mode` (or `*party-mode` from any agent), and suddenly you've got **all your AI agents**
-in one conversation. PM, Architect, DEV, UX Designer, the CIS creative agents - everyone shows up.
+Type `/bmad:core:workflows:party-mode` (or `*party-mode` from any agent), and suddenly you've got **all your AI agents** in one conversation. PM, Architect, DEV, UX Designer, the CIS creative agents - everyone shows up.
 
 **Why it's useful:**
 
 - **After complex workflows** - Debrief with the whole team about what worked, what didn't
 - **Big decisions with tradeoffs** - Get technical, creative, and strategic perspectives simultaneously
 - **Brainstorming sessions** - Watch ideas evolve through cross-pollination
-- **When things go wrong** - Call out failures, watch agents defend their decisions, let them debate whose fault it
-  was (oddly therapeutic)
+- **When things go wrong** - Call out failures, watch agents defend their decisions, let them debate whose fault it was (oddly therapeutic)
 - **Sprint retrospectives** - Party mode powers the retrospective workflow
 - **Sprint planning** - Multi-agent collaboration for planning sessions
 
@@ -61,20 +59,15 @@ Type: exit
 
 ### Example 1: Calling Out Bad Architecture
 
-**You:** "Okay team, our last sprint was a disaster. The authentication service went down three times. Who screwed this
-up?"
+**You:** "Okay team, our last sprint was a disaster. The authentication service went down three times. Who screwed this up?"
 
-**Architect (Winston):** "The design was sound - distributed authentication with proper fallbacks. If implementation
-deviated from the spec..."
+**Architect (Winston):** "The design was sound - distributed authentication with proper fallbacks. If implementation deviated from the spec..."
 
-**DEV (Amelia):** "I followed the architecture doc exactly. The spec didn't account for concurrent session invalidation
-race conditions."
+**DEV (Amelia):** "I followed the architecture doc exactly. The spec didn't account for concurrent session invalidation race conditions."
 
-**PM (John):** "Both of you missed the bigger issue - we didn't validate session management requirements in the PRD.
-This is on me for not catching it."
+**PM (John):** "Both of you missed the bigger issue - we didn't validate session management requirements in the PRD. This is on me for not catching it."
 
-**TEA (Murat):** "And I should've caught this in integration tests. The test scenarios didn't cover concurrent
-invalidation."
+**TEA (Murat):** "And I should've caught this in integration tests. The test scenarios didn't cover concurrent invalidation."
 
 _(Watch them debate whose fault it really was - it's therapeutic)_
 
@@ -84,16 +77,13 @@ _(Watch them debate whose fault it really was - it's therapeutic)_
 
 **You:** "How do we make onboarding feel magical instead of boring?"
 
-**UX Designer (Sally):** "Start with progressive disclosure - reveal features as users need them, not all at once in a
-tutorial."
+**UX Designer (Sally):** "Start with progressive disclosure - reveal features as users need them, not all at once in a tutorial."
 
 **Storyteller (CIS):** "What if onboarding was a story? Each step reveals a character's journey - the user IS the hero."
 
-**Innovation Strategist (CIS):** "Take it further - gamify with unlockable achievements. But make them meaningful, not
-arbitrary badges."
+**Innovation Strategist (CIS):** "Take it further - gamify with unlockable achievements. But make them meaningful, not arbitrary badges."
 
-**Game Designer:** "Building on that - what if the first 'quest' is actually solving a real user problem? They learn by
-doing something valuable."
+**Game Designer:** "Building on that - what if the first 'quest' is actually solving a real user problem? They learn by doing something valuable."
 
 _(Ideas cross-pollinate and evolve)_
 
@@ -109,8 +99,7 @@ _(Ideas cross-pollinate and evolve)_
 
 **DEV:** "Monolith with clear module boundaries. We can extract services later if needed."
 
-**Innovation Strategist:** "Contrarian take - if your differentiator IS scalability, build for it now. Otherwise
-Architect's right."
+**Innovation Strategist:** "Contrarian take - if your differentiator IS scalability, build for it now. Otherwise Architect's right."
 
 _(Multiple perspectives reveal the right answer)_
 
@@ -137,8 +126,7 @@ _(Multiple perspectives reveal the right answer)_
 
 ## Agent Customization
 
-Party mode uses agents from `bmad/[module]/agents/*.md` - these already include any customizations you applied during
-install.
+Party mode uses agents from `bmad/[module]/agents/*.md` - these already include any customizations you applied during install.
 
 **To customize agents for party mode:**
 
@@ -179,11 +167,9 @@ See [Agents Guide](./agents-guide.md#agent-customization) for details.
 
 Party mode can include **19+ agents** from all installed modules:
 
-**BMM (12 agents):** PM, Analyst, Architect, SM, DEV, TEA, UX Designer, Technical Writer, Game Designer, Game Developer,
-Game Architect
+**BMM (12 agents):** PM, Analyst, Architect, SM, DEV, TEA, UX Designer, Technical Writer, Game Designer, Game Developer, Game Architect
 
-**CIS (5 agents):** Brainstorming Coach, Creative Problem Solver, Design Thinking Coach, Innovation Strategist,
-Storyteller
+**CIS (5 agents):** Brainstorming Coach, Creative Problem Solver, Design Thinking Coach, Innovation Strategist, Storyteller
 
 **BMB (1 agent):** BMad Builder
 

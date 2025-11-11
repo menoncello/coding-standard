@@ -127,7 +127,7 @@ Guide for prioritizing test scenarios based on risk, criticality, and business i
 ## Test Coverage by Priority
 
 | Priority | Unit Coverage | Integration Coverage | E2E Coverage       |
-|----------|---------------|----------------------|--------------------|
+| -------- | ------------- | -------------------- | ------------------ |
 | P0       | >90%          | >80%                 | All critical paths |
 | P1       | >80%          | >60%                 | Main happy paths   |
 | P2       | >60%          | >40%                 | Smoke tests        |
@@ -339,7 +339,7 @@ npx playwright test
 Priority should align with risk score from `probability-impact.md`:
 
 | Risk Score | Typical Priority | Rationale                                  |
-|------------|------------------|--------------------------------------------|
+| ---------- | ---------------- | ------------------------------------------ |
 | 9          | P0               | Critical blocker (probability=3, impact=3) |
 | 6-8        | P0 or P1         | High risk (requires mitigation)            |
 | 4-5        | P1 or P2         | Medium risk (monitor closely)              |
@@ -366,10 +366,8 @@ Before finalizing test priorities:
 
 ## Integration Points
 
-- **Used in workflows**: `*automate` (priority-based test generation), `*test-design` (scenario prioritization),
-  `*trace` (coverage validation by priority)
-- **Related fragments**: `risk-governance.md` (risk scoring), `probability-impact.md` (impact assessment),
-  `selective-testing.md` (tag-based execution)
+- **Used in workflows**: `*automate` (priority-based test generation), `*test-design` (scenario prioritization), `*trace` (coverage validation by priority)
+- **Related fragments**: `risk-governance.md` (risk scoring), `probability-impact.md` (impact assessment), `selective-testing.md` (tag-based execution)
 - **Tools**: Playwright/Cypress grep for tag filtering, CI scripts for priority-based execution
 
 _Source: Risk-based testing practices, test prioritization strategies, production incident analysis_

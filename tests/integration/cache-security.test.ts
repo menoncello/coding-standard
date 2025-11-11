@@ -35,17 +35,29 @@ describe('Cache Security Integration Tests', () => {
             keyManager.destroy();
         });
 
-        test('1.3-SEC-001 should generate and rotate encryption keys', () => {
+        test('1.3-SEC-001 should generate and rotate encryption keys', async () => {
             const initialKey = keyManager.getCurrentKey();
             expect(initialKey).toBeDefined();
             expect(initialKey.length).toBe(32); // 256 bits
 
-            // Test key rotation
+            // Test automatic key rotation with proper async handling
             const beforeRotation = keyManager.getCurrentKey();
-            setTimeout(() => {
-                const afterRotation = keyManager.getCurrentKey();
-                expect(afterRotation).not.toEqual(beforeRotation);
-            }, 150);
+            expect(keyManager.hasActiveRotationTimer()).toBe(true);
+
+            // Wait for automatic key rotation to occur (interval is 100ms, so wait longer)
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    const afterAutoRotation = keyManager.getCurrentKey();
+                    expect(afterAutoRotation).not.toEqual(beforeRotation);
+                    resolve();
+                }, 200); // Wait longer than the rotation interval
+            });
+
+            // Test manual key rotation
+            const beforeManualRotation = keyManager.getCurrentKey();
+            keyManager.forceKeyRotation();
+            const afterManualRotation = keyManager.getCurrentKey();
+            expect(afterManualRotation).not.toEqual(beforeManualRotation);
         });
 
         test('1.3-SEC-002 should maintain decryption keys during rotation', () => {

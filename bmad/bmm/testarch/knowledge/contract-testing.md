@@ -2,18 +2,11 @@
 
 ## Principle
 
-Contract testing validates API contracts between consumer and provider services without requiring integrated end-to-end
-tests. Store consumer contracts alongside integration specs, version contracts semantically, and publish on every CI
-run. Provider verification before merge surfaces breaking changes immediately, while explicit fallback behavior (
-timeouts, retries, error payloads) captures resilience guarantees in contracts.
+Contract testing validates API contracts between consumer and provider services without requiring integrated end-to-end tests. Store consumer contracts alongside integration specs, version contracts semantically, and publish on every CI run. Provider verification before merge surfaces breaking changes immediately, while explicit fallback behavior (timeouts, retries, error payloads) captures resilience guarantees in contracts.
 
 ## Rationale
 
-Traditional integration testing requires running both consumer and provider simultaneously, creating slow, flaky tests
-with complex setup. Contract testing decouples services: consumers define expectations (pact files), providers verify
-against those expectations independently. This enables parallel development, catches breaking changes early, and
-documents API behavior as executable specifications. Pair contract tests with API smoke tests to validate data mapping
-and UI rendering in tandem.
+Traditional integration testing requires running both consumer and provider simultaneously, creating slow, flaky tests with complex setup. Contract testing decouples services: consumers define expectations (pact files), providers verify against those expectations independently. This enables parallel development, catches breaking changes early, and documents API behavior as executable specifications. Pair contract tests with API smoke tests to validate data mapping and UI rendering in tandem.
 
 ## Pattern Examples
 

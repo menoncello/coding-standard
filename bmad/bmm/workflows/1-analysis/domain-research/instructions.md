@@ -20,12 +20,10 @@ Check for context:
 - Did user provide initial domain/project description?
 
 If context exists, reflect it back:
-"I understand you're building [description]. Let's explore the [domain] aspects together to ensure we capture all
-critical requirements."
+"I understand you're building [description]. Let's explore the [domain] aspects together to ensure we capture all critical requirements."
 
 If no context:
-"Let's explore your project's domain together. Tell me about what you're building and what makes it unique or
-complex."</action>
+"Let's explore your project's domain together. Tell me about what you're building and what makes it unique or complex."</action>
 </step>
 
 <step n="1" goal="Domain detection and scoping">
@@ -54,8 +52,7 @@ Based on responses, identify primary domain(s):
 - Other specialized domain
 
 Share your understanding:
-"Based on our discussion, this appears to be a [domain] project with [key characteristics]. The main areas we should
-research are:
+"Based on our discussion, this appears to be a [domain] project with [key characteristics]. The main areas we should research are:
 
 - [Area 1]
 - [Area 2]
@@ -69,8 +66,7 @@ What concerns you most about building in this space?"</action>
 <step n="2" goal="Collaborative concern mapping">
 <action>Work WITH the user to identify critical concerns
 
-"Let's map out the important considerations together. I'll share what I typically see in [domain], and you tell me what
-applies to your case."
+"Let's map out the important considerations together. I'll share what I typically see in [domain], and you tell me what applies to your case."
 
 For detected domain, explore relevant areas:
 

@@ -75,7 +75,10 @@ export class PerformanceMonitor {
     endTimer(timerId: string, operation: string, success: boolean = true, cacheHit: boolean = false, data?: any): number {
         const startTime = this.operationTimers.get(timerId);
         if (!startTime) {
-            console.warn(`Timer ${timerId} not found`);
+            // Silently handle missing timers during tests to avoid console noise
+            if (process.env.NODE_ENV !== 'test') {
+                console.warn(`Timer ${timerId} not found`);
+            }
             return 0;
         }
 
@@ -105,6 +108,20 @@ export class PerformanceMonitor {
         if (this.metrics.length > this.maxMetrics) {
             this.metrics = this.metrics.slice(-this.maxMetrics);
         }
+    }
+
+    /**
+     * Simple record method for compatibility with registry
+     */
+    recordMetricSimple(operation: string, duration: number, data?: any): void {
+        this.recordMetric({
+            responseTime: duration,
+            memoryUsage: this.getMemoryUsage(),
+            timestamp: Date.now(),
+            operation,
+            success: true,
+            data
+        });
     }
 
     /**

@@ -1,7 +1,6 @@
 # BMad Method V6 Quick Start Guide
 
-Get started with BMad Method v6 for your new greenfield project. This guide walks you through building software from
-scratch using AI-powered workflows.
+Get started with BMad Method v6 for your new greenfield project. This guide walks you through building software from scratch using AI-powered workflows.
 
 ## TL;DR - The Quick Path
 
@@ -16,8 +15,7 @@ scratch using AI-powered workflows.
 
 ## What is BMad Method?
 
-BMad Method (BMM) helps you build software through guided workflows with specialized AI agents. The process follows four
-phases:
+BMad Method (BMM) helps you build software through guided workflows with specialized AI agents. The process follows four phases:
 
 1. **Phase 1: Analysis** (Optional) - Brainstorming, Research, Product Brief
 2. **Phase 2: Planning** (Required) - Create your requirements (tech-spec or PRD)
@@ -39,20 +37,16 @@ The interactive installer will guide you through setup and create a `bmad/` fold
 
 ### Step 1: Initialize Your Workflow
 
-1. **Load the Analyst agent** in your IDE - See your IDE-specific instructions
-   in [docs/ide-info](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) for how to activate agents:
-    - [Claude Code](https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/ide-info/claude-code.md)
-    - [VS Code/Cursor/Windsurf](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) - Check your IDE
-      folder
-    - Other IDEs also supported
+1. **Load the Analyst agent** in your IDE - See your IDE-specific instructions in [docs/ide-info](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) for how to activate agents:
+   - [Claude Code](https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/ide-info/claude-code.md)
+   - [VS Code/Cursor/Windsurf](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) - Check your IDE folder
+   - Other IDEs also supported
 2. **Wait for the agent's menu** to appear
 3. **Tell the agent**: "Run workflow-init" or type "\*workflow-init" or select the menu item number
 
 #### What happens during workflow-init?
 
-Workflows are interactive processes in V6 that replaced tasks and templates from prior versions. There are many types of
-workflows, and you can even create your own with the BMad Builder module. For the BMad Method, you'll be interacting
-with expert-designed workflows crafted to work with you to get the best out of both you and the LLM.
+Workflows are interactive processes in V6 that replaced tasks and templates from prior versions. There are many types of workflows, and you can even create your own with the BMad Builder module. For the BMad Method, you'll be interacting with expert-designed workflows crafted to work with you to get the best out of both you and the LLM.
 
 During workflow-init, you'll describe:
 
@@ -66,32 +60,26 @@ Based on your description, the workflow will suggest a track and let you choose 
 
 **Three Planning Tracks:**
 
-- **Quick Flow** - Fast implementation (tech-spec only) - bug fixes, simple features, clear scope (typically 1-15
-  stories)
-- **BMad Method** - Full planning (PRD + Architecture + UX) - products, platforms, complex features (typically 10-50+
-  stories)
-- **Enterprise Method** - Extended planning (BMad Method + Security/DevOps/Test) - enterprise requirements, compliance,
-  multi-tenant (typically 30+ stories)
+- **Quick Flow** - Fast implementation (tech-spec only) - bug fixes, simple features, clear scope (typically 1-15 stories)
+- **BMad Method** - Full planning (PRD + Architecture + UX) - products, platforms, complex features (typically 10-50+ stories)
+- **Enterprise Method** - Extended planning (BMad Method + Security/DevOps/Test) - enterprise requirements, compliance, multi-tenant (typically 30+ stories)
 
 **Note**: Story counts are guidance, not definitions. Tracks are chosen based on planning needs, not story math.
 
 #### What gets created?
 
-Once you confirm your track, the `bmm-workflow-status.yaml` file will be created in your project's docs folder (assuming
-default install location). This file tracks your progress through all phases.
+Once you confirm your track, the `bmm-workflow-status.yaml` file will be created in your project's docs folder (assuming default install location). This file tracks your progress through all phases.
 
 **Important notes:**
 
 - Every track has different paths through the phases
 - Story counts can still change based on overall complexity as you work
 - For this guide, we'll assume a BMad Method track project
-- This workflow will guide you through Phase 1 (optional), Phase 2 (required), and Phase 3 (required for BMad Method and
-  Enterprise tracks)
+- This workflow will guide you through Phase 1 (optional), Phase 2 (required), and Phase 3 (required for BMad Method and Enterprise tracks)
 
 ### Step 2: Work Through Phases 1-3
 
-After workflow-init completes, you'll work through the planning phases. **Important: Use fresh chats for each workflow
-to avoid context limitations.**
+After workflow-init completes, you'll work through the planning phases. **Important: Use fresh chats for each workflow to avoid context limitations.**
 
 #### Checking Your Status
 
@@ -119,14 +107,12 @@ The next TRULY REQUIRED step is:
 
 When an agent tells you to run a workflow (like `prd`):
 
-1. **Start a new chat** with the specified agent (e.g., PM) -
-   See [docs/ide-info](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) for your IDE's specific
-   instructions
+1. **Start a new chat** with the specified agent (e.g., PM) - See [docs/ide-info](https://github.com/bmad-code-org/BMAD-METHOD/tree/main/docs/ide-info) for your IDE's specific instructions
 2. **Wait for the menu** to appear
 3. **Tell the agent** to run it using any of these formats:
-    - Type the shorthand: `*prd`
-    - Say it naturally: "Let's create a new PRD"
-    - Select the menu number for "create-prd"
+   - Type the shorthand: `*prd`
+   - Say it naturally: "Let's create a new PRD"
+   - Select the menu number for "create-prd"
 
 The agents in V6 are very good with fuzzy menu matching!
 
@@ -146,8 +132,8 @@ For v4 users or those who prefer to skip workflow-status guidance:
 1. Load the **PM agent** in a new chat
 2. Tell it to run the PRD workflow
 3. Once complete, you'll have:
-    - **PRD.md** - Your Product Requirements Document
-    - Epic breakdown
+   - **PRD.md** - Your Product Requirements Document
+   - Epic breakdown
 
 **For Quick Flow track:**
 
@@ -189,8 +175,7 @@ Once architecture is complete:
 
 ### Step 3: Start Building (Phase 4 - Implementation)
 
-Once planning and architecture are complete, you'll move to Phase 4. **Important: Each workflow below should be run in a
-fresh chat to avoid context limitations and hallucinations.**
+Once planning and architecture are complete, you'll move to Phase 4. **Important: Each workflow below should be run in a fresh chat to avoid context limitations and hallucinations.**
 
 #### 3.1 Initialize Sprint Planning
 
@@ -248,8 +233,7 @@ After completing all stories in an epic:
 1. **Start a new chat** with the **SM agent**
 2. Tell the agent: "Run retrospective"
 
-**Why fresh chats?** Context-intensive workflows can cause hallucinations if you keep issuing commands in the same chat.
-Starting fresh ensures the agent has maximum context capacity for each workflow.
+**Why fresh chats?** Context-intensive workflows can cause hallucinations if you keep issuing commands in the same chat. Starting fresh ensures the agent has maximum context capacity for each workflow.
 
 ---
 
@@ -259,8 +243,7 @@ Each agent is a specialized AI persona:
 
 - **Analyst** - Initializes workflows and tracks progress
 - **PM** - Creates requirements and specifications
-- **UX-Designer** - If your project has a front end - this designer will help produce artifacts, come up with mock
-  updates, and design a great look and feel with you giving it guidance.
+- **UX-Designer** - If your project has a front end - this designer will help produce artifacts, come up with mock updates, and design a great look and feel with you giving it guidance.
 - **Architect** - Designs system architecture
 - **SM (Scrum Master)** - Manages sprints and creates stories
 - **DEV** - Implements code and reviews work

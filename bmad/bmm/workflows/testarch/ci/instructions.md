@@ -9,9 +9,7 @@
 
 ## Overview
 
-Scaffolds a production-ready CI/CD quality pipeline with test execution, burn-in loops for flaky test detection,
-parallel sharding, artifact collection, and notification configuration. This workflow creates platform-specific CI
-configuration optimized for fast feedback and reliable test execution.
+Scaffolds a production-ready CI/CD quality pipeline with test execution, burn-in loops for flaky test detection, parallel sharding, artifact collection, and notification configuration. This workflow creates platform-specific CI configuration optimized for fast feedback and reliable test execution.
 
 ---
 
@@ -32,40 +30,40 @@ configuration optimized for fast feedback and reliable test execution.
 ### Actions
 
 1. **Verify Git Repository**
-    - Check for `.git/` directory
-    - Confirm remote repository configured (`git remote -v`)
-    - If not initialized, HALT with message: "Git repository required for CI/CD setup"
+   - Check for `.git/` directory
+   - Confirm remote repository configured (`git remote -v`)
+   - If not initialized, HALT with message: "Git repository required for CI/CD setup"
 
 2. **Validate Test Framework**
-    - Look for `playwright.config.*` or `cypress.config.*`
-    - Read framework configuration to extract:
-        - Test directory location
-        - Test command
-        - Reporter configuration
-        - Timeout settings
-    - If not found, HALT with message: "Run `framework` workflow first to set up test infrastructure"
+   - Look for `playwright.config.*` or `cypress.config.*`
+   - Read framework configuration to extract:
+     - Test directory location
+     - Test command
+     - Reporter configuration
+     - Timeout settings
+   - If not found, HALT with message: "Run `framework` workflow first to set up test infrastructure"
 
 3. **Run Local Tests**
-    - Execute `npm run test:e2e` (or equivalent from package.json)
-    - Ensure tests pass before CI setup
-    - If tests fail, HALT with message: "Fix failing tests before setting up CI/CD"
+   - Execute `npm run test:e2e` (or equivalent from package.json)
+   - Ensure tests pass before CI setup
+   - If tests fail, HALT with message: "Fix failing tests before setting up CI/CD"
 
 4. **Detect CI Platform**
-    - Check for existing CI configuration:
-        - `.github/workflows/*.yml` (GitHub Actions)
-        - `.gitlab-ci.yml` (GitLab CI)
-        - `.circleci/config.yml` (Circle CI)
-        - `Jenkinsfile` (Jenkins)
-    - If found, ask user: "Update existing CI configuration or create new?"
-    - If not found, detect platform from git remote:
-        - `github.com` → GitHub Actions (default)
-        - `gitlab.com` → GitLab CI
-        - Ask user if unable to auto-detect
+   - Check for existing CI configuration:
+     - `.github/workflows/*.yml` (GitHub Actions)
+     - `.gitlab-ci.yml` (GitLab CI)
+     - `.circleci/config.yml` (Circle CI)
+     - `Jenkinsfile` (Jenkins)
+   - If found, ask user: "Update existing CI configuration or create new?"
+   - If not found, detect platform from git remote:
+     - `github.com` → GitHub Actions (default)
+     - `gitlab.com` → GitLab CI
+     - Ask user if unable to auto-detect
 
 5. **Read Environment Configuration**
-    - Check for `.nvmrc` to determine Node version
-    - Default to Node 20 LTS if not found
-    - Read `package.json` to identify dependencies (affects caching strategy)
+   - Check for `.nvmrc` to determine Node version
+   - Default to Node 20 LTS if not found
+   - Read `package.json` to identify dependencies (affects caching strategy)
 
 **Halt Condition:** If preflight checks fail, stop immediately and report which requirement failed.
 
@@ -80,30 +78,30 @@ configuration optimized for fast feedback and reliable test execution.
    Based on detection or user preference, use the appropriate template:
 
    **GitHub Actions** (`.github/workflows/test.yml`):
-    - Most common platform
-    - Excellent caching and matrix support
-    - Free for public repos, generous free tier for private
+   - Most common platform
+   - Excellent caching and matrix support
+   - Free for public repos, generous free tier for private
 
    **GitLab CI** (`.gitlab-ci.yml`):
-    - Integrated with GitLab
-    - Built-in registry and runners
-    - Powerful pipeline features
+   - Integrated with GitLab
+   - Built-in registry and runners
+   - Powerful pipeline features
 
    **Circle CI** (`.circleci/config.yml`):
-    - Fast execution with parallelism
-    - Docker-first approach
-    - Enterprise features
+   - Fast execution with parallelism
+   - Docker-first approach
+   - Enterprise features
 
    **Jenkins** (`Jenkinsfile`):
-    - Self-hosted option
-    - Maximum customization
-    - Requires infrastructure management
+   - Self-hosted option
+   - Maximum customization
+   - Requires infrastructure management
 
 2. **Generate Pipeline Configuration**
 
    Use templates from `{installed_path}/` directory:
-    - `github-actions-template.yml`
-    - `gitlab-ci-template.yml`
+   - `github-actions-template.yml`
+   - `gitlab-ci-template.yml`
 
    **Key pipeline stages:**
 
@@ -170,9 +168,9 @@ configuration optimized for fast feedback and reliable test execution.
    **Purpose:** Runs tests multiple times to catch non-deterministic failures before they reach main branch.
 
    **When to run:**
-    - On pull requests to main/develop
-    - Weekly on cron schedule
-    - After significant test infrastructure changes
+   - On pull requests to main/develop
+   - Weekly on cron schedule
+   - After significant test infrastructure changes
 
 5. **Configure Caching**
 
@@ -217,11 +215,11 @@ configuration optimized for fast feedback and reliable test execution.
    ```
 
    **Artifacts to collect:**
-    - Traces (Playwright) - full debugging context
-    - Screenshots - visual evidence of failures
-    - Videos - interaction playback
-    - HTML reports - detailed test results
-    - Console logs - error messages and warnings
+   - Traces (Playwright) - full debugging context
+   - Screenshots - visual evidence of failures
+   - Videos - interaction playback
+   - HTML reports - detailed test results
+   - Console logs - error messages and warnings
 
 7. **Add Retry Logic**
 
@@ -314,31 +312,31 @@ configuration optimized for fast feedback and reliable test execution.
 ### Primary Artifacts Created
 
 1. **CI Configuration File**
-    - `.github/workflows/test.yml` (GitHub Actions)
-    - `.gitlab-ci.yml` (GitLab CI)
-    - `.circleci/config.yml` (Circle CI)
+   - `.github/workflows/test.yml` (GitHub Actions)
+   - `.gitlab-ci.yml` (GitLab CI)
+   - `.circleci/config.yml` (Circle CI)
 
 2. **Pipeline Stages**
-    - **Lint**: Code quality checks (ESLint, Prettier)
-    - **Test**: Parallel test execution (4 shards)
-    - **Burn-in**: Flaky test detection (10 iterations)
-    - **Report**: Result aggregation and publishing
+   - **Lint**: Code quality checks (ESLint, Prettier)
+   - **Test**: Parallel test execution (4 shards)
+   - **Burn-in**: Flaky test detection (10 iterations)
+   - **Report**: Result aggregation and publishing
 
 3. **Helper Scripts**
-    - `scripts/test-changed.sh` - Selective testing
-    - `scripts/ci-local.sh` - Local CI mirror
-    - `scripts/burn-in.sh` - Standalone burn-in execution
+   - `scripts/test-changed.sh` - Selective testing
+   - `scripts/ci-local.sh` - Local CI mirror
+   - `scripts/burn-in.sh` - Standalone burn-in execution
 
 4. **Documentation**
-    - `docs/ci.md` - CI pipeline guide
-    - `docs/ci-secrets-checklist.md` - Required secrets
-    - Inline comments in CI configuration
+   - `docs/ci.md` - CI pipeline guide
+   - `docs/ci-secrets-checklist.md` - Required secrets
+   - Inline comments in CI configuration
 
 5. **Optimization Features**
-    - Dependency caching (npm, browser binaries)
-    - Parallel sharding (4 jobs default)
-    - Retry logic (2 retries on failure)
-    - Failure-only artifact upload
+   - Dependency caching (npm, browser binaries)
+   - Parallel sharding (4 jobs default)
+   - Retry logic (2 retries on failure)
+   - Failure-only artifact upload
 
 ### Performance Targets
 
@@ -355,19 +353,13 @@ configuration optimized for fast feedback and reliable test execution.
 
 ### Knowledge Base Integration
 
-**Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to identify and load relevant knowledge
-fragments:
+**Critical:** Consult `{project-root}/bmad/bmm/testarch/tea-index.csv` to identify and load relevant knowledge fragments:
 
-- `ci-burn-in.md` - Burn-in loop patterns: 10-iteration detection, GitHub Actions workflow, shard orchestration,
-  selective execution (678 lines, 4 examples)
-- `selective-testing.md` - Changed test detection strategies: tag-based, spec filters, diff-based selection, promotion
-  rules (727 lines, 4 examples)
-- `visual-debugging.md` - Artifact collection best practices: trace viewer, HAR recording, custom artifacts,
-  accessibility integration (522 lines, 5 examples)
-- `test-quality.md` - CI-specific test quality criteria: deterministic tests, isolated with cleanup, explicit
-  assertions, length/time optimization (658 lines, 5 examples)
-- `playwright-config.md` - CI-optimized configuration: parallelization, artifact output, project dependencies,
-  sharding (722 lines, 5 examples)
+- `ci-burn-in.md` - Burn-in loop patterns: 10-iteration detection, GitHub Actions workflow, shard orchestration, selective execution (678 lines, 4 examples)
+- `selective-testing.md` - Changed test detection strategies: tag-based, spec filters, diff-based selection, promotion rules (727 lines, 4 examples)
+- `visual-debugging.md` - Artifact collection best practices: trace viewer, HAR recording, custom artifacts, accessibility integration (522 lines, 5 examples)
+- `test-quality.md` - CI-specific test quality criteria: deterministic tests, isolated with cleanup, explicit assertions, length/time optimization (658 lines, 5 examples)
+- `playwright-config.md` - CI-optimized configuration: parallelization, artifact output, project dependencies, sharding (722 lines, 5 examples)
 
 ### CI Platform-Specific Guidance
 

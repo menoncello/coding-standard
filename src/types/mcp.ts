@@ -164,3 +164,93 @@ export const VALIDATE_CODE_TOOL: Tool = {
         required: ['code', 'language']
     }
 };
+
+export const ADD_STANDARD_TOOL: Tool = {
+    name: 'addStandard',
+    description: 'Add a new coding standard to the registry',
+    inputSchema: {
+        type: 'object',
+        properties: {
+            semanticName: {
+                type: 'string',
+                description: 'Semantic name for the standard (e.g., react-component-naming)'
+            },
+            pattern: {
+                type: 'string',
+                description: 'Regular expression pattern for the standard'
+            },
+            description: {
+                type: 'string',
+                description: 'Description of what the standard enforces'
+            },
+            category: {
+                type: 'string',
+                description: 'Category of the standard (naming, formatting, structure, etc.)',
+                enum: ['naming', 'formatting', 'structure', 'performance', 'security', 'testing', 'documentation', 'error-handling', 'best-practices', 'style']
+            },
+            technology: {
+                type: 'string',
+                description: 'Technology the standard applies to (typescript, javascript, python, etc.)'
+            },
+            severity: {
+                type: 'string',
+                description: 'Severity level for violations',
+                enum: ['error', 'warning', 'info'],
+                default: 'error'
+            },
+            examples: {
+                type: 'array',
+                items: {
+                    type: 'object',
+                    properties: {
+                        valid: {
+                            type: 'array',
+                            items: { type: 'string' },
+                            description: 'Examples that follow the standard'
+                        },
+                        invalid: {
+                            type: 'array',
+                            items: { type: 'string' },
+                            description: 'Examples that violate the standard'
+                        },
+                        description: {
+                            type: 'string',
+                            description: 'Description of this example set'
+                        }
+                    }
+                },
+                description: 'Examples showing valid and invalid usage'
+            }
+        },
+        required: ['semanticName', 'pattern', 'description']
+    }
+};
+
+export const REMOVE_STANDARD_TOOL: Tool = {
+    name: 'removeStandard',
+    description: 'Remove a coding standard from the registry',
+    inputSchema: {
+        type: 'object',
+        properties: {
+            semanticName: {
+                type: 'string',
+                description: 'Semantic name of the standard to remove'
+            },
+            force: {
+                type: 'boolean',
+                description: 'Force removal even if the standard is referenced by other standards',
+                default: false
+            }
+        },
+        required: ['semanticName']
+    }
+};
+
+export const REGISTRY_STATS_TOOL: Tool = {
+    name: 'getRegistryStats',
+    description: 'Get statistics about the standards registry',
+    inputSchema: {
+        type: 'object',
+        properties: {}
+    }
+};

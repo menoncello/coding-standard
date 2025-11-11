@@ -6,16 +6,12 @@
 <critical>Web research is ENABLED - always use current {{current_year}} data</critical>
 
 <critical>🚨 ANTI-HALLUCINATION PROTOCOL - MANDATORY 🚨</critical>
-<critical>NEVER present information without a verified source - if you cannot find a source, say "I could not find
-reliable data on this"</critical>
+<critical>NEVER present information without a verified source - if you cannot find a source, say "I could not find reliable data on this"</critical>
 <critical>ALWAYS cite sources with URLs when presenting data, statistics, or factual claims</critical>
-<critical>REQUIRE at least 2 independent sources for critical claims (market size, growth rates, competitive
-data)</critical>
+<critical>REQUIRE at least 2 independent sources for critical claims (market size, growth rates, competitive data)</critical>
 <critical>When sources conflict, PRESENT BOTH views and note the discrepancy - do NOT pick one arbitrarily</critical>
-<critical>Flag any data you are uncertain about with confidence
-levels: [High Confidence], [Medium Confidence], [Low Confidence - verify]</critical>
-<critical>Distinguish clearly between: FACTS (from sources), ANALYSIS (your interpretation), and SPECULATION (educated
-guesses)</critical>
+<critical>Flag any data you are uncertain about with confidence levels: [High Confidence], [Medium Confidence], [Low Confidence - verify]</critical>
+<critical>Distinguish clearly between: FACTS (from sources), ANALYSIS (your interpretation), and SPECULATION (educated guesses)</critical>
 <critical>When using WebSearch results, ALWAYS extract and include the source URL for every claim</critical>
 
 <!-- IDE-INJECT-POINT: research-subagents -->
@@ -65,8 +61,7 @@ guesses)</critical>
 
 <step n="2" goal="Discover research needs through conversation">
 
-<action>Welcome {user_name} warmly. Position yourself as their research partner who uses live {{current_year}} web data.
-Ask what they're looking to understand or research.</action>
+<action>Welcome {user_name} warmly. Position yourself as their research partner who uses live {{current_year}} web data. Ask what they're looking to understand or research.</action>
 
 <action>Listen and collaboratively identify the research type based on what they describe:
 

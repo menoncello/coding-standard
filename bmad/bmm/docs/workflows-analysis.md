@@ -4,17 +4,13 @@
 
 ## Overview
 
-Phase 1 (Analysis) workflows are **optional** exploration and discovery tools that help validate ideas, understand
-markets, and generate strategic context before planning begins.
+Phase 1 (Analysis) workflows are **optional** exploration and discovery tools that help validate ideas, understand markets, and generate strategic context before planning begins.
 
-**Key principle:** Analysis workflows help you think strategically before committing to implementation. Skip them if
-your requirements are already clear.
+**Key principle:** Analysis workflows help you think strategically before committing to implementation. Skip them if your requirements are already clear.
 
-**When to use:** Starting new projects, exploring opportunities, validating market fit, generating ideas, understanding
-problem spaces.
+**When to use:** Starting new projects, exploring opportunities, validating market fit, generating ideas, understanding problem spaces.
 
-**When to skip:** Continuing existing projects with clear requirements, well-defined features with known solutions,
-strict constraints where discovery is complete.
+**When to skip:** Continuing existing projects with clear requirements, well-defined features with known solutions, strict constraints where discovery is complete.
 
 ---
 
@@ -67,7 +63,7 @@ graph TB
 ## Quick Reference
 
 | Workflow               | Agent         | Required    | Purpose                                                        | Output                       |
-|------------------------|---------------|-------------|----------------------------------------------------------------|------------------------------|
+| ---------------------- | ------------- | ----------- | -------------------------------------------------------------- | ---------------------------- |
 | **brainstorm-project** | Analyst       | No          | Explore solution approaches and architectures                  | Solution options + rationale |
 | **brainstorm-game**    | Analyst       | No          | Generate game concepts using creative techniques               | Game concepts + evaluation   |
 | **research**           | Analyst       | No          | Multi-type research (market/technical/competitive/user/domain) | Research reports             |
@@ -80,8 +76,7 @@ graph TB
 
 ### brainstorm-project
 
-**Purpose:** Generate multiple solution approaches through parallel ideation tracks (architecture, UX, integration,
-value).
+**Purpose:** Generate multiple solution approaches through parallel ideation tracks (architecture, UX, integration, value).
 
 **Agent:** Analyst
 
@@ -99,8 +94,7 @@ value).
 - Risk analysis (dependencies, challenges)
 - Strategic recommendation with rationale
 
-**Example:** "We need a customer dashboard" → Options: Monolith SSR (faster), Microservices SPA (scalable), Hybrid (
-balanced) with recommendation.
+**Example:** "We need a customer dashboard" → Options: Monolith SSR (faster), Microservices SPA (scalable), Hybrid (balanced) with recommendation.
 
 ---
 
@@ -131,22 +125,20 @@ balanced) with recommendation.
 - Consolidated concept document with feasibility
 - Design pillar alignment matrix
 
-**Example:** "Roguelike with psychological themes" → Emotions as characters, inner demons as enemies, therapy sessions
-as rest points, deck composition affects narrative.
+**Example:** "Roguelike with psychological themes" → Emotions as characters, inner demons as enemies, therapy sessions as rest points, deck composition affects narrative.
 
 ---
 
 ### research
 
-**Purpose:** Comprehensive multi-type research system consolidating market, technical, competitive, user, and domain
-analysis.
+**Purpose:** Comprehensive multi-type research system consolidating market, technical, competitive, user, and domain analysis.
 
 **Agent:** Analyst
 
 **Research Types:**
 
 | Type            | Purpose                                                | Use When                            |
-|-----------------|--------------------------------------------------------|-------------------------------------|
+| --------------- | ------------------------------------------------------ | ----------------------------------- |
 | **market**      | TAM/SAM/SOM, competitive analysis                      | Need market viability validation    |
 | **technical**   | Technology evaluation, ADRs                            | Choosing frameworks/platforms       |
 | **competitive** | Deep competitor analysis                               | Understanding competitive landscape |
@@ -161,8 +153,7 @@ analysis.
 - Platform-specific optimization for deep_prompt type
 - Configurable research depth (quick/standard/comprehensive)
 
-**Example (market):** "SaaS project management tool" → TAM $50B, SAM $5B, SOM $50M, top competitors (Asana, Monday),
-positioning recommendation.
+**Example (market):** "SaaS project management tool" → TAM $50B, SAM $5B, SOM $50M, top competitors (Asana, Monday), positioning recommendation.
 
 ---
 
@@ -215,7 +206,7 @@ positioning recommendation.
 **Game Brief vs GDD:**
 
 | Aspect       | Game Brief         | GDD                       |
-|--------------|--------------------|---------------------------|
+| ------------ | ------------------ | ------------------------- |
 | Purpose      | Validate concept   | Design for implementation |
 | Detail Level | High-level vision  | Detailed specs            |
 | Format       | Conversational     | Structured                |
@@ -274,7 +265,7 @@ research (market/competitive type) → product-brief → Phase 2
 Analysis outputs feed directly into Planning:
 
 | Analysis Output             | Planning Input             |
-|-----------------------------|----------------------------|
+| --------------------------- | -------------------------- |
 | product-brief.md            | **prd** workflow           |
 | game-brief.md               | **gdd** workflow           |
 | market-research.md          | **prd** context            |

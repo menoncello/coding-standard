@@ -2,18 +2,13 @@
 
 ## Principle
 
-Common test failures follow predictable patterns (stale selectors, race conditions, dynamic data assertions, network
-errors, hard waits). **Automated healing** identifies failure signatures and applies pattern-based fixes. Manual healing
-captures these patterns for future automation.
+Common test failures follow predictable patterns (stale selectors, race conditions, dynamic data assertions, network errors, hard waits). **Automated healing** identifies failure signatures and applies pattern-based fixes. Manual healing captures these patterns for future automation.
 
 ## Rationale
 
-**The Problem**: Test failures waste developer time on repetitive debugging. Teams manually fix the same selector
-issues, timing bugs, and data mismatches repeatedly across test suites.
+**The Problem**: Test failures waste developer time on repetitive debugging. Teams manually fix the same selector issues, timing bugs, and data mismatches repeatedly across test suites.
 
-**The Solution**: Catalog common failure patterns with diagnostic signatures and automated fixes. When a test fails,
-match the error message/stack trace against known patterns and apply the corresponding fix. This transforms test
-maintenance from reactive debugging to proactive pattern application.
+**The Solution**: Catalog common failure patterns with diagnostic signatures and automated fixes. When a test fails, match the error message/stack trace against known patterns and apply the corresponding fix. This transforms test maintenance from reactive debugging to proactive pattern application.
 
 **Why This Matters**:
 
@@ -612,7 +607,7 @@ test('heal implicit wait with explicit network wait', async ({ page }) => {
 ## Healing Pattern Catalog
 
 | Failure Type   | Diagnostic Signature                          | Healing Strategy                      | Prevention Pattern                        |
-|----------------|-----------------------------------------------|---------------------------------------|-------------------------------------------|
+| -------------- | --------------------------------------------- | ------------------------------------- | ----------------------------------------- |
 | Stale Selector | "locator resolved to 0 elements"              | Replace with data-testid or ARIA role | Selector hierarchy (testid > ARIA > text) |
 | Race Condition | "timeout waiting for element"                 | Add network-first interception        | Intercept before navigate                 |
 | Dynamic Data   | "Expected 'User 123' but got 'User 456'"      | Use regex or capture dynamic values   | Never hardcode IDs/timestamps             |
@@ -642,11 +637,8 @@ Before enabling auto-healing in workflows:
 
 ## Integration Points
 
-- **Used in workflows**: `*automate` (auto-healing after test generation), `*atdd` (optional healing for acceptance
-  tests)
-- **Related fragments**: `selector-resilience.md` (selector debugging), `timing-debugging.md` (race condition fixes),
-  `network-first.md` (interception patterns), `data-factories.md` (dynamic data handling)
+- **Used in workflows**: `*automate` (auto-healing after test generation), `*atdd` (optional healing for acceptance tests)
+- **Related fragments**: `selector-resilience.md` (selector debugging), `timing-debugging.md` (race condition fixes), `network-first.md` (interception patterns), `data-factories.md` (dynamic data handling)
 - **Tools**: Error message parsing, AST analysis for code patterns, Playwright MCP (optional), pattern matching
 
-_Source: Playwright test-healer patterns, production test failure analysis, common anti-patterns from
-test-resources-for-ai_
+_Source: Playwright test-healer patterns, production test failure analysis, common anti-patterns from test-resources-for-ai_

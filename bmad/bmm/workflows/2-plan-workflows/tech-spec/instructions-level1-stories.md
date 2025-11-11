@@ -6,14 +6,13 @@
 <critical>This is a lightweight story breakdown - not a full PRD</critical>
 <critical>Level 1 = coherent feature, 1-10 stories (prefer 2-3), 1 epic</critical>
 <critical>This workflow runs AFTER tech-spec.md has been completed</critical>
-<critical>Story format MUST match create-story template for compatibility with story-context and dev-story
-workflows</critical>
+<critical>Story format MUST match create-story template for compatibility with story-context and dev-story workflows</critical>
 
 <step n="1" goal="Load tech spec and extract implementation tasks">
 
 <action>Read the completed tech-spec.md file from {output_folder}/tech-spec.md</action>
 <action>Load bmm-workflow-status.yaml from {output_folder}/bmm-workflow-status.yaml (if exists)</action>
-<action>Extract dev_story_location from config (where stories are stored)</action>
+<action>Extract dev_ephemeral_location from config (where stories are stored)</action>
 
 <action>Extract from the ENHANCED tech-spec structure:
 
@@ -50,11 +49,9 @@ workflows</critical>
 <example>
 **Epic:** JS Library Icon Reliability
 
-**Goal:** Eliminate external dependencies for JS library icons to ensure consistent, reliable display and improve
-application performance.
+**Goal:** Eliminate external dependencies for JS library icons to ensure consistent, reliable display and improve application performance.
 
-**Scope:** Migrate all 14 recommended JS library icons from third-party CDN URLs (GitHub, jsDelivr) to internal static
-asset hosting.
+**Scope:** Migrate all 14 recommended JS library icons from third-party CDN URLs (GitHub, jsDelivr) to internal static asset hosting.
 
 **Success Criteria:**
 
@@ -140,8 +137,7 @@ asset hosting.
 6. **Format**: Use Given/When/Then when applicable
 
 **Good AC Examples:**
-✅ AC #1: Given a valid email address, when user submits the form, then the account is created and user receives a
-confirmation email within 30 seconds
+✅ AC #1: Given a valid email address, when user submits the form, then the account is created and user receives a confirmation email within 30 seconds
 ✅ AC #2: Given an invalid email format, when user submits, then form displays "Invalid email format" error message
 ✅ AC #3: All unit tests in UserService.test.ts pass with 100% coverage
 
@@ -178,12 +174,11 @@ confirmation email within 30 seconds
 Since tech-spec is context-rich, populate ALL template fields:
 
 - dependencies: Extract from tech-spec "Development Context → Dependencies" and "Integration Points"
-- existing_code_references: Extract from "Development Context → Relevant Existing Code" and "Developer Resources → Key
-  Code Locations"
+- existing_code_references: Extract from "Development Context → Relevant Existing Code" and "Developer Resources → Key Code Locations"
   </guidelines>
 
 <for-each story="1 to story_count">
-  <action>Set story_path_{n} = "{dev_story_location}/story-{epic_slug}-{n}.md"</action>
+  <action>Set story_path_{n} = "{dev_ephemeral_location}/story-{epic_slug}-{n}.md"</action>
   <action>Create story file from user_story_template with the following content:</action>
 
   <template-output file="{story_path_{n}}">
@@ -256,12 +251,12 @@ Epic: Icon Reliability
 ## Implementation Sequence
 
 1. **Story 1** → Build icon infrastructure (setup, download, configure)
-    - Dependencies: None
-    - Deliverable: Icon files downloaded, organized, accessible
+   - Dependencies: None
+   - Deliverable: Icon files downloaded, organized, accessible
 
 2. **Story 2** → Test and deploy (depends on Story 1)
-    - Dependencies: Story 1 must be complete
-    - Deliverable: Icons verified, tested, deployed to production
+   - Dependencies: Story 1 must be complete
+   - Deliverable: Icons verified, tested, deployed to production
 
 **Dependency Validation:** ✅ Valid sequence - no forward dependencies
 </example>
@@ -396,7 +391,7 @@ Stories are implementation-ready!</output>
 - `story-{epic_slug}-3.md` → Third story
   {{/if}}
 
-**Story Location:** `{dev_story_location}/`
+**Story Location:** `{dev_ephemeral_location}/`
 
 **Next Steps - Iterative Implementation:**
 

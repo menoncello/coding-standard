@@ -2,18 +2,13 @@
 
 ## Principle
 
-Fast feedback loops and transparent debugging artifacts are critical for maintaining test reliability and developer
-confidence. Visual debugging tools (trace viewers, screenshots, videos, HAR files) turn cryptic test failures into
-actionable insights, reducing triage time from hours to minutes.
+Fast feedback loops and transparent debugging artifacts are critical for maintaining test reliability and developer confidence. Visual debugging tools (trace viewers, screenshots, videos, HAR files) turn cryptic test failures into actionable insights, reducing triage time from hours to minutes.
 
 ## Rationale
 
-**The Problem**: CI failures often provide minimal context—a timeout, a selector mismatch, or a network error—forcing
-developers to reproduce issues locally (if they can). This wastes time and discourages test maintenance.
+**The Problem**: CI failures often provide minimal context—a timeout, a selector mismatch, or a network error—forcing developers to reproduce issues locally (if they can). This wastes time and discourages test maintenance.
 
-**The Solution**: Capture rich debugging artifacts **only on failure** to balance storage costs with diagnostic value.
-Modern tools like Playwright Trace Viewer, Cypress Debug UI, and HAR recordings provide interactive, time-travel
-debugging that reveals exactly what the test saw at each step.
+**The Solution**: Capture rich debugging artifacts **only on failure** to balance storage costs with diagnostic value. Modern tools like Playwright Trace Viewer, Cypress Debug UI, and HAR recordings provide interactive, time-travel debugging that reveals exactly what the test saw at each step.
 
 **Why This Matters**:
 
@@ -511,8 +506,7 @@ test('debug state mutation', async ({ page }) => {
 
 Before deploying tests to CI, ensure:
 
-- [ ] **Artifact configuration**: `trace: 'on-first-retry'`, `screenshot: 'only-on-failure'`,
-  `video: 'retain-on-failure'`
+- [ ] **Artifact configuration**: `trace: 'on-first-retry'`, `screenshot: 'only-on-failure'`, `video: 'retain-on-failure'`
 - [ ] **CI artifact upload**: GitHub Actions/GitLab CI configured to upload `test-results/` and `playwright-report/`
 - [ ] **HAR recording**: Set up for flaky API tests (record once, replay deterministically)
 - [ ] **Custom debug fixtures**: Console logs + network summary captured on failure
@@ -523,11 +517,8 @@ Before deploying tests to CI, ensure:
 
 ## Integration Points
 
-- **Used in workflows**: `*framework` (initial setup), `*ci` (artifact upload), `*test-review` (validate artifact
-  config)
-- **Related fragments**: `playwright-config.md` (artifact configuration), `ci-burn-in.md` (CI artifact upload),
-  `test-quality.md` (debugging best practices)
+- **Used in workflows**: `*framework` (initial setup), `*ci` (artifact upload), `*test-review` (validate artifact config)
+- **Related fragments**: `playwright-config.md` (artifact configuration), `ci-burn-in.md` (CI artifact upload), `test-quality.md` (debugging best practices)
 - **Tools**: Playwright Trace Viewer, Cypress Debug UI, axe-core, HAR files
 
-_Source: Playwright official docs, Murat testing philosophy (visual debugging manifesto), SEON production debugging
-patterns_
+_Source: Playwright official docs, Murat testing philosophy (visual debugging manifesto), SEON production debugging patterns_

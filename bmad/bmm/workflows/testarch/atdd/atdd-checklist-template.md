@@ -35,8 +35,8 @@
 {List each E2E test with its current status and expected failure reason}
 
 - ✅ **Test:** {test_name}
-    - **Status:** RED - {failure_reason}
-    - **Verifies:** {what_this_test_validates}
+  - **Status:** RED - {failure_reason}
+  - **Verifies:** {what_this_test_validates}
 
 ### API Tests ({api_test_count} tests)
 
@@ -45,8 +45,8 @@
 {List each API test with its current status and expected failure reason}
 
 - ✅ **Test:** {test_name}
-    - **Status:** RED - {failure_reason}
-    - **Verifies:** {what_this_test_validates}
+  - **Status:** RED - {failure_reason}
+  - **Verifies:** {what_this_test_validates}
 
 ### Component Tests ({component_test_count} tests)
 
@@ -55,8 +55,8 @@
 {List each component test with its current status and expected failure reason}
 
 - ✅ **Test:** {test_name}
-    - **Status:** RED - {failure_reason}
-    - **Verifies:** {what_this_test_validates}
+  - **Status:** RED - {failure_reason}
+  - **Verifies:** {what_this_test_validates}
 
 ---
 
@@ -93,9 +93,9 @@ const users = createUsers(5); // Generate 5 random users
 **Fixtures:**
 
 - `{fixtureName}` - {description_of_what_fixture_provides}
-    - **Setup:** {what_setup_does}
-    - **Provides:** {what_test_receives}
-    - **Cleanup:** {what_cleanup_does}
+  - **Setup:** {what_setup_does}
+  - **Provides:** {what_test_receives}
+  - **Cleanup:** {what_cleanup_does}
 
 **Example Usage:**
 
@@ -304,10 +304,8 @@ test('should do something', async ({ {fixtureName} }) => {
 
 This ATDD workflow consulted the following knowledge fragments:
 
-- **fixture-architecture.md** - Test fixture patterns with setup/teardown and auto-cleanup using Playwright's
-  `test.extend()`
-- **data-factories.md** - Factory patterns using `@faker-js/faker` for random test data generation with overrides
-  support
+- **fixture-architecture.md** - Test fixture patterns with setup/teardown and auto-cleanup using Playwright's `test.extend()`
+- **data-factories.md** - Factory patterns using `@faker-js/faker` for random test data generation with overrides support
 - **component-tdd.md** - Component test strategies using Playwright Component Testing
 - **network-first.md** - Route interception patterns (intercept BEFORE navigation to prevent race conditions)
 - **test-quality.md** - Test design principles (Given-When-Then, one assertion per test, determinism, isolation)

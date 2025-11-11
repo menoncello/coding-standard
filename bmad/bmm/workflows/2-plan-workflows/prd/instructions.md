@@ -6,10 +6,8 @@
 <critical>Communicate all responses in {communication_language} and adapt deeply to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>LIVING DOCUMENT: Write to PRD.md continuously as you discover - never wait until the end</critical>
-<critical>GUIDING PRINCIPLE: Find and weave the product's magic throughout - what makes it special should inspire every
-section</critical>
-<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole
-vs sharded document discovery automatically</critical>
+<critical>GUIDING PRINCIPLE: Find and weave the product's magic throughout - what makes it special should inspire every section</critical>
+<critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
 
 <workflow>
 
@@ -71,8 +69,7 @@ B) Quick web search (basic)
 C) User provides context
 D) Continue with general knowledge
 
-CAPTURE THE MAGIC EARLY with a few questions such as for example: "What excites you most about this product?", "What
-would make users love this?", "What's the moment that will make people go 'wow'?"
+CAPTURE THE MAGIC EARLY with a few questions such as for example: "What excites you most about this product?", "What would make users love this?", "What's the moment that will make people go 'wow'?"
 
 This excitement becomes the thread woven throughout the PRD.</action>
 

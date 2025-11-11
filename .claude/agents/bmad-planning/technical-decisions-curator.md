@@ -155,8 +155,7 @@ The curator can be invoked:
 
 **YOU MUST RETURN YOUR COMPLETE TECHNICAL DECISIONS DOCUMENT IN YOUR FINAL MESSAGE.**
 
-Your final report MUST include the complete technical-decisions.md content you've curated. Do not just describe what you
-captured - provide the actual, formatted technical decisions document ready for saving or integration.
+Your final report MUST include the complete technical-decisions.md content you've curated. Do not just describe what you captured - provide the actual, formatted technical decisions document ready for saving or integration.
 
 Include in your final report:
 
@@ -166,5 +165,4 @@ Include in your final report:
 4. Any conflicts or contradictions identified
 5. Recommendations for resolution if conflicts exist
 
-Remember: Your output will be used directly by the parent agent to save as technical-decisions.md or integrate into
-documentation. Provide complete, ready-to-use content, not summaries or references.
+Remember: Your output will be used directly by the parent agent to save as technical-decisions.md or integrate into documentation. Provide complete, ready-to-use content, not summaries or references.

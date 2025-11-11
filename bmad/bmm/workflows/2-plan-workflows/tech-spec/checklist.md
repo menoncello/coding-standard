@@ -13,9 +13,9 @@
 ## 1. Output Files Exist
 
 - [ ] tech-spec.md created in output folder
-- [ ] Story file(s) created in dev_story_location
-    - Level 0: 1 story file (story-{slug}.md)
-    - Level 1: epics.md + 2-3 story files (story-{epic-slug}-N.md)
+- [ ] Story file(s) created in dev_ephemeral_location
+  - Level 0: 1 story file (story-{slug}.md)
+  - Level 1: epics.md + 2-3 story files (story-{epic-slug}-N.md)
 - [ ] bmm-workflow-status.yaml updated (if not standalone mode)
 - [ ] No unfilled {{template_variables}} in any files
 
@@ -56,16 +56,16 @@
 
 - [ ] **Zero "or" statements**: NO "use X or Y", "either A or B", "options include"
 - [ ] **Specific versions**: All frameworks, libraries, tools have EXACT versions
-    - ✅ GOOD: "Python 3.11", "React 18.2.0", "winston v3.8.2 (from package.json)"
-    - ❌ BAD: "Python 2 or 3", "React 18+", "a logger like pino or winston"
+  - ✅ GOOD: "Python 3.11", "React 18.2.0", "winston v3.8.2 (from package.json)"
+  - ❌ BAD: "Python 2 or 3", "React 18+", "a logger like pino or winston"
 - [ ] **Definitive decisions**: Every technical choice is final, not a proposal
 - [ ] **Stack-aligned**: Decisions reference detected project stack
 
 ### Implementation Clarity
 
 - [ ] **Source tree changes**: EXACT file paths with CREATE/MODIFY/DELETE actions
-    - ✅ GOOD: "src/services/UserService.ts - MODIFY - Add validateEmail() method"
-    - ❌ BAD: "Update some files in the services folder"
+  - ✅ GOOD: "src/services/UserService.ts - MODIFY - Add validateEmail() method"
+  - ❌ BAD: "Update some files in the services folder"
 - [ ] **Technical approach**: Describes SPECIFIC implementation using detected stack
 - [ ] **Existing patterns**: Documents brownfield patterns to follow (if applicable)
 - [ ] **Integration points**: Specific modules, APIs, services identified
@@ -211,5 +211,4 @@
 
 ---
 
-_The tech-spec should be a RICH CONTEXT DOCUMENT that gives developers everything they need without requiring separate
-context generation._
+_The tech-spec should be a RICH CONTEXT DOCUMENT that gives developers everything they need without requiring separate context generation._

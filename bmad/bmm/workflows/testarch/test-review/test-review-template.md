@@ -33,8 +33,8 @@
 
 ## Quality Criteria Assessment
 
-| Criterion                            | Status                        | Violations | Notes        |
-|--------------------------------------|-------------------------------|------------|--------------|
+| Criterion                            | Status                          | Violations | Notes        |
+| ------------------------------------ | ------------------------------- | ---------- | ------------ |
 | BDD Format (Given-When-Then)         | {✅ PASS \| ⚠️ WARN \| ❌ FAIL} | {count}    | {brief_note} |
 | Test IDs                             | {✅ PASS \| ⚠️ WARN \| ❌ FAIL} | {count}    | {brief_note} |
 | Priority Markers (P0/P1/P2/P3)       | {✅ PASS \| ⚠️ WARN \| ❌ FAIL} | {count}    | {brief_note} |
@@ -212,11 +212,11 @@ Grade:                   {grade}
 
 - **Test IDs**: {test_id_list}
 - **Priority Distribution**:
-    - P0 (Critical): {p0_count} tests
-    - P1 (High): {p1_count} tests
-    - P2 (Medium): {p2_count} tests
-    - P3 (Low): {p3_count} tests
-    - Unknown: {unknown_count} tests
+  - P0 (Critical): {p0_count} tests
+  - P1 (High): {p1_count} tests
+  - P2 (Medium): {p2_count} tests
+  - P3 (Low): {p3_count} tests
+  - Unknown: {unknown_count} tests
 
 ### Assertions Analysis
 
@@ -245,8 +245,8 @@ Grade:                   {grade}
 
 {If story file available, map tests to ACs:}
 
-| Acceptance Criterion | Test ID   | Status                   | Notes   |
-|----------------------|-----------|--------------------------|---------|
+| Acceptance Criterion | Test ID   | Status                     | Notes   |
+| -------------------- | --------- | -------------------------- | ------- |
 | {AC_1}               | {test_id} | {✅ Covered \| ❌ Missing} | {notes} |
 | {AC_2}               | {test_id} | {✅ Covered \| ❌ Missing} | {notes} |
 | {AC_3}               | {test_id} | {✅ Covered \| ❌ Missing} | {notes} |
@@ -259,16 +259,11 @@ Grade:                   {grade}
 
 This review consulted the following knowledge base fragments:
 
-- **[test-quality.md](../../../testarch/knowledge/test-quality.md)** - Definition of Done for tests (no hard waits, <300
-  lines, <1.5 min, self-cleaning)
-- **[fixture-architecture.md](../../../testarch/knowledge/fixture-architecture.md)** - Pure function → Fixture →
-  mergeTests pattern
-- **[network-first.md](../../../testarch/knowledge/network-first.md)** - Route intercept before navigate (race condition
-  prevention)
-- **[data-factories.md](../../../testarch/knowledge/data-factories.md)** - Factory functions with overrides, API-first
-  setup
-- **[test-levels-framework.md](../../../testarch/knowledge/test-levels-framework.md)** - E2E vs API vs Component vs Unit
-  appropriateness
+- **[test-quality.md](../../../testarch/knowledge/test-quality.md)** - Definition of Done for tests (no hard waits, <300 lines, <1.5 min, self-cleaning)
+- **[fixture-architecture.md](../../../testarch/knowledge/fixture-architecture.md)** - Pure function → Fixture → mergeTests pattern
+- **[network-first.md](../../../testarch/knowledge/network-first.md)** - Route intercept before navigate (race condition prevention)
+- **[data-factories.md](../../../testarch/knowledge/data-factories.md)** - Factory functions with overrides, API-first setup
+- **[test-levels-framework.md](../../../testarch/knowledge/test-levels-framework.md)** - E2E vs API vs Component vs Unit appropriateness
 - **[tdd-cycles.md](../../../testarch/knowledge/tdd-cycles.md)** - Red-Green-Refactor patterns
 - **[selective-testing.md](../../../testarch/knowledge/selective-testing.md)** - Duplicate coverage detection
 - **[ci-burn-in.md](../../../testarch/knowledge/ci-burn-in.md)** - Flakiness detection patterns (10-iteration loop)
@@ -284,24 +279,24 @@ See [tea-index.csv](../../../testarch/tea-index.csv) for complete knowledge base
 ### Immediate Actions (Before Merge)
 
 1. **{action_1}** - {description}
-    - Priority: {P0 | P1 | P2}
-    - Owner: {team_or_person}
-    - Estimated Effort: {time_estimate}
+   - Priority: {P0 | P1 | P2}
+   - Owner: {team_or_person}
+   - Estimated Effort: {time_estimate}
 
 2. **{action_2}** - {description}
-    - Priority: {P0 | P1 | P2}
-    - Owner: {team_or_person}
-    - Estimated Effort: {time_estimate}
+   - Priority: {P0 | P1 | P2}
+   - Owner: {team_or_person}
+   - Estimated Effort: {time_estimate}
 
 ### Follow-up Actions (Future PRs)
 
 1. **{action_1}** - {description}
-    - Priority: {P2 | P3}
-    - Target: {next_sprint | backlog}
+   - Priority: {P2 | P3}
+   - Target: {next_sprint | backlog}
 
 2. **{action_2}** - {description}
-    - Priority: {P2 | P3}
-    - Target: {next_sprint | backlog}
+   - Priority: {P2 | P3}
+   - Target: {next_sprint | backlog}
 
 ### Re-Review Needed?
 
@@ -320,23 +315,19 @@ See [tea-index.csv](../../../testarch/tea-index.csv) for complete knowledge base
 
 **For Approve**:
 
-> Test quality is excellent/good with {score}/100 score. {Minor issues noted can be addressed in follow-up PRs.} Tests
-> are production-ready and follow best practices.
+> Test quality is excellent/good with {score}/100 score. {Minor issues noted can be addressed in follow-up PRs.} Tests are production-ready and follow best practices.
 
 **For Approve with Comments**:
 
-> Test quality is acceptable with {score}/100 score. {High-priority recommendations should be addressed but don't block
-> merge.} Critical issues resolved, but improvements would enhance maintainability.
+> Test quality is acceptable with {score}/100 score. {High-priority recommendations should be addressed but don't block merge.} Critical issues resolved, but improvements would enhance maintainability.
 
 **For Request Changes**:
 
-> Test quality needs improvement with {score}/100 score. {Critical issues must be fixed before merge.} {X} critical
-> violations detected that pose flakiness/maintainability risks.
+> Test quality needs improvement with {score}/100 score. {Critical issues must be fixed before merge.} {X} critical violations detected that pose flakiness/maintainability risks.
 
 **For Block**:
 
-> Test quality is insufficient with {score}/100 score. {Multiple critical issues make tests unsuitable for production.}
-> Recommend pairing session with QA engineer to apply patterns from knowledge base.
+> Test quality is insufficient with {score}/100 score. {Multiple critical issues make tests unsuitable for production.} Recommend pairing session with QA engineer to apply patterns from knowledge base.
 
 ---
 
@@ -347,7 +338,7 @@ See [tea-index.csv](../../../testarch/tea-index.csv) for complete knowledge base
 {Table of all violations sorted by line number:}
 
 | Line   | Severity      | Criterion   | Issue         | Fix         |
-|--------|---------------|-------------|---------------|-------------|
+| ------ | ------------- | ----------- | ------------- | ----------- |
 | {line} | {P0/P1/P2/P3} | {criterion} | {brief_issue} | {brief_fix} |
 | {line} | {P0/P1/P2/P3} | {criterion} | {brief_issue} | {brief_fix} |
 
@@ -356,7 +347,7 @@ See [tea-index.csv](../../../testarch/tea-index.csv) for complete knowledge base
 {If reviewing same file multiple times, show trend:}
 
 | Review Date  | Score         | Grade     | Critical Issues | Trend       |
-|--------------|---------------|-----------|-----------------|-------------|
+| ------------ | ------------- | --------- | --------------- | ----------- |
 | {YYYY-MM-DD} | {score_1}/100 | {grade_1} | {count_1}       | ⬆️ Improved |
 | {YYYY-MM-DD} | {score_2}/100 | {grade_2} | {count_2}       | ⬇️ Declined |
 | {YYYY-MM-DD} | {score_3}/100 | {grade_3} | {count_3}       | ➡️ Stable   |
@@ -366,7 +357,7 @@ See [tea-index.csv](../../../testarch/tea-index.csv) for complete knowledge base
 {If reviewing multiple files in directory/suite:}
 
 | File     | Score       | Grade   | Critical | Status             |
-|----------|-------------|---------|----------|--------------------|
+| -------- | ----------- | ------- | -------- | ------------------ |
 | {file_1} | {score}/100 | {grade} | {count}  | {Approved/Blocked} |
 | {file_2} | {score}/100 | {grade} | {count}  | {Approved/Blocked} |
 | {file_3} | {score}/100 | {grade} | {count}  | {Approved/Blocked} |

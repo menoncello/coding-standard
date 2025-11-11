@@ -10,17 +10,16 @@
 
 ## Input Document Discovery
 
-This workflow may reference: market research, brainstorming documents, user specified other inputs, or brownfield
-project documentation.
+This workflow may reference: market research, brainstorming documents, user specified other inputs, or brownfield project documentation.
 
 **Discovery Process** (execute for each referenced document):
 
 1. **Search for whole document first** - Use fuzzy file matching to find the complete document
 2. **Check for sharded version** - If whole document not found, look for `{doc-name}/index.md`
 3. **If sharded version found**:
-    - Read `index.md` to understand the document structure
-    - Read ALL section files listed in the index
-    - Treat the combined content as if it were a single document
+   - Read `index.md` to understand the document structure
+   - Read ALL section files listed in the index
+   - Treat the combined content as if it were a single document
 4. **Brownfield projects**: The `document-project` workflow always creates `{output_folder}/docs/index.md`
 
 **Priority**: If both whole and sharded versions exist, use the whole document.
@@ -76,8 +75,7 @@ Adapt your tone to {user_skill_level}:
 
 - Expert: "Let's define your product vision. What are you building?"
 - Intermediate: "I'm here to help shape your product vision. Tell me about your idea."
-- Beginner: "Hi! I'm going to help you figure out exactly what you want to build. Let's start with your idea - what got
-  you excited about this?"
+- Beginner: "Hi! I'm going to help you figure out exactly what you want to build. Let's start with your idea - what got you excited about this?"
 
 Start with open exploration:
 
@@ -171,8 +169,7 @@ Adapt your response:
   <template-output>existing_solutions_gaps</template-output>
 </check>
 
-<action>Reflect understanding: "So the core issue is {{problem_summary}}, and {{impact_if_mentioned}}. Let me capture
-that..."</action>
+<action>Reflect understanding: "So the core issue is {{problem_summary}}, and {{impact_if_mentioned}}. Let me capture that..."</action>
 </step>
 
 <step n="3" goal="Shape the solution vision">
@@ -520,8 +517,7 @@ The next phase will take your brief and create the detailed planning artifacts n
 - Or proceed directly to the PRD workflow if you know your path
   {{/if}}
 
-Remember: This brief captures YOUR vision. It grew from our conversation, not from a rigid template. It's ready to guide
-the next phase of bringing your idea to life.
+Remember: This brief captures YOUR vision. It grew from our conversation, not from a rigid template. It's ready to guide the next phase of bringing your idea to life.
 </output>
 </step>
 

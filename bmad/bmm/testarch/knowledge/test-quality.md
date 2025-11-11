@@ -2,23 +2,17 @@
 
 ## Principle
 
-Tests must be deterministic, isolated, explicit, focused, and fast. Every test should execute in under 1.5 minutes,
-contain fewer than 300 lines, avoid hard waits and conditionals, keep assertions visible in test bodies, and clean up
-after itself for parallel execution.
+Tests must be deterministic, isolated, explicit, focused, and fast. Every test should execute in under 1.5 minutes, contain fewer than 300 lines, avoid hard waits and conditionals, keep assertions visible in test bodies, and clean up after itself for parallel execution.
 
 ## Rationale
 
-Quality tests provide reliable signal about application health. Flaky tests erode confidence and waste engineering time.
-Tests that use hard waits (`waitForTimeout(3000)`) are non-deterministic and slow. Tests with hidden assertions or
-conditional logic become unmaintainable. Large tests (>300 lines) are hard to understand and debug. Slow tests (>1.5
-min) block CI pipelines. Self-cleaning tests prevent state pollution in parallel runs.
+Quality tests provide reliable signal about application health. Flaky tests erode confidence and waste engineering time. Tests that use hard waits (`waitForTimeout(3000)`) are non-deterministic and slow. Tests with hidden assertions or conditional logic become unmaintainable. Large tests (>300 lines) are hard to understand and debug. Slow tests (>1.5 min) block CI pipelines. Self-cleaning tests prevent state pollution in parallel runs.
 
 ## Pattern Examples
 
 ### Example 1: Deterministic Test Pattern
 
-**Context**: When writing tests, eliminate all sources of non-determinism: hard waits, conditionals controlling flow,
-try-catch for flow control, and random data without seeds.
+**Context**: When writing tests, eliminate all sources of non-determinism: hard waits, conditionals controlling flow, try-catch for flow control, and random data without seeds.
 
 **Implementation**:
 
@@ -105,8 +99,7 @@ describe('Dashboard', () => {
 
 ### Example 2: Isolated Test with Cleanup
 
-**Context**: When tests create data, they must clean up after themselves to prevent state pollution in parallel runs.
-Use fixture auto-cleanup or explicit teardown.
+**Context**: When tests create data, they must clean up after themselves to prevent state pollution in parallel runs. Use fixture auto-cleanup or explicit teardown.
 
 **Implementation**:
 
@@ -224,8 +217,7 @@ describe('Admin User Management', () => {
 
 ### Example 3: Explicit Assertions in Tests
 
-**Context**: When validating test results, keep assertions visible in test bodies. Never hide assertions in helper
-functions - this obscures test intent and makes failures harder to diagnose.
+**Context**: When validating test results, keep assertions visible in test bodies. Never hide assertions in helper functions - this obscures test intent and makes failures harder to diagnose.
 
 **Implementation**:
 
@@ -343,8 +335,7 @@ test.describe('User creation validation', () => {
 
 ### Example 4: Test Length Limits
 
-**Context**: When tests grow beyond 300 lines, they become hard to understand, debug, and maintain. Refactor long tests
-by extracting setup helpers, splitting scenarios, or using fixtures.
+**Context**: When tests grow beyond 300 lines, they become hard to understand, debug, and maintain. Refactor long tests by extracting setup helpers, splitting scenarios, or using fixtures.
 
 **Implementation**:
 
@@ -473,8 +464,7 @@ test('admin can update notification preferences', async ({ adminPage, seedUser }
 
 ### Example 5: Execution Time Optimization
 
-**Context**: When tests take longer than 1.5 minutes, they slow CI pipelines and feedback loops. Optimize by using API
-setup instead of UI navigation, parallelizing independent operations, and avoiding unnecessary waits.
+**Context**: When tests take longer than 1.5 minutes, they slow CI pipelines and feedback loops. Optimize by using API setup instead of UI navigation, parallelizing independent operations, and avoiding unnecessary waits.
 
 **Implementation**:
 
@@ -651,13 +641,12 @@ test('admin action', async ({ page }) => {
 
 ## Integration Points
 
-- **Used in workflows**: `*atdd` (test generation quality), `*automate` (test expansion quality), `*test-review` (
-  quality validation)
+- **Used in workflows**: `*atdd` (test generation quality), `*automate` (test expansion quality), `*test-review` (quality validation)
 - **Related fragments**:
-    - `network-first.md` - Deterministic waiting strategies
-    - `data-factories.md` - Isolated, parallel-safe data patterns
-    - `fixture-architecture.md` - Setup extraction and cleanup
-    - `test-levels-framework.md` - Choosing appropriate test granularity for speed
+  - `network-first.md` - Deterministic waiting strategies
+  - `data-factories.md` - Isolated, parallel-safe data patterns
+  - `fixture-architecture.md` - Setup extraction and cleanup
+  - `test-levels-framework.md` - Choosing appropriate test granularity for speed
 
 ## Core Quality Checklist
 

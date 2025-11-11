@@ -16,9 +16,7 @@
 - Important Issues: 3
 - Cleanup Recommendations: 2
 
-The dev-story workflow is well-structured and follows most BMAD v6 standards. The workflow correctly sets
-`web_bundle: false` as expected for implementation workflows. However, there are several config variable usage issues
-and some variables referenced in instructions that are not defined in the YAML.
+The dev-story workflow is well-structured and follows most BMAD v6 standards. The workflow correctly sets `web_bundle: false` as expected for implementation workflows. However, there are several config variable usage issues and some variables referenced in instructions that are not defined in the YAML.
 
 ---
 
@@ -65,14 +63,11 @@ All standard config variables are present and properly formatted using {project-
 3. `{run_until_complete}` - Used 1 time (line 108)
 4. `{run_tests_command}` - Used 1 time (line 120)
 
-These variables appear to be pulling from config.yaml but are not explicitly defined in the workflow.yaml file. While
-the config_source mechanism may provide these, workflow.yaml should document all variables used in the workflow for
-clarity.
+These variables appear to be pulling from config.yaml but are not explicitly defined in the workflow.yaml file. While the config_source mechanism may provide these, workflow.yaml should document all variables used in the workflow for clarity.
 
 ### Unused Variables (Bloat)
 
-1. **context_path** - Defined as `"{config_source}:dev_story_location"` but never used. This duplicates `story_dir`
-   functionality.
+1. **context_path** - Defined as `"{config_source}:dev_ephemeral_location"` but never used. This duplicates `story_dir` functionality.
 
 ---
 
@@ -108,8 +103,7 @@ clarity.
 
 ### Additional Config Variables
 
-**IMPORTANT ISSUE:** The workflow uses additional variables that appear to come from config but are not explicitly
-documented:
+**IMPORTANT ISSUE:** The workflow uses additional variables that appear to come from config but are not explicitly documented:
 
 1. `{user_skill_level}` - Used to tailor communication style
 2. `{document_output_language}` - Used for document generation
@@ -146,10 +140,10 @@ The workflow correctly sets `web_bundle: false`. This is the expected configurat
 ### Unused YAML Fields
 
 1. **context_path** (line 11 in workflow.yaml)
-    - Defined as: `"{config_source}:dev_story_location"`
-    - Never referenced in instructions.md
-    - Duplicates functionality of `story_dir` variable
-    - **Recommendation:** Remove this variable as `story_dir` serves the same purpose
+   - Defined as: `"{config_source}:dev_ephemeral_location"`
+   - Never referenced in instructions.md
+   - Duplicates functionality of `story_dir` variable
+   - **Recommendation:** Remove this variable as `story_dir` serves the same purpose
 
 ### Hardcoded Values
 
@@ -230,45 +224,44 @@ None - No critical issues detected.
 ### Important (Address Soon)
 
 1. **Document or Define Missing Variables**
-    - Add explicit definitions in workflow.yaml for: `user_skill_level`, `document_output_language`,
-      `run_until_complete`, `run_tests_command`
-    - OR document these as optional config variables with defaults
-    - These variables are used in instructions but not defined in YAML
-    - **Impact:** Reduces clarity and may cause confusion about variable sources
+   - Add explicit definitions in workflow.yaml for: `user_skill_level`, `document_output_language`, `run_until_complete`, `run_tests_command`
+   - OR document these as optional config variables with defaults
+   - These variables are used in instructions but not defined in YAML
+   - **Impact:** Reduces clarity and may cause confusion about variable sources
 
 2. **Standardize project-root Variable Syntax**
-    - Change line 4 `{project_root}` to `{project-root}` (hyphen)
-    - Ensure consistency with BMAD v6 standard naming convention
-    - **Impact:** Maintains consistency with framework standards
+   - Change line 4 `{project_root}` to `{project-root}` (hyphen)
+   - Ensure consistency with BMAD v6 standard naming convention
+   - **Impact:** Maintains consistency with framework standards
 
 3. **Remove or Use context_path Variable**
-    - Variable `context_path` is defined but never used
-    - Since `story_dir` serves the same purpose, remove `context_path`
-    - OR if there's a semantic difference, document why both exist
-    - **Impact:** Reduces bloat and potential confusion
+   - Variable `context_path` is defined but never used
+   - Since `story_dir` serves the same purpose, remove `context_path`
+   - OR if there's a semantic difference, document why both exist
+   - **Impact:** Reduces bloat and potential confusion
 
 ### Cleanup (Nice to Have)
 
 1. **Consider Splitting Step 1**
-    - Step 1 handles both story discovery AND file loading
-    - Could be split into "1. Find Story" and "2. Load Story Files"
-    - Would improve clarity and maintainability
-    - **Impact:** Minor improvement to workflow structure
+   - Step 1 handles both story discovery AND file loading
+   - Could be split into "1. Find Story" and "2. Load Story Files"
+   - Would improve clarity and maintainability
+   - **Impact:** Minor improvement to workflow structure
 
 2. **Add Variable Documentation Comment**
-    - Add a comment block in workflow.yaml listing all variables used by this workflow
-    - Include both explicit YAML variables and config-pulled variables
-    - Example format:
-      ```yaml
-      # Workflow-specific variables
-      # - story_file: Path to story markdown
-      # - story_dir: Directory containing stories
-      #
-      # Config-pulled variables (from bmm/config.yaml)
-      # - user_skill_level: User's technical skill level
-      # - document_output_language: Language for generated docs
-      ```
-    - **Impact:** Improves developer understanding and maintenance
+   - Add a comment block in workflow.yaml listing all variables used by this workflow
+   - Include both explicit YAML variables and config-pulled variables
+   - Example format:
+     ```yaml
+     # Workflow-specific variables
+     # - story_file: Path to story markdown
+     # - story_dir: Directory containing stories
+     #
+     # Config-pulled variables (from bmm/config.yaml)
+     # - user_skill_level: User's technical skill level
+     # - document_output_language: Language for generated docs
+     ```
+   - **Impact:** Improves developer understanding and maintenance
 
 ---
 
@@ -345,8 +338,7 @@ None - No critical issues detected.
 
 ### Strengths
 
-1. **Comprehensive Workflow Logic:** The dev-story workflow is well-thought-out with proper error handling, validation
-   gates, and iterative execution
+1. **Comprehensive Workflow Logic:** The dev-story workflow is well-thought-out with proper error handling, validation gates, and iterative execution
 2. **Config Integration:** Excellent use of config variables for user personalization and output management
 3. **Clear Documentation:** Instructions are detailed with specific HALT conditions and validation checkpoints
 4. **Proper Web Bundle Setting:** Correctly identifies this as a local-only workflow with web_bundle: false
@@ -372,5 +364,4 @@ The workflow is a critical part of the BMM implementation phase and shows mature
 **Pass Rate:** 89% (62 passed / 70 total checks)
 **Recommendation:** Good - Minor fixes needed
 
-The dev-story workflow is production-ready with minor improvements recommended. The issues identified are primarily
-documentation and consistency improvements rather than functional problems.
+The dev-story workflow is production-ready with minor improvements recommended. The issues identified are primarily documentation and consistency improvements rather than functional problems.

@@ -8,9 +8,7 @@
 
 ## What is Quick Spec Flow?
 
-Quick Spec Flow is a **streamlined alternative** to the full BMad Method for Quick Flow track projects. Instead of going
-through Product Brief → PRD → Architecture, you go **straight to a context-aware technical specification** and start
-coding.
+Quick Spec Flow is a **streamlined alternative** to the full BMad Method for Quick Flow track projects. Instead of going through Product Brief → PRD → Architecture, you go **straight to a context-aware technical specification** and start coding.
 
 ### When to Use Quick Spec Flow
 
@@ -77,12 +75,12 @@ flowchart TD
 ### What You Get
 
 1. **tech-spec.md** - Comprehensive technical specification with:
-    - Problem statement and solution
-    - Detected framework versions and dependencies
-    - Brownfield code patterns (if applicable)
-    - Existing test patterns to follow
-    - Specific file paths to modify
-    - Complete implementation guidance
+   - Problem statement and solution
+   - Detected framework versions and dependencies
+   - Brownfield code patterns (if applicable)
+   - Existing test patterns to follow
+   - Specific file paths to modify
+   - Complete implementation guidance
 
 2. **story-[slug].md** - Single user story ready for development
 
@@ -267,15 +265,15 @@ For user-facing changes, Quick Spec Flow captures:
 - UX flow changes (current vs new)
 - Responsive design needs (mobile, tablet, desktop)
 - Accessibility requirements:
-    - Keyboard navigation
-    - Screen reader compatibility
-    - ARIA labels
-    - Color contrast standards
+  - Keyboard navigation
+  - Screen reader compatibility
+  - ARIA labels
+  - Color contrast standards
 - User feedback patterns:
-    - Loading states
-    - Error messages
-    - Success confirmations
-    - Progress indicators
+  - Loading states
+  - Error messages
+  - Success confirmations
+  - Progress indicators
 
 ---
 
@@ -327,18 +325,18 @@ Checks:
 
 1. **Start:** Load PM agent, say "I want to fix the login validation bug"
 2. **PM runs tech-spec workflow:**
-    - Asks: "What problem are you solving?"
-    - You explain the validation issue
-    - Detects your Node.js stack (Express 4.18.2, Jest for testing)
-    - Analyzes existing UserService code patterns
-    - Asks: "Should I follow your existing conventions?" → You say yes
-    - Generates tech-spec.md with specific file paths and patterns
-    - Creates story-login-fix.md
+   - Asks: "What problem are you solving?"
+   - You explain the validation issue
+   - Detects your Node.js stack (Express 4.18.2, Jest for testing)
+   - Analyzes existing UserService code patterns
+   - Asks: "Should I follow your existing conventions?" → You say yes
+   - Generates tech-spec.md with specific file paths and patterns
+   - Creates story-login-fix.md
 3. **Implement:** Load DEV agent, run `dev-story`
-    - DEV reads tech-spec (has all context!)
-    - Implements fix following existing patterns
-    - Runs tests (following existing Jest patterns)
-    - Done!
+   - DEV reads tech-spec (has all context!)
+   - Implements fix following existing patterns
+   - Runs tests (following existing Jest patterns)
+   - Done!
 
 **Total time:** 15-30 minutes (mostly implementation)
 
@@ -352,24 +350,24 @@ Checks:
 
 1. **Start:** Load PM agent, say "I want to add OAuth social login"
 2. **PM runs tech-spec workflow:**
-    - Asks about the feature scope
-    - You specify: Google and GitHub OAuth
-    - Detects your stack (Next.js 13.4, NextAuth.js already installed!)
-    - Analyzes existing auth patterns
-    - Confirms conventions with you
-    - Generates:
-        - tech-spec.md (comprehensive implementation guide)
-        - epics.md (OAuth Integration epic)
-        - story-oauth-1.md (Backend OAuth setup)
-        - story-oauth-2.md (Frontend login buttons)
+   - Asks about the feature scope
+   - You specify: Google and GitHub OAuth
+   - Detects your stack (Next.js 13.4, NextAuth.js already installed!)
+   - Analyzes existing auth patterns
+   - Confirms conventions with you
+   - Generates:
+     - tech-spec.md (comprehensive implementation guide)
+     - epics.md (OAuth Integration epic)
+     - story-oauth-1.md (Backend OAuth setup)
+     - story-oauth-2.md (Frontend login buttons)
 3. **Optional Sprint Planning:** Load SM agent, run `sprint-planning`
 4. **Implement Story 1:**
-    - Load DEV agent, run `dev-story` for story 1
-    - DEV implements backend OAuth
+   - Load DEV agent, run `dev-story` for story 1
+   - DEV implements backend OAuth
 5. **Implement Story 2:**
-    - DEV agent, run `dev-story` for story 2
-    - DEV implements frontend
-    - Done!
+   - DEV agent, run `dev-story` for story 2
+   - DEV implements frontend
+   - Done!
 
 **Total time:** 1-3 hours (mostly implementation)
 
@@ -408,7 +406,7 @@ Quick Spec Flow works seamlessly with all Phase 4 implementation workflows:
 ## Comparison: Quick Spec vs Full BMM
 
 | Aspect                | Quick Flow Track             | BMad Method/Enterprise Tracks      |
-|-----------------------|------------------------------|------------------------------------|
+| --------------------- | ---------------------------- | ---------------------------------- |
 | **Setup**             | None (standalone)            | workflow-init recommended          |
 | **Planning Docs**     | tech-spec.md only            | Product Brief → PRD → Architecture |
 | **Time to Code**      | Minutes                      | Hours to days                      |
@@ -513,13 +511,11 @@ Quick Spec Flow is **fully standalone**:
 
 ### Q: Can I use Quick Spec Flow on an existing project?
 
-**A:** Yes! It's perfect for brownfield projects. It will analyze your existing code, detect patterns, and ask if you
-want to follow them.
+**A:** Yes! It's perfect for brownfield projects. It will analyze your existing code, detect patterns, and ask if you want to follow them.
 
 ### Q: What if I don't have a package.json or requirements.txt?
 
-**A:** Quick Spec Flow will work in greenfield mode, recommend starter templates, and use WebSearch for modern best
-practices.
+**A:** Quick Spec Flow will work in greenfield mode, recommend starter templates, and use WebSearch for modern best practices.
 
 ### Q: Do I need to run workflow-init first?
 
@@ -531,13 +527,11 @@ practices.
 
 ### Q: What if my Quick Flow project grows?
 
-**A:** No problem! You can always transition to BMad Method by running workflow-init and create-prd. Your tech-spec
-becomes input for the PRD.
+**A:** No problem! You can always transition to BMad Method by running workflow-init and create-prd. Your tech-spec becomes input for the PRD.
 
 ### Q: Do I need story-context for every story?
 
-**A:** Usually no! Tech-spec is comprehensive enough for most Quick Flow projects. Only use story-context for complex
-edge cases.
+**A:** Usually no! Tech-spec is comprehensive enough for most Quick Flow projects. Only use story-context for complex edge cases.
 
 ### Q: Can I skip validation?
 
@@ -545,8 +539,7 @@ edge cases.
 
 ### Q: Will it work with my team's code style?
 
-**A:** Yes! It detects your conventions and asks for confirmation. You control whether to follow existing patterns or
-establish new ones.
+**A:** Yes! It detects your conventions and asks for confirmation. You control whether to follow existing patterns or establish new ones.
 
 ---
 
@@ -613,9 +606,9 @@ When you get multiple stories, check the dependency validation output. Proper se
 - Analyzed: Existing ProductList component patterns
 - Confirmed: Follow existing API and component structure
 - Generated:
-    - Epic: Product Search Functionality
-    - Story 1: Backend search API with filters
-    - Story 2: Frontend search UI component
+  - Epic: Product Search Functionality
+  - Story 1: Backend search API with filters
+  - Story 2: Frontend search UI component
 - Auto-validated: Story 1 → Story 2 sequence correct
 
 **Result:** Search feature implemented in 4-6 hours with proper architecture.

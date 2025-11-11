@@ -2,29 +2,21 @@
 
 <critical>The workflow execution engine is governed by: {project_root}/bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on
-{user_skill_level}</critical>
+<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {user_skill_level}</critical>
 <critical>This is a HIGHLY INTERACTIVE workflow - make technical decisions WITH user, not FOR them</critical>
-<critical>Web research is MANDATORY - use WebSearch tool with {{current_year}} for current version info and
-trends</critical>
+<critical>Web research is MANDATORY - use WebSearch tool with {{current_year}} for current version info and trends</critical>
 <critical>ALWAYS verify current versions - NEVER use hardcoded or outdated version numbers</critical>
 <critical>Communicate all responses in {communication_language} and tailor to {user_skill_level}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 
 <critical>🚨 ANTI-HALLUCINATION PROTOCOL - MANDATORY 🚨</critical>
-<critical>NEVER invent version numbers, features, or technical details - ALWAYS verify with current {{current_year}}
-sources</critical>
-<critical>Every technical claim (version, feature, performance, compatibility) MUST have a cited source with
-URL</critical>
+<critical>NEVER invent version numbers, features, or technical details - ALWAYS verify with current {{current_year}} sources</critical>
+<critical>Every technical claim (version, feature, performance, compatibility) MUST have a cited source with URL</critical>
 <critical>Version numbers MUST be verified via WebSearch - do NOT rely on training data (it's outdated!)</critical>
-<critical>When comparing technologies, cite sources for each claim (performance benchmarks, community size,
-etc.)</critical>
-<critical>Mark confidence
-levels: [Verified {{current_year}} source], [Older source - verify], [Uncertain - needs verification]</critical>
-<critical>Distinguish: FACT (from official docs/sources), OPINION (from community/reviews), SPECULATION (your
-analysis)</critical>
-<critical>If you cannot find current information about a technology, state: "I could not find recent {{current_year}}
-data on [X]"</critical>
+<critical>When comparing technologies, cite sources for each claim (performance benchmarks, community size, etc.)</critical>
+<critical>Mark confidence levels: [Verified {{current_year}} source], [Older source - verify], [Uncertain - needs verification]</critical>
+<critical>Distinguish: FACT (from official docs/sources), OPINION (from community/reviews), SPECULATION (your analysis)</critical>
+<critical>If you cannot find current information about a technology, state: "I could not find recent {{current_year}} data on [X]"</critical>
 <critical>Extract and include source URLs in all technology profiles and comparisons</critical>
 
 <workflow>
@@ -44,8 +36,7 @@ What technical question are you wrestling with?"
 <check if="{user_skill_level} == 'intermediate'">
   "I'll help you research and evaluate your technical options.
 
-We'll look at current technologies (using {{current_year}} data), understand the trade-offs, and figure out what fits
-your needs best.
+We'll look at current technologies (using {{current_year}} data), understand the trade-offs, and figure out what fits your needs best.
 
 What technical decision are you trying to make?"
 </check>
@@ -53,8 +44,7 @@ What technical decision are you trying to make?"
 <check if="{user_skill_level} == 'beginner'">
   "Think of this as having a technical advisor help you research your options.
 
-I'll explain what different technologies do, why you might choose one over another, and help you make an informed
-decision.
+I'll explain what different technologies do, why you might choose one over another, and help you make an informed decision.
 
 What technical challenge brought you here?"
 </check>

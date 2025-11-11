@@ -323,8 +323,7 @@
 - **Medium Credibility (single source):** {{medium_confidence_count}} claims
 - **Low Credibility (needs verification):** {{low_confidence_count}} claims
 
-**Note:** Any claim marked [Low Confidence] or [Single source] should be independently verified before making critical
-business decisions.
+**Note:** Any claim marked [Low Confidence] or [Single source] should be independently verified before making critical business decisions.
 
 ---
 
@@ -345,6 +344,4 @@ business decisions.
 
 ---
 
-_This market research report was generated using the BMad Method Market Research Workflow, combining systematic analysis
-frameworks with real-time market intelligence gathering. All factual claims are backed by cited sources with
-verification dates._
+_This market research report was generated using the BMad Method Market Research Workflow, combining systematic analysis frameworks with real-time market intelligence gathering. All factual claims are backed by cited sources with verification dates._

@@ -1,7 +1,6 @@
 # BMM - BMad Method Module
 
-Core orchestration system for AI-driven agile development, providing comprehensive lifecycle management through
-specialized agents and workflows.
+Core orchestration system for AI-driven agile development, providing comprehensive lifecycle management through specialized agents and workflows.
 
 ---
 
@@ -102,8 +101,7 @@ Just-in-time epic context and story context provide exact expertise when needed.
 
 ### Multi-Agent Collaboration
 
-Use party mode to engage all 19+ agents (from BMM, CIS, BMB, custom modules) in group discussions for strategic
-decisions, creative brainstorming, and complex problem-solving.
+Use party mode to engage all 19+ agents (from BMM, CIS, BMB, custom modules) in group discussions for strategic decisions, creative brainstorming, and complex problem-solving.
 
 👉 **[Party Mode Guide](./docs/party-mode.md)** - How to orchestrate multi-agent collaboration
 

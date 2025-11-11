@@ -317,35 +317,34 @@ If ANY of these are true, validation FAILS:
 **When validating:**
 
 1. **Load ALL documents:**
-    - PRD.md (required)
-    - epics.md (required)
-    - product-brief.md (if exists)
-    - domain-brief.md (if exists)
-    - research documents (if referenced)
+   - PRD.md (required)
+   - epics.md (required)
+   - product-brief.md (if exists)
+   - domain-brief.md (if exists)
+   - research documents (if referenced)
 
 2. **Validate in order:**
-    - Check critical failures first (immediate stop if any found)
-    - Verify PRD completeness
-    - Verify epics completeness
-    - Cross-reference FR coverage (most important)
-    - Check sequencing (second most important)
-    - Validate research integration
-    - Check polish and quality
+   - Check critical failures first (immediate stop if any found)
+   - Verify PRD completeness
+   - Verify epics completeness
+   - Cross-reference FR coverage (most important)
+   - Check sequencing (second most important)
+   - Validate research integration
+   - Check polish and quality
 
 3. **Report findings:**
-    - List critical failures prominently
-    - Group issues by severity
-    - Provide specific line numbers/sections
-    - Suggest concrete fixes
-    - Highlight what's working well
+   - List critical failures prominently
+   - Group issues by severity
+   - Provide specific line numbers/sections
+   - Suggest concrete fixes
+   - Highlight what's working well
 
 4. **Provide actionable next steps:**
-    - If validation passes: "Ready for architecture workflow"
-    - If minor issues: "Fix [X] items then re-validate"
-    - If major issues: "Rework [sections] then re-validate"
-    - If critical failures: "Must fix critical items before proceeding"
+   - If validation passes: "Ready for architecture workflow"
+   - If minor issues: "Fix [X] items then re-validate"
+   - If major issues: "Rework [sections] then re-validate"
+   - If critical failures: "Must fix critical items before proceeding"
 
 ---
 
-**Remember:** This validation ensures the entire planning phase is complete and the implementation phase has everything
-needed to succeed. Be thorough but fair - the goal is quality, not perfection.
+**Remember:** This validation ensures the entire planning phase is complete and the implementation phase has everything needed to succeed. Be thorough but fair - the goal is quality, not perfection.

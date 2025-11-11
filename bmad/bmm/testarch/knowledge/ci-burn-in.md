@@ -2,16 +2,11 @@
 
 ## Principle
 
-CI pipelines must execute tests reliably, quickly, and provide clear feedback. Burn-in testing (running changed tests
-multiple times) flushes out flakiness before merge. Stage jobs strategically: install/cache once, run changed specs
-first for fast feedback, then shard full suites with fail-fast disabled to preserve evidence.
+CI pipelines must execute tests reliably, quickly, and provide clear feedback. Burn-in testing (running changed tests multiple times) flushes out flakiness before merge. Stage jobs strategically: install/cache once, run changed specs first for fast feedback, then shard full suites with fail-fast disabled to preserve evidence.
 
 ## Rationale
 
-CI is the quality gate for production. A poorly configured pipeline either wastes developer time (slow feedback, false
-positives) or ships broken code (false negatives, insufficient coverage). Burn-in testing ensures reliability by
-stress-testing changed code, while parallel execution and intelligent test selection optimize speed without sacrificing
-thoroughness.
+CI is the quality gate for production. A poorly configured pipeline either wastes developer time (slow feedback, false positives) or ships broken code (false negatives, insufficient coverage). Burn-in testing ensures reliability by stress-testing changed code, while parallel execution and intelligent test selection optimize speed without sacrificing thoroughness.
 
 ## Pattern Examples
 

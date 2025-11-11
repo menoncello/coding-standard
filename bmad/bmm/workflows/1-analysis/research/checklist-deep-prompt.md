@@ -19,8 +19,7 @@
 
 ### Fact vs Analysis Distinction
 
-- [ ] Prompt requires clear labeling: "Distinguish FACTS (sourced), ANALYSIS (your interpretation), SPECULATION (
-  projections)"
+- [ ] Prompt requires clear labeling: "Distinguish FACTS (sourced), ANALYSIS (your interpretation), SPECULATION (projections)"
 - [ ] Prompt instructs: "Do not present assumptions or analysis as verified facts"
 - [ ] Prompt requires: "Label projections and forecasts clearly as such"
 - [ ] Prompt warns: "Avoid vague attributions like 'experts say' - name the expert/source"

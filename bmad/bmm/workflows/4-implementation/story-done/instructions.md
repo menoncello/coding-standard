@@ -6,8 +6,7 @@
 
 <workflow>
 
-<critical>This workflow is run by DEV agent AFTER user confirms a story is approved (Definition of Done is
-complete)</critical>
+<critical>This workflow is run by DEV agent AFTER user confirms a story is approved (Definition of Done is complete)</critical>
 <critical>Workflow: Update story file status to Done</critical>
 
 <step n="1" goal="Find reviewed story to mark done" tag="sprint-status">
@@ -25,8 +24,7 @@ complete)</critical>
   <action>Read ALL lines from beginning to end - do not skip any content</action>
   <action>Parse the development_status section completely</action>
 
-<action>Find FIRST story (reading in order from top to bottom) where: - Key matches pattern: number-number-name (e.g., "
-1-2-user-auth") - NOT an epic key (epic-X) or retrospective (epic-X-retrospective) - Status value equals "review"
+<action>Find FIRST story (reading in order from top to bottom) where: - Key matches pattern: number-number-name (e.g., "1-2-user-auth") - NOT an epic key (epic-X) or retrospective (epic-X-retrospective) - Status value equals "review"
 </action>
 
   <check if="no story with status 'review' found">
@@ -100,12 +98,12 @@ Story is marked Done in file, but sprint-status.yaml may be out of sync.
 **Next Steps:**
 
 1. Continue with next story in your backlog
-    - Run `create-story` for next backlog story
-    - Or run `dev-story` if ready stories exist
+   - Run `create-story` for next backlog story
+   - Or run `dev-story` if ready stories exist
 2. Check epic completion status
-    - Run `retrospective` workflow to check if epic is complete
-    - Epic retrospective will verify all stories are done
-      </output>
+   - Run `retrospective` workflow to check if epic is complete
+   - Epic retrospective will verify all stories are done
+     </output>
 
 </step>
 
