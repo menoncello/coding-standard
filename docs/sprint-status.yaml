@@ -54,7 +54,7 @@ development_status:
   epic-3: contexted
   3-1-standards-registry-system: done
   3-2-slash-command-interface: done
-  3-3-hot-reload-and-file-watching: backlog
+  3-3-hot-reload-and-file-watching: done
   epic-3-retrospective: optional
 
   # Epic 4: Tool Integration and Auto-Detection

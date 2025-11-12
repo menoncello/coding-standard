@@ -17,7 +17,7 @@ describe('GetStandardsHandler', () => {
 const testLogger = LoggerFactory.createTestLogger(true);
     let testHandler: GetStandardsHandler;
     let registry: StandardsRegistry;
-    const testDbPath = './test-standards-registry.db';
+    let testDbPath: string;
 
     // Helper function to seed test data directly to registry
     async function seedTestData(registry: StandardsRegistry): Promise<void> {
@@ -84,6 +84,11 @@ const testLogger = LoggerFactory.createTestLogger(true);
     }
 
     beforeEach(async () => {
+        // Generate unique database path for this test run
+        const timestamp = Date.now();
+        const randomId = Math.random().toString(36).substring(7);
+        testDbPath = `./test-standards-registry-${timestamp}-${randomId}.db`;
+
         // Clean up any existing test database
         if (existsSync(testDbPath)) {
             rmSync(testDbPath);
@@ -103,13 +108,25 @@ const testLogger = LoggerFactory.createTestLogger(true);
         testHandler['registry'] = registry;
     });
 
-    afterEach(() => {
-        // Close the registry
-        registry?.close?.();
+    afterEach(async () => {
+        try {
+            // Close the registry first and wait for it to complete
+            if (registry && typeof registry.close === 'function') {
+                await Promise.resolve(registry.close());
+            }
+        } catch (error) {
+            // Log cleanup errors but don't fail the test
+            console.warn('Warning: Error during registry cleanup:', error);
+        }
 
-        // Clean up test database
-        if (existsSync(testDbPath)) {
-            rmSync(testDbPath);
+        try {
+            // Clean up test database file
+            if (testDbPath && existsSync(testDbPath)) {
+                rmSync(testDbPath, { force: true });
+            }
+        } catch (error) {
+            // Log cleanup errors but don't fail the test
+            console.warn('Warning: Error during database file cleanup:', error);
         }
     });
     describe('getStandards', () => {

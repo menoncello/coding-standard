@@ -5,9 +5,14 @@ import { rmSync, existsSync } from 'node:fs';
 
 describe('StandardsRegistry', () => {
     let registry: StandardsRegistry;
-    const testDbPath = './test-standards-registry.db';
+    let testDbPath: string;
 
     beforeEach(() => {
+        // Generate unique database path for this test run
+        const timestamp = Date.now();
+        const randomId = Math.random().toString(36).substring(7);
+        testDbPath = `./test-standards-registry-${timestamp}-${randomId}.db`;
+
         // Clean up any existing test database
         if (existsSync(testDbPath)) {
             rmSync(testDbPath);
@@ -15,11 +20,25 @@ describe('StandardsRegistry', () => {
         registry = new StandardsRegistry(testDbPath);
     });
 
-    afterEach(() => {
-        registry.close();
-        // Clean up test database
-        if (existsSync(testDbPath)) {
-            rmSync(testDbPath);
+    afterEach(async () => {
+        try {
+            // Close the registry first and wait for it to complete
+            if (registry && typeof registry.close === 'function') {
+                await Promise.resolve(registry.close());
+            }
+        } catch (error) {
+            // Log cleanup errors but don't fail the test
+            console.warn('Warning: Error during registry cleanup:', error);
+        }
+
+        try {
+            // Clean up test database file
+            if (testDbPath && existsSync(testDbPath)) {
+                rmSync(testDbPath, { force: true });
+            }
+        } catch (error) {
+            // Log cleanup errors but don't fail the test
+            console.warn('Warning: Error during database file cleanup:', error);
         }
     });
 

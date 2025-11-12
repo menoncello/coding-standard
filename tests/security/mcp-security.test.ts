@@ -117,17 +117,17 @@ describe('MCP Security Tests', () => {
             for (const error of sensitiveErrors) {
                 const handledError = McpErrorHandler.handleError(error);
 
-                // TODO: Currently error handler doesn't sanitize sensitive info
-                // This test documents the security concern that needs to be addressed
                 expect(handledError).toBeInstanceOf(Error);
 
-                // When security is implemented, uncomment these assertions:
-                // expect(handledError.message).not.toContain('password');
-                // expect(handledError.message).not.toContain('token');
-                // expect(handledError.message).not.toContain('secret');
-                // expect(handledError.message).not.toContain('postgresql://');
-                // expect(handledError.message).not.toContain('/home/');
-                // expect(handledError.message).not.toContain('stack trace');
+                // Security assertions - error sanitization is now implemented
+                expect(handledError.message).not.toContain('user:pass');
+                expect(handledError.message).not.toContain('token = abc123secret');
+                expect(handledError.message).not.toContain('postgresql://user:pass@localhost/db');
+                expect(handledError.message).not.toContain('/home/user/secrets/config.json');
+                expect(handledError.message).not.toContain('stack trace with sensitive data');
+
+                // Verify that sanitized replacements are present
+                expect(handledError.message).toMatch(/(\*\*\*|\[sanitized\])/gi);
             }
         });
 
@@ -142,15 +142,16 @@ describe('MCP Security Tests', () => {
             for (const error of pathErrors) {
                 const handledError = McpErrorHandler.handleError(error);
 
-                // TODO: Currently error handler doesn't sanitize file paths
-                // This test documents the security concern that needs to be addressed
                 expect(handledError).toBeInstanceOf(Error);
 
-                // When security is implemented, uncomment these assertions:
-                // expect(handledError.message).not.toContain('/etc/');
-                // expect(handledError.message).not.toContain('/var/');
-                // expect(handledError.message).not.toContain('~/.ssh/');
-                // expect(handledError.message).not.toContain('../');
+                // Security assertions - file path sanitization is now implemented
+                expect(handledError.message).not.toContain('/etc/passwd');
+                expect(handledError.message).not.toContain('/var/log');
+                expect(handledError.message).not.toContain('.ssh/id_rsa');
+                expect(handledError.message).not.toContain('../../../etc/hosts');
+
+                // Verify that sanitized replacements are present
+                expect(handledError.message).toContain('/***');
             }
         });
 
