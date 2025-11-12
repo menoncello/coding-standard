@@ -1,0 +1,194 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>3</storyId>
+    <title>Hot Reload and File Watching</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-11</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>3-3-hot-reload-and-file-watching.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>developer</asA>
+    <iWant>standards to update automatically when files change</iWant>
+    <soThat>the system stays current without manual intervention</soThat>
+    <tasks>## Tasks / Subtasks
+
+- [ ] Implement FileWatcherService for standards directory monitoring (AC: 1, 2, 6)
+  - [ ] Create file system event handlers with debounced change detection
+  - [ ] Implement file filtering for standards-related extensions (.json, .yaml, .md)
+  - [ ] Add recursive directory watching with configurable depth limits
+  - [ ] Setup proper event throttling to prevent overwhelming the system
+
+- [ ] Develop HotReloadManager for registry updates (AC: 1, 3, 4, 6)
+  - [ ] Integrate with existing StandardsRegistry for atomic rule updates
+  - [ ] Implement conflict detection and resolution for concurrent changes
+  - [ ] Add rollback mechanisms for failed hot reload operations
+  - [ ] Create validation pipeline for rule patterns before registry updates
+
+- [ ] Create CacheInvalidationService for timely cache clearing (AC: 2, 5)
+  - [ ] Integrate with existing cache-first architecture (Memory → SQLite → File)
+  - [ ] Implement selective cache invalidation based on changed rules
+  - [ ] Add performance monitoring to ensure &lt;100ms cache invalidation targets
+  - [ ] Create cache warming strategies for frequently accessed standards
+
+- [ ] Implement HotReloadOrchestrator for coordinating operations (AC: 1, 3, 5, 6)
+  - [ ] Coordinate between FileWatcher, HotReloadManager, and CacheInvalidation
+  - [ ] Ensure service continuity during hot reload operations
+  - [ ] Implement proper error handling and recovery procedures
+  - [ ] Add comprehensive logging and audit trail for hot reload events
+
+- [ ] Create comprehensive test suite (AC: 1, 2, 3, 4, 5, 6)
+  - [ ] Unit tests for FileWatcher, HotReloadManager, and CacheInvalidation
+  - [ ] Integration tests with StandardsRegistry and existing cache infrastructure
+  - [ ] Performance tests to validate &lt;100ms cache invalidation targets
+  - [ ] Concurrency tests for multiple simultaneous file changes
+  - [ ] Fault tolerance tests for error scenarios and rollback procedures</tasks>
+  </story>
+
+  <acceptanceCriteria>## Acceptance Criteria
+
+1. **Given** file watching is enabled for standards directory
+**When** a standards file is modified with new or updated rules
+**Then** the changes are automatically detected and applied without service interruption
+
+2. **Given** file watching detects changes to standards files
+**When** the file system events are processed
+**Then** the cache is invalidated appropriately within 100ms of file change detection
+
+3. **Given** concurrent file changes occur during hot reload operations
+**When** processing the file system events
+**Then** the registry maintains consistency with no data loss or partial states
+
+4. **Given** invalid or malformed rule patterns are introduced via file changes
+**When** the hot reload system attempts to apply updates
+**Then** the system maintains registry consistency and provides clear error messages without service interruption
+
+5. **Given** the system is under normal operation
+**When** hot reload processes file changes
+**Then** existing slash command operations and search functionality remain available with no performance degradation
+
+6. **Given** multiple standards files are changed simultaneously
+**When** the hot reload system processes the batch of changes
+**Then** all changes are applied atomically with proper conflict resolution and rollback on failure</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="docs/architecture.md" title="Project Architecture" section="Project Structure & Performance Targets">
+        Provides the complete system architecture including cache-first approach, file watching integration points, and sub-50ms performance targets. Defines src/utils/file-watcher.ts as the designated location for hot reload functionality.
+      </doc>
+      <doc path="bmad-ephemeral/stories/tech-spec-epic-3.md" title="Epic 3 Technical Specification" section="Hot Reload Architecture & Performance Requirements">
+        Authoritative technical specification defining hot reload workflow, 100ms cache invalidation targets, atomic operations requirements, and integration with existing StandardsRegistry and cache infrastructure.
+      </doc>
+      <doc path="bmad-ephemeral/stories/3-1-standards-registry-system.md" title="Story 3.1 Implementation" section="Existing Registry Components">
+        Complete implementation of StandardsRegistry with sub-30ms performance, CRUD operations, and cache-first architecture that serves as the foundation for hot reload functionality.
+      </doc>
+      <doc path="bmad-ephemeral/stories/3-2-slash-command-interface.md" title="Story 3.2 Implementation" section="CLI Integration Patterns">
+        Completed slash command system with registry integration patterns, atomic operations, and performance frameworks that can be leveraged for hot reload command interfaces.
+      </doc>
+    </docs>
+    <code>
+      <artifact path="src/standards/registry.ts" kind="service" symbol="StandardsRegistry" lines="11-50" reason="Core registry with sub-30ms CRUD operations, cache-first architecture, and validation integration for hot reload updates">
+        The central standards registry that hot reload must integrate with for atomic rule updates. Provides add(), remove(), update() methods with built-in validation and cache management.
+      </artifact>
+      <artifact path="src/standards/validator.ts" kind="validator" symbol="StandardValidator" reason="Input validation and conflict detection system for hot reload file content validation">
+        Provides comprehensive validation for rule patterns, metadata, and semantic naming. Critical for validating file content before hot reload registry updates.
+      </artifact>
+      <artifact path="src/standards/semantic-naming.ts" kind="service" symbol="SemanticNamingService" reason="Name resolution and search capabilities for hot reload integration">
+        Handles semantic name resolution, caching, and fuzzy search that hot reload can leverage for efficient rule lookup and cache management.
+      </artifact>
+      <artifact path="src/cli/slash-commands/executor.ts" kind="executor" symbol="SlashCommandExecutor" lines="43-50" reason="Command execution patterns and atomic operation handling that can be adapted for hot reload workflows">
+        Implements atomic command execution with rollback capabilities and performance monitoring that provides patterns for hot reload operations.
+      </artifact>
+      <artifact path="src/cache/cache-manager.ts" kind="service" symbol="CacheManager" reason="Multi-layer cache infrastructure (Memory → SQLite → File) for selective cache invalidation">
+        Provides the cache-first architecture with invalidation patterns that hot reload must integrate with for sub-100ms cache clearing targets.
+      </artifact>
+      <artifact path="src/utils/performance-monitor.ts" kind="monitor" symbol="performanceMonitor" reason="Performance tracking system for validating <100ms cache invalidation targets">
+        Built-in performance monitoring for tracking response times, cache hit rates, and operation timing required for hot reload performance validation.
+      </artifact>
+    </code>
+    <dependencies>
+      <ecosystem name="bun" version=">=1.0.0" packages="[@modelcontextprotocol/sdk:1.21.1]">
+        Bun runtime provides native file watching APIs, SQLite support, and zero-copy file operations essential for hot reload functionality. MCP SDK provides tool protocol integration.
+      </ecosystem>
+      <ecosystem name="testing" packages="[@faker-js/faker:10.1.0, @playwright/test:1.56.1, @stryker-mutator/core:9.3.0]">
+        Comprehensive testing framework with Bun test runner for unit tests, Playwright for integration tests, and Stryker for mutation testing coverage validation.
+      </ecosystem>
+      <ecosystem name="typescript" version="^5.9.3" packages="[@types/bun:1.3.2]">
+        TypeScript with strict mode for type safety in hot reload implementations and Bun API definitions.
+      </ecosystem>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint type="performance" priority="critical">
+      Sub-100ms cache invalidation after file change detection. All hot reload operations must maintain the established sub-50ms performance targets from Stories 3.1 & 3.2.
+    </constraint>
+    <constraint type="architecture" priority="critical">
+      Must follow cache-first architecture (Memory → SQLite → File). Hot reload cannot bypass established cache layers and must integrate with existing CacheManager.
+    </constraint>
+    <constraint type="consistency" priority="critical">
+      Atomic operations required. Registry must maintain consistency during concurrent file changes with no partial states or data loss during hot reload operations.
+    </constraint>
+    <constraint type="integration" priority="high">
+      Must integrate with existing StandardsRegistry CRUD operations. Hot reload should use registry.add(), registry.remove(), registry.update() methods rather than direct database access.
+    </constraint>
+    <constraint type="security" priority="high">
+      Input validation required for all file content. Must use StandardValidator to prevent ReDoS attacks and validate rule patterns before registry updates.
+    </constraint>
+    <constraint type="continuity" priority="high">
+      Zero service interruption during hot reload. Existing slash command operations and search functionality must remain available with no performance degradation.
+    </constraint>
+    <constraint type="error_handling" priority="medium">
+      Rollback mechanisms required for failed hot reload operations. System must maintain registry consistency and provide clear error messages without service interruption.
+    </constraint>
+    <constraint type="project_structure" priority="medium">
+      Follow established patterns: new components in src/utils/ (file-watcher.ts, cache-invalidator.ts) and src/standards/ (hot-reload-manager.ts). Use PascalCase class conventions.
+    </constraint>
+  </constraints>
+  <interfaces>
+    <interface name="FileWatcherService" kind="class" signature="class FileWatcherService { start(): Promise&lt;void&gt;; stop(): Promise&lt;void&gt;; on(event: 'change', handler: (event: FileChangeEvent) =&gt; void): void }" path="src/utils/file-watcher.ts">
+      Bun-native file watching service with debounced change detection, configurable file patterns (.json, .yaml, .md), and recursive directory watching with depth limits.
+    </interface>
+    <interface name="HotReloadManager" kind="class" signature="class HotReloadManager { processChanges(events: FileChangeEvent[]): Promise&lt;HotReloadResult&gt;; validateChanges(changes: FileChange[]): Promise&lt;ValidationResult&gt;; rollbackFailedOperations(): Promise&lt;void&gt; }" path="src/standards/hot-reload-manager.ts">
+      Coordinates hot reload operations between FileWatcher, StandardsRegistry, and CacheInvalidation. Handles conflict detection, atomic updates, and rollback mechanisms.
+    </interface>
+    <interface name="CacheInvalidationService" kind="class" signature="class CacheInvalidationService { invalidateForRule(ruleId: string): Promise&lt;void&gt;; invalidateSelective(ruleIds: string[]): Promise&lt;void&gt;; warmCache(ruleIds: string[]): Promise&lt;void&gt; }" path="src/utils/cache-invalidator.ts">
+      Selective cache invalidation integrated with existing cache-first architecture. Ensures sub-100ms cache clearing and provides cache warming strategies.
+    </interface>
+    <interface name="StandardsRegistry CRUD" kind="methods" signature="add(rule: StandardRule): Promise&lt;AddResult&gt;; remove(semanticName: string): Promise&lt;RemoveResult&gt;; update(semanticName: string, updates: Partial&lt;StandardRule&gt;): Promise&lt;UpdateResult&gt;" path="src/standards/registry.ts">
+      Existing registry CRUD operations that hot reload must use for atomic rule updates. Provides built-in validation, conflict detection, and cache management.
+    </interface>
+    <interface name="MCP Protocol" kind="protocol" signature="JSON-RPC 2.0 with tool discovery and execution" path="@modelcontextprotocol/sdk">
+      Standardized protocol for Claude Code integration. Hot reload events should be logged through existing MCP tool handlers for audit trail consistency.
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Use Bun test runner with >95% line coverage requirement. Follow established patterns: unit tests for individual components, integration tests for workflows, performance tests for sub-100ms targets, and mutation testing for coverage validation. Test structure must follow AAA (Arrange-Act-Assert) pattern with descriptive test names matching acceptance criteria.</standards>
+    <locations>tests/unit/utils/file-watcher.test.ts, tests/unit/utils/cache-invalidator.test.ts, tests/unit/standards/hot-reload-manager.test.ts, tests/integration/hot-reload-workflow.test.ts, tests/performance/hot-reload-performance.test.ts, tests/security/hot-reload-security.test.ts</locations>
+    <ideas>
+      <test idea="File Change Detection" ac="1">
+        Test debounced file watching with rapid successive changes, verify file filtering (.json, .yaml, .md), and validate recursive directory watching with configurable depth limits.
+      </test>
+      <test idea="Cache Invalidation Performance" ac="2">
+        Performance tests to validate &lt;100ms cache invalidation targets using realistic file change scenarios. Measure time from file change detection to cache clearing completion.
+      </test>
+      <test idea="Concurrent File Changes" ac="3">
+        Concurrency tests with multiple simultaneous file changes to validate registry consistency. Test race conditions, conflict resolution, and atomic operation handling.
+      </test>
+      <test idea="Invalid Content Handling" ac="4">
+        Security tests for malicious regex patterns, malformed YAML/JSON, and ReDoS attack prevention. Verify error messages and registry consistency maintenance.
+      </test>
+      <test idea="Service Continuity" ac="5">
+        Load tests during hot reload operations to ensure slash commands and search functionality remain available with no performance degradation (>5ms performance impact).
+      </test>
+      <test idea="Batch File Changes" ac="6">
+        Tests for multiple simultaneous file changes with atomic batch operations, conflict resolution, and rollback on failure scenarios.
+      </test>
+      <test idea="Memory Pressure" ac="all">
+        Stress tests under memory constraints to validate LRU cache eviction and resource management during hot reload operations.
+      </test>
+    </ideas>
+  </tests>
+</story-context>
